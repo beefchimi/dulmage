@@ -1,0 +1,24 @@
+%section#intro_dulmage.intro_dulmage
+
+	%article.intro
+
+		.project_content
+
+			%h1 Dulmage
+			%h2 Front End Developer
+
+			%p.visuallyhidden Curtis Dulmage. Front end web developer. Ottawa, Canada. Here are a few of my most recent projects. Please get in touch if you have any questions. Thank you.
+
+		%a#contact.contact{:href => "#", :title => "Mail Me"}
+
+			-# for whatever reason...  using "svg use" would not work with the animation in chrome... no idea why
+			%svg#mail.ui_mail{:version => "1.1", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :x => "0px", :y => "0px", :viewBox => "0 0 45 39", "enable-background" => "new 0 0 45 39", "xml:space" => "preserve"}
+				%path.path_inside{:fill => "none", :stroke => "#fff", "stroke-width" => "1.8", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-miterlimit" => "10", :d => "M22.128 26.966L43.34 1.736 15.67 22.695"}
+				%path.path_outside{:fill => "none", :stroke => "#fff", "stroke-width" => "1.8", "stroke-miterlimit" => "10", :d => "M15.57 22.704v12.053l6.558-7.79L33.106 37.15 43.34 1.738 3.02 18.207z"}
+
+			%p.mailme
+				Mail Me
+
+		#preloader.loading-icon
+			%svg.ui_loader{:viewBox => "0 0 64 64"}
+				%use{"xlink:href" => "#ui_loader"}
