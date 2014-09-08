@@ -8,6 +8,8 @@ jQuery(document).ready(function($) {
 	// objects and height values
 	var $window      = $(window),
 		$mainElement = $('main'),
+		$navList     = $('nav ul li'),
+		$navLinks    = $('a.link_anchor'),
 		windowHeight;
 
 	// display stats !!! REMOVE FOR PRODUCTION !!!
@@ -23,17 +25,17 @@ jQuery(document).ready(function($) {
 
 	// RGB color data for each section
 	var sectionData = {
-		section_0:{  title:'section_0',  r:235, g:71,  b:71  },
-		section_1:{  title:'section_1',  r:255, g:195, b:12  },
-		section_2:{  title:'section_2',  r:255, g:65,  b:0   },
-		section_3:{  title:'section_3',  r:255, g:90,  b:82  },
-		section_4:{  title:'section_4',  r:226, g:172, b:58  },
-		section_5:{  title:'section_5',  r:248, g:109, b:41  },
-		section_6:{  title:'section_6',  r:235, g:71,  b:71  },
-		section_7:{  title:'section_7',  r:55,  g:58,  b:134 },
-		section_8:{  title:'section_8',  r:73,  g:200, b:142 },
-		section_9:{  title:'section_9',  r:192, g:106, b:30  },
-		section_10:{ title:'section_10', r:57,  g:148, b:219 }
+		section_0:{  title:'welcome',   r:235, g:71,  b:71,  h:0,   s:80  },
+		section_1:{  title:'preserve',  r:255, g:195, b:12,  h:45,  s:100 },
+		section_2:{  title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100 },
+		section_3:{  title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100 },
+		section_4:{  title:'na2014',    r:226, g:172, b:58,  h:41,  s:74  },
+		section_5:{  title:'artscourt', r:248, g:109, b:41,  h:20,  s:94  },
+		section_6:{  title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80  },
+		section_7:{  title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42  },
+		section_8:{  title:'chicken',   r:73,  g:200, b:142, h:153, s:54  },
+		section_9:{  title:'cfc',       r:192, g:106, b:30,  h:28,  s:73  },
+		section_10:{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69  }
 	};
 
 	// assigned / updated on first load
@@ -59,6 +61,20 @@ jQuery(document).ready(function($) {
 		updateR,
 		updateG,
 		updateB;
+
+	// all HSL variables
+	var beginH,
+		beginS,
+		endH,
+		endS,
+		diffH,
+		diffS,
+		intSignH,
+		intSignS,
+		calcH,
+		calcS,
+		updateH,
+		updateS;
 
 	// section data
 	var sectionCount = $('section').length,
@@ -120,20 +136,39 @@ jQuery(document).ready(function($) {
 
 		}
 
+		// remove "current" class from prev / next nav items (if present)
+		$navList.eq(sectionPrev).removeClass('current');
+		$navList.eq(sectionNext).removeClass('current');
+
+		// then apply "current" class to the current nav item
+		$navList.eq(sectionCurrent).addClass('current');
+
 		// redefine begin RGB values based on new sectionCurrent
 		beginR = sectionData['section_'+sectionCurrent]['r'];
 		beginG = sectionData['section_'+sectionCurrent]['g'];
 		beginB = sectionData['section_'+sectionCurrent]['b'];
+
+		// redefine begin HSL values based on new sectionCurrent
+		beginH = sectionData['section_'+sectionCurrent]['h'];
+		beginS = sectionData['section_'+sectionCurrent]['s'];
 
 		// redefine end RGB values based on new sectionNext
 		endR = sectionData['section_'+sectionNext]['r'];
 		endG = sectionData['section_'+sectionNext]['g'];
 		endB = sectionData['section_'+sectionNext]['b'];
 
+		// redefine end HSL values based on new sectionNext
+		endH = sectionData['section_'+sectionNext]['h'];
+		endS = sectionData['section_'+sectionNext]['s'];
+
 		// define difference of begin / end RGB values
 		diffR = beginR - endR;
 		diffG = beginG - endG;
 		diffB = beginB - endB;
+
+		// define difference of begin / end HSL values
+		diffH = beginH - endH;
+		diffS = beginS - endS;
 
 	}
 
@@ -177,19 +212,35 @@ jQuery(document).ready(function($) {
 		intSignR = diffR > 0 ? '-' : '';
 		intSignG = diffG > 0 ? '-' : '';
 		intSignB = diffB > 0 ? '-' : '';
+		intSignH = diffH > 0 ? '-' : '';
+		intSignS = diffS > 0 ? '-' : '';
 
-		// calculate the threshold we will (in/de)crease our RGB values by
+		// calculate the threshold we will (in/de)crease our RGB / HSL values by
 		calcR = Math.abs( (diffR * currentPercent) / 100 );
 		calcG = Math.abs( (diffG * currentPercent) / 100 );
 		calcB = Math.abs( (diffB * currentPercent) / 100 );
+		calcH = Math.abs( (diffH * currentPercent) / 100 );
+		calcS = Math.abs( (diffS * currentPercent) / 100 );
 
-		// update our RGB values by adding our calculated (in/de)crease values to the current (begin) value
+		// update our RGB / HSL values by adding our calculated (in/de)crease values to the current (begin) value
 		updateR = beginR + parseInt(intSignR + calcR);
 		updateG = beginG + parseInt(intSignG + calcG);
 		updateB = beginB + parseInt(intSignB + calcB);
+		updateH = beginH + parseInt(intSignH + calcH);
+		updateS = beginS + parseInt(intSignS + calcS);
 
-		// apply new values
-		$mainElement.css('background-color', 'rgb('+updateR+','+updateG+','+updateB+')');
+		// apply new values only if scrollPos is greater than 0...
+		// this will prevent iOS rubber band scrolling from producing incorrect values
+		if (scrollPos >= 0) {
+
+			$mainElement.css('background-color', 'rgb('+updateR+','+updateG+','+updateB+')');
+
+			$navLinks.css({
+				color              : 'rgb('+updateR+','+updateG+','+updateB+')',
+				'background-color' : 'hsl('+updateH+','+updateS+'%,90%)'
+			});
+
+		}
 
 		// output HELPER info to screen
 		helperOutput(updateR, updateG, updateB);
@@ -232,6 +283,27 @@ jQuery(document).ready(function($) {
 		};
 
 	})();
+
+
+	/* Helper: Smooth Scroll Anchor Links
+	---------------------------------------------------------------------------- */
+	function smoothScroll() {
+
+		$navLinks.on('click', function() {
+
+			// get object ID from the clicked href
+			var targetSection = $(this.hash);
+
+			// use jQuery's animate to scroll the html and body element to the target
+			$('html, body').animate({
+				scrollTop: targetSection.offset().top
+			}, 1600);
+
+			return false;
+
+		});
+
+	}
 
 
 	/* Helper: Output To Screen or Console
@@ -295,6 +367,7 @@ jQuery(document).ready(function($) {
 	});
 */
 
+
 	// does this account for orientation change?
 	$window.resize(function() {
 
@@ -317,6 +390,16 @@ jQuery(document).ready(function($) {
 		onPageLoad();
 
 		navToggle();
+
+		smoothScroll();
+
+/*
+		$navLinks.smoothScroll({
+			speed: 'auto'
+		});
+*/
+
+		// smoothScroll.init();
 
 	});
 

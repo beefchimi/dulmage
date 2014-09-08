@@ -158,8 +158,8 @@ gulp.task('deploy', function() {
 	gulp.src('build/**')
 		.pipe(plugins.rsync({
 			root: 'build',
-			hostname: secrets.servers.rsync.host,
-			destination: secrets.servers.rsync.dest,
+			hostname: secrets.servers.prod.host,
+			destination: secrets.servers.prod.dest,
 			incremental: true,
 			progress: true,
 			recursive: true,
