@@ -11,15 +11,15 @@ jQuery(document).ready(function($) {
 		windowHeight;
 
 	// display stats !!! REMOVE FOR PRODUCTION !!!
-	var $statsHeight             = $('h2.height span'),
-			$statsPercent        = $('h2.percent span'),
-			$statsScroll         = $('h2.scroll span'),
-			$statsSectionPrev    = $('h2.section_prev span'),
-			$statsSectionCurrent = $('h2.section_current span'),
-			$statsSectionNext    = $('h2.section_next span'),
-			$statsUpdateR        = $('h2.updateR span'),
-			$statsUpdateG        = $('h2.updateG span'),
-			$statsUpdateB        = $('h2.updateB span');
+	var $statsHeight             = $('h6.height span'),
+			$statsPercent        = $('h6.percent span'),
+			$statsScroll         = $('h6.scroll span'),
+			$statsSectionPrev    = $('h6.section_prev span'),
+			$statsSectionCurrent = $('h6.section_current span'),
+			$statsSectionNext    = $('h6.section_next span'),
+			$statsUpdateR        = $('h6.updateR span'),
+			$statsUpdateG        = $('h6.updateG span'),
+			$statsUpdateB        = $('h6.updateB span');
 
 	// RGB color data for each section
 	var sectionData = {
@@ -197,6 +197,20 @@ jQuery(document).ready(function($) {
 	}
 
 
+	/* navToggle: Click to toggle navigation
+	---------------------------------------------------------------------------- */
+	function navToggle() {
+
+		$('a.nav_toggle').on('click', function() {
+
+			$(this).toggleClass('active');
+			return false;
+
+		});
+
+	}
+
+
 	/* Helper: Fire Window Resize Event Upon Finish
 	---------------------------------------------------------------------------- */
 	var waitForFinalEvent = (function () {
@@ -296,9 +310,13 @@ jQuery(document).ready(function($) {
 
 	$window.load(function() {
 
+		// http://codepen.io/MyXoToD/blog/look-ma-such-a-smooth-scroll
+
 		// fires only once EVERYTHING is ready...
 		// fire this after our preLoader, which should initialize immediately
 		onPageLoad();
+
+		navToggle();
 
 	});
 

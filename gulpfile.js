@@ -56,11 +56,13 @@ if (gutil.env.dev === true) {
 ---------------------------------------------------------------------------- */
 
 // Delete all build files
+/*
 gulp.task('clean', function(cb) {
 
 	del(['build/assets/css/**', 'build/assets/js/scripts.js', 'build/assets/img/**', 'build/index.html'], cb);
 
 });
+*/
 
 
 // Compile Haml with double quotes

@@ -8,14 +8,11 @@
 		:plain
 			<!-- inject:svg --><!-- endinject -->
 
+		= Haml::Engine.new(File.read('dev/haml/_nav.html.haml')).render
+
 		%main{:role => 'main'}
 
-			- @sections = ['Welcome', 'Preserve', 'BMC', 'Fringe', 'NA 2014', 'Arts Court', 'NA 2012', 'Pukeko', 'Chicken.ca', 'CFC', 'Bryston']
-
-			- @sections.each_with_index do |section,index|
-				%section{:class => 'section-#{index}'}
-					%article
-						%h1 #{index} &mdash; #{section}
+			= Haml::Engine.new(File.read('dev/haml/_sections.html.haml')).render
 
 			= Haml::Engine.new(File.read('dev/haml/_stats.html.haml')).render
 
