@@ -24,25 +24,32 @@ jQuery(document).ready(function($) {
 			$statsUpdateB        = $('h6.updateB span');
 
 
-// original : r:235, g:71,  b:71,  h:0,   s:80  },
-// toronto  : r:134, g:160, b:197, h:215, s:35  },
-// green    : r:106, g:96, b:25, h:53, s:62  },
+// !!! INCLUDE L VALUE
+
+// 'welcome'  r:235, g:71,  b:71,  h:0,   s:80, l:60  },
+// 'toronto'  r:134, g:160, b:197, h:215, s:35, l:65  },
+// 'thegut'   r:106, g:96, b:25, h:53, s:62, l:26  },
+// 'flowers'  r:140, g:84,  b:193, h:271, s:47,  l:54 },
 
 
 	// RGB color data for each section
 	var sectionData = {
-		section_0:{  title:'welcome',   r:235, g:71,  b:71,  h:0,   s:80  },
-		section_1:{  title:'preserve',  r:255, g:195, b:12,  h:45,  s:100 },
-		section_2:{  title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100 },
-		section_3:{  title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100 },
-		section_4:{  title:'na2014',    r:226, g:172, b:58,  h:41,  s:74  },
-		section_5:{  title:'artscourt', r:248, g:109, b:41,  h:20,  s:94  },
-		section_6:{  title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80  },
-		section_7:{  title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42  },
-		section_8:{  title:'chicken',   r:73,  g:200, b:142, h:153, s:54  },
-		section_9:{  title:'cfc',       r:192, g:106, b:30,  h:28,  s:73  },
-		section_10:{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69  }
+		section_0:{  title:'flowers',   r:140, g:84,  b:193, h:271, s:47,  l:54 },
+		section_1:{  title:'preserve',  r:255, g:195, b:12,  h:45,  s:100, l:52 },
+		section_2:{  title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100, l:50 },
+		section_3:{  title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100, l:66 },
+		section_4:{  title:'na2014',    r:226, g:172, b:58,  h:41,  s:74,  l:56 },
+		section_5:{  title:'artscourt', r:248, g:109, b:41,  h:20,  s:94,  l:57 },
+		section_6:{  title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80,  l:60 },
+		section_7:{  title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42,  l:37 },
+		section_8:{  title:'chicken',   r:73,  g:200, b:142, h:153, s:54,  l:54 },
+		section_9:{  title:'cfc',       r:192, g:106, b:30,  h:28,  s:73,  l:44 },
+		section_10:{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69,  l:54 }
 	};
+
+
+
+
 
 	// assigned / updated on first load
 	var scrollPos,
@@ -100,7 +107,8 @@ jQuery(document).ready(function($) {
 		// get height of browser window on page load and resize events
 		windowHeight = $window.height();
 
-		// apply windowHeight to each <section>
+		// apply windowHeight to each <section>...
+		// only required because iOS shits the bed with 100vh height elements and orientation change
 		$('section').height(windowHeight);
 
 		// get sectionCurrent on page load

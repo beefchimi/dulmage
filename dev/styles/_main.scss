@@ -5,6 +5,10 @@
 /*
 
 welcome		#eb4747		rgb(235,71,71)		hsl(0,80%,60%)
+toronto		#86a0c5		rgb(134,160,197)	hsl(215,35%,65%)
+thegut		#6a6019		rgb(106,96,25)		hsl(53,62%,26%)
+flowers		#8c54c1		rgb(140,84,193)		hsl(271,47%,54%)
+
 preserve	#ffc30c		rgb(255,195,12)		hsl(45,100%,52%)
 bmc			#ff4100		rgb(255,65,0)		hsl(15,100%,50%)
 fringe		#ff5a52		rgb(255,90,82)		hsl(3,100%,66%)
@@ -309,7 +313,7 @@ div.project_content h4 + h3 {
 /* Intro Section
 ---------------------------------------------------------------------------- */
 section.intro_welcome {
-	background-image: url('../img/welcome.png');
+	background-image: url('../img/0-flowers.png');
 }
 section.intro_welcome .project_logo {
 	width: 24rem;

@@ -113,7 +113,7 @@ gulp.task('images', function() {
 		.pipe(plugins.imagemin({
 			optimizationLevel: 7,
 			progressive: true,
-			use: [pngcrush()]
+			use: [pngcrush()] // is this making things super slow?
 		}))
 		.pipe(gulp.dest(paths.images.dest));
 });
@@ -154,6 +154,7 @@ gulp.task('svg', function() {
 
 
 // Use rsync to deploy to server (no need to exclude files since everything comes from 'build' folder)
+// no longer seems to work...
 gulp.task('deploy', function() {
 	gulp.src('build/**')
 		.pipe(plugins.rsync({
@@ -173,6 +174,8 @@ gulp.task('deploy', function() {
 // does not inject SVG... need better process for this
 gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 
+	gulp.start('svg'); // apparently not a good approach
+
 	// watch dev files, rebuild when changed
 	gulp.watch(paths.haml.src + '*.haml', ['haml']);
 	gulp.watch(paths.styles.src + '*.scss', ['styles']);
@@ -189,6 +192,6 @@ gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 // Should run gulp clean prior to running the default task
 gulp.task('default', ['haml'], function() {
 
-	gulp.start('styles', 'scripts', 'images', 'svg');
+	gulp.start('styles', 'scripts', 'images', 'svg'); // apparently not a good approach
 
 });
