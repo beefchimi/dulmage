@@ -23,6 +23,12 @@ jQuery(document).ready(function($) {
 			$statsUpdateG        = $('h6.updateG span'),
 			$statsUpdateB        = $('h6.updateB span');
 
+
+// original : r:235, g:71,  b:71,  h:0,   s:80  },
+// toronto  : r:134, g:160, b:197, h:215, s:35  },
+// green    : r:106, g:96, b:25, h:53, s:62  },
+
+
 	// RGB color data for each section
 	var sectionData = {
 		section_0:{  title:'welcome',   r:235, g:71,  b:71,  h:0,   s:80  },
@@ -136,11 +142,11 @@ jQuery(document).ready(function($) {
 
 		}
 
-		// remove "current" class from prev / next nav items (if present)
-		$navList.eq(sectionPrev).removeClass('current');
-		$navList.eq(sectionNext).removeClass('current');
+		// remove "current" class from ALL nav items...
+		// sectionPrev & sectionNext is unreliable and sometimes does not get removed in time
+		$navList.removeClass('current');
 
-		// then apply "current" class to the current nav item
+		// apply "current" class to the current nav item
 		$navList.eq(sectionCurrent).addClass('current');
 
 		// redefine begin RGB values based on new sectionCurrent
