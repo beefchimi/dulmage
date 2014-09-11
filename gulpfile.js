@@ -6,6 +6,7 @@ var gulp       = require('gulp'),
 	gutil      = require('gulp-util'),
 	livereload = require('gulp-livereload'),
 	del        = require('del'),
+	rsync      = require('rsyncwrapper').rsync,
 	pngcrush   = require('imagemin-pngcrush'),
 	secrets    = require('./secrets.json'),
 	plugins    = require('gulp-load-plugins')({
@@ -152,9 +153,11 @@ gulp.task('svg', function() {
 
 
 // Use rsync to deploy to server (no need to exclude files since everything comes from 'build' folder)
-// no longer seems to work...
+// build/** and build/**/*.* do not seem to work anymore... in fact nothing seems to fucking work!
+/*
 gulp.task('deploy', function() {
-	gulp.src('build/**')
+
+	gulp.src(['build/.htaccess', 'build/index.html', 'build/assets/**'])
 		.pipe(plugins.rsync({
 			root: 'build',
 			hostname: secrets.servers.prod.host,
@@ -165,6 +168,26 @@ gulp.task('deploy', function() {
 			clean: true,
 			exclude: ['.DS_Store']
 		}));
+
+});
+*/
+
+
+// Use rsyncwrapper to deploy to server... since piece of ship gulp-rsync doesn't do a fucking thing!
+gulp.task('deploy', function() {
+
+	rsync({
+		ssh: true,
+		src: './build/',
+		dest: 'curtisdulmage.com@s186705.gridserver.com:/nfs/c06/h06/mnt/186705/domains/curtisdulmage.com/html/sites/dulmage',
+		recursive: true,
+		syncDest: true,
+		exclude: ['.DS_Store'],
+		args: ['--verbose']
+	}, function(error, stdout, stderr, cmd) {
+		gutil.log(stdout);
+	});
+
 });
 
 
