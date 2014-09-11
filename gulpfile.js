@@ -18,23 +18,23 @@ var gulp       = require('gulp'),
 var paths = {
 
 	haml: {
-		src: 'dev/haml/',
+		src : 'dev/haml/',
 		dest: 'build/'
 	},
 	styles: {
-		src: 'dev/styles/',
+		src : 'dev/styles/',
 		dest: 'build/assets/css/'
 	},
 	scripts: {
-		src: 'dev/scripts/*.js',
+		src : 'dev/scripts/*.js',
 		dest: 'build/assets/js/'
 	},
 	images: {
-		src: 'dev/media/images/*.{png,jpg,gif}',
+		src : 'dev/media/images/*.{png,jpg,gif}',
 		dest: 'build/assets/img/'
 	},
 	svg: {
-		src: 'dev/media/svg/*.svg' // , dest: 'build/assets/svg/'
+		src : 'dev/media/svg/*.svg' // , dest: 'build/assets/svg/'
 	}
 
 };

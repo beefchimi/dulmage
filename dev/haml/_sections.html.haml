@@ -11,7 +11,7 @@
 			%h1.visuallyhidden Curtis Dulmage
 			%h2 Web Developer
 
-			-# %p Hello. I'm a front-end web developer currently living in Ottawa, Canada. I've picked out only a few of my favourite projects to showcase, but if you like what you see, please feel free to get in touch. Thank you.
+			= Haml::Engine.new(File.read('dev/haml/_description.html.haml')).render
 
 		%a#contact.contact{:href => '#', :title => 'Mail Me'}
 			%svg.svg_mail
@@ -23,7 +23,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://preserve.northernarmy.com', :target => '_blank', :title => 'Preserve.'}
+		%a.project_logo{:href => 'http://preserve.northernarmy.com', :target => '_blank', :title => 'Preserve.'}
 
 			%svg.svg_preserve
 				%use{'xlink:href' => '#preserve'}
@@ -40,7 +40,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://bodymindchange.ca', :target => '_blank', :title => 'Body. Mind. Change.'}
+		%a.project_logo{:href => 'http://bodymindchange.ca', :target => '_blank', :title => 'Body. Mind. Change.'}
 
 			%svg.svg_bmc
 				%use{'xlink:href' => '#bmc'}
@@ -60,7 +60,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://ottawafringe.com', :target => '_blank', :title => 'Ottawa Fringe Festival'}
+		%a.project_logo{:href => 'http://ottawafringe.com', :target => '_blank', :title => 'Ottawa Fringe Festival'}
 
 			%svg.svg_fringe
 				%use{'xlink:href' => '#fringe'}
@@ -83,7 +83,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://northernarmy.com', :target => '_blank', :title => 'Northern Army 2014'}
+		%a.project_logo{:href => 'http://northernarmy.com', :target => '_blank', :title => 'Northern Army 2014'}
 
 			%svg.svg_na2014
 				%use{'xlink:href' => '#na'}
@@ -100,7 +100,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://artscourt.ca', :target => '_blank', :title => 'Arts Court Theatre'}
+		%a.project_logo{:href => 'http://artscourt.ca', :target => '_blank', :title => 'Arts Court Theatre'}
 
 			%svg.svg_na
 				%use{'xlink:href' => '#artscourt'}
@@ -123,7 +123,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://na-2012.armystage.com', :target => '_blank', :title => 'Northern Army 2012'}
+		%a.project_logo{:href => 'http://na-2012.armystage.com', :target => '_blank', :title => 'Northern Army 2012'}
 
 			%svg.svg_na2012
 				%use{'xlink:href' => '#na'}
@@ -140,7 +140,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://pukekodesign.ca', :target => '_blank', :title => 'Pukeko Design'}
+		%a.project_logo{:href => 'http://pukekodesign.ca', :target => '_blank', :title => 'Pukeko Design'}
 
 			%svg.svg_pukeko
 				%use{'xlink:href' => '#pukeko'}
@@ -160,7 +160,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://chicken.ca', :target => '_blank', :title => 'Chicken.ca'}
+		%a.project_logo{:href => 'http://chicken.ca', :target => '_blank', :title => 'Chicken.ca'}
 
 			%svg.svg_chicken
 				%use{'xlink:href' => '#chicken'}
@@ -183,7 +183,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://chickenfarmers.ca', :target => '_blank', :title => 'Chicken Farmers of Canada'}
+		%a.project_logo{:href => 'http://chickenfarmers.ca', :target => '_blank', :title => 'Chicken Farmers of Canada'}
 
 			%svg.svg_cfc
 				%use{'xlink:href' => '#chicken'}
@@ -203,7 +203,7 @@
 
 	%article.project
 
-		%a.project_logo.project_link{:href => 'http://bryston.curtisdulmage.com', :target => '_blank', :title => 'BDP Beta'}
+		%a.project_logo{:href => 'http://bryston.curtisdulmage.com', :target => '_blank', :title => 'BDP Beta'}
 
 			%svg.svg_bryston
 				%use{'xlink:href' => '#bryston'}

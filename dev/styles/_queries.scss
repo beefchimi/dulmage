@@ -39,7 +39,7 @@
 	div.project_overlay {
 		transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 	}
-	a.project_link svg,
+	a.project_logo svg,
 	div.project_content h3,
 	div.project_content h4,
 	div.project_overlay h5 {
@@ -70,9 +70,11 @@
 	.project_logo {
 		margin-bottom: 6rem;
 	}
-	a.project_link svg {
-		filter: blur(0px);
+/*
+	a.project_logo svg {
+		filter: blur(0px); // is this null state required?
 	}
+*/
 	/* --- Project Overlay --- */
 	div.project_overlay {
 		display: block;
@@ -103,7 +105,7 @@
 	/* Project Interactive States
 	---------------------------------------------------------------------------- */
 	/* + hover state + */
-	a.project_link:hover svg {
+	a.project_logo:hover svg {
 		opacity: 0.7;
 		filter: blur(2px);
 	}
@@ -125,7 +127,7 @@
 	a.project_logo:active ~ div.project_overlay h5 {
 		transform: scale(0.9);
 	}
-	a.project_link:active svg {
+	a.project_logo:active svg {
 		opacity: 0.8;
 		filter: blur(1px);
 	}
@@ -139,7 +141,7 @@
 
 	/* Intro Section
 	---------------------------------------------------------------------------- */
-	section.intro_welcome .project_logo {
+	section.intro_welcome div.project_logo {
 		width: 28rem;
 		height: 7.5rem;
 	}
@@ -160,52 +162,52 @@
 	/* Projects Section
 	---------------------------------------------------------------------------- */
 	/* --- Preserve --- */
-	section.project_preserve a.project_link {
+	section.project_preserve a.project_logo {
 		width: 17rem;
 		height: 18.2rem;
 	}
 	/* --- BMC --- */
-	section.project_bmc a.project_link {
+	section.project_bmc a.project_logo {
 		width: 24rem;
 		height: 11.7rem;
 	}
 	/* --- Fringe --- */
-	section.project_fringe a.project_link {
+	section.project_fringe a.project_logo {
 		width: 26rem;
 		height: 14.5rem;
 	}
 	/* --- NA 2014 --- */
-	section.project_na2014 a.project_link {
+	section.project_na2014 a.project_logo {
 		width: 22rem;
 		height: 11.6rem;
 	}
 	/* --- Arts Court --- */
-	section.project_artscourt a.project_link {
+	section.project_artscourt a.project_logo {
 		width: 15.2rem;
 		height: 13.8rem;
 	}
 	/* --- NA 2012 --- */
-	section.project_na2012 a.project_link {
+	section.project_na2012 a.project_logo {
 		width: 22rem;
 		height: 11.6rem;
 	}
 	/* --- Pukeko --- */
-	section.project_pukeko a.project_link {
+	section.project_pukeko a.project_logo {
 		width: 15.6rem;
 		height: 17.8rem;
 	}
 	/* --- Chicken --- */
-	section.project_chicken a.project_link {
+	section.project_chicken a.project_logo {
 		width: 17.6rem;
 		height: 13.6rem;
 	}
 	/* --- CFC --- */
-	section.project_cfc a.project_link {
+	section.project_cfc a.project_logo {
 		width: 17.6rem;
 		height: 13.6rem;
 	}
 	/* --- Bryston --- */
-	section.project_bryston a.project_link {
+	section.project_bryston a.project_logo {
 		width: 19.2rem;
 		height: 8.8rem;
 	}
