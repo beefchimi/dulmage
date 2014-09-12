@@ -52,6 +52,9 @@ nav a.nav_toggle {
 nav a.nav_toggle div.line {
 	transition: all 0.3s ease-in-out;
 }
+nav ul li.link_welcome {
+	transition: transform 0.3s ease-in-out 0s, z-index 0.2s ease-in-out;
+}
 nav ul li.link_preserve {
 	transition: transform 0.3s ease-in-out 0.02s, z-index 0.2s ease-in-out;
 }
