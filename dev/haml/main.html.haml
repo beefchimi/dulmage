@@ -10,8 +10,6 @@
 
 		= Haml::Engine.new(File.read('dev/haml/_nav.html.haml')).render
 
-		-# = Haml::Engine.new(File.read('dev/haml/_stats.html.haml')).render
-
 		%main{:role => 'main'}
 
 			= Haml::Engine.new(File.read('dev/haml/_sections.html.haml')).render

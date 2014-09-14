@@ -16,7 +16,8 @@
 
 	/* Project Logo / Link
 	---------------------------------------------------------------------------- */
-	.project_logo {
+	div.project_logo,
+	a.project_logo {
 		margin-bottom: 0;
 	}
 
@@ -139,7 +140,7 @@
 
 	/* Intro Section
 	---------------------------------------------------------------------------- */
-	section.intro_welcome div.project_logo {
+	section.intro_dulmage div.project_logo {
 		width: 28rem;
 		height: 7.5rem;
 	}

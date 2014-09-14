@@ -4,7 +4,7 @@
 
 /*
 
-* hello		#eb4747		rgb(235,71,71)		hsl(0,80%,60%)
+dulmage		#eb4747		rgb(235,71,71)		hsl(0,80%,60%)
 
 beach		#86a0c5		rgb(134,160,197)	hsl(215,35%,65%)
 bridge		#6e916e		rgb(110,145,110)	hsl(120,14%,50%)
@@ -52,7 +52,7 @@ nav a.nav_toggle {
 nav a.nav_toggle div.line {
 	transition: all 0.3s ease-in-out;
 }
-nav ul li.link_welcome {
+nav ul li.link_dulmage {
 	transition: transform 0.3s ease-in-out 0s, z-index 0.2s ease-in-out;
 }
 nav ul li.link_preserve {
@@ -313,11 +313,11 @@ div.project_content h4 + h3 {
 
 /* Intro Section
 ---------------------------------------------------------------------------- */
-section.intro_welcome div.project_logo {
+section.intro_dulmage div.project_logo {
 	width: 24rem;
 	height: 6.4rem;
 }
-section.intro_welcome div.project_logo svg {
+section.intro_dulmage div.project_logo svg {
 	fill: rgb(244,202,191);
 }
 /* --- Mail Me --- */
@@ -353,25 +353,25 @@ a.contact span.mailme {
 	overflow: hidden;
 }
 /* --- Background --- */
-body.beach section.intro_welcome {
+body.beach section.intro_dulmage {
 	background-image: url('../img/home-beach.png');
 }
-body.bridge section.intro_welcome {
+body.bridge section.intro_dulmage {
 	background-image: url('../img/home-bridge.png');
 }
-body.flowers section.intro_welcome {
+body.flowers section.intro_dulmage {
 	background-image: url('../img/home-flowers.png');
 }
-body.forest section.intro_welcome {
+body.forest section.intro_dulmage {
 	background-image: url('../img/home-forest.png');
 }
-body.thegut section.intro_welcome {
+body.thegut section.intro_dulmage {
 	background-image: url('../img/home-thegut.png');
 }
-body.tropical section.intro_welcome {
+body.tropical section.intro_dulmage {
 	background-image: url('../img/home-tropical.png');
 }
-body.worship section.intro_welcome {
+body.worship section.intro_dulmage {
 	background-image: url('../img/home-worship.png');
 }
 
