@@ -100,6 +100,9 @@ a.contact {
 
 /* General Styles
 ---------------------------------------------------------------------------- */
+main {
+	position: sticky;
+}
 section {
 	display: table;
 	table-layout: fixed;
@@ -463,4 +466,46 @@ section.project_bryston {
 section.project_bryston a.project_logo {
 	width: 18rem;
 	height: 8.2rem;
+}
+
+
+
+
+
+/* --- Stats --- */
+h6 {
+	position: fixed;
+	z-index: 9999;
+	font-size: 18px;
+	font-weight: 900;
+	color: hsla(0,0%,100%,0.8);
+}
+h6 span {
+	display: block;
+}
+h6.height,
+h6.diff,
+h6.scroll {
+	top: 32px;
+}
+h6.touchS,
+h6.touchM,
+h6.touchE {
+	bottom: 48px;
+}
+/* + alignment + */
+h6.height,
+h6.touchS {
+	left: 32px;
+}
+h6.diff,
+h6.touchM {
+	left: 50%;
+	text-align: center;
+	transform: translateX(-50%);
+}
+h6.scroll,
+h6.touchE {
+	right: 32px;
+	text-align: right;
 }

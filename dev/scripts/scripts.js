@@ -4,22 +4,25 @@ jQuery(document).ready(function($) {
 	/* Global Variables
 	---------------------------------------------------------------------------- */
 
-	// common objects and height values
+	/* --- Objects and Initial Setup --- */
+
+	// common objects
 	var $window      = $(window),
+		$body        = $('body'),
 		$mainElement = $('main'),
+		$sections    = $('section'),
 		$navList     = $('nav ul li'),
-		$navLinks    = $('a.link_anchor'),
-		windowHeight;
+		$navLinks    = $('a.link_anchor');
 
 	// possible homepage options
 	var homeOptions = [
-		{ title:'beach',    r:134, g:160, b:197, h:215, s:35, l:65 },
-		{ title:'bridge',   r:110, g:145, b:110, h:120, s:14, l:50 },
-		{ title:'flowers',  r:140, g:84,  b:193, h:271, s:47, l:54 },
-		{ title:'forest',   r:189, g:187, b:56,  h:59,  s:54, l:48 },
-		{ title:'thegut',   r:106, g:96,  b:25,  h:53,  s:62, l:26 },
-		{ title:'tropical', r:186, g:64,  b:79,  h:353, s:49, l:49 },
-		{ title:'worship',  r:203, g:78,  b:74,  h:2,   s:55, l:54 }
+		{ title:'beach',    r:134, g:160, b:197, h:215, s:35 },
+		{ title:'bridge',   r:110, g:145, b:110, h:120, s:14 },
+		{ title:'flowers',  r:140, g:84,  b:193, h:271, s:47 },
+		{ title:'forest',   r:189, g:187, b:56,  h:59,  s:54 },
+		{ title:'thegut',   r:106, g:96,  b:25,  h:53,  s:62 },
+		{ title:'tropical', r:186, g:64,  b:79,  h:353, s:49 },
+		{ title:'worship',  r:203, g:78,  b:74,  h:2,   s:55 }
 	];
 
 	// randomly select a home option
@@ -30,62 +33,55 @@ jQuery(document).ready(function($) {
 	// Color data for each section (first object is added as a random selection from homeOptions)
 	var sectionData = [
 		homeOptions[randomOption],
-		{ title:'preserve',  r:255, g:195, b:12,  h:45,  s:100, l:52 },
-		{ title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100, l:50 },
-		{ title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100, l:66 },
-		{ title:'na2014',    r:226, g:172, b:58,  h:41,  s:74,  l:56 },
-		{ title:'artscourt', r:248, g:109, b:41,  h:20,  s:94,  l:57 },
-		{ title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80,  l:60 },
-		{ title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42,  l:37 },
-		{ title:'chicken',   r:73,  g:200, b:142, h:153, s:54,  l:54 },
-		{ title:'cfc',       r:192, g:106, b:30,  h:28,  s:73,  l:44 },
-		{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69,  l:54 }
+		{ title:'preserve',  r:255, g:195, b:12,  h:45,  s:100 },
+		{ title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100 },
+		{ title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100 },
+		{ title:'na2014',    r:226, g:172, b:58,  h:41,  s:74  },
+		{ title:'artscourt', r:248, g:109, b:41,  h:20,  s:94  },
+		{ title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80  },
+		{ title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42  },
+		{ title:'chicken',   r:73,  g:200, b:142, h:153, s:54  },
+		{ title:'cfc',       r:192, g:106, b:30,  h:28,  s:73  },
+		{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69  }
 	];
 
-	// assigned / updated on first load
-	var scrollPos,
-		currentPercent;
-
-	// all RGB variables
-	var beginR,
-		beginG,
-		beginB,
-		endR,
-		endG,
-		endB,
-		diffR,
-		diffG,
-		diffB,
-		intSignR,
-		intSignG,
-		intSignB,
-		calcR,
-		calcG,
-		calcB,
-		updateR,
-		updateG,
-		updateB;
-
-	// all HSL variables
-	var beginH,
-		beginS,
-		endH,
-		endS,
-		diffH,
-		diffS,
-		intSignH,
-		intSignS,
-		calcH,
-		calcS,
-		updateH,
-		updateS;
+	/* --- Section and Data Variables --- */
 
 	// section data
-	var sectionCount = $('section').length,
+	var sectionCount = $sections.length,
 		sectionPrev,
 		sectionCurrent,
 		sectionNext,
 		sectionWhileScrolling;
+
+	// scroll, touch, and height variables
+	var scrollPos,
+		currentPercent,
+		windowHeight,
+		touchS,
+		touchM,
+		touchE,
+		touchAll,
+		touchID,
+		isTouching = false;
+
+	/* --- Colour Variables --- */
+
+	// all RGB variables
+	var beginR, beginG, beginB,
+		endR, endG, endB,
+		diffR, diffG, diffB,
+		intSignR, intSignG, intSignB,
+		calcR, calcG, calcB,
+		updateR, updateG, updateB;
+
+	// all HSL variables
+	var beginH, beginS,
+		endH, endS,
+		diffH, diffS,
+		intSignH, intSignS,
+		calcH, calcS,
+		updateH, updateS;
 
 
 	/* onPageLoad: Main Function To Fire on Window Load
@@ -99,11 +95,11 @@ jQuery(document).ready(function($) {
 		windowHeight = $window.height();
 
 		// set randomly selected homeOption as body class to enable correct background-image
-		$('body').addClass(homeOptions[randomOption].title);
+		$body.addClass(homeOptions[randomOption].title);
 
 		// apply windowHeight to each <section>...
 		// only required because iOS shits the bed with 100vh height elements and orientation change
-		$('section').height(windowHeight);
+		$sections.height(windowHeight);
 
 		// get sectionCurrent on page load
 		sectionCurrent = Math.floor(scrollPos / windowHeight);
@@ -186,7 +182,7 @@ jQuery(document).ready(function($) {
 	function updateColor() {
 
 		// update scroll position as we scroll the window
-		scrollPos = $(this).scrollTop();
+		scrollPos = $window.scrollTop();
 
 		// check what section we are in while scrolling
 		sectionWhileScrolling = Math.floor(scrollPos / windowHeight);
@@ -253,13 +249,34 @@ jQuery(document).ready(function($) {
 	}
 
 
-	/* navToggle: Click to toggle navigation
+	/* Navigation: Click to toggle navigation
 	---------------------------------------------------------------------------- */
 	function navToggle() {
 
 		$('a.nav_toggle').on('click', function() {
 
 			$(this).toggleClass('active');
+			return false;
+
+		});
+
+	}
+
+
+	/* Navigation: Smooth Scroll Anchor Links
+	---------------------------------------------------------------------------- */
+	function smoothScroll() {
+
+		$navLinks.on('click', function() {
+
+			// get object ID from the clicked href
+			var targetSection = $(this.hash);
+
+			// use jQuery's animate to scroll the html and body element to the target
+			$('html, body').animate({
+				scrollTop: targetSection.offset().top
+			}, 1600);
+
 			return false;
 
 		});
@@ -290,23 +307,71 @@ jQuery(document).ready(function($) {
 	})();
 
 
-	/* Helper: Smooth Scroll Anchor Links
+	/* Window Events: On Touch - Start, Move, and End
 	---------------------------------------------------------------------------- */
-	function smoothScroll() {
+	document.body.addEventListener('touchstart', function(e) {
 
-		$navLinks.on('click', function() {
+		// code adapted from:
+		// http://dropshado.ws/post/45694832906/touch-identifier-0
 
-			// get object ID from the clicked href
-			var targetSection = $(this.hash);
+		// dismiss after-touches
+		if (isTouching) {
+			return;
+		}
 
-			// use jQuery's animate to scroll the html and body element to the target
-			$('html, body').animate({
-				scrollTop: targetSection.offset().top
-			}, 1600);
+		// only care about the first touch
+		touchS  = e.changedTouches[0];
+		touchID = touchS.identifier;
 
-			return false;
+		window.addEventListener('touchmove', onTouchMove, false);
+		window.addEventListener('touchend', onTouchEnd, false);
 
-		});
+		isTouching = true;
+
+	}, false);
+
+	// iterate through touch points and stick with the initial touch contact
+	function getTouch(e) {
+
+		// cycle through every changed touch and get one that matches
+		for (var i = 0, len = e.changedTouches.length; i < len; i++) {
+
+			touchAll = e.changedTouches[i];
+
+			if (touchAll.identifier === touchID) {
+				return touchAll;
+			}
+
+		}
+
+	}
+
+	// assign touchstart to touchmove, updateColor as we move / scroll
+	function onTouchMove(e) {
+
+		touchM = getTouch(e);
+
+		if (!touchM) {
+			return;
+		}
+
+		updateColor();
+
+	}
+
+	// assign touchstart to touchend, remove touch listeners, set isTouching back to false
+	function onTouchEnd(e) {
+
+		touchE = getTouch(e);
+
+		if (!touchE) {
+			return;
+		}
+
+		window.removeEventListener('touchmove', onTouchMove, false);
+		window.removeEventListener('touchend', onTouchEnd, false);
+
+		isTouching = false;
 
 	}
 
@@ -341,14 +406,6 @@ jQuery(document).ready(function($) {
 		navToggle();
 
 		smoothScroll();
-
-/*
-		$navLinks.smoothScroll({
-			speed: 'auto'
-		});
-*/
-
-		// smoothScroll.init();
 
 	});
 
