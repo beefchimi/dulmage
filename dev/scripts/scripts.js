@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+document.addEventListener('DOMContentLoaded', function() {
 
 
 	/* Global Variables
@@ -7,12 +7,13 @@ jQuery(document).ready(function($) {
 	/* --- Objects and Initial Setup --- */
 
 	// common objects
-	var $window      = $(window),
-		$body        = $('body'),
-		$mainElement = $('main'),
-		$sections    = $('section'),
-		$navList     = $('nav ul li'),
-		$navLinks    = $('a.link_anchor');
+	var elBody       = document.body,
+		elMain       = document.getElementsByTagName('main'),
+		elSections   = document.getElementsByTagName('section'),
+		elNavList    = document.getElementsByTagName('li'),
+		elNavLinks   = document.getElementsByClassName('link_anchor'),
+		elNavToggle  = document.getElementsByClassName('nav_toggle'),
+		navListCount = elNavList.length;
 
 	// possible homepage options
 	var homeOptions = [
@@ -30,7 +31,7 @@ jQuery(document).ready(function($) {
 		randomMax    = homeOptions.length - 1,
 		randomOption = Math.floor(Math.random() * (randomMax - randomMin + 1)) + randomMin;
 
-	// Color data for each section (first object is added as a random selection from homeOptions)
+	// color data for each section (first object is added as a random selection from homeOptions)
 	var sectionData = [
 		homeOptions[randomOption],
 		{ title:'preserve',  r:255, g:195, b:12,  h:45,  s:100 },
@@ -48,7 +49,7 @@ jQuery(document).ready(function($) {
 	/* --- Section and Data Variables --- */
 
 	// section data
-	var sectionCount = $sections.length,
+	var sectionCount = elSections.length,
 		sectionPrev,
 		sectionCurrent,
 		sectionNext,
@@ -89,17 +90,19 @@ jQuery(document).ready(function($) {
 	function onPageLoad() {
 
 		// get scroll position on load in case of anchor or refresh (do not assume 0)
-		scrollPos = $window.scrollTop();
+		scrollPos = window.scrollY;
 
 		// get height of browser window on page load and resize events
-		windowHeight = $window.height();
+		windowHeight = window.innerHeight;
 
 		// set randomly selected homeOption as body class to enable correct background-image
-		$body.addClass(homeOptions[randomOption].title);
+		elBody.classList.add(homeOptions[randomOption].title);
 
 		// apply windowHeight to each <section>...
 		// only required because iOS shits the bed with 100vh height elements and orientation change
-		$sections.height(windowHeight);
+		for (var i = 0; i < sectionCount; i++) {
+			elSections[i].style.height = windowHeight + 'px';
+		}
 
 		// get sectionCurrent on page load
 		sectionCurrent = Math.floor(scrollPos / windowHeight);
@@ -142,10 +145,13 @@ jQuery(document).ready(function($) {
 
 		// remove "current" class from ALL nav items...
 		// sectionPrev & sectionNext is unreliable and sometimes does not get removed in time
-		$navList.removeClass('current');
+		for (var i = 0; i < navListCount; i++) {
+			elNavList[i].classList.remove('current');
+			elNavList[i].classList.remove('current');
+		}
 
 		// apply "current" class to the current nav item
-		$navList.eq(sectionCurrent).addClass('current');
+		elNavList[sectionCurrent].classList.add('current');
 
 		// redefine begin RGB values based on new sectionCurrent
 		beginR = sectionData[sectionCurrent].r;
@@ -182,7 +188,7 @@ jQuery(document).ready(function($) {
 	function updateColor() {
 
 		// update scroll position as we scroll the window
-		scrollPos = $window.scrollTop();
+		scrollPos = window.scrollY;
 
 		// apply new values only if scrollPos is greater than 0...
 		// this will prevent iOS rubber band scrolling from producing incorrect values
@@ -240,13 +246,13 @@ jQuery(document).ready(function($) {
 		updateS = beginS + parseInt(intSignS + calcS);
 
 		// apply new RGB colors to <main> element
-		$mainElement.css('background-color', 'rgb('+updateR+','+updateG+','+updateB+')');
+		elMain[0].style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
 
-		// apply new RGB & HSL colors to <nav> element... using HSL to controll lightness, gets converted to RGB in browser :(
-		$navLinks.css({
-			color              : 'rgb('+updateR+','+updateG+','+updateB+')',
-			'background-color' : 'hsl('+updateH+','+updateS+'%,90%)'
-		});
+		// apply new RGB & HSL colors to <nav> links... using HSL to control lightness, gets converted to RGB in browser :(
+		for (var i = 0; i < navListCount; i++) {
+			elNavLinks[i].style.color = 'rgb('+updateR+','+updateG+','+updateB+')';
+			elNavLinks[i].style.backgroundColor = 'hsl('+updateH+','+updateS+'%,90%)';
+		}
 
 	}
 
@@ -255,33 +261,12 @@ jQuery(document).ready(function($) {
 	---------------------------------------------------------------------------- */
 	function navToggle() {
 
-		$('a.nav_toggle').on('click', function() {
+		elNavToggle[0].addEventListener('click', function(e) {
 
-			$(this).toggleClass('active');
-			return false;
+			this.classList.toggle('active');
+			e.preventDefault();
 
-		});
-
-	}
-
-
-	/* Navigation: Smooth Scroll Anchor Links
-	---------------------------------------------------------------------------- */
-	function smoothScroll() {
-
-		$navLinks.on('click', function() {
-
-			// get object ID from the clicked href
-			var targetSection = $(this.hash);
-
-			// use jQuery's animate to scroll the html and body element to the target
-			$('html, body').animate({
-				scrollTop: targetSection.offset().top
-			}, 1600);
-
-			return false;
-
-		});
+		}, false);
 
 	}
 
@@ -378,16 +363,15 @@ jQuery(document).ready(function($) {
 	}
 
 
-	/* Window Events: On Scroll, Resize, and Load
+	/* Window Events: On - Scroll, Resize
 	---------------------------------------------------------------------------- */
-	$window.scroll(function() {
+	window.addEventListener('scroll', function(e) {
 
 		updateColor();
 
-	});
+	}, false);
 
-
-	$window.resize(function() {
+	window.addEventListener('resize', function(e) {
 
 		// do not fire resize event for every pixel... wait until finished
 		waitForFinalEvent(function() {
@@ -396,20 +380,25 @@ jQuery(document).ready(function($) {
 
 		}, 500, 'unique string');
 
+	}, false);
+
+
+	/* Initialize Primary Functions
+	---------------------------------------------------------------------------- */
+
+	// fires only once EVERYTHING is ready...
+	// fire this after our preLoader, which should initialize immediately
+
+	onPageLoad();
+
+	navToggle();
+
+	// smoothScroll();
+	smoothScroll.init({
+		speed: 400,
+		easing: 'easeInOutQuint',
+		updateURL: false
 	});
 
 
-	$window.load(function() {
-
-		// fires only once EVERYTHING is ready...
-		// fire this after our preLoader, which should initialize immediately
-		onPageLoad();
-
-		navToggle();
-
-		smoothScroll();
-
-	});
-
-
-});
+}, false);

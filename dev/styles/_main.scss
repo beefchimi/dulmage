@@ -101,7 +101,7 @@ a.contact {
 /* General Styles
 ---------------------------------------------------------------------------- */
 main {
-	position: sticky;
+	position: sticky; // required for custom touch events to behave properly in iOS
 }
 section {
 	display: table;
@@ -377,19 +377,6 @@ body.worship section.intro_dulmage {
 
 /* Projects Section
 ---------------------------------------------------------------------------- */
-
-/*
-
-	perhaps these should be sized with ems...
-	so I can make a font-size change only to the parent and impact sizing for all SVGs
-	landscape logos needs to be smaller
-
-	detect for svg with modernizr... fall back to PNGs
-
-	look into mobile detections and using the no-flexbox styles (orientation change causes problems)
-
-*/
-
 /* --- Preserve --- */
 section.project_preserve {
 	background-image: url('../img/preserve.png');
@@ -414,11 +401,15 @@ section.project_fringe a.project_logo {
 	width: 20rem;
 	height: 11.1rem;
 }
-/* --- NA 2014 --- */
+/* --- NA 2014 & 2012 --- */
 section.project_na2014 {
 	background-image: url('../img/na2014.png');
 }
-section.project_na2014 a.project_logo {
+section.project_na2012 {
+	background-image: url('../img/na2012.png');
+}
+section.project_na2014 a.project_logo,
+section.project_na2012 a.project_logo {
 	width: 16.1rem;
 	height: 8.4rem;
 }
@@ -430,14 +421,6 @@ section.project_artscourt a.project_logo {
 	width: 11rem;
 	height: 10rem;
 }
-/* --- NA 2012 --- */
-section.project_na2012 {
-	background-image: url('../img/na2012.png');
-}
-section.project_na2012 a.project_logo {
-	width: 16.1rem;
-	height: 8.4rem;
-}
 /* --- Pukeko --- */
 section.project_pukeko {
 	background-image: url('../img/pukeko.png');
@@ -446,18 +429,14 @@ section.project_pukeko a.project_logo {
 	width: 12.1rem;
 	height: 13.7rem;
 }
-/* --- Chicken --- */
+/* --- Chicken & CFC --- */
 section.project_chicken {
 	background-image: url('../img/chicken.png');
 }
-section.project_chicken a.project_logo {
-	width: 13rem;
-	height: 10rem;
-}
-/* --- CFC --- */
 section.project_cfc {
 	background-image: url('../img/cfc.png');
 }
+section.project_chicken a.project_logo,
 section.project_cfc a.project_logo {
 	width: 13rem;
 	height: 10rem;

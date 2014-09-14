@@ -175,8 +175,9 @@
 		width: 26rem;
 		height: 14.5rem;
 	}
-	/* --- NA 2014 --- */
-	section.project_na2014 a.project_logo {
+	/* --- NA 2014 & 2012 --- */
+	section.project_na2014 a.project_logo,
+	section.project_na2012 a.project_logo {
 		width: 22rem;
 		height: 11.6rem;
 	}
@@ -185,22 +186,13 @@
 		width: 15.2rem;
 		height: 13.8rem;
 	}
-	/* --- NA 2012 --- */
-	section.project_na2012 a.project_logo {
-		width: 22rem;
-		height: 11.6rem;
-	}
 	/* --- Pukeko --- */
 	section.project_pukeko a.project_logo {
 		width: 15.6rem;
 		height: 17.8rem;
 	}
-	/* --- Chicken --- */
-	section.project_chicken a.project_logo {
-		width: 17.6rem;
-		height: 13.6rem;
-	}
-	/* --- CFC --- */
+	/* --- Chicken & CFC --- */
+	section.project_chicken a.project_logo,
 	section.project_cfc a.project_logo {
 		width: 17.6rem;
 		height: 13.6rem;

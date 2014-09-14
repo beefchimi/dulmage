@@ -179,7 +179,7 @@ gulp.task('deploy', function() {
 	rsync({
 		ssh: true,
 		src: './build/',
-		dest: 'curtisdulmage.com@s186705.gridserver.com:/nfs/c06/h06/mnt/186705/domains/curtisdulmage.com/html/sites/dulmage',
+		dest: secrets.servers.prod.host + ':' + secrets.servers.prod.dest,
 		recursive: true,
 		syncDest: true,
 		exclude: ['.DS_Store'],
