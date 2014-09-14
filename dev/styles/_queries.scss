@@ -67,14 +67,12 @@
 
 	/* Project Logo / Link
 	---------------------------------------------------------------------------- */
-	.project_logo {
+	div.project_logo {
 		margin-bottom: 6rem;
 	}
-/*
-	a.project_logo svg {
-		filter: blur(0px); // is this null state required?
+	a.project_logo {
+		margin-bottom: 7.2rem;
 	}
-*/
 	/* --- Project Overlay --- */
 	div.project_overlay {
 		display: block;

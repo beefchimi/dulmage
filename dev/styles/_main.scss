@@ -229,15 +229,18 @@ nav ul li.current a span {
 .project_logo {
 	position: relative;
 	z-index: 1001;
-	margin: 0 auto 4rem auto;
 }
 .project_logo svg {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
+div.project_logo {
+	margin: 0 auto 3.2rem auto;
+}
 a.project_logo {
 	display: block;
+	margin: 0 auto 5.2rem auto;
 }
 a.project_logo svg {
 	fill: rgba(255,255,255,0.94);
@@ -392,120 +395,78 @@ section.project_preserve {
 	background-image: url('../img/preserve.png');
 }
 section.project_preserve a.project_logo {
-	width: 14rem;
-	height: 15rem;
+	width: 12rem;
+	height: 12.8rem;
 }
 /* --- BMC --- */
 section.project_bmc {
 	background-image: url('../img/bmc.png');
 }
 section.project_bmc a.project_logo {
-	width: 22rem;
-	height: 10.8rem;
+	width: 18rem;
+	height: 8.8rem;
 }
 /* --- Fringe --- */
 section.project_fringe {
 	background-image: url('../img/fringe.png');
 }
 section.project_fringe a.project_logo {
-	width: 22rem;
-	height: 12.3rem;
+	width: 20rem;
+	height: 11.1rem;
 }
 /* --- NA 2014 --- */
 section.project_na2014 {
 	background-image: url('../img/na2014.png');
 }
 section.project_na2014 a.project_logo {
-	width: 20rem;
-	height: 10.5rem;
+	width: 16.1rem;
+	height: 8.4rem;
 }
 /* --- Arts Court --- */
 section.project_artscourt {
 	background-image: url('../img/artscourt.png');
 }
 section.project_artscourt a.project_logo {
-	width: 13rem;
-	height: 11.8rem;
+	width: 11rem;
+	height: 10rem;
 }
 /* --- NA 2012 --- */
 section.project_na2012 {
 	background-image: url('../img/na2012.png');
 }
 section.project_na2012 a.project_logo {
-	width: 20rem;
-	height: 10.5rem;
+	width: 16.1rem;
+	height: 8.4rem;
 }
 /* --- Pukeko --- */
 section.project_pukeko {
 	background-image: url('../img/pukeko.png');
 }
 section.project_pukeko a.project_logo {
-	width: 14rem;
-	height: 16rem;
+	width: 12.1rem;
+	height: 13.7rem;
 }
 /* --- Chicken --- */
 section.project_chicken {
 	background-image: url('../img/chicken.png');
 }
 section.project_chicken a.project_logo {
-	width: 16rem;
-	height: 12.4rem;
+	width: 13rem;
+	height: 10rem;
 }
 /* --- CFC --- */
 section.project_cfc {
 	background-image: url('../img/cfc.png');
 }
 section.project_cfc a.project_logo {
-	width: 16rem;
-	height: 12.4rem;
+	width: 13rem;
+	height: 10rem;
 }
 /* --- Bryston --- */
 section.project_bryston {
 	background-image: url('../img/bryston.png');
 }
 section.project_bryston a.project_logo {
-	width: 18rem;
-	height: 8.2rem;
-}
-
-
-
-
-
-/* --- Stats --- */
-h6 {
-	position: fixed;
-	z-index: 9999;
-	font-size: 18px;
-	font-weight: 900;
-	color: hsla(0,0%,100%,0.8);
-}
-h6 span {
-	display: block;
-}
-h6.height,
-h6.diff,
-h6.scroll {
-	top: 32px;
-}
-h6.touchS,
-h6.touchM,
-h6.touchE {
-	bottom: 48px;
-}
-/* + alignment + */
-h6.height,
-h6.touchS {
-	left: 32px;
-}
-h6.diff,
-h6.touchM {
-	left: 50%;
-	text-align: center;
-	transform: translateX(-50%);
-}
-h6.scroll,
-h6.touchE {
-	right: 32px;
-	text-align: right;
+	width: 14rem;
+	height: 6.4rem;
 }
