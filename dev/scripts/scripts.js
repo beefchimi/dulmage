@@ -184,22 +184,28 @@ jQuery(document).ready(function($) {
 		// update scroll position as we scroll the window
 		scrollPos = $window.scrollTop();
 
-		// check what section we are in while scrolling
-		sectionWhileScrolling = Math.floor(scrollPos / windowHeight);
+		// apply new values only if scrollPos is greater than 0...
+		// this will prevent iOS rubber band scrolling from producing incorrect values
+		if (scrollPos >= 0) {
 
-		// once sectionWhileScrolling no longer equals sectionCurrent,
-		// we know we have crossed into new territory
-		if (sectionCurrent != sectionWhileScrolling) {
+			// check what section we are in while scrolling
+			sectionWhileScrolling = Math.floor(scrollPos / windowHeight);
 
-			// assign sectionWhileScrolling as the new sectionCurrent
-			sectionCurrent = sectionWhileScrolling;
+			// once sectionWhileScrolling no longer equals sectionCurrent,
+			// we know we have crossed into new territory
+			if (sectionCurrent != sectionWhileScrolling) {
 
-			// run trackSection again to update section progression and RGB values
-			trackSection();
+				// assign sectionWhileScrolling as the new sectionCurrent
+				sectionCurrent = sectionWhileScrolling;
+
+				// run trackSection again to update section progression and RGB values
+				trackSection();
+
+			}
+
+			colorMath();
 
 		}
-
-		colorMath();
 
 	}
 
@@ -233,18 +239,14 @@ jQuery(document).ready(function($) {
 		updateH = beginH + parseInt(intSignH + calcH);
 		updateS = beginS + parseInt(intSignS + calcS);
 
-		// apply new values only if scrollPos is greater than 0...
-		// this will prevent iOS rubber band scrolling from producing incorrect values
-		if (scrollPos >= 0) {
+		// apply new RGB colors to <main> element
+		$mainElement.css('background-color', 'rgb('+updateR+','+updateG+','+updateB+')');
 
-			$mainElement.css('background-color', 'rgb('+updateR+','+updateG+','+updateB+')');
-
-			$navLinks.css({
-				color              : 'rgb('+updateR+','+updateG+','+updateB+')',
-				'background-color' : 'hsl('+updateH+','+updateS+'%,90%)'
-			});
-
-		}
+		// apply new RGB & HSL colors to <nav> element... using HSL to controll lightness, gets converted to RGB in browser :(
+		$navLinks.css({
+			color              : 'rgb('+updateR+','+updateG+','+updateB+')',
+			'background-color' : 'hsl('+updateH+','+updateS+'%,90%)'
+		});
 
 	}
 
