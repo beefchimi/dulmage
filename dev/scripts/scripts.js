@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
 
 
 	/* Global Variables
@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// common objects
 	var elBody       = document.body,
-		elMain       = document.getElementsByTagName('main'),
+		elMain       = document.getElementsByTagName('main')[0],
 		elSections   = document.getElementsByTagName('section'),
 		elNavList    = document.getElementsByTagName('li'),
 		elNavLinks   = document.getElementsByClassName('link_anchor'),
-		elNavToggle  = document.getElementsByClassName('nav_toggle'),
+		elNavToggle  = document.getElementsByClassName('nav_toggle')[0],
 		navListCount = elNavList.length;
 
 	// possible homepage options
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		updateS = beginS + parseInt(intSignS + calcS);
 
 		// apply new RGB colors to <main> element
-		elMain[0].style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
+		elMain.style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
 
 		// apply new RGB & HSL colors to <nav> links... using HSL to control lightness, gets converted to RGB in browser :(
 		for (var i = 0; i < navListCount; i++) {
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	---------------------------------------------------------------------------- */
 	function navToggle() {
 
-		elNavToggle[0].addEventListener('click', function(e) {
+		elNavToggle.addEventListener('click', function(e) {
 
 			this.classList.toggle('active');
 			e.preventDefault();
@@ -401,4 +401,4 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 
-}, false);
+// }, false);
