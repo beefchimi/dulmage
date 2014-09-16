@@ -27,7 +27,7 @@ var paths = {
 		dest: 'build/assets/css/'
 	},
 	scripts: {
-		src : 'dev/scripts/*.js',
+		src : 'dev/scripts/', // *.js
 		dest: 'build/assets/js/'
 	},
 	images: {
@@ -95,7 +95,7 @@ gulp.task('styles', function() {
 // Concat and Output Scripts
 gulp.task('scripts', function() {
 
-	return gulp.src(paths.scripts.src)
+	return gulp.src(paths.scripts.src + '*.js') // [paths.scripts.src + 'plugins.js', paths.scripts.src + 'scripts.js']
 		// .pipe(plugins.jshint('.jshintrc')) // what is '.jshintrc' ?
 		// .pipe(plugins.jshint.reporter('default'))
 		.pipe(plugins.concat('scripts.js'))
@@ -200,7 +200,7 @@ gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 	// watch dev files, rebuild when changed
 	gulp.watch(paths.haml.src + '*.haml', ['haml']);
 	gulp.watch(paths.styles.src + '*.scss', ['styles']);
-	gulp.watch(paths.scripts.src, ['scripts']);
+	gulp.watch(paths.scripts.src + '*.js', ['scripts']);
 
 	// start livereload server and refresh page whenever build files are updated
 	livereload.listen(); // errors with livereload?

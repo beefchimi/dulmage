@@ -1,14 +1,973 @@
+/*
 // Avoid 'console' errors in browsers that lack a console
-!function(){for(var a,b=function(){},c=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeline","timelineEnd","timeStamp","trace","warn"],d=c.length,e=window.console=window.console||{};d--;)a=c[d],e[a]||(e[a]=b)}();
+(function() {
+
+	var method;
+	var noop = function () {};
+	var methods = [
+		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+	];
+	var length = methods.length;
+	var console = (window.console = window.console || {});
+
+	while (length--) {
+		method = methods[length];
+
+		// Only stub undefined methods.
+		if (!console[method]) {
+			console[method] = noop;
+		}
+	}
+
+}());
+*/
 
 
-// imagesLoaded PACKAGED v3.1.8 | copyright David Desandro | http://imagesloaded.desandro.com/ | MIT License
-(function(){function e(){}function t(e,t){for(var n=e.length;n--;)if(e[n].listener===t)return n;return-1}function n(e){return function(){return this[e].apply(this,arguments)}}var i=e.prototype,r=this,o=r.EventEmitter;i.getListeners=function(e){var t,n,i=this._getEvents();if("object"==typeof e){t={};for(n in i)i.hasOwnProperty(n)&&e.test(n)&&(t[n]=i[n])}else t=i[e]||(i[e]=[]);return t},i.flattenListeners=function(e){var t,n=[];for(t=0;e.length>t;t+=1)n.push(e[t].listener);return n},i.getListenersAsObject=function(e){var t,n=this.getListeners(e);return n instanceof Array&&(t={},t[e]=n),t||n},i.addListener=function(e,n){var i,r=this.getListenersAsObject(e),o="object"==typeof n;for(i in r)r.hasOwnProperty(i)&&-1===t(r[i],n)&&r[i].push(o?n:{listener:n,once:!1});return this},i.on=n("addListener"),i.addOnceListener=function(e,t){return this.addListener(e,{listener:t,once:!0})},i.once=n("addOnceListener"),i.defineEvent=function(e){return this.getListeners(e),this},i.defineEvents=function(e){for(var t=0;e.length>t;t+=1)this.defineEvent(e[t]);return this},i.removeListener=function(e,n){var i,r,o=this.getListenersAsObject(e);for(r in o)o.hasOwnProperty(r)&&(i=t(o[r],n),-1!==i&&o[r].splice(i,1));return this},i.off=n("removeListener"),i.addListeners=function(e,t){return this.manipulateListeners(!1,e,t)},i.removeListeners=function(e,t){return this.manipulateListeners(!0,e,t)},i.manipulateListeners=function(e,t,n){var i,r,o=e?this.removeListener:this.addListener,s=e?this.removeListeners:this.addListeners;if("object"!=typeof t||t instanceof RegExp)for(i=n.length;i--;)o.call(this,t,n[i]);else for(i in t)t.hasOwnProperty(i)&&(r=t[i])&&("function"==typeof r?o.call(this,i,r):s.call(this,i,r));return this},i.removeEvent=function(e){var t,n=typeof e,i=this._getEvents();if("string"===n)delete i[e];else if("object"===n)for(t in i)i.hasOwnProperty(t)&&e.test(t)&&delete i[t];else delete this._events;return this},i.removeAllListeners=n("removeEvent"),i.emitEvent=function(e,t){var n,i,r,o,s=this.getListenersAsObject(e);for(r in s)if(s.hasOwnProperty(r))for(i=s[r].length;i--;)n=s[r][i],n.once===!0&&this.removeListener(e,n.listener),o=n.listener.apply(this,t||[]),o===this._getOnceReturnValue()&&this.removeListener(e,n.listener);return this},i.trigger=n("emitEvent"),i.emit=function(e){var t=Array.prototype.slice.call(arguments,1);return this.emitEvent(e,t)},i.setOnceReturnValue=function(e){return this._onceReturnValue=e,this},i._getOnceReturnValue=function(){return this.hasOwnProperty("_onceReturnValue")?this._onceReturnValue:!0},i._getEvents=function(){return this._events||(this._events={})},e.noConflict=function(){return r.EventEmitter=o,e},"function"==typeof define&&define.amd?define("eventEmitter/EventEmitter",[],function(){return e}):"object"==typeof module&&module.exports?module.exports=e:this.EventEmitter=e}).call(this),function(e){function t(t){var n=e.event;return n.target=n.target||n.srcElement||t,n}var n=document.documentElement,i=function(){};n.addEventListener?i=function(e,t,n){e.addEventListener(t,n,!1)}:n.attachEvent&&(i=function(e,n,i){e[n+i]=i.handleEvent?function(){var n=t(e);i.handleEvent.call(i,n)}:function(){var n=t(e);i.call(e,n)},e.attachEvent("on"+n,e[n+i])});var r=function(){};n.removeEventListener?r=function(e,t,n){e.removeEventListener(t,n,!1)}:n.detachEvent&&(r=function(e,t,n){e.detachEvent("on"+t,e[t+n]);try{delete e[t+n]}catch(i){e[t+n]=void 0}});var o={bind:i,unbind:r};"function"==typeof define&&define.amd?define("eventie/eventie",o):e.eventie=o}(this),function(e,t){"function"==typeof define&&define.amd?define(["eventEmitter/EventEmitter","eventie/eventie"],function(n,i){return t(e,n,i)}):"object"==typeof exports?module.exports=t(e,require("wolfy87-eventemitter"),require("eventie")):e.imagesLoaded=t(e,e.EventEmitter,e.eventie)}(window,function(e,t,n){function i(e,t){for(var n in t)e[n]=t[n];return e}function r(e){return"[object Array]"===d.call(e)}function o(e){var t=[];if(r(e))t=e;else if("number"==typeof e.length)for(var n=0,i=e.length;i>n;n++)t.push(e[n]);else t.push(e);return t}function s(e,t,n){if(!(this instanceof s))return new s(e,t);"string"==typeof e&&(e=document.querySelectorAll(e)),this.elements=o(e),this.options=i({},this.options),"function"==typeof t?n=t:i(this.options,t),n&&this.on("always",n),this.getImages(),a&&(this.jqDeferred=new a.Deferred);var r=this;setTimeout(function(){r.check()})}function f(e){this.img=e}function c(e){this.src=e,v[e]=this}var a=e.jQuery,u=e.console,h=u!==void 0,d=Object.prototype.toString;s.prototype=new t,s.prototype.options={},s.prototype.getImages=function(){this.images=[];for(var e=0,t=this.elements.length;t>e;e++){var n=this.elements[e];"IMG"===n.nodeName&&this.addImage(n);var i=n.nodeType;if(i&&(1===i||9===i||11===i))for(var r=n.querySelectorAll("img"),o=0,s=r.length;s>o;o++){var f=r[o];this.addImage(f)}}},s.prototype.addImage=function(e){var t=new f(e);this.images.push(t)},s.prototype.check=function(){function e(e,r){return t.options.debug&&h&&u.log("confirm",e,r),t.progress(e),n++,n===i&&t.complete(),!0}var t=this,n=0,i=this.images.length;if(this.hasAnyBroken=!1,!i)return this.complete(),void 0;for(var r=0;i>r;r++){var o=this.images[r];o.on("confirm",e),o.check()}},s.prototype.progress=function(e){this.hasAnyBroken=this.hasAnyBroken||!e.isLoaded;var t=this;setTimeout(function(){t.emit("progress",t,e),t.jqDeferred&&t.jqDeferred.notify&&t.jqDeferred.notify(t,e)})},s.prototype.complete=function(){var e=this.hasAnyBroken?"fail":"done";this.isComplete=!0;var t=this;setTimeout(function(){if(t.emit(e,t),t.emit("always",t),t.jqDeferred){var n=t.hasAnyBroken?"reject":"resolve";t.jqDeferred[n](t)}})},a&&(a.fn.imagesLoaded=function(e,t){var n=new s(this,e,t);return n.jqDeferred.promise(a(this))}),f.prototype=new t,f.prototype.check=function(){var e=v[this.img.src]||new c(this.img.src);if(e.isConfirmed)return this.confirm(e.isLoaded,"cached was confirmed"),void 0;if(this.img.complete&&void 0!==this.img.naturalWidth)return this.confirm(0!==this.img.naturalWidth,"naturalWidth"),void 0;var t=this;e.on("confirm",function(e,n){return t.confirm(e.isLoaded,n),!0}),e.check()},f.prototype.confirm=function(e,t){this.isLoaded=e,this.emit("confirm",this,t)};var v={};return c.prototype=new t,c.prototype.check=function(){if(!this.isChecked){var e=new Image;n.bind(e,"load",this),n.bind(e,"error",this),e.src=this.src,this.isChecked=!0}},c.prototype.handleEvent=function(e){var t="on"+e.type;this[t]&&this[t](e)},c.prototype.onload=function(e){this.confirm(!0,"onload"),this.unbindProxyEvents(e)},c.prototype.onerror=function(e){this.confirm(!1,"onerror"),this.unbindProxyEvents(e)},c.prototype.confirm=function(e,t){this.isConfirmed=!0,this.isLoaded=e,this.emit("confirm",this,t)},c.prototype.unbindProxyEvents=function(e){n.unbind(e.target,"load",this),n.unbind(e.target,"error",this)},s});
+// PxLoader v1.0 | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+(function(global) {
+
+	/*
+	 * PixelLab Resource Loader
+	 * Loads resources while providing progress updates.
+	*/
+	function PxLoader(settings) {
+
+		// merge settings with defaults
+		settings = settings || {};
+		this.settings = settings;
+
+		// how frequently we poll resources for progress
+		if (settings.statusInterval == null) {
+			settings.statusInterval = 5000; // every 5 seconds by default
+		}
+
+		// delay before logging since last progress change
+		if (settings.loggingDelay == null) {
+			settings.loggingDelay = 20 * 1000; // log stragglers after 20 secs
+		}
+
+		// stop waiting if no progress has been made in the moving time window
+		if (settings.noProgressTimeout == null) {
+			settings.noProgressTimeout = Infinity; // do not stop waiting by default
+		}
+
+		var entries = [],
+			// holds resources to be loaded with their status
+			progressListeners = [],
+			timeStarted, progressChanged = Date.now();
+
+		/**
+		 * The status of a resource
+		 * @enum {number}
+		 */
+		var ResourceState = {
+			QUEUED: 0,
+			WAITING: 1,
+			LOADED: 2,
+			ERROR: 3,
+			TIMEOUT: 4
+		};
+
+		// places non-array values into an array.
+		var ensureArray = function(val) {
+			if (val == null) {
+				return [];
+			}
+
+			if (Array.isArray(val)) {
+				return val;
+			}
+
+			return [val];
+		};
+
+		// add an entry to the list of resources to be loaded
+		this.add = function(resource) {
+
+			// TODO: would be better to create a base class for all resources and
+			// initialize the PxLoaderTags there rather than overwritting tags here
+			resource.tags = new PxLoaderTags(resource.tags);
+
+			// ensure priority is set
+			if (resource.priority == null) {
+				resource.priority = Infinity;
+			}
+
+			entries.push({
+				resource: resource,
+				status: ResourceState.QUEUED
+			});
+		};
+
+		this.addProgressListener = function(callback, tags) {
+			progressListeners.push({
+				callback: callback,
+				tags: new PxLoaderTags(tags)
+			});
+		};
+
+		this.addCompletionListener = function(callback, tags) {
+			progressListeners.push({
+				tags: new PxLoaderTags(tags),
+				callback: function(e) {
+					if (e.completedCount === e.totalCount) {
+						callback(e);
+					}
+				}
+			});
+		};
+
+		// creates a comparison function for resources
+		var getResourceSort = function(orderedTags) {
+
+			// helper to get the top tag's order for a resource
+			orderedTags = ensureArray(orderedTags);
+			var getTagOrder = function(entry) {
+				var resource = entry.resource,
+					bestIndex = Infinity;
+				for (var i = 0; i < resource.tags.length; i++) {
+					for (var j = 0; j < Math.min(orderedTags.length, bestIndex); j++) {
+						if (resource.tags.all[i] === orderedTags[j] && j < bestIndex) {
+							bestIndex = j;
+							if (bestIndex === 0) {
+								break;
+							}
+						}
+						if (bestIndex === 0) {
+							break;
+						}
+					}
+				}
+				return bestIndex;
+			};
+			return function(a, b) {
+				// check tag order first
+				var aOrder = getTagOrder(a),
+					bOrder = getTagOrder(b);
+				if (aOrder < bOrder) { return -1; }
+				if (aOrder > bOrder) { return 1; }
+
+				// now check priority
+				if (a.priority < b.priority) { return -1; }
+				if (a.priority > b.priority) { return 1; }
+				return 0;
+			};
+		};
+
+		this.start = function(orderedTags) {
+			timeStarted = Date.now();
+
+			// first order the resources
+			var compareResources = getResourceSort(orderedTags);
+			entries.sort(compareResources);
+
+			// trigger requests for each resource
+			for (var i = 0, len = entries.length; i < len; i++) {
+				var entry = entries[i];
+				entry.status = ResourceState.WAITING;
+				entry.resource.start(this);
+			}
+
+			// do an initial status check soon since items may be loaded from the cache
+			setTimeout(statusCheck, 100);
+		};
+
+		var statusCheck = function() {
+			var checkAgain = false,
+				noProgressTime = Date.now() - progressChanged,
+				timedOut = (noProgressTime >= settings.noProgressTimeout),
+				shouldLog = (noProgressTime >= settings.loggingDelay);
+
+			for (var i = 0, len = entries.length; i < len; i++) {
+				var entry = entries[i];
+				if (entry.status !== ResourceState.WAITING) {
+					continue;
+				}
+
+				// see if the resource has loaded
+				if (entry.resource.checkStatus) {
+					entry.resource.checkStatus();
+				}
+
+				// if still waiting, mark as timed out or make sure we check again
+				if (entry.status === ResourceState.WAITING) {
+					if (timedOut) {
+						entry.resource.onTimeout();
+					} else {
+						checkAgain = true;
+					}
+				}
+			}
+
+			// log any resources that are still pending
+			if (shouldLog && checkAgain) {
+				log();
+			}
+
+			if (checkAgain) {
+				setTimeout(statusCheck, settings.statusInterval);
+			}
+		};
+
+		this.isBusy = function() {
+			for (var i = 0, len = entries.length; i < len; i++) {
+				if (entries[i].status === ResourceState.QUEUED || entries[i].status === ResourceState.WAITING) {
+					return true;
+				}
+			}
+			return false;
+		};
+
+		var onProgress = function(resource, statusType) {
+
+			var entry = null,
+				i, len, numResourceTags, listener, shouldCall;
+
+			// find the entry for the resource
+			for (i = 0, len = entries.length; i < len; i++) {
+				if (entries[i].resource === resource) {
+					entry = entries[i];
+					break;
+				}
+			}
+
+			// we have already updated the status of the resource
+			if (entry == null || entry.status !== ResourceState.WAITING) {
+				return;
+			}
+			entry.status = statusType;
+			progressChanged = Date.now();
+
+			numResourceTags = resource.tags.length;
+
+			// fire callbacks for interested listeners
+			for (i = 0, len = progressListeners.length; i < len; i++) {
+
+				listener = progressListeners[i];
+				if (listener.tags.length === 0) {
+					// no tags specified so always tell the listener
+					shouldCall = true;
+				} else {
+					// listener only wants to hear about certain tags
+					shouldCall = resource.tags.intersects(listener.tags);
+				}
+
+				if (shouldCall) {
+					sendProgress(entry, listener);
+				}
+			}
+		};
+
+		this.onLoad = function(resource) {
+			onProgress(resource, ResourceState.LOADED);
+		};
+		this.onError = function(resource) {
+			onProgress(resource, ResourceState.ERROR);
+		};
+		this.onTimeout = function(resource) {
+			onProgress(resource, ResourceState.TIMEOUT);
+		};
+
+		// sends a progress report to a listener
+		var sendProgress = function(updatedEntry, listener) {
+			// find stats for all the resources the caller is interested in
+			var completed = 0,
+				total = 0,
+				i, len, entry, includeResource;
+			for (i = 0, len = entries.length; i < len; i++) {
+
+				entry = entries[i];
+				includeResource = false;
+
+				if (listener.tags.length === 0) {
+					// no tags specified so always tell the listener
+					includeResource = true;
+				} else {
+					includeResource = entry.resource.tags.intersects(listener.tags);
+				}
+
+				if (includeResource) {
+					total++;
+					if (entry.status === ResourceState.LOADED ||
+						entry.status === ResourceState.ERROR ||
+						entry.status === ResourceState.TIMEOUT) {
+
+						completed++;
+					}
+				}
+			}
+
+			listener.callback({
+				// info about the resource that changed
+				resource: updatedEntry.resource,
+
+				// should we expose StatusType instead?
+				loaded: (updatedEntry.status === ResourceState.LOADED),
+				error: (updatedEntry.status === ResourceState.ERROR),
+				timeout: (updatedEntry.status === ResourceState.TIMEOUT),
+
+				// updated stats for all resources
+				completedCount: completed,
+				totalCount: total
+			});
+		};
+
+		// prints the status of each resource to the console
+		var log = this.log = function(showAll) {
+			if (!window.console) {
+				return;
+			}
+
+			var elapsedSeconds = Math.round((Date.now() - timeStarted) / 1000);
+			window.console.log('PxLoader elapsed: ' + elapsedSeconds + ' sec');
+
+			for (var i = 0, len = entries.length; i < len; i++) {
+				var entry = entries[i];
+				if (!showAll && entry.status !== ResourceState.WAITING) {
+					continue;
+				}
+
+				var message = 'PxLoader: #' + i + ' ' + entry.resource.getName();
+				switch(entry.status) {
+					case ResourceState.QUEUED:
+						message += ' (Not Started)';
+						break;
+					case ResourceState.WAITING:
+						message += ' (Waiting)';
+						break;
+					case ResourceState.LOADED:
+						message += ' (Loaded)';
+						break;
+					case ResourceState.ERROR:
+						message += ' (Error)';
+						break;
+					case ResourceState.TIMEOUT:
+						message += ' (Timeout)';
+						break;
+				}
+
+				if (entry.resource.tags.length > 0) {
+					message += ' Tags: [' + entry.resource.tags.all.join(',') + ']';
+				}
+
+				window.console.log(message);
+			}
+		};
+	}
 
 
+	// Tag object to handle tag intersection; once created not meant to be changed
+	// Performance rationale: http://jsperf.com/lists-indexof-vs-in-operator/3
+
+	function PxLoaderTags(values) {
+
+		this.all = [];
+		this.first = null; // cache the first value
+		this.length = 0;
+
+		// holds values as keys for quick lookup
+		this.lookup = {};
+
+		if (values) {
+
+			// first fill the array of all values
+			if (Array.isArray(values)) {
+				// copy the array of values, just to be safe
+				this.all = values.slice(0);
+			} else if (typeof values === 'object') {
+				for (var key in values) {
+					if(values.hasOwnProperty(key)) {
+						this.all.push(key);
+					}
+				}
+			} else {
+				this.all.push(values);
+			}
+
+			// cache the length and the first value
+			this.length = this.all.length;
+			if (this.length > 0) {
+				this.first = this.all[0];
+			}
+
+			// set values as object keys for quick lookup during intersection test
+			for (var i = 0; i < this.length; i++) {
+				this.lookup[this.all[i]] = true;
+			}
+		}
+	}
+
+	// compare this object with another; return true if they share at least one value
+	PxLoaderTags.prototype.intersects = function(other) {
+
+		// handle empty values case
+		if (this.length === 0 || other.length === 0) {
+			return false;
+		}
+
+		// only a single value to compare?
+		if (this.length === 1 && other.length === 1) {
+			return this.first === other.first;
+		}
+
+		// better to loop through the smaller object
+		if (other.length < this.length) {
+			return other.intersects(this);
+		}
+
+		// loop through every key to see if there are any matches
+		for (var key in this.lookup) {
+			if (other.lookup[key]) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	// AMD module support
+	if (typeof define === 'function' && define.amd) {
+		define('PxLoader', [], function() {
+			return PxLoader;
+		});
+	}
+
+	// exports
+	global.PxLoader = PxLoader;
+
+}(this));
+
+// Date.now() shim for older browsers
+if (!Date.now) {
+	Date.now = function now() {
+		return new Date().getTime();
+	};
+}
+
+// shims to ensure we have newer Array utility methods
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray
+if (!Array.isArray) {
+	Array.isArray = function(arg) {
+		return Object.prototype.toString.call(arg) === '[object Array]';
+	};
+}
+
+
+// PxLoader v1.0 Image Extension | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+function PxLoaderImage(url, tags, priority) {
+	var self = this,
+		loader = null;
+
+	this.img = new Image();
+	this.tags = tags;
+	this.priority = priority;
+
+	var onReadyStateChange = function() {
+		if (self.img.readyState === 'complete') {
+			removeEventHandlers();
+			loader.onLoad(self);
+		}
+	};
+
+	var onLoad = function() {
+		removeEventHandlers();
+		loader.onLoad(self);
+	};
+
+	var onError = function() {
+		removeEventHandlers();
+		loader.onError(self);
+	};
+
+	var removeEventHandlers = function() {
+		self.unbind('load', onLoad);
+		self.unbind('readystatechange', onReadyStateChange);
+		self.unbind('error', onError);
+	};
+
+	this.start = function(pxLoader) {
+		// we need the loader ref so we can notify upon completion
+		loader = pxLoader;
+
+		// NOTE: Must add event listeners before the src is set. We
+		// also need to use the readystatechange because sometimes
+		// load doesn't fire when an image is in the cache.
+		self.bind('load', onLoad);
+		self.bind('readystatechange', onReadyStateChange);
+		self.bind('error', onError);
+
+		self.img.src = url;
+	};
+
+	// called by PxLoader to check status of image (fallback in case
+	// the event listeners are not triggered).
+	this.checkStatus = function() {
+		if (self.img.complete) {
+			removeEventHandlers();
+			loader.onLoad(self);
+		}
+	};
+
+	// called by PxLoader when it is no longer waiting
+	this.onTimeout = function() {
+		removeEventHandlers();
+		if (self.img.complete) {
+			loader.onLoad(self);
+		} else {
+			loader.onTimeout(self);
+		}
+	};
+
+	// returns a name for the resource that can be used in logging
+	this.getName = function() {
+		return url;
+	};
+
+	// cross-browser event binding
+	this.bind = function(eventName, eventHandler) {
+		if (self.img.addEventListener) {
+			self.img.addEventListener(eventName, eventHandler, false);
+		} else if (self.img.attachEvent) {
+			self.img.attachEvent('on' + eventName, eventHandler);
+		}
+	};
+
+	// cross-browser event un-binding
+	this.unbind = function(eventName, eventHandler) {
+		if (self.img.removeEventListener) {
+			self.img.removeEventListener(eventName, eventHandler, false);
+		} else if (self.img.detachEvent) {
+			self.img.detachEvent('on' + eventName, eventHandler);
+		}
+	};
+
+}
+
+// add a convenience method to PxLoader for adding an image
+PxLoader.prototype.addImage = function(url, tags, priority) {
+	var imageLoader = new PxLoaderImage(url, tags, priority);
+	this.add(imageLoader);
+
+	// return the img element to the caller
+	return imageLoader.img;
+};
+
+// AMD module support
+if (typeof define === 'function' && define.amd) {
+	define('PxLoaderImage', [], function() {
+		return PxLoaderImage;
+	});
+}
+
+
+/*
 // smooth-scroll v5.1.2 [bind polyfill] | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
-Function.prototype.bind||(Function.prototype.bind=function(t){if("function"!=typeof this)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var o=Array.prototype.slice.call(arguments,1),n=this;return fNOP=function(){},fBound=function(){return n.apply(this instanceof fNOP&&t?this:t,o.concat(Array.prototype.slice.call(arguments)))},fNOP.prototype=this.prototype,fBound.prototype=new fNOP,fBound});
+if (!Function.prototype.bind) {
+	Function.prototype.bind = function (oThis) {
+		if (typeof this !== "function") {
+			// closest thing possible to the ECMAScript 5
+			// internal IsCallable function
+			throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+		}
+
+		var aArgs = Array.prototype.slice.call(arguments, 1);
+		var fToBind = this;
+		fNOP = function () {};
+		fBound = function () {
+			return fToBind.apply(this instanceof fNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
+		};
+
+		fNOP.prototype = this.prototype;
+		fBound.prototype = new fNOP();
+
+		return fBound;
+	};
+}
+*/
 
 
 // smooth-scroll v5.1.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
-!function(t,e){"function"==typeof define&&define.amd?define("smoothScroll",e(t)):"object"==typeof exports?module.exports=e(t):t.smoothScroll=e(t)}(this,function(t){"use strict";var e,n={},o=!!document.querySelector&&!!t.addEventListener,r={speed:500,easing:"easeInOutCubic",offset:0,updateURL:!0,callbackBefore:function(){},callbackAfter:function(){}},a=function(t,e,n){if("[object Object]"===Object.prototype.toString.call(t))for(var o in t)Object.prototype.hasOwnProperty.call(t,o)&&e.call(n,t[o],o,t);else for(var r=0,a=t.length;a>r;r++)e.call(n,t[r],r,t)},c=function(t,e){var n={};return a(t,function(e,o){n[o]=t[o]}),a(e,function(t,o){n[o]=e[o]}),n},u=function(t,e){for(var n=e.charAt(0);t&&t!==document;t=t.parentNode)if("."===n){if(t.classList.contains(e.substr(1)))return t}else if("#"===n){if(t.id===e.substr(1))return t}else if("["===n&&t.hasAttribute(e.substr(1,e.length-2)))return t;return!1},i=function(t){for(var e,n=String(t),o=n.length,r=-1,a="",c=n.charCodeAt(0);++r<o;){if(e=n.charCodeAt(r),0===e)throw new InvalidCharacterError("Invalid character: the input contains U+0000.");a+=e>=1&&31>=e||127==e||0===r&&e>=48&&57>=e||1===r&&e>=48&&57>=e&&45===c?"\\"+e.toString(16)+" ":e>=128||45===e||95===e||e>=48&&57>=e||e>=65&&90>=e||e>=97&&122>=e?n.charAt(r):"\\"+n.charAt(r)}return a},s=function(t,e){var n;return"easeInQuad"===t&&(n=e*e),"easeOutQuad"===t&&(n=e*(2-e)),"easeInOutQuad"===t&&(n=.5>e?2*e*e:-1+(4-2*e)*e),"easeInCubic"===t&&(n=e*e*e),"easeOutCubic"===t&&(n=--e*e*e+1),"easeInOutCubic"===t&&(n=.5>e?4*e*e*e:(e-1)*(2*e-2)*(2*e-2)+1),"easeInQuart"===t&&(n=e*e*e*e),"easeOutQuart"===t&&(n=1- --e*e*e*e),"easeInOutQuart"===t&&(n=.5>e?8*e*e*e*e:1-8*--e*e*e*e),"easeInQuint"===t&&(n=e*e*e*e*e),"easeOutQuint"===t&&(n=1+--e*e*e*e*e),"easeInOutQuint"===t&&(n=.5>e?16*e*e*e*e*e:1+16*--e*e*e*e*e),n||e},f=function(t,e,n){var o=0;if(t.offsetParent)do o+=t.offsetTop,t=t.offsetParent;while(t);return o=o-e-n,o>=0?o:0},l=function(){return Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,document.body.offsetHeight,document.documentElement.offsetHeight,document.body.clientHeight,document.documentElement.clientHeight)},d=function(t){return t&&"object"==typeof JSON&&"function"==typeof JSON.parse?JSON.parse(t):{}},h=function(t,e){history.pushState&&(e||"true"===e)&&history.pushState({pos:t.id},"",window.location.pathname+t)};n.animateScroll=function(e,n,o){var a=c(a||r,o||{}),u=d(e?e.getAttribute("data-options"):null);a=c(a,u),n="#"+i(n.substr(1));var p,m,b,v=document.querySelector("[data-scroll-header]"),g=null===v?0:v.offsetHeight+v.offsetTop,O=t.pageYOffset,y=f(document.querySelector(n),g,parseInt(a.offset,10)),I=y-O,S=l(),A=0;h(n,a.updateURL);var Q=function(o,r,c){var u=t.pageYOffset;(o==r||u==r||t.innerHeight+u>=S)&&(clearInterval(c),a.callbackAfter(e,n))},C=function(){A+=16,m=A/parseInt(a.speed,10),m=m>1?1:m,b=O+I*s(a.easing,m),t.scrollTo(0,Math.floor(b)),Q(b,y,p)},H=function(){a.callbackBefore(e,n),p=setInterval(C,16)};0===t.pageYOffset&&t.scrollTo(0,0),H()};var p=function(t){var o=u(t.target,"[data-scroll]");o&&"a"===o.tagName.toLowerCase()&&(t.preventDefault(),n.animateScroll(o,o.hash,e,t))};return n.destroy=function(){e&&(document.removeEventListener("click",p,!1),e=null)},n.init=function(t){o&&(n.destroy(),e=c(r,t||{}),document.addEventListener("click",p,!1))},n});
+(function (root, factory) {
+	if ( typeof define === 'function' && define.amd ) {
+		define('smoothScroll', factory(root));
+	} else if ( typeof exports === 'object' ) {
+		module.exports = factory(root);
+	} else {
+		root.smoothScroll = factory(root);
+	}
+})(this, function (root) {
+
+	'use strict';
+
+	//
+	// Variables
+	//
+
+	var smoothScroll = {}; // Object for public APIs
+	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var settings;
+
+	// Default settings
+	var defaults = {
+		speed: 500,
+		easing: 'easeInOutCubic',
+		offset: 0,
+		updateURL: true,
+		callbackBefore: function () {},
+		callbackAfter: function () {}
+	};
+
+
+	//
+	// Methods
+	//
+
+	/**
+	 * A simple forEach() implementation for Arrays, Objects and NodeLists
+	 * @private
+	 * @param {Array|Object|NodeList} collection Collection of items to iterate
+	 * @param {Function} callback Callback function for each iteration
+	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
+	 */
+	var forEach = function (collection, callback, scope) {
+		if (Object.prototype.toString.call(collection) === '[object Object]') {
+			for (var prop in collection) {
+				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+					callback.call(scope, collection[prop], prop, collection);
+				}
+			}
+		} else {
+			for (var i = 0, len = collection.length; i < len; i++) {
+				callback.call(scope, collection[i], i, collection);
+			}
+		}
+	};
+
+	/**
+	 * Merge defaults with user options
+	 * @private
+	 * @param {Object} defaults Default settings
+	 * @param {Object} options User options
+	 * @returns {Object} Merged values of defaults and options
+	 */
+	var extend = function ( defaults, options ) {
+		var extended = {};
+		forEach(defaults, function (value, prop) {
+			extended[prop] = defaults[prop];
+		});
+		forEach(options, function (value, prop) {
+			extended[prop] = options[prop];
+		});
+		return extended;
+	};
+
+	/**
+	 * Get the closest matching element up the DOM tree
+	 * @param {Element} elem Starting element
+	 * @param {String} selector Selector to match against (class, ID, or data attribute)
+	 * @return {Boolean|Element} Returns false if not match found
+	 */
+	var getClosest = function (elem, selector) {
+		var firstChar = selector.charAt(0);
+		for ( ; elem && elem !== document; elem = elem.parentNode ) {
+			if ( firstChar === '.' ) {
+				if ( elem.classList.contains( selector.substr(1) ) ) {
+					return elem;
+				}
+			} else if ( firstChar === '#' ) {
+				if ( elem.id === selector.substr(1) ) {
+					return elem;
+				}
+			} else if ( firstChar === '[' ) {
+				if ( elem.hasAttribute( selector.substr(1, selector.length - 2) ) ) {
+					return elem;
+				}
+			}
+		}
+		return false;
+	};
+
+	/**
+	 * Escape special characters for use with querySelector
+	 * @private
+	 * @param {String} id The anchor ID to escape
+	 * @author Mathias Bynens
+	 * @link https://github.com/mathiasbynens/CSS.escape
+	 */
+	var escapeCharacters = function ( id ) {
+		var string = String(id);
+		var length = string.length;
+		var index = -1;
+		var codeUnit;
+		var result = '';
+		var firstCodeUnit = string.charCodeAt(0);
+		while (++index < length) {
+			codeUnit = string.charCodeAt(index);
+			// Note: there’s no need to special-case astral symbols, surrogate
+			// pairs, or lone surrogates.
+
+			// If the character is NULL (U+0000), then throw an
+			// `InvalidCharacterError` exception and terminate these steps.
+			if (codeUnit === 0x0000) {
+				throw new InvalidCharacterError(
+					'Invalid character: the input contains U+0000.'
+				);
+			}
+
+			if (
+				// If the character is in the range [\1-\1F] (U+0001 to U+001F) or is
+				// U+007F, […]
+				(codeUnit >= 0x0001 && codeUnit <= 0x001F) || codeUnit == 0x007F ||
+				// If the character is the first character and is in the range [0-9]
+				// (U+0030 to U+0039), […]
+				(index === 0 && codeUnit >= 0x0030 && codeUnit <= 0x0039) ||
+				// If the character is the second character and is in the range [0-9]
+				// (U+0030 to U+0039) and the first character is a `-` (U+002D), […]
+				(
+					index === 1 &&
+					codeUnit >= 0x0030 && codeUnit <= 0x0039 &&
+					firstCodeUnit === 0x002D
+				)
+			) {
+				// http://dev.w3.org/csswg/cssom/#escape-a-character-as-code-point
+				result += '\\' + codeUnit.toString(16) + ' ';
+				continue;
+			}
+
+			// If the character is not handled by one of the above rules and is
+			// greater than or equal to U+0080, is `-` (U+002D) or `_` (U+005F), or
+			// is in one of the ranges [0-9] (U+0030 to U+0039), [A-Z] (U+0041 to
+			// U+005A), or [a-z] (U+0061 to U+007A), […]
+			if (
+				codeUnit >= 0x0080 ||
+				codeUnit === 0x002D ||
+				codeUnit === 0x005F ||
+				codeUnit >= 0x0030 && codeUnit <= 0x0039 ||
+				codeUnit >= 0x0041 && codeUnit <= 0x005A ||
+				codeUnit >= 0x0061 && codeUnit <= 0x007A
+			) {
+				// the character itself
+				result += string.charAt(index);
+				continue;
+			}
+
+			// Otherwise, the escaped character.
+			// http://dev.w3.org/csswg/cssom/#escape-a-character
+			result += '\\' + string.charAt(index);
+
+		}
+		return result;
+	};
+
+	/**
+	 * Calculate the easing pattern
+	 * @private
+	 * @param {String} type Easing pattern
+	 * @param {Number} time Time animation should take to complete
+	 * @returns {Number}
+	 */
+	var easingPattern = function ( type, time ) {
+		var pattern;
+		if ( type === 'easeInQuad' ) pattern = time * time; // accelerating from zero velocity
+		if ( type === 'easeOutQuad' ) pattern = time * (2 - time); // decelerating to zero velocity
+		if ( type === 'easeInOutQuad' ) pattern = time < 0.5 ? 2 * time * time : -1 + (4 - 2 * time) * time; // acceleration until halfway, then deceleration
+		if ( type === 'easeInCubic' ) pattern = time * time * time; // accelerating from zero velocity
+		if ( type === 'easeOutCubic' ) pattern = (--time) * time * time + 1; // decelerating to zero velocity
+		if ( type === 'easeInOutCubic' ) pattern = time < 0.5 ? 4 * time * time * time : (time - 1) * (2 * time - 2) * (2 * time - 2) + 1; // acceleration until halfway, then deceleration
+		if ( type === 'easeInQuart' ) pattern = time * time * time * time; // accelerating from zero velocity
+		if ( type === 'easeOutQuart' ) pattern = 1 - (--time) * time * time * time; // decelerating to zero velocity
+		if ( type === 'easeInOutQuart' ) pattern = time < 0.5 ? 8 * time * time * time * time : 1 - 8 * (--time) * time * time * time; // acceleration until halfway, then deceleration
+		if ( type === 'easeInQuint' ) pattern = time * time * time * time * time; // accelerating from zero velocity
+		if ( type === 'easeOutQuint' ) pattern = 1 + (--time) * time * time * time * time; // decelerating to zero velocity
+		if ( type === 'easeInOutQuint' ) pattern = time < 0.5 ? 16 * time * time * time * time * time : 1 + 16 * (--time) * time * time * time * time; // acceleration until halfway, then deceleration
+		return pattern || time; // no easing, no acceleration
+	};
+
+	/**
+	 * Calculate how far to scroll
+	 * @private
+	 * @param {Element} anchor The anchor element to scroll to
+	 * @param {Number} headerHeight Height of a fixed header, if any
+	 * @param {Number} offset Number of pixels by which to offset scroll
+	 * @returns {Number}
+	 */
+	var getEndLocation = function ( anchor, headerHeight, offset ) {
+		var location = 0;
+		if (anchor.offsetParent) {
+			do {
+				location += anchor.offsetTop;
+				anchor = anchor.offsetParent;
+			} while (anchor);
+		}
+		location = location - headerHeight - offset;
+		return location >= 0 ? location : 0;
+	};
+
+	/**
+	 * Determine the document's height
+	 * @private
+	 * @returns {Number}
+	 */
+	var getDocumentHeight = function () {
+		return Math.max(
+			document.body.scrollHeight, document.documentElement.scrollHeight,
+			document.body.offsetHeight, document.documentElement.offsetHeight,
+			document.body.clientHeight, document.documentElement.clientHeight
+		);
+	};
+
+	/**
+	 * Convert data-options attribute into an object of key/value pairs
+	 * @private
+	 * @param {String} options Link-specific options as a data attribute string
+	 * @returns {Object}
+	 */
+	var getDataOptions = function ( options ) {
+		return !options || !(typeof JSON === 'object' && typeof JSON.parse === 'function') ? {} : JSON.parse( options );
+	};
+
+	/**
+	 * Update the URL
+	 * @private
+	 * @param {Element} anchor The element to scroll to
+	 * @param {Boolean} url Whether or not to update the URL history
+	 */
+	var updateUrl = function ( anchor, url ) {
+		if ( history.pushState && (url || url === 'true') ) {
+			history.pushState( {
+				pos: anchor.id
+			}, '', window.location.pathname + anchor );
+		}
+	};
+
+	/**
+	 * Start/stop the scrolling animation
+	 * @public
+	 * @param {Element} toggle The element that toggled the scroll event
+	 * @param {Element} anchor The element to scroll to
+	 * @param {Object} settings
+	 * @param {Event} event
+	 */
+	smoothScroll.animateScroll = function ( toggle, anchor, options ) {
+
+		// Options and overrides
+		var settings = extend( settings || defaults, options || {} );  // Merge user options with defaults
+		var overrides = getDataOptions( toggle ? toggle.getAttribute('data-options') : null );
+		settings = extend( settings, overrides );
+		anchor = '#' + escapeCharacters(anchor.substr(1)); // Escape special characters and leading numbers
+
+		// Selectors and variables
+		var fixedHeader = document.querySelector('[data-scroll-header]'); // Get the fixed header
+		var headerHeight = fixedHeader === null ? 0 : (fixedHeader.offsetHeight + fixedHeader.offsetTop); // Get the height of a fixed header if one exists
+		var startLocation = root.pageYOffset; // Current location on the page
+		var endLocation = getEndLocation( document.querySelector(anchor), headerHeight, parseInt(settings.offset, 10) ); // Scroll to location
+		var animationInterval; // interval timer
+		var distance = endLocation - startLocation; // distance to travel
+		var documentHeight = getDocumentHeight();
+		var timeLapsed = 0;
+		var percentage, position;
+
+		// Update URL
+		updateUrl(anchor, settings.updateURL);
+
+		/**
+		 * Stop the scroll animation when it reaches its target (or the bottom/top of page)
+		 * @private
+		 * @param {Number} position Current position on the page
+		 * @param {Number} endLocation Scroll to location
+		 * @param {Number} animationInterval How much to scroll on this loop
+		 */
+		var stopAnimateScroll = function (position, endLocation, animationInterval) {
+			var currentLocation = root.pageYOffset;
+			if ( position == endLocation || currentLocation == endLocation || ( (root.innerHeight + currentLocation) >= documentHeight ) ) {
+				clearInterval(animationInterval);
+				settings.callbackAfter( toggle, anchor ); // Run callbacks after animation complete
+			}
+		};
+
+		/**
+		 * Loop scrolling animation
+		 * @private
+		 */
+		var loopAnimateScroll = function () {
+			timeLapsed += 16;
+			percentage = ( timeLapsed / parseInt(settings.speed, 10) );
+			percentage = ( percentage > 1 ) ? 1 : percentage;
+			position = startLocation + ( distance * easingPattern(settings.easing, percentage) );
+			root.scrollTo( 0, Math.floor(position) );
+			stopAnimateScroll(position, endLocation, animationInterval);
+		};
+
+		/**
+		 * Set interval timer
+		 * @private
+		 */
+		var startAnimateScroll = function () {
+			settings.callbackBefore( toggle, anchor ); // Run callbacks before animating scroll
+			animationInterval = setInterval(loopAnimateScroll, 16);
+		};
+
+		/**
+		 * Reset position to fix weird iOS bug
+		 * @link https://github.com/cferdinandi/smooth-scroll/issues/45
+		 */
+		if ( root.pageYOffset === 0 ) {
+			root.scrollTo( 0, 0 );
+		}
+
+		// Start scrolling animation
+		startAnimateScroll();
+
+	};
+
+	/**
+	 * If smooth scroll element clicked, animate scroll
+	 * @private
+	 */
+	var eventHandler = function (event) {
+		var toggle = getClosest(event.target, '[data-scroll]');
+		if ( toggle && toggle.tagName.toLowerCase() === 'a' ) {
+			event.preventDefault(); // Prevent default click event
+			smoothScroll.animateScroll( toggle, toggle.hash, settings, event ); // Animate scroll
+		}
+	};
+
+	/**
+	 * Destroy the current initialization.
+	 * @public
+	 */
+	smoothScroll.destroy = function () {
+		if ( !settings ) return;
+		document.removeEventListener( 'click', eventHandler, false );
+		settings = null;
+	};
+
+	/**
+	 * Initialize Smooth Scroll
+	 * @public
+	 * @param {Object} options User settings
+	 */
+	smoothScroll.init = function ( options ) {
+
+		// feature test
+		if ( !supports ) return;
+
+		// Destroy any existing initializations
+		smoothScroll.destroy();
+
+		// Selectors and variables
+		settings = extend( defaults, options || {} ); // Merge user options with defaults
+
+		// When a toggle is clicked, run the click handler
+		document.addEventListener('click', eventHandler, false);
+
+	};
+
+
+	//
+	// Public APIs
+	//
+
+	return smoothScroll;
+
+});

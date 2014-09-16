@@ -31,6 +31,7 @@ bryston		#3994db		rgb(57,148,219)		hsl(206,69%,54%)
 ---------------------------------------------------------------------------- */
 html {
 	font-family: 'brandon-grotesque', 'Brandon Grotesque', Futura, 'Trebuchet MS', Arial, sans-serif;
+	overflow-y: visible;
 }
 body {
 	position: relative;
@@ -46,6 +47,9 @@ body {
 
 /* Transitions
 ---------------------------------------------------------------------------- */
+body aside {
+	transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
 nav a.nav_toggle {
 	transition: transform 0.2s ease-in-out;
 }
@@ -96,6 +100,72 @@ section {
 }
 a.contact {
 	transition: opacity 0.2s ease-in-out;
+}
+
+/* Image Loader
+---------------------------------------------------------------------------- */
+@keyframes colorWheel {
+/*
+	0% {
+		background-color: rgb(235,55,20);
+	}
+	100% {
+		background-color: rgb(235,71,71);
+	}
+*/
+
+	0% {
+		background-color: rgb(235,55,20);
+	}
+/*
+	50% {
+		background-color: rgb(236,160,27);
+	}
+*/
+	100% {
+		background-color: rgb(235,75,20);
+	}
+
+}
+aside {
+	position: fixed;
+	z-index: 4000;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(235,55,20);
+	opacity: 0;
+	visibility: hidden;
+	animation: colorWheel 2s ease-in-out infinite alternate;
+}
+aside div.load-wrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+aside div.load-wrap p {
+	font-size: 3.2rem;
+	font-weight: 900;
+	letter-spacing: 0.4rem;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.8);
+}
+aside div.load-wrap span {
+	display: block;
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: rgba(255,255,255,0.8);
+}
+/* + loading / loaded + */
+html.loading {
+	overflow-y: hidden;
+}
+html.loading aside {
+	opacity: 1;
+	visibility: visible;
 }
 
 /* General Styles
@@ -352,7 +422,9 @@ a.contact span.mailme {
 	white-space: nowrap;
 	overflow: hidden;
 }
+
 /* --- Background --- */
+/*
 body.beach section.intro_dulmage {
 	background-image: url('../img/home-beach.png');
 }
@@ -374,6 +446,7 @@ body.tropical section.intro_dulmage {
 body.worship section.intro_dulmage {
 	background-image: url('../img/home-worship.png');
 }
+*/
 
 /* Projects Section
 ---------------------------------------------------------------------------- */

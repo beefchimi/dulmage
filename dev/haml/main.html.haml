@@ -1,5 +1,5 @@
 !!!
-%html{:lang => 'en'}
+%html.loading{:lang => 'en'}
 
 	= Haml::Engine.new(File.read('dev/haml/_head.html.haml')).render
 
@@ -14,4 +14,12 @@
 
 			= Haml::Engine.new(File.read('dev/haml/_sections.html.haml')).render
 
-			= Haml::Engine.new(File.read('dev/haml/_footer.html.haml')).render
+		%aside
+			.load-wrap
+				%p Loading
+				%span 0
+
+		-# %script{:src => 'assets/js/plugins.js'}
+		%script{:src => 'assets/js/scripts.js'}
+		-# :javascript
+			-# (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date; e=o.createElement(i);r=o.getElementsByTagName(i)[0]; e.src='//www.google-analytics.com/analytics.js'; r.parentNode.insertBefore(e,r)}(window,document,'script','ga')); ga('create','UA-XXXXX-X'); ga('send','pageview');

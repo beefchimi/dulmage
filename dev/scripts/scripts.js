@@ -1,4 +1,4 @@
-// document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
 
 
 	/* Global Variables
@@ -7,13 +7,15 @@
 	/* --- Objects and Initial Setup --- */
 
 	// common objects
-	var elBody       = document.body,
-		elMain       = document.getElementsByTagName('main')[0],
-		elSections   = document.getElementsByTagName('section'),
-		elNavList    = document.getElementsByTagName('li'),
-		elNavLinks   = document.getElementsByClassName('link_anchor'),
-		elNavToggle  = document.getElementsByClassName('nav_toggle')[0],
-		navListCount = elNavList.length;
+	var elHTML         = document.documentElement,
+		elBody         = document.body,
+		elMain         = document.getElementsByTagName('main')[0],
+		elSections     = document.getElementsByTagName('section'),
+		elIntroSection = document.getElementById('intro_dulmage'),
+		elNavList      = document.getElementsByTagName('li'),
+		elNavLinks     = document.getElementsByClassName('link_anchor'),
+		elNavToggle    = document.getElementsByClassName('nav_toggle')[0],
+		navListCount   = elNavList.length;
 
 	// possible homepage options
 	var homeOptions = [
@@ -84,6 +86,55 @@
 		calcH, calcS,
 		updateH, updateS;
 
+	/* --- Image Preloader --- */
+
+	var imgLoader   = new PxLoader(),
+		imgPath     = 'assets/img/',
+		imgHome     = imgPath + 'home-' + homeOptions[randomOption].title + '.png',
+		elAside     = document.getElementsByTagName('aside')[0],
+		elAsideSpan = elAside.getElementsByTagName('span')[0];
+
+	// load home image based on homeOptions random selection
+	imgLoader.addImage(imgHome),
+
+	// only first half of images are preloaded
+	imgLoader.addImage(imgPath + 'artscourt.png'),
+	imgLoader.addImage(imgPath + 'bmc.png'),
+	imgLoader.addImage(imgPath + 'bryston.png'),
+	imgLoader.addImage(imgPath + 'cfc.png'),
+	imgLoader.addImage(imgPath + 'chicken.png'),
+	imgLoader.addImage(imgPath + 'fringe.png'),
+	imgLoader.addImage(imgPath + 'na2012.png'),
+	imgLoader.addImage(imgPath + 'na2014.png'),
+	imgLoader.addImage(imgPath + 'preserve.png'),
+	imgLoader.addImage(imgPath + 'pukeko.png');
+
+	// callback for displaying load progress
+	imgLoader.addProgressListener(function(e) {
+
+		var loadPercent = Math.round(e.completedCount / e.totalCount * 100);
+
+		elAsideSpan.innerHTML = loadPercent;
+
+	});
+
+	// callback that will be run once images are ready
+	imgLoader.addCompletionListener(function() {
+
+		// remove 'loading' class from <html> in order to trigger css transition for fade out and restore scrolling
+		elHTML.classList.remove('loading');
+
+		// fade out should take 800ms, but give it a little bit more time just to be safe
+		setTimeout(function() {
+			// elAside.remove(); unsure about support for this
+			elAside.parentNode.removeChild(elAside);
+		}, 1000);
+
+	});
+
+	// initialize the preloader
+	imgLoader.start();
+
 
 	/* onPageLoad: Main Function To Fire on Window Load
 	---------------------------------------------------------------------------- */
@@ -95,8 +146,8 @@
 		// get height of browser window on page load and resize events
 		windowHeight = window.innerHeight;
 
-		// set randomly selected homeOption as body class to enable correct background-image
-		elBody.classList.add(homeOptions[randomOption].title);
+		// set randomly selected homeOption as <section> background-image
+		elIntroSection.style.backgroundImage = 'url(' + imgHome + ')';
 
 		// apply windowHeight to each <section>...
 		// only required because iOS shits the bed with 100vh height elements and orientation change
@@ -386,11 +437,7 @@
 	/* Initialize Primary Functions
 	---------------------------------------------------------------------------- */
 
-	// fires only once EVERYTHING is ready...
-	// fire this after our preLoader, which should initialize immediately
-
 	onPageLoad();
-
 	navToggle();
 
 	// smoothScroll();
@@ -401,4 +448,4 @@
 	});
 
 
-// }, false);
+}, false);
