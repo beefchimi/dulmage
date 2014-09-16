@@ -41,15 +41,18 @@ var paths = {
 };
 
 
-// run "gulp *task* --dev" for more verbose output
+// --dev flag variables
 var isProduction = true,
 	sassStyle    = 'compressed',
-	sourceMap    = false;
+	sourceMap    = false,
+	deployPath   = secrets.server.prod;
 
+// run "gulp *task* --dev" for dev en output
 if (gutil.env.dev === true) {
 	isProduction = false;
 	sassStyle    = 'expanded';
 	sourceMap    = true;
+	deployPath   = secrets.server.stage;
 }
 
 
@@ -179,10 +182,10 @@ gulp.task('deploy', function() {
 	rsync({
 		ssh: true,
 		src: './build/',
-		dest: secrets.servers.prod.host + ':' + secrets.servers.prod.dest,
+		dest: secrets.server.host + ':' + deployPath,
 		recursive: true,
 		syncDest: true,
-		exclude: ['.DS_Store'],
+		exclude: ['.DS_Store'], // 'robots.txt'
 		args: ['--verbose']
 	}, function(error, stdout, stderr, cmd) {
 		gutil.log(stdout);
