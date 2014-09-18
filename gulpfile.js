@@ -185,8 +185,7 @@ gulp.task('deploy', function() {
 		dest: secrets.server.host + ':' + deployPath,
 		recursive: true,
 		syncDest: true,
-		clean: false,
-		exclude: ['.DS_Store'], // 'robots.txt'
+		exclude: ['.DS_Store'], // be sure to exclude sites folder and robots.txt... once you can fucking figure out how
 		args: ['--verbose']
 	}, function(error, stdout, stderr, cmd) {
 		gutil.log(stdout);
