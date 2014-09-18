@@ -3,9 +3,7 @@
 
 /* HTML5 Display Definitions
 ---------------------------------------------------------------------------- */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
-audio, canvas, progress, video { display: inline-block; vertical-align: baseline; }
-audio:not([controls]) { display: none; height: 0; }
+article, aside, footer, header, main, nav, section { display: block; }
 [hidden], template { display: none; }
 
 /* Base
@@ -23,7 +21,7 @@ a:active, a:hover { outline: 0; }
 
 /* Typography
 ---------------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6, p, ul, ol, li { margin: 0; padding: 0; font-weight: 400; font-style: normal; line-height: 1; }
+h1, h2, h3, h4, h5, h6, p, ul, ol, li { margin: 0; padding: 0; font-weight: 500; font-style: normal; line-height: 1; }
 sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
@@ -36,7 +34,7 @@ nav ul, nav ol { list-style-image: none; }
 /* Embedded Content
 ---------------------------------------------------------------------------- */
 img { max-width: 100%; height: auto; border: 0; }
-audio, canvas, img, svg, video { display: block; vertical-align: middle; }
+img, svg { display: block; vertical-align: middle; }
 svg:not(:root) { overflow: hidden; }
 
 /* Helper Classes

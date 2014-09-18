@@ -560,7 +560,6 @@ if (typeof define === 'function' && define.amd) {
 }
 
 
-/*
 // smooth-scroll v5.1.2 [bind polyfill] | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
 if (!Function.prototype.bind) {
 	Function.prototype.bind = function (oThis) {
@@ -583,7 +582,6 @@ if (!Function.prototype.bind) {
 		return fBound;
 	};
 }
-*/
 
 
 // smooth-scroll v5.1.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/

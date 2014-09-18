@@ -322,6 +322,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
+	/* secretMail: Add mailto link to home section
+	---------------------------------------------------------------------------- */
+	function secretMail() {
+
+		var mailLink    = document.getElementById('contact'),
+			prefix      = 'mailto',
+			local       = 'curtis',
+			klammeraffe = '@',
+			domain      = 'dulmage',
+			suffix      = 'me';
+
+		mailLink.setAttribute('href', prefix + ':' + local + klammeraffe + domain + '.' + suffix)
+
+	}
+
+
 	/* Helper: Fire Window Resize Event Upon Finish
 	---------------------------------------------------------------------------- */
 	var waitForFinalEvent = (function() {
@@ -439,6 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	onPageLoad();
 	navToggle();
+	secretMail();
 
 	// smoothScroll();
 	smoothScroll.init({

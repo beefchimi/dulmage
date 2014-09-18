@@ -14,18 +14,20 @@
 		visibility: hidden;
 	}
 
-	/* Project Logo / Link
-	---------------------------------------------------------------------------- */
-	div.project_logo,
-	a.project_logo {
-		margin-bottom: 0;
-	}
-
 	/* Project Content
 	---------------------------------------------------------------------------- */
-	div.project_content {
+	article:not(.intro) div.project_content {
 		display: none;
 		visibility: hidden;
+	}
+	div.project_content h2 {
+		margin-bottom: 3.2rem;
+	}
+
+	/* Project Logo
+	---------------------------------------------------------------------------- */
+	a.project_logo {
+		margin-bottom: 0;
 	}
 
 }
@@ -47,7 +49,7 @@
 		transition: all 0.3s ease-in-out;
 		backface-visibility: hidden;
 	}
-	a.contact span.mailme {
+	a.contact p.mailme {
 		transition: max-width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 	}
 
@@ -66,21 +68,13 @@
 		padding: 1.2rem 2.2rem 1.2rem 2rem;
 	}
 
-	/* Project Logo / Link
-	---------------------------------------------------------------------------- */
-	div.project_logo {
-		margin-bottom: 6rem;
-	}
-	a.project_logo {
-		margin-bottom: 7.2rem;
-	}
-	/* --- Project Overlay --- */
-	div.project_overlay {
-		display: block;
-	}
-
 	/* Project Content
 	---------------------------------------------------------------------------- */
+	div.project_content h1 {
+		margin-bottom: 6rem;
+		font-size: 8rem;
+		letter-spacing: 3rem;
+	}
 	div.project_content h2 {
 		font-size: 2.4rem;
 		letter-spacing: 0.4rem;
@@ -101,8 +95,11 @@
 		filter: blur(0px);
 	}
 
-	/* Project Interactive States
+	/* Project Logo
 	---------------------------------------------------------------------------- */
+	a.project_logo {
+		margin-bottom: 7.2rem;
+	}
 	/* + hover state + */
 	a.project_logo:hover svg {
 		opacity: 0.7;
@@ -134,26 +131,26 @@
 	a.project_logo:active + div.project_content h4 {
 		filter: blur(0.5px);
 	}
+	/* --- Project Overlay --- */
+	div.project_overlay {
+		display: block;
+	}
 
 	/* ==|== intro / projects =====================================================
 	   ========================================================================= */
 
 	/* Intro Section
 	---------------------------------------------------------------------------- */
-	section.intro_dulmage div.project_logo {
-		width: 28rem;
-		height: 7.5rem;
-	}
 	/* --- Mail Me --- */
 	a.contact {
 		bottom: 3.2rem;
 		left: 3.2rem;
 		transform: translateX(0);
 	}
-	a.contact span.mailme {
+	a.contact p.mailme {
 		display: block;
 	}
-	a.contact:hover span.mailme {
+	a.contact:hover p.mailme {
 		max-width: 12rem;
 		opacity: 1;
 	}
@@ -212,6 +209,9 @@
 
 	/* Project Content
 	---------------------------------------------------------------------------- */
+	article.intro div.project_content {
+		margin-top: -3.2rem;
+	}
 	div.project_content {
 		z-index: 10;
 		position: absolute;

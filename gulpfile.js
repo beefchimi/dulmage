@@ -35,7 +35,7 @@ var paths = {
 		dest: 'build/assets/img/'
 	},
 	svg: {
-		src : 'dev/media/svg/*.svg' // , dest: 'build/assets/svg/'
+		src : 'dev/media/svg/*.svg'
 	}
 
 };
@@ -185,6 +185,7 @@ gulp.task('deploy', function() {
 		dest: secrets.server.host + ':' + deployPath,
 		recursive: true,
 		syncDest: true,
+		clean: false,
 		exclude: ['.DS_Store'], // 'robots.txt'
 		args: ['--verbose']
 	}, function(error, stdout, stderr, cmd) {
