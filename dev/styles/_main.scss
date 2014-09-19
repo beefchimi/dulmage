@@ -102,10 +102,10 @@ section {
 	transition: height 0.2s ease-in-out;
 }
 article.intro {
-	transition: background-color 1s ease-in-out; // delay: 0.4s
+	transition: background-color 1s ease-in-out;
 }
 a.contact {
-	transition: color 0.2s ease-in-out; // , opacity 1s ease-in-out
+	transition: color 0.2s ease-in-out;
 }
 
 /* General Styles
@@ -245,7 +245,6 @@ div.project_content h3,
 div.project_content h4 {
 	text-align: center;
 	text-transform: uppercase;
-	// color: rgba(255,255,255,0.95);
 }
 div.project_content h1,
 div.project_content h2 {
@@ -363,12 +362,6 @@ div.project_content h1 {
 div.project_content h2 {
 	animation: txtFade 2.8s ease-in-out 1s forwards;
 }
-/*
-body.loading nav > a,
-body.loading a.contact {
-	opacity: 0;
-}
-*/
 /* --- Mail Me --- */
 a.contact {
 	display: block;
@@ -377,17 +370,27 @@ a.contact {
 	bottom: 20%;
 	left: 50%;
 	transform: translateX(-50%);
+	width: 4.4rem;
+	height: 4.4rem;
 	color: rgba(255,255,255,0.9);
 	opacity: 1;
+/*
+	bottom: 1.6rem;
+	left: 1.6rem;
+	width: 3.6rem;
+	height: 3.6rem;
+*/
 }
 a.contact:active {
 	color: rgba(255,255,255,0.8);
 }
 a.contact svg.svg_mail {
-	width: 4.4rem;
-	height: 4.4rem;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
-a.contact svg.svg_mail path {
+a.contact svg.svg_mail .path_inside,
+a.contact svg.svg_mail .path_outside {
 	stroke: rgba(255,255,255,0.9);
 }
 a.contact p.mailme {
@@ -404,36 +407,40 @@ a.contact p.mailme {
 	white-space: nowrap;
 	overflow: hidden;
 }
-
 /* + path animation + */
 @keyframes svgpath {
 	to {
 		stroke-dashoffset: 0;
 	}
 }
-a.contact svg.svg_mail path.path_outside {
-	stroke-dasharray: 134;
-	stroke-dashoffset: 134;
-}
-a.contact svg.svg_mail path.path_inside {
+a.contact svg.svg_mail .path_inside {
 	stroke-dasharray: 100;
 	stroke-dashoffset: 100;
 }
-body.ready a.contact svg.svg_mail path.path_outside {
-	animation: svgpath 1.6s ease-in-out forwards;
+a.contact svg.svg_mail .path_outside {
+	stroke-dasharray: 134;
+	stroke-dashoffset: 134;
 }
-body.ready a.contact svg.svg_mail path.path_inside {
+
+body.ready a.contact svg.svg_mail .path_inside {
 	animation: svgpath 1.6s ease-in-out 0.4s forwards;
 }
-
-
+body.ready a.contact svg.svg_mail .path_outside {
+	animation: svgpath 1.6s ease-in-out forwards;
+}
 /* + nav animation + */
 body.ready nav > a div {
 	width: 3.2rem;
 }
 
+
+
+
+
+
 /* + loading circle + */
 
+/*
 
 @keyframes rotator {
 	to {
@@ -454,8 +461,6 @@ body.ready nav > a div {
 
 div.loading-icon {
 
-	display: none;
-
 	width: 4.4rem;
 	height: 4.4rem;
 	// animation: rotator 1.4s linear infinite both;
@@ -473,7 +478,7 @@ div.loading-icon svg.svg_loader circle {
 }
 
 
-
+*/
 
 
 

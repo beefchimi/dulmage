@@ -10,14 +10,16 @@
 			%p.visuallyhidden Curtis Dulmage. Front-end web developer. Ottawa, Canada. Here are a few of my most recent projects. Please get in touch if you have any questions. Thank you.
 
 		%a#contact.contact{:href => '#', :title => 'Mail Me'}
-			%svg.svg_mail
-				%use{'xlink:href' => '#mail'}
+			%svg#mail.svg_mail{:version => '1.1', :xmlns => 'http://www.w3.org/2000/svg', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink', :x => '0px', :y => '0px', :viewBox => '20 38.5 44 39', 'enable-background' => 'new 20 38.5 44 39', 'xml:space' => 'preserve'}
+				%polyline.path_inside{:fill => 'none', :stroke => '#fff', 'stroke-width' => '1.8', 'stroke-linecap' => 'round', 'stroke-linejoin' => 'round', 'stroke-miterlimit' => '10', :points => ' 41.5,65.5 62.7,40.2 35,61.2 '}
+				%polygon.path_outside{:fill => 'none', :stroke => '#fff', 'stroke-width' => '1.8', 'stroke-miterlimit' => '10', :points => '34.9,61.2 34.9,73.3 41.5,65.5 52.5,75.7 62.7,40.2 22.4,56.7 '}
 			%p.mailme
 				Mail Me
+		-# for whatever reason...  using 'svg use' would not work with the animation in chrome... no idea why
 
-		.loading-icon
-			%svg.svg_loader
-				%use{'xlink:href' => '#loader'}
+		-# .loading-icon
+			-# %svg.svg_loader
+				-# %use{'xlink:href' => '#loader'}
 
 %section#project_preserve.project_preserve
 
