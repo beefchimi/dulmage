@@ -56,7 +56,7 @@
 	/* Navigation
 	---------------------------------------------------------------------------- */
 	/* --- Nav Toggle --- */
-	nav a.nav_toggle {
+	nav > a {
 		bottom: 3.2rem;
 		right: 3.2rem;
 	}

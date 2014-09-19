@@ -1,9 +1,9 @@
 !!!
-%html.loading{:lang => 'en'}
+%html{:lang => 'en'}
 
 	= Haml::Engine.new(File.read('dev/haml/_head.html.haml')).render
 
-	%body
+	%body.loading
 
 		:plain
 			<!-- inject:svg --><!-- endinject -->
@@ -13,11 +13,6 @@
 		%main{:role => 'main'}
 
 			= Haml::Engine.new(File.read('dev/haml/_sections.html.haml')).render
-
-		%aside
-			.load-wrap
-				%p Loading
-				%span 0
 
 		%script{:src => 'assets/js/scripts.js'}
 		-# :javascript

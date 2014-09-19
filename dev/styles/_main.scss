@@ -31,7 +31,7 @@ bryston		#3994db		rgb(57,148,219)		hsl(206,69%,54%)
 ---------------------------------------------------------------------------- */
 html {
 	font-family: 'brandon-grotesque', 'Brandon Grotesque', Futura, 'Trebuchet MS', Arial, sans-serif;
-	overflow-y: visible;
+	// overflow-y: visible;
 }
 body {
 	position: relative;
@@ -47,46 +47,49 @@ body {
 
 /* Transitions
 ---------------------------------------------------------------------------- */
-body aside {
-	transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+nav > a {
+	transition: transform 0.2s ease-in-out, opacity 1s ease-in-out;
 }
-nav a.nav_toggle {
-	transition: transform 0.2s ease-in-out;
+nav > a div.one {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out;
 }
-nav a.nav_toggle div.line {
-	transition: all 0.3s ease-in-out;
+nav > a div.two {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out 0.4s;
 }
-nav ul li.link_dulmage {
+nav > a div.three {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out 0.8s;
+}
+li[data-anchor="dulmage"] {
 	transition: transform 0.3s ease-in-out 0s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_preserve {
+li[data-anchor="preserve"] {
 	transition: transform 0.3s ease-in-out 0.02s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_bmc {
+li[data-anchor="bmc"] {
 	transition: transform 0.3s ease-in-out 0.04s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_fringe {
+li[data-anchor="fringe"] {
 	transition: transform 0.3s ease-in-out 0.06s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_na2014 {
+li[data-anchor="na2014"] {
 	transition: transform 0.3s ease-in-out 0.08s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_artscourt {
+li[data-anchor="artscourt"] {
 	transition: transform 0.3s ease-in-out 0.1s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_na2012 {
+li[data-anchor="na2012"] {
 	transition: transform 0.3s ease-in-out 0.12s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_pukeko {
+li[data-anchor="pukeko"] {
 	transition: transform 0.3s ease-in-out 0.14s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_chicken {
+li[data-anchor="chicken"] {
 	transition: transform 0.3s ease-in-out 0.16s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_cfc {
+li[data-anchor="cfc"] {
 	transition: transform 0.3s ease-in-out 0.18s, z-index 0.2s ease-in-out;
 }
-nav ul li.link_bryston {
+li[data-anchor="bryston"] {
 	transition: transform 0.3s ease-in-out 0.2s, z-index 0.2s ease-in-out;
 }
 nav ul li a {
@@ -98,74 +101,11 @@ nav ul li a span {
 section {
 	transition: height 0.2s ease-in-out;
 }
+article.intro {
+	transition: background-color 1s ease-in-out; // delay: 0.4s
+}
 a.contact {
-	transition: opacity 0.2s ease-in-out;
-}
-
-/* Image Loader
----------------------------------------------------------------------------- */
-@keyframes colorWheel {
-/*
-	0% {
-		background-color: rgb(235,55,20);
-	}
-	100% {
-		background-color: rgb(235,71,71);
-	}
-*/
-
-	0% {
-		background-color: rgb(235,55,20);
-	}
-/*
-	50% {
-		background-color: rgb(236,160,27);
-	}
-*/
-	100% {
-		background-color: rgb(235,75,20);
-	}
-
-}
-aside {
-	position: fixed;
-	z-index: 4000;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: rgb(235,55,20);
-	opacity: 0;
-	visibility: hidden;
-	animation: colorWheel 2s ease-in-out infinite alternate;
-}
-aside div.load-wrap {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
-}
-aside div.load-wrap p {
-	font-size: 3.2rem;
-	font-weight: 900;
-	letter-spacing: 0.4rem;
-	text-transform: uppercase;
-	color: rgba(255,255,255,0.8);
-}
-aside div.load-wrap span {
-	display: block;
-	font-size: 1.6rem;
-	font-weight: 700;
-	color: rgba(255,255,255,0.8);
-}
-/* + loading / loaded + */
-html.loading {
-	overflow-y: hidden;
-}
-html.loading aside {
-	opacity: 1;
-	visibility: visible;
+	transition: color 0.2s ease-in-out; // , opacity 1s ease-in-out
 }
 
 /* General Styles
@@ -191,7 +131,7 @@ article {
 /* Navigation
 ---------------------------------------------------------------------------- */
 /* --- Nav Toggle --- */
-nav a.nav_toggle {
+nav > a {
 	display: block;
 	position: fixed;
 	z-index: 2000;
@@ -199,43 +139,46 @@ nav a.nav_toggle {
 	right: 2rem;
 	width: 3.2rem;
 	height: 2rem;
+	// opacity: 1;
 }
-nav a.nav_toggle div.line {
+nav > a div {
 	position: absolute;
-	left: 0;
-	width: 3.2rem;
+	width: 0rem;
 	height: 0.2rem;
 	background: rgba(255,255,255,0.9);
 }
-nav a.nav_toggle div.line.one {
+nav > a div.one {
 	top: 0;
+	left: 0;
 }
-nav a.nav_toggle div.line.two {
+nav > a div.two {
 	top: 0.9rem;
+	right: 0;
 }
-nav a.nav_toggle div.line.three {
+nav > a div.three {
 	top: 1.8rem;
+	left: 0;
 }
 /* + nav toggle interaction + */
-nav a.nav_toggle:hover {
+nav > a:hover {
 	transform: scale(1.1);
 }
-nav a.nav_toggle.active div.line.one {
+nav > a.active div.one {
 	top: 0.9rem;
 	transform: rotate(-45deg);
 }
-nav a.nav_toggle.active div.line.two {
+nav > a.active div.two {
 	opacity: 0;
 	transform: scale(0.2);
 }
-nav a.nav_toggle.active div.line.three {
+nav > a.active div.three {
 	top: 0.9rem;
 	transform: rotate(45deg);
 }
-nav a.nav_toggle.active + ul {
+nav > a.active + ul {
 	width: auto;
 }
-nav a.nav_toggle.active + ul li {
+nav > a.active + ul li {
 	transform: translateX(1%);
 }
 /* --- Nav List --- */
@@ -302,6 +245,14 @@ div.project_content h3,
 div.project_content h4 {
 	text-align: center;
 	text-transform: uppercase;
+	// color: rgba(255,255,255,0.95);
+}
+div.project_content h1,
+div.project_content h2 {
+	color: rgba(255,255,255,0);
+}
+div.project_content h3,
+div.project_content h4 {
 	color: rgba(255,255,255,0.95);
 }
 div.project_content h1 {
@@ -332,19 +283,15 @@ div.project_content h4 + h3 {
 /* Project Logo
 ---------------------------------------------------------------------------- */
 a.project_logo {
+	display: block;
 	position: relative;
 	z-index: 1001;
+	margin: 0 auto 5.2rem auto;
 }
 a.project_logo svg {
 	display: block;
 	width: 100%;
 	height: 100%;
-}
-a.project_logo {
-	display: block;
-	margin: 0 auto 5.2rem auto;
-}
-a.project_logo svg {
 	fill: rgba(255,255,255,0.94);
 }
 /* --- Project Overlay --- */
@@ -385,6 +332,43 @@ div.project_overlay h5 {
 
 /* Intro Section
 ---------------------------------------------------------------------------- */
+@keyframes bgPulse {
+	0% {
+		background-color: rgba(0,0,0,1);
+	}
+	100% {
+		background-color: rgba(30,30,30,1);
+	}
+}
+@keyframes txtFade {
+	0% {
+		color: rgba(255,255,255,0);
+	}
+	100% {
+		color: rgba(255,255,255,0.95);
+	}
+}
+/* --- Preloader --- */
+body.loading article.intro {
+	background-color: rgba(0,0,0,1);
+	animation: bgPulse 3s ease-in-out infinite alternate forwards;
+}
+body.ready article.intro {
+	animation: none;
+	background-color: rgba(0,0,0,0);
+}
+div.project_content h1 {
+	animation: txtFade 2.4s ease-in-out 0.4s forwards;
+}
+div.project_content h2 {
+	animation: txtFade 2.8s ease-in-out 1s forwards;
+}
+/*
+body.loading nav > a,
+body.loading a.contact {
+	opacity: 0;
+}
+*/
 /* --- Mail Me --- */
 a.contact {
 	display: block;
@@ -394,14 +378,17 @@ a.contact {
 	left: 50%;
 	transform: translateX(-50%);
 	color: rgba(255,255,255,0.9);
+	opacity: 1;
 }
 a.contact:active {
-	opacity: 0.8;
+	color: rgba(255,255,255,0.8);
 }
 a.contact svg.svg_mail {
 	width: 4.4rem;
 	height: 4.4rem;
-	fill: rgba(255,255,255,0.9);
+}
+a.contact svg.svg_mail path {
+	stroke: rgba(255,255,255,0.9);
 }
 a.contact p.mailme {
 	display: none;
@@ -417,6 +404,79 @@ a.contact p.mailme {
 	white-space: nowrap;
 	overflow: hidden;
 }
+
+/* + path animation + */
+@keyframes svgpath {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+a.contact svg.svg_mail path.path_outside {
+	stroke-dasharray: 134;
+	stroke-dashoffset: 134;
+}
+a.contact svg.svg_mail path.path_inside {
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+}
+body.ready a.contact svg.svg_mail path.path_outside {
+	animation: svgpath 1.6s ease-in-out forwards;
+}
+body.ready a.contact svg.svg_mail path.path_inside {
+	animation: svgpath 1.6s ease-in-out 0.4s forwards;
+}
+
+
+/* + nav animation + */
+body.ready nav > a div {
+	width: 3.2rem;
+}
+
+/* + loading circle + */
+
+
+@keyframes rotator {
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes spoon {
+
+	50% {
+		stroke-dashoffset: -136;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+
+
+}
+
+div.loading-icon {
+
+	display: none;
+
+	width: 4.4rem;
+	height: 4.4rem;
+	// animation: rotator 1.4s linear infinite both;
+}
+div.loading-icon svg.svg_loader {
+	display: block;
+	width: 4.4rem;
+	height: 4.4rem;
+}
+div.loading-icon svg.svg_loader circle {
+	stroke: rgba(255,255,255,0.9);
+	stroke-dasharray: 136;
+	stroke-dashoffset: 136;
+	// animation: spoon 1.6s ease-in-out infinite; // alternate-reverse
+}
+
+
+
+
+
+
 
 /* Projects Section
 ---------------------------------------------------------------------------- */

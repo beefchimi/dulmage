@@ -7,14 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	/* --- Objects and Initial Setup --- */
 
 	// common objects
-	var elHTML         = document.documentElement,
-		elBody         = document.body,
+	var elBody         = document.body,
 		elMain         = document.getElementsByTagName('main')[0],
 		elSections     = document.getElementsByTagName('section'),
 		elIntroSection = document.getElementById('intro_dulmage'),
+		elNavToggle    = document.getElementById('nav_toggle'),
 		elNavList      = document.getElementsByTagName('li'),
 		elNavLinks     = document.getElementsByClassName('link_anchor'),
-		elNavToggle    = document.getElementsByClassName('nav_toggle')[0],
 		navListCount   = elNavList.length;
 
 	// possible homepage options
@@ -88,48 +87,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	/* --- Image Preloader --- */
 
-	var imgLoader   = new PxLoader(),
-		imgPath     = 'assets/img/',
-		imgHome     = imgPath + 'home-' + homeOptions[randomOption].title + '.png',
-		elAside     = document.getElementsByTagName('aside')[0],
-		elAsideSpan = elAside.getElementsByTagName('span')[0];
+	var imgLoader = new PxLoader(),
+		imgPath   = 'assets/img/',
+		imgHome   = imgPath + 'home-' + homeOptions[randomOption].title + '.png';
 
 	// load home image based on homeOptions random selection
-	imgLoader.addImage(imgHome),
+	imgLoader.addImage(imgHome);
 
 	// only first half of images are preloaded
-	imgLoader.addImage(imgPath + 'artscourt.png'),
-	imgLoader.addImage(imgPath + 'bmc.png'),
-	imgLoader.addImage(imgPath + 'bryston.png'),
-	imgLoader.addImage(imgPath + 'cfc.png'),
-	imgLoader.addImage(imgPath + 'chicken.png'),
-	imgLoader.addImage(imgPath + 'fringe.png'),
-	imgLoader.addImage(imgPath + 'na2012.png'),
-	imgLoader.addImage(imgPath + 'na2014.png'),
-	imgLoader.addImage(imgPath + 'preserve.png'),
+	imgLoader.addImage(imgPath + 'artscourt.png');
+	imgLoader.addImage(imgPath + 'bmc.png');
+	imgLoader.addImage(imgPath + 'bryston.png');
+	imgLoader.addImage(imgPath + 'cfc.png');
+	imgLoader.addImage(imgPath + 'chicken.png');
+	imgLoader.addImage(imgPath + 'fringe.png');
+	imgLoader.addImage(imgPath + 'na2012.png');
+	imgLoader.addImage(imgPath + 'na2014.png');
+	imgLoader.addImage(imgPath + 'preserve.png');
 	imgLoader.addImage(imgPath + 'pukeko.png');
-
-	// callback for displaying load progress
-	imgLoader.addProgressListener(function(e) {
-
-		var loadPercent = Math.round(e.completedCount / e.totalCount * 100);
-
-		elAsideSpan.innerHTML = loadPercent;
-
-	});
 
 	// callback that will be run once images are ready
 	imgLoader.addCompletionListener(function() {
-
-		// remove 'loading' class from <html> in order to trigger css transition for fade out and restore scrolling
-		elHTML.classList.remove('loading');
-
-		// fade out should take 800ms, but give it a little bit more time just to be safe
-		setTimeout(function() {
-			// elAside.remove(); unsure about support for this
-			elAside.parentNode.removeChild(elAside);
-		}, 1000);
-
+		// replace <body> 'loading' class with 'ready' in order to trigger css transitions / animations
+		elBody.className = 'ready';
 	});
 
 	// initialize the preloader
@@ -141,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function onPageLoad() {
 
 		// get scroll position on load in case of anchor or refresh (do not assume 0)
+		// we will likely scroll to document top on page load for preloader styles... but that could still fail in some cases
 		scrollPos = window.scrollY;
 
 		// get height of browser window on page load and resize events
@@ -195,14 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 
 		// remove "current" class from ALL nav items...
-		// sectionPrev & sectionNext is unreliable and sometimes does not get removed in time
+		// sectionPrev & sectionNext is unreliable and sometimes does not get removed in time (not fast enough)
 		for (var i = 0; i < navListCount; i++) {
-			elNavList[i].classList.remove('current');
-			elNavList[i].classList.remove('current');
+			elNavList[i].className = '';
 		}
 
 		// apply "current" class to the current nav item
-		elNavList[sectionCurrent].classList.add('current');
+		elNavList[sectionCurrent].className = 'current';
 
 		// redefine begin RGB values based on new sectionCurrent
 		beginR = sectionData[sectionCurrent].r;
@@ -314,7 +294,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		elNavToggle.addEventListener('click', function(e) {
 
-			this.classList.toggle('active');
+			if (this.className == 'active') {
+				this.className = '';
+			} else {
+				this.className = 'active';
+			}
+
+			// this.classList.toggle('active');
+
 			e.preventDefault();
 
 		}, false);
@@ -452,6 +439,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	/* Initialize Primary Functions
 	---------------------------------------------------------------------------- */
+
+	// reset the scroll position to the top left of the document
+	window.scroll(0, 0);
 
 	onPageLoad();
 	navToggle();

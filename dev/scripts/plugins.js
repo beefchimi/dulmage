@@ -1,28 +1,3 @@
-/*
-// Avoid 'console' errors in browsers that lack a console
-(function() {
-
-	var method;
-	var noop = function () {};
-	var methods = [
-		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
-	];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-
-	while (length--) {
-		method = methods[length];
-
-		// Only stub undefined methods.
-		if (!console[method]) {
-			console[method] = noop;
-		}
-	}
-
-}());
-*/
-
-
 // PxLoader v1.0 | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
 (function(global) {
 
@@ -437,23 +412,9 @@
 
 }(this));
 
-// Date.now() shim for older browsers
-if (!Date.now) {
-	Date.now = function now() {
-		return new Date().getTime();
-	};
-}
-
-// shims to ensure we have newer Array utility methods
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray
-if (!Array.isArray) {
-	Array.isArray = function(arg) {
-		return Object.prototype.toString.call(arg) === '[object Array]';
-	};
-}
-
 
 // PxLoader v1.0 Image Extension | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+// removed Date.now and Array.isArray polyfill... add back if needed
 function PxLoaderImage(url, tags, priority) {
 	var self = this,
 		loader = null;
@@ -560,31 +521,8 @@ if (typeof define === 'function' && define.amd) {
 }
 
 
-// smooth-scroll v5.1.2 [bind polyfill] | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
-if (!Function.prototype.bind) {
-	Function.prototype.bind = function (oThis) {
-		if (typeof this !== "function") {
-			// closest thing possible to the ECMAScript 5
-			// internal IsCallable function
-			throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-		}
-
-		var aArgs = Array.prototype.slice.call(arguments, 1);
-		var fToBind = this;
-		fNOP = function () {};
-		fBound = function () {
-			return fToBind.apply(this instanceof fNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
-		};
-
-		fNOP.prototype = this.prototype;
-		fBound.prototype = new fNOP();
-
-		return fBound;
-	};
-}
-
-
 // smooth-scroll v5.1.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
+// removed bind polyfill... add back if needed
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
 		define('smoothScroll', factory(root));
@@ -620,13 +558,7 @@ if (!Function.prototype.bind) {
 	// Methods
 	//
 
-	/**
-	 * A simple forEach() implementation for Arrays, Objects and NodeLists
-	 * @private
-	 * @param {Array|Object|NodeList} collection Collection of items to iterate
-	 * @param {Function} callback Callback function for each iteration
-	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
-	 */
+	// A simple forEach() implementation for Arrays, Objects and NodeLists
 	var forEach = function (collection, callback, scope) {
 		if (Object.prototype.toString.call(collection) === '[object Object]') {
 			for (var prop in collection) {
@@ -641,13 +573,7 @@ if (!Function.prototype.bind) {
 		}
 	};
 
-	/**
-	 * Merge defaults with user options
-	 * @private
-	 * @param {Object} defaults Default settings
-	 * @param {Object} options User options
-	 * @returns {Object} Merged values of defaults and options
-	 */
+	// Merge defaults with user options
 	var extend = function ( defaults, options ) {
 		var extended = {};
 		forEach(defaults, function (value, prop) {
@@ -659,12 +585,7 @@ if (!Function.prototype.bind) {
 		return extended;
 	};
 
-	/**
-	 * Get the closest matching element up the DOM tree
-	 * @param {Element} elem Starting element
-	 * @param {String} selector Selector to match against (class, ID, or data attribute)
-	 * @return {Boolean|Element} Returns false if not match found
-	 */
+	// Get the closest matching element up the DOM tree
 	var getClosest = function (elem, selector) {
 		var firstChar = selector.charAt(0);
 		for ( ; elem && elem !== document; elem = elem.parentNode ) {
@@ -685,13 +606,7 @@ if (!Function.prototype.bind) {
 		return false;
 	};
 
-	/**
-	 * Escape special characters for use with querySelector
-	 * @private
-	 * @param {String} id The anchor ID to escape
-	 * @author Mathias Bynens
-	 * @link https://github.com/mathiasbynens/CSS.escape
-	 */
+	// Escape special characters for use with querySelector
 	var escapeCharacters = function ( id ) {
 		var string = String(id);
 		var length = string.length;
@@ -757,13 +672,7 @@ if (!Function.prototype.bind) {
 		return result;
 	};
 
-	/**
-	 * Calculate the easing pattern
-	 * @private
-	 * @param {String} type Easing pattern
-	 * @param {Number} time Time animation should take to complete
-	 * @returns {Number}
-	 */
+	// Calculate the easing pattern
 	var easingPattern = function ( type, time ) {
 		var pattern;
 		if ( type === 'easeInQuad' ) pattern = time * time; // accelerating from zero velocity
@@ -781,14 +690,7 @@ if (!Function.prototype.bind) {
 		return pattern || time; // no easing, no acceleration
 	};
 
-	/**
-	 * Calculate how far to scroll
-	 * @private
-	 * @param {Element} anchor The anchor element to scroll to
-	 * @param {Number} headerHeight Height of a fixed header, if any
-	 * @param {Number} offset Number of pixels by which to offset scroll
-	 * @returns {Number}
-	 */
+	// Calculate how far to scroll
 	var getEndLocation = function ( anchor, headerHeight, offset ) {
 		var location = 0;
 		if (anchor.offsetParent) {
@@ -801,11 +703,7 @@ if (!Function.prototype.bind) {
 		return location >= 0 ? location : 0;
 	};
 
-	/**
-	 * Determine the document's height
-	 * @private
-	 * @returns {Number}
-	 */
+	// Determine the document's height
 	var getDocumentHeight = function () {
 		return Math.max(
 			document.body.scrollHeight, document.documentElement.scrollHeight,
@@ -814,22 +712,12 @@ if (!Function.prototype.bind) {
 		);
 	};
 
-	/**
-	 * Convert data-options attribute into an object of key/value pairs
-	 * @private
-	 * @param {String} options Link-specific options as a data attribute string
-	 * @returns {Object}
-	 */
+	// Convert data-options attribute into an object of key/value pairs
 	var getDataOptions = function ( options ) {
 		return !options || !(typeof JSON === 'object' && typeof JSON.parse === 'function') ? {} : JSON.parse( options );
 	};
 
-	/**
-	 * Update the URL
-	 * @private
-	 * @param {Element} anchor The element to scroll to
-	 * @param {Boolean} url Whether or not to update the URL history
-	 */
+	// Update the URL
 	var updateUrl = function ( anchor, url ) {
 		if ( history.pushState && (url || url === 'true') ) {
 			history.pushState( {
@@ -838,14 +726,7 @@ if (!Function.prototype.bind) {
 		}
 	};
 
-	/**
-	 * Start/stop the scrolling animation
-	 * @public
-	 * @param {Element} toggle The element that toggled the scroll event
-	 * @param {Element} anchor The element to scroll to
-	 * @param {Object} settings
-	 * @param {Event} event
-	 */
+	// Start/stop the scrolling animation
 	smoothScroll.animateScroll = function ( toggle, anchor, options ) {
 
 		// Options and overrides
@@ -868,13 +749,7 @@ if (!Function.prototype.bind) {
 		// Update URL
 		updateUrl(anchor, settings.updateURL);
 
-		/**
-		 * Stop the scroll animation when it reaches its target (or the bottom/top of page)
-		 * @private
-		 * @param {Number} position Current position on the page
-		 * @param {Number} endLocation Scroll to location
-		 * @param {Number} animationInterval How much to scroll on this loop
-		 */
+		// Stop the scroll animation when it reaches its target (or the bottom/top of page)
 		var stopAnimateScroll = function (position, endLocation, animationInterval) {
 			var currentLocation = root.pageYOffset;
 			if ( position == endLocation || currentLocation == endLocation || ( (root.innerHeight + currentLocation) >= documentHeight ) ) {
@@ -883,10 +758,7 @@ if (!Function.prototype.bind) {
 			}
 		};
 
-		/**
-		 * Loop scrolling animation
-		 * @private
-		 */
+		// Loop scrolling animation
 		var loopAnimateScroll = function () {
 			timeLapsed += 16;
 			percentage = ( timeLapsed / parseInt(settings.speed, 10) );
@@ -896,19 +768,13 @@ if (!Function.prototype.bind) {
 			stopAnimateScroll(position, endLocation, animationInterval);
 		};
 
-		/**
-		 * Set interval timer
-		 * @private
-		 */
+		// Set interval timer
 		var startAnimateScroll = function () {
 			settings.callbackBefore( toggle, anchor ); // Run callbacks before animating scroll
 			animationInterval = setInterval(loopAnimateScroll, 16);
 		};
 
-		/**
-		 * Reset position to fix weird iOS bug
-		 * @link https://github.com/cferdinandi/smooth-scroll/issues/45
-		 */
+		// Reset position to fix weird iOS bug
 		if ( root.pageYOffset === 0 ) {
 			root.scrollTo( 0, 0 );
 		}
@@ -918,10 +784,7 @@ if (!Function.prototype.bind) {
 
 	};
 
-	/**
-	 * If smooth scroll element clicked, animate scroll
-	 * @private
-	 */
+	// If smooth scroll element clicked, animate scroll
 	var eventHandler = function (event) {
 		var toggle = getClosest(event.target, '[data-scroll]');
 		if ( toggle && toggle.tagName.toLowerCase() === 'a' ) {
@@ -930,21 +793,14 @@ if (!Function.prototype.bind) {
 		}
 	};
 
-	/**
-	 * Destroy the current initialization.
-	 * @public
-	 */
+	// Destroy the current initialization.
 	smoothScroll.destroy = function () {
 		if ( !settings ) return;
 		document.removeEventListener( 'click', eventHandler, false );
 		settings = null;
 	};
 
-	/**
-	 * Initialize Smooth Scroll
-	 * @public
-	 * @param {Object} options User settings
-	 */
+	// Initialize Smooth Scroll
 	smoothScroll.init = function ( options ) {
 
 		// feature test
@@ -960,11 +816,6 @@ if (!Function.prototype.bind) {
 		document.addEventListener('click', eventHandler, false);
 
 	};
-
-
-	//
-	// Public APIs
-	//
 
 	return smoothScroll;
 
