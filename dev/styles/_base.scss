@@ -1,42 +1,42 @@
-/* ==|== base reset ===========================================================
-   ========================================================================= */
+// ==|== base reset ===========================================================
+// ============================================================================
 
-/* HTML5 Display Definitions
----------------------------------------------------------------------------- */
+// HTML5 Display Definitions
+// ----------------------------------------------------------------------------
 article, aside, footer, header, main, nav, section { display: block; }
 [hidden], template { display: none; }
 
-/* Base
----------------------------------------------------------------------------- */
+// Base
+// ----------------------------------------------------------------------------
 html { box-sizing: border-box; font-size: 62.5%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-size-adjust: 100%; }
 *, *:before, *:after { box-sizing: inherit; }
 html, body { overflow-x: hidden; }
 body { margin: 0; }
 
-/* Links
----------------------------------------------------------------------------- */
+// Links
+// ----------------------------------------------------------------------------
 a { text-decoration: none; background: transparent; }
 a:focus { outline: none; }
 a:active, a:hover { outline: 0; }
 
-/* Typography
----------------------------------------------------------------------------- */
+// Typography
+// ----------------------------------------------------------------------------
 h1, h2, h3, h4, h5, h6, p, ul, ol, li { margin: 0; padding: 0; font-weight: 400; font-style: normal; line-height: 1; }
 sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
-/* Lists
----------------------------------------------------------------------------- */
+// Lists
+// ----------------------------------------------------------------------------
 ul, ol { list-style: none; }
 nav ul, nav ol { list-style-image: none; }
 
-/* Embedded Content
----------------------------------------------------------------------------- */
+// Embedded Content
+// ----------------------------------------------------------------------------
 img { max-width: 100%; height: auto; border: 0; }
 img, svg { display: block; vertical-align: middle; }
 svg:not(:root) { overflow: hidden; }
 
-/* Helper Classes
----------------------------------------------------------------------------- */
+// Helper Classes
+// ----------------------------------------------------------------------------
 .visuallyhidden { clip: rect(0 0 0 0); overflow: hidden; position: absolute; margin: -0.1rem; padding: 0; width: 0.1rem; height: 0.1rem; border: 0; }

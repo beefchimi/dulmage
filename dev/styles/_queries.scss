@@ -1,21 +1,21 @@
-/* ==|== media queries ========================================================
-   WIDTHS: 480px / 568px / 768px / 980px
-   ========================================================================= */
+// ==|== media queries ========================================================
+// WIDTHS: 568px / 768px / 980px
+// ============================================================================
 
-@media only screen and (max-width: 35.5em) and (orientation: landscape) { /* 568px / 16px = 35.5em */
+@media only screen and (max-width: 35.5em) and (orientation: landscape) { // 568px / 16px = 35.5em
 
-/* ==|== primary styles =======================================================
-   ========================================================================= */
+// ==|== primary styles =======================================================
+// ============================================================================
 
-	/* Navigation
-	---------------------------------------------------------------------------- */
+	// Navigation
+	// ----------------------------------------------------------------------------
 	nav {
 		display: none;
 		visibility: hidden;
 	}
 
-	/* Project Content
-	---------------------------------------------------------------------------- */
+	// Project Content
+	// ----------------------------------------------------------------------------
 	article:not(.intro) div.project_content {
 		display: none;
 		visibility: hidden;
@@ -24,21 +24,21 @@
 		margin-bottom: 3.2rem;
 	}
 
-	/* Project Logo
-	---------------------------------------------------------------------------- */
+	// Project Logo
+	// ----------------------------------------------------------------------------
 	a.project_logo {
 		margin-bottom: 0;
 	}
 
 }
 
-@media only screen and (min-width: 48em) { /* 768px / 16px = 48em */
+@media only screen and (min-width: 48em) { // 768px / 16px = 48em
 
-/* ==|== primary styles =======================================================
-   ========================================================================= */
+// ==|== primary styles =======================================================
+// ============================================================================
 
-	/* Transitions
-	---------------------------------------------------------------------------- */
+	// Transitions
+	// ----------------------------------------------------------------------------
 	div.project_overlay {
 		transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 	}
@@ -53,14 +53,15 @@
 		transition: max-width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 	}
 
-	/* Navigation
-	---------------------------------------------------------------------------- */
-	/* --- Nav Toggle --- */
+	// Navigation
+	// ----------------------------------------------------------------------------
+
+	// --- Nav Toggle --- \\
 	nav > a {
 		bottom: 3.2rem;
 		right: 3.2rem;
 	}
-	/* --- Nav List --- */
+	// --- Nav List --- \\
 	nav ul {
 		bottom: 9rem;
 	}
@@ -68,8 +69,8 @@
 		padding: 1.2rem 2.2rem 1.2rem 2rem;
 	}
 
-	/* Project Content
-	---------------------------------------------------------------------------- */
+	// Project Content
+	// ----------------------------------------------------------------------------
 	div.project_content h1 {
 		margin-bottom: 6rem;
 		font-size: 8rem;
@@ -95,12 +96,12 @@
 		filter: blur(0px);
 	}
 
-	/* Project Logo
-	---------------------------------------------------------------------------- */
+	// Project Logo
+	// ----------------------------------------------------------------------------
 	a.project_logo {
 		margin-bottom: 7.2rem;
 	}
-	/* + hover state + */
+	// + hover state + \\
 	a.project_logo:hover svg {
 		opacity: 0.7;
 		filter: blur(2px);
@@ -116,7 +117,7 @@
 	a.project_logo:hover ~ div.project_overlay h5 {
 		transform: scale(1);
 	}
-	/* + active state + */
+	// + active state + \\
 	a.project_logo:active ~ div.project_overlay {
 		opacity: 0.8;
 	}
@@ -131,17 +132,17 @@
 	a.project_logo:active + div.project_content h4 {
 		filter: blur(0.5px);
 	}
-	/* --- Project Overlay --- */
+	// --- Project Overlay --- \\
 	div.project_overlay {
 		display: block;
 	}
 
-	/* ==|== intro / projects =====================================================
-	   ========================================================================= */
+	// ==|== intro / projects =====================================================
+	// ============================================================================
 
-	/* Intro Section
-	---------------------------------------------------------------------------- */
-	/* --- Mail Me --- */
+	// Intro Section
+	// ----------------------------------------------------------------------------
+	// --- Mail Me --- \\
 	a.contact {
 		bottom: 3.2rem;
 		left: 3.2rem;
@@ -155,46 +156,46 @@
 		opacity: 1;
 	}
 
-	/* Projects Section
-	---------------------------------------------------------------------------- */
-	/* --- Preserve --- */
+	// Projects Section
+	// ----------------------------------------------------------------------------
+	// --- Preserve --- \\
 	section.project_preserve a.project_logo {
 		width: 17rem;
 		height: 18.2rem;
 	}
-	/* --- BMC --- */
+	// --- BMC --- \\
 	section.project_bmc a.project_logo {
 		width: 24rem;
 		height: 11.7rem;
 	}
-	/* --- Fringe --- */
+	// --- Fringe --- \\
 	section.project_fringe a.project_logo {
 		width: 26rem;
 		height: 14.5rem;
 	}
-	/* --- NA 2014 & 2012 --- */
+	// --- NA 2014 & 2012 --- \\
 	section.project_na2014 a.project_logo,
 	section.project_na2012 a.project_logo {
 		width: 22rem;
 		height: 11.6rem;
 	}
-	/* --- Arts Court --- */
+	// --- Arts Court --- \\
 	section.project_artscourt a.project_logo {
 		width: 15.2rem;
 		height: 13.8rem;
 	}
-	/* --- Pukeko --- */
+	// --- Pukeko --- \\
 	section.project_pukeko a.project_logo {
 		width: 15.6rem;
 		height: 17.8rem;
 	}
-	/* --- Chicken & CFC --- */
+	// --- Chicken & CFC --- \\
 	section.project_chicken a.project_logo,
 	section.project_cfc a.project_logo {
 		width: 17.6rem;
 		height: 13.6rem;
 	}
-	/* --- Bryston --- */
+	// --- Bryston --- \\
 	section.project_bryston a.project_logo {
 		width: 19.2rem;
 		height: 8.8rem;
@@ -202,13 +203,13 @@
 
 }
 
-@media only screen and (min-width: 48em) and (min-height: 43.75em) { /* 768px / 16px = 48em | 700px / 16px = 43.75em */
+@media only screen and (min-width: 48em) and (min-height: 43.75em) { // 768px / 16px = 48em | 700px / 16px = 43.75em
 
-/* ==|== primary styles =======================================================
-   ========================================================================= */
+// ==|== primary styles =======================================================
+// ============================================================================
 
-	/* Project Content
-	---------------------------------------------------------------------------- */
+	// Project Content
+	// ----------------------------------------------------------------------------
 	article.intro div.project_content {
 		margin-top: -3.2rem;
 	}
@@ -218,6 +219,19 @@
 		left: 50%;
 		transform: translateX(-50%);
 		width: 90%;
+	}
+
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { // IE10 & IE11
+
+	div.loading-icon {
+		visibility: hidden;
+	}
+	a.contact svg.svg_mail .path_inside,
+	a.contact svg.svg_mail .path_outside {
+		stroke-dasharray: 0;
+		stroke-dashoffset: 0;
 	}
 
 }

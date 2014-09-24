@@ -1,52 +1,25 @@
-/* ==|== primary styles =======================================================
-   Author: Northern Army
-   ========================================================================= */
+// ==|== primary styles =======================================================
+// Author: Northern Army
+// ============================================================================
 
-/*
 
-dulmage		#eb4747		rgb(235,71,71)		hsl(0,80%,60%)
-
-beach		#86a0c5		rgb(134,160,197)	hsl(215,35%,65%)
-bridge		#6e916e		rgb(110,145,110)	hsl(120,14%,50%)
-flowers		#8c54c1		rgb(140,84,193)		hsl(271,47%,54%)
-forest		#bdbb38		rgb(189,187,56)		hsl(59,54%,48%)
-thegut		#6a6019		rgb(106,96,25)		hsl(53,62%,26%)
-tropical	#ba404f		rgb(186,64,79)		hsl(353,49%,49%)
-worship		#cb4e4a		rgb(203,78,74)		hsl(2,55%,54%)
-
-preserve	#ffc30c		rgb(255,195,12)		hsl(45,100%,52%)
-bmc			#ff4100		rgb(255,65,0)		hsl(15,100%,50%)
-fringe		#ff5a52		rgb(255,90,82)		hsl(3,100%,66%)
-na2014		#e2ac3a		rgb(226,172,58)		hsl(41,74%,56%)
-artscourt	#f86d29		rgb(248,109,41)		hsl(20,94%,57%)
-na2012		#eb4747		rgb(235,71,71)		hsl(0,80%,60%)
-pukeko		#373a86		rgb(55,58,134)		hsl(238,42%,37%)
-chicken		#49c88e		rgb(73,200,142)		hsl(153,54%,54%)
-cfc			#c06a1e		rgb(192,106,30)		hsl(28,73%,44%)
-bryston		#3994db		rgb(57,148,219)		hsl(206,69%,54%)
-
-*/
-
-/* Foundation
----------------------------------------------------------------------------- */
+// Foundation
+// ----------------------------------------------------------------------------
 html {
 	font-family: 'brandon-grotesque', 'Brandon Grotesque', Futura, 'Trebuchet MS', Arial, sans-serif;
-	// overflow-y: visible;
 }
 body {
 	position: relative;
 }
 ::-moz-selection {
-	background: rgba(0,0,0,0.8);
-	color: rgb(255,255,255);
+	background: #000;
 }
 ::selection {
-	background: rgba(0,0,0,0.8);
-	color: rgb(255,255,255);
+	background: #000;
 }
 
-/* Transitions
----------------------------------------------------------------------------- */
+// Transitions
+// ----------------------------------------------------------------------------
 nav > a {
 	transition: transform 0.2s ease-in-out, opacity 1s ease-in-out;
 }
@@ -104,12 +77,18 @@ section {
 article.intro {
 	transition: background-color 1s ease-in-out;
 }
-a.contact {
+div.loading-icon svg.svg_loader circle {
+	transition: stroke 0.6s ease-in-out;
+}
+div.project_content h4 a::before {
+	transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+section.error div.project_content h2 a {
 	transition: color 0.2s ease-in-out;
 }
 
-/* General Styles
----------------------------------------------------------------------------- */
+// General Styles
+// ----------------------------------------------------------------------------
 main {
 	position: sticky; // required for custom touch events to behave properly in iOS
 }
@@ -127,10 +106,16 @@ article {
 	display: table-cell;
 	vertical-align: middle;
 }
+svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
 
-/* Navigation
----------------------------------------------------------------------------- */
-/* --- Nav Toggle --- */
+// Navigation
+// ----------------------------------------------------------------------------
+
+// --- Nav Toggle --- \\
 nav > a {
 	display: block;
 	position: fixed;
@@ -139,13 +124,12 @@ nav > a {
 	right: 2rem;
 	width: 3.2rem;
 	height: 2rem;
-	// opacity: 1;
 }
 nav > a div {
 	position: absolute;
 	width: 0rem;
 	height: 0.2rem;
-	background: rgba(255,255,255,0.9);
+	background: rgb(255,255,255);
 }
 nav > a div.one {
 	top: 0;
@@ -159,7 +143,7 @@ nav > a div.three {
 	top: 1.8rem;
 	left: 0;
 }
-/* + nav toggle interaction + */
+// + nav toggle interaction + \\
 nav > a:hover {
 	transform: scale(1.1);
 }
@@ -181,7 +165,7 @@ nav > a.active + ul {
 nav > a.active + ul li {
 	transform: translateX(1%);
 }
-/* --- Nav List --- */
+// --- Nav List --- \\
 nav ul {
 	position: fixed;
 	z-index: 2001;
@@ -191,11 +175,11 @@ nav ul {
 	text-align: right;
 }
 nav ul li {
-	float: right;
-	clear: both;
-	transform: translateX(125%);
 	position: relative;
 	z-index: 2003;
+	float: right;
+	clear: both;
+	transform: translateX(125%); // more than 100% to accomodate for scaled nav items
 }
 nav ul li a {
 	display: block;
@@ -211,9 +195,9 @@ nav ul li a span {
 	letter-spacing: 0.2rem;
 	white-space: nowrap;
 	color: inherit;
-	background-color: rgba(255,255,255,0);
+	background-color: rgba(255,255,255,0.8);
 }
-/* + interaction + */
+// + interaction + \\
 nav ul li:hover {
 	z-index: 3003;
 }
@@ -221,12 +205,12 @@ nav ul li a:hover {
 	transform: scale(1.2);
 }
 nav ul li a:hover span {
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255,255,255,0.9);
 }
 nav ul li a:active {
 	transform: scale(1.1);
 }
-/* + current nav item + */
+// + current nav item + \\
 nav ul li.current {
 	z-index: 3003;
 }
@@ -234,11 +218,11 @@ nav ul li.current a {
 	transform: scale(1.2);
 }
 nav ul li.current a span {
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255,255,255,0.9);
 }
 
-/* Project Content
----------------------------------------------------------------------------- */
+// Project Content
+// ----------------------------------------------------------------------------
 div.project_content h1,
 div.project_content h2,
 div.project_content h3,
@@ -248,11 +232,17 @@ div.project_content h4 {
 }
 div.project_content h1,
 div.project_content h2 {
+	position: relative;
+	z-index: 100;
 	color: rgba(255,255,255,0);
+}
+html.no-cssanimations div.project_content h1,
+html.no-cssanimations div.project_content h2 {
+	color: rgba(255,255,255,1);
 }
 div.project_content h3,
 div.project_content h4 {
-	color: rgba(255,255,255,0.95);
+	color: rgb(255,255,255);
 }
 div.project_content h1 {
 	margin-bottom: 2rem;
@@ -278,9 +268,35 @@ div.project_content h4 {
 div.project_content h4 + h3 {
 	margin-top: 3.2rem;
 }
+// + external links + \\
+div.project_content h4 a {
+	display: inline-block;
+	position: relative;
+	color: rgb(255,255,255);
+}
+div.project_content h4 a::before {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: -0.8rem;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	width: 0%;
+	height: 0.1rem;
+	background-color: rgba(255,255,255,0);
+}
+div.project_content h4 a:hover::before {
+	width: 100%;
+	background-color: rgba(255,255,255,0.9);
+}
+div.project_content h4 a:active::before {
+	width: 90%;
+	background-color: rgba(255,255,255,0.8);
+}
 
-/* Project Logo
----------------------------------------------------------------------------- */
+// Project Logo
+// ----------------------------------------------------------------------------
 a.project_logo {
 	display: block;
 	position: relative;
@@ -288,12 +304,9 @@ a.project_logo {
 	margin: 0 auto 5.2rem auto;
 }
 a.project_logo svg {
-	display: block;
-	width: 100%;
-	height: 100%;
 	fill: rgba(255,255,255,0.94);
 }
-/* --- Project Overlay --- */
+// --- Project Overlay --- \\
 div.project_overlay {
 	display: none;
 	position: fixed;
@@ -326,43 +339,33 @@ div.project_overlay h5 {
 }
 
 
-/* ==|== intro / projects =====================================================
-   ========================================================================= */
+// ==|== sections =============================================================
+// ============================================================================
 
-/* Intro Section
----------------------------------------------------------------------------- */
-@keyframes bgPulse {
-	0% {
-		background-color: rgba(0,0,0,1);
-	}
-	100% {
-		background-color: rgba(30,30,30,1);
-	}
-}
+// Intro Section
+// ----------------------------------------------------------------------------
 @keyframes txtFade {
 	0% {
 		color: rgba(255,255,255,0);
 	}
 	100% {
-		color: rgba(255,255,255,0.95);
+		color: rgba(255,255,255,1);
 	}
 }
-/* --- Preloader --- */
-body.loading article.intro {
-	background-color: rgba(0,0,0,1);
-	animation: bgPulse 3s ease-in-out infinite alternate forwards;
+// --- Preloader --- \\
+article.intro {
+	background-color: rgba(10,10,10,1);
 }
 body.ready article.intro {
-	animation: none;
-	background-color: rgba(0,0,0,0);
+	background-color: rgba(10,10,10,0);
 }
-div.project_content h1 {
+html.cssanimations div.project_content h1 {
 	animation: txtFade 2.4s ease-in-out 0.4s forwards;
 }
-div.project_content h2 {
+html.cssanimations div.project_content h2 {
 	animation: txtFade 2.8s ease-in-out 1s forwards;
 }
-/* --- Mail Me --- */
+// --- Mail Me --- \\
 a.contact {
 	display: block;
 	position: absolute;
@@ -372,26 +375,12 @@ a.contact {
 	transform: translateX(-50%);
 	width: 4.4rem;
 	height: 4.4rem;
-	color: rgba(255,255,255,0.9);
+	color: rgb(255,255,255);
 	opacity: 1;
-/*
-	bottom: 1.6rem;
-	left: 1.6rem;
-	width: 3.6rem;
-	height: 3.6rem;
-*/
-}
-a.contact:active {
-	color: rgba(255,255,255,0.8);
-}
-a.contact svg.svg_mail {
-	display: block;
-	width: 100%;
-	height: 100%;
 }
 a.contact svg.svg_mail .path_inside,
 a.contact svg.svg_mail .path_outside {
-	stroke: rgba(255,255,255,0.9);
+	stroke: rgb(255,255,255);
 }
 a.contact p.mailme {
 	display: none;
@@ -407,7 +396,7 @@ a.contact p.mailme {
 	white-space: nowrap;
 	overflow: hidden;
 }
-/* + path animation + */
+// + path animation + \\
 @keyframes svgpath {
 	to {
 		stroke-dashoffset: 0;
@@ -421,71 +410,65 @@ a.contact svg.svg_mail .path_outside {
 	stroke-dasharray: 134;
 	stroke-dashoffset: 134;
 }
-
-body.ready a.contact svg.svg_mail .path_inside {
+html.no-cssanimations a.contact svg.svg_mail .path_inside,
+html.no-cssanimations a.contact svg.svg_mail .path_outside {
+	stroke-dasharray: 0;
+	stroke-dashoffset: 0;
+}
+html.cssanimations body.ready a.contact svg.svg_mail .path_inside {
 	animation: svgpath 1.6s ease-in-out 0.4s forwards;
 }
-body.ready a.contact svg.svg_mail .path_outside {
+html.cssanimations body.ready a.contact svg.svg_mail .path_outside {
 	animation: svgpath 1.6s ease-in-out forwards;
 }
-/* + nav animation + */
+// + nav animation + \\
 body.ready nav > a div {
 	width: 3.2rem;
 }
-
-
-
-
-
-
-/* + loading circle + */
-
-/*
-
+// + loading circle + \\
+@keyframes logoFade {
+	to {
+		opacity: 1;
+	}
+}
 @keyframes rotator {
 	to {
 		transform: rotate(360deg);
 	}
 }
-@keyframes spoon {
-
-	50% {
-		stroke-dashoffset: -136;
+@keyframes loadpath {
+	to {
+		stroke-dashoffset: -138;
 	}
-	100% {
-		stroke-dashoffset: 0;
-	}
-
-
 }
-
 div.loading-icon {
-
+	position: absolute;
+	top: 16%;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
 	width: 4.4rem;
 	height: 4.4rem;
-	// animation: rotator 1.4s linear infinite both;
-}
-div.loading-icon svg.svg_loader {
-	display: block;
-	width: 4.4rem;
-	height: 4.4rem;
+	opacity: 0;
+	animation: logoFade 2s ease-in-out 1 forwards 2s, rotator 1.6s linear infinite forwards;
 }
 div.loading-icon svg.svg_loader circle {
 	stroke: rgba(255,255,255,0.9);
-	stroke-dasharray: 136;
-	stroke-dashoffset: 136;
-	// animation: spoon 1.6s ease-in-out infinite; // alternate-reverse
+	stroke-dasharray: 138;
+	stroke-dashoffset: 138;
+	animation: loadpath 1.6s linear infinite;
+}
+body.ready div.loading-icon svg.svg_loader circle {
+	stroke: rgba(255,255,255,0);
+}
+html.no-cssanimations div.loading-icon {
+	visibility: hidden;
 }
 
+// Projects Section
+// ----------------------------------------------------------------------------
 
-*/
-
-
-
-
-/* Projects Section
----------------------------------------------------------------------------- */
-/* --- Preserve --- */
+// --- Preserve --- \\
 section.project_preserve {
 	background-image: url('../img/preserve.png');
 }
@@ -493,7 +476,7 @@ section.project_preserve a.project_logo {
 	width: 12rem;
 	height: 12.8rem;
 }
-/* --- BMC --- */
+// --- BMC --- \\
 section.project_bmc {
 	background-image: url('../img/bmc.png');
 }
@@ -501,7 +484,7 @@ section.project_bmc a.project_logo {
 	width: 18rem;
 	height: 8.8rem;
 }
-/* --- Fringe --- */
+// --- Fringe --- \\
 section.project_fringe {
 	background-image: url('../img/fringe.png');
 }
@@ -509,7 +492,7 @@ section.project_fringe a.project_logo {
 	width: 20rem;
 	height: 11.1rem;
 }
-/* --- NA 2014 & 2012 --- */
+// --- NA 2014 & 2012 --- \\
 section.project_na2014 {
 	background-image: url('../img/na2014.png');
 }
@@ -521,7 +504,7 @@ section.project_na2012 a.project_logo {
 	width: 16.1rem;
 	height: 8.4rem;
 }
-/* --- Arts Court --- */
+// --- Arts Court --- \\
 section.project_artscourt {
 	background-image: url('../img/artscourt.png');
 }
@@ -529,7 +512,7 @@ section.project_artscourt a.project_logo {
 	width: 11rem;
 	height: 10rem;
 }
-/* --- Pukeko --- */
+// --- Pukeko --- \\
 section.project_pukeko {
 	background-image: url('../img/pukeko.png');
 }
@@ -537,7 +520,7 @@ section.project_pukeko a.project_logo {
 	width: 12.1rem;
 	height: 13.7rem;
 }
-/* --- Chicken & CFC --- */
+// --- Chicken & CFC --- \\
 section.project_chicken {
 	background-image: url('../img/chicken.png');
 }
@@ -549,11 +532,33 @@ section.project_cfc a.project_logo {
 	width: 13rem;
 	height: 10rem;
 }
-/* --- Bryston --- */
+// --- Bryston --- \\
 section.project_bryston {
 	background-image: url('../img/bryston.png');
 }
 section.project_bryston a.project_logo {
 	width: 14rem;
 	height: 6.4rem;
+}
+
+// Error 404
+// ----------------------------------------------------------------------------
+body.error_404 main {
+	background-color: rgb(20,20,20);
+}
+section.error div.project_content h1,
+section.error div.project_content h2 {
+	color: rgb(255,255,255);
+}
+section.error div.project_content h2 {
+	line-height: 1.4;
+}
+section.error div.project_content a {
+	color: rgb(235,71,71);
+}
+section.error div.project_content a:hover {
+	color: rgb(235,140,140);
+}
+section.error div.project_content a:active {
+	color: rgb(235,110,110);
 }

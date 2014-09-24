@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
-	/* Global Variables
-	---------------------------------------------------------------------------- */
+	// Global Variables
+	// ----------------------------------------------------------------------------
 
-	/* --- Objects and Initial Setup --- */
+	// --- Objects and Initial Setup --- \\
 
 	// common objects
 	var elBody         = document.body,
 		elMain         = document.getElementsByTagName('main')[0],
 		elSections     = document.getElementsByTagName('section'),
 		elIntroSection = document.getElementById('intro_dulmage'),
+		elIntroArticle = document.getElementsByClassName('intro')[0],
+		elPreloader    = document.getElementById('preloader'),
 		elNavToggle    = document.getElementById('nav_toggle'),
 		elNavList      = document.getElementsByTagName('li'),
 		elNavLinks     = document.getElementsByClassName('link_anchor'),
@@ -18,13 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// possible homepage options
 	var homeOptions = [
-		{ title:'beach',    r:134, g:160, b:197, h:215, s:35 },
-		{ title:'bridge',   r:110, g:145, b:110, h:120, s:14 },
-		{ title:'flowers',  r:140, g:84,  b:193, h:271, s:47 },
-		{ title:'forest',   r:189, g:187, b:56,  h:59,  s:54 },
-		{ title:'thegut',   r:106, g:96,  b:25,  h:53,  s:62 },
-		{ title:'tropical', r:186, g:64,  b:79,  h:353, s:49 },
-		{ title:'worship',  r:203, g:78,  b:74,  h:2,   s:55 }
+		{ title:'beach',    r:134, g:160, b:197 },
+		{ title:'bridge',   r:110, g:145, b:110 },
+		{ title:'flowers',  r:140, g:84,  b:193 },
+		{ title:'forest',   r:189, g:187, b:56  },
+		{ title:'thegut',   r:106, g:96,  b:25  },
+		{ title:'tropical', r:186, g:64,  b:79  },
+		{ title:'worship',  r:203, g:78,  b:74  }
 	];
 
 	// randomly select a home option
@@ -35,19 +37,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	// color data for each section (first object is added as a random selection from homeOptions)
 	var sectionData = [
 		homeOptions[randomOption],
-		{ title:'preserve',  r:255, g:195, b:12,  h:45,  s:100 },
-		{ title:'bmc',       r:255, g:65,  b:0,   h:15,  s:100 },
-		{ title:'fringe',    r:255, g:90,  b:82,  h:3,   s:100 },
-		{ title:'na2014',    r:226, g:172, b:58,  h:41,  s:74  },
-		{ title:'artscourt', r:248, g:109, b:41,  h:20,  s:94  },
-		{ title:'na2012',    r:235, g:71,  b:71,  h:0,   s:80  },
-		{ title:'pukeko',    r:55,  g:58,  b:134, h:238, s:42  },
-		{ title:'chicken',   r:73,  g:200, b:142, h:153, s:54  },
-		{ title:'cfc',       r:192, g:106, b:30,  h:28,  s:73  },
-		{ title:'bryston',   r:57,  g:148, b:219, h:206, s:69  }
+		{ title:'preserve',  r:255, g:195, b:12  },
+		{ title:'bmc',       r:255, g:65,  b:0   },
+		{ title:'fringe',    r:255, g:90,  b:82  },
+		{ title:'na2014',    r:226, g:172, b:58  },
+		{ title:'artscourt', r:248, g:109, b:41  },
+		{ title:'na2012',    r:235, g:71,  b:71  },
+		{ title:'pukeko',    r:55,  g:58,  b:134 },
+		{ title:'chicken',   r:73,  g:200, b:142 },
+		{ title:'cfc',       r:192, g:106, b:30  },
+		{ title:'bryston',   r:57,  g:148, b:219 }
 	];
 
-	/* --- Section and Data Variables --- */
+	// --- Section and Data Variables --- \\
 
 	// section data
 	var sectionCount = elSections.length,
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		touchID,
 		isTouching = false;
 
-	/* --- Colour Variables --- */
+	// --- Colour Variables --- \\
 
 	// all RGB variables
 	var beginR, beginG, beginB,
@@ -77,15 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		calcR, calcG, calcB,
 		updateR, updateG, updateB;
 
-	// all HSL variables
-	var beginH, beginS,
-		endH, endS,
-		diffH, diffS,
-		intSignH, intSignS,
-		calcH, calcS,
-		updateH, updateS;
-
-	/* --- Image Preloader --- */
+	// --- Image Preloader --- \\
 
 	var imgLoader = new PxLoader(),
 		imgPath   = 'assets/img/',
@@ -108,21 +102,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// callback that will be run once images are ready
 	imgLoader.addCompletionListener(function() {
+
 		// replace <body> 'loading' class with 'ready' in order to trigger css transitions / animations
 		elBody.className = 'ready';
+
+		// remove div.loader-icon from DOM after 4 seconds
+		setTimeout(function() {
+			elIntroArticle.removeChild(elPreloader);
+		}, 4000);
+
 	});
 
 	// initialize the preloader
 	imgLoader.start();
 
 
-	/* onPageLoad: Main Function To Fire on Window Load
-	---------------------------------------------------------------------------- */
+	// onPageLoad: Main Function To Fire on Window Load
+	// ----------------------------------------------------------------------------
 	function onPageLoad() {
 
 		// get scroll position on load in case of anchor or refresh (do not assume 0)
 		// we will likely scroll to document top on page load for preloader styles... but that could still fail in some cases
-		scrollPos = window.scrollY;
+		scrollPos = window.pageYOffset;
 
 		// get height of browser window on page load and resize events
 		windowHeight = window.innerHeight;
@@ -153,20 +154,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	/* trackSection: Track Progression of Sections
-	---------------------------------------------------------------------------- */
+	// trackSection: Track Progression of Sections
+	// ----------------------------------------------------------------------------
 	function trackSection() {
 
 		// determine new prev / next sections
 		if (sectionCurrent <= 0) {
 
-			sectionPrev = 0; // false ???
+			sectionPrev = 0;
 			sectionNext = sectionCurrent + 1;
 
 		} else if ( sectionCurrent >= (sectionCount - 1) ) {
 
 			sectionPrev = sectionCurrent - 1;
-			sectionNext = sectionCurrent; // false ???
+			sectionNext = sectionCurrent;
 
 		} else {
 
@@ -189,37 +190,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		beginG = sectionData[sectionCurrent].g;
 		beginB = sectionData[sectionCurrent].b;
 
-		// redefine begin HSL values based on new sectionCurrent
-		beginH = sectionData[sectionCurrent].h;
-		beginS = sectionData[sectionCurrent].s;
-
 		// redefine end RGB values based on new sectionNext
 		endR = sectionData[sectionNext].r;
 		endG = sectionData[sectionNext].g;
 		endB = sectionData[sectionNext].b;
-
-		// redefine end HSL values based on new sectionNext
-		endH = sectionData[sectionNext].h;
-		endS = sectionData[sectionNext].s;
 
 		// define difference of begin / end RGB values
 		diffR = beginR - endR;
 		diffG = beginG - endG;
 		diffB = beginB - endB;
 
-		// define difference of begin / end HSL values
-		diffH = beginH - endH;
-		diffS = beginS - endS;
-
 	}
 
 
-	/* updateColor: Update Background Color During Scroll
-	---------------------------------------------------------------------------- */
+	// updateColor: Update Background Color During Scroll
+	// ----------------------------------------------------------------------------
 	function updateColor() {
 
 		// update scroll position as we scroll the window
-		scrollPos = window.scrollY;
+		scrollPos = window.pageYOffset;
 
 		// apply new values only if scrollPos is greater than 0...
 		// this will prevent iOS rubber band scrolling from producing incorrect values
@@ -247,8 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	/* colorMath: Calculate Background Colour Values
-	---------------------------------------------------------------------------- */
+	// colorMath: Calculate Background Colour Values
+	// ----------------------------------------------------------------------------
 	function colorMath() {
 
 		// get current scroll percentage within section
@@ -259,37 +248,31 @@ document.addEventListener('DOMContentLoaded', function() {
 		intSignR = diffR > 0 ? '-' : '';
 		intSignG = diffG > 0 ? '-' : '';
 		intSignB = diffB > 0 ? '-' : '';
-		intSignH = diffH > 0 ? '-' : '';
-		intSignS = diffS > 0 ? '-' : '';
 
-		// calculate the threshold we will (in/de)crease our RGB / HSL values by
+		// calculate the threshold we will (in/de)crease our RGB values by
 		calcR = Math.abs( (diffR * currentPercent) / 100 );
 		calcG = Math.abs( (diffG * currentPercent) / 100 );
 		calcB = Math.abs( (diffB * currentPercent) / 100 );
-		calcH = Math.abs( (diffH * currentPercent) / 100 );
-		calcS = Math.abs( (diffS * currentPercent) / 100 );
 
-		// update our RGB / HSL values by adding our calculated (in/de)crease values to the current (begin) value
+		// update our RGB values by adding our calculated (in/de)crease values to the current (begin) value
 		updateR = beginR + parseInt(intSignR + calcR);
 		updateG = beginG + parseInt(intSignG + calcG);
 		updateB = beginB + parseInt(intSignB + calcB);
-		updateH = beginH + parseInt(intSignH + calcH);
-		updateS = beginS + parseInt(intSignS + calcS);
 
 		// apply new RGB colors to <main> element
 		elMain.style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
 
-		// apply new RGB & HSL colors to <nav> links... using HSL to control lightness, gets converted to RGB in browser :(
+		// apply new RGB colors to <nav> links
 		for (var i = 0; i < navListCount; i++) {
-			elNavLinks[i].style.color = 'rgb('+updateR+','+updateG+','+updateB+')';
-			elNavLinks[i].style.backgroundColor = 'hsl('+updateH+','+updateS+'%,90%)';
+			elNavLinks[i].style.color           = 'rgb('+updateR+','+updateG+','+updateB+')';
+			elNavLinks[i].style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
 		}
 
 	}
 
 
-	/* Navigation: Click to toggle navigation
-	---------------------------------------------------------------------------- */
+	// Navigation: Click to toggle navigation
+	// ----------------------------------------------------------------------------
 	function navToggle() {
 
 		elNavToggle.addEventListener('click', function(e) {
@@ -300,8 +283,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				this.className = 'active';
 			}
 
-			// this.classList.toggle('active');
-
 			e.preventDefault();
 
 		}, false);
@@ -309,24 +290,23 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	/* secretMail: Add mailto link to home section
-	---------------------------------------------------------------------------- */
+	// secretMail: Add mailto link to home section
+	// ----------------------------------------------------------------------------
 	function secretMail() {
 
 		var mailLink    = document.getElementById('contact'),
 			prefix      = 'mailto',
 			local       = 'curtis',
-			klammeraffe = '@',
 			domain      = 'dulmage',
 			suffix      = 'me';
 
-		mailLink.setAttribute('href', prefix + ':' + local + klammeraffe + domain + '.' + suffix)
+		mailLink.setAttribute('href', prefix + ':' + local + '@' + domain + '.' + suffix);
 
 	}
 
 
-	/* Helper: Fire Window Resize Event Upon Finish
-	---------------------------------------------------------------------------- */
+	// Helper: Fire Window Resize Event Upon Finish
+	// ----------------------------------------------------------------------------
 	var waitForFinalEvent = (function() {
 
 		var timers = {};
@@ -348,8 +328,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	})();
 
 
-	/* Window Events: On Touch - Start, Move, and End
-	---------------------------------------------------------------------------- */
+	// Window Events: On Touch - Start, Move, and End
+	// ----------------------------------------------------------------------------
 	document.body.addEventListener('touchstart', function(e) {
 
 		// code adapted from:
@@ -387,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	}
 
-	// assign touchstart to touchmove, updateColor as we move / scroll
+	// assign touchstart to touchmove, updateColor as we move
 	function onTouchMove(e) {
 
 		touchM = getTouch(e);
@@ -417,8 +397,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	/* Window Events: On - Scroll, Resize
-	---------------------------------------------------------------------------- */
+	// Window Events: On - Scroll, Resize
+	// ----------------------------------------------------------------------------
 	window.addEventListener('scroll', function(e) {
 
 		updateColor();
@@ -437,11 +417,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	}, false);
 
 
-	/* Initialize Primary Functions
-	---------------------------------------------------------------------------- */
-
-	// reset the scroll position to the top left of the document
-	window.scroll(0, 0);
+	// Initialize Primary Functions
+	// ----------------------------------------------------------------------------
+	// load page at top of document...
+	// chrome remembers your scroll position on reload, so this is the only reliable solution
+	if (history.pushState) {
+		history.pushState(null, null, '');
+		window.scroll(0, 0);
+	}
 
 	onPageLoad();
 	navToggle();

@@ -15,17 +15,18 @@
 				%polygon.path_outside{:fill => 'none', :stroke => '#fff', 'stroke-width' => '1.8', 'stroke-miterlimit' => '10', :points => '34.9,61.2 34.9,73.3 41.5,65.5 52.5,75.7 62.7,40.2 22.4,56.7 '}
 			%p.mailme
 				Mail Me
+
 		-# for whatever reason...  using 'svg use' would not work with the animation in chrome... no idea why
 
-		-# .loading-icon
-			-# %svg.svg_loader
-				-# %use{'xlink:href' => '#loader'}
+		#preloader.loading-icon
+			%svg#loader.svg_loader{:version => '1.1', :xmlns => 'http://www.w3.org/2000/svg', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink', :x => '0px', :y => '0px', :viewBox => '-2.5 -2.5 49 49'}
+				%circle.path_circle{:fill => 'none', :stroke => '#fff', 'stroke-width' => '5', 'stroke-linecap' => 'round', 'stroke-linejoin' => 'round', :cx => '22', :cy => '22', :r => '22'}
 
 %section#project_preserve.project_preserve
 
 	%article.project
 
-		%a.project_logo{:href => 'http://preserve.northernarmy.com', :target => '_blank', :title => 'Preserve.'}
+		%a.project_logo{:href => 'http://preserve.northernarmy.com', :title => 'Preserve.', :target => '_blank'}
 
 			%svg.svg_preserve
 				%use{'xlink:href' => '#preserve'}
@@ -33,7 +34,8 @@
 		.project_content
 
 			%h3 Inhouse Project
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -42,7 +44,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://bodymindchange.ca', :target => '_blank', :title => 'Body. Mind. Change.'}
+		%a.project_logo{:href => 'http://bodymindchange.ca', :title => 'Body. Mind. Change.', :target => '_blank'}
 
 			%svg.svg_bmc
 				%use{'xlink:href' => '#bmc'}
@@ -53,7 +55,8 @@
 			%h4 TIFF / CFC Media Lab / David Cronenberg
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -62,7 +65,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://ottawafringe.com', :target => '_blank', :title => 'Ottawa Fringe Festival'}
+		%a.project_logo{:href => 'http://ottawafringe.com/', :title => 'Ottawa Fringe Festival', :target => '_blank'}
 
 			%svg.svg_fringe
 				%use{'xlink:href' => '#fringe'}
@@ -70,10 +73,12 @@
 		.project_content
 
 			%h3 Client
-			%h4 Ottawa Fringe Festival
+			%h4
+				%a{:href => 'http://ottawafringe.com/', :title => 'Ottawa Fringe Festival', :target => '_blank'} Ottawa Fringe Festival
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 			%h3 Ecommerce Development
 			%h4 James Beninger
@@ -85,7 +90,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://northernarmy.com', :target => '_blank', :title => 'Northern Army 2014'}
+		%a.project_logo{:href => 'http://northernarmy.com/', :title => 'Northern Army 2014', :target => '_blank'}
 
 			%svg.svg_na2014
 				%use{'xlink:href' => '#na'}
@@ -93,7 +98,8 @@
 		.project_content
 
 			%h3 Inhouse Project
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army 2014', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -102,7 +108,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://artscourt.ca', :target => '_blank', :title => 'Arts Court Theatre'}
+		%a.project_logo{:href => 'http://artscourt.ca/', :title => 'Arts Court Theatre', :target => '_blank'}
 
 			%svg.svg_na
 				%use{'xlink:href' => '#artscourt'}
@@ -110,13 +116,16 @@
 		.project_content
 
 			%h3 Client
-			%h4 Arts Court Theatre
+			%h4
+				%a{:href => 'http://artscourt.ca/', :title => 'Arts Court Theatre', :target => '_blank'} Arts Court Theatre
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 			%h3 Ecommerce Development
-			%h4 Aaron Pepper
+			%h4
+				%a{:href => 'http://aaronpepper.com/', :title => 'Aaron Pepper', :target => '_blank'} Aaron Pepper
 
 		.project_overlay
 			%h5 View Project
@@ -125,7 +134,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://na-2012.armystage.com', :target => '_blank', :title => 'Northern Army 2012'}
+		%a.project_logo{:href => 'http://na-2012.armystage.com/', :title => 'Northern Army 2012', :target => '_blank'}
 
 			%svg.svg_na2012
 				%use{'xlink:href' => '#na'}
@@ -133,7 +142,8 @@
 		.project_content
 
 			%h3 Inhouse Project
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://na-2012.armystage.com/', :title => 'Northern Army 2012', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -142,7 +152,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://pukekodesign.ca', :target => '_blank', :title => 'Pukeko Design'}
+		%a.project_logo{:href => 'http://pukekodesign.ca/', :title => 'Pukeko Design', :target => '_blank'}
 
 			%svg.svg_pukeko
 				%use{'xlink:href' => '#pukeko'}
@@ -150,10 +160,12 @@
 		.project_content
 
 			%h3 Client
-			%h4 Pukeko Design
+			%h4
+				%a{:href => 'http://pukekodesign.ca/', :title => 'Pukeko Design', :target => '_blank'} Pukeko Design
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -162,7 +174,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://chicken.ca', :target => '_blank', :title => 'Chicken.ca'}
+		%a.project_logo{:href => 'http://chicken.ca/', :title => 'Chicken.ca', :target => '_blank'}
 
 			%svg.svg_chicken
 				%use{'xlink:href' => '#chicken'}
@@ -170,13 +182,16 @@
 		.project_content
 
 			%h3 Client
-			%h4 chicken.ca
+			%h4
+				%a{:href => 'http://chicken.ca/', :title => 'Chicken.ca', :target => '_blank'} chicken.ca
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 			%h3 Backend Development
-			%h4 Theory Tank
+			%h4
+				%a{:href => 'http://www.theorytank.com/', :title => 'Theory Tank', :target => '_blank'} Theory Tank
 
 		.project_overlay
 			%h5 View Project
@@ -185,7 +200,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://chickenfarmers.ca', :target => '_blank', :title => 'Chicken Farmers of Canada'}
+		%a.project_logo{:href => 'http://chickenfarmers.ca/', :title => 'Chicken Farmers of Canada', :target => '_blank'}
 
 			%svg.svg_cfc
 				%use{'xlink:href' => '#chicken'}
@@ -193,10 +208,12 @@
 		.project_content
 
 			%h3 Client
-			%h4 Chicken Farmers of Canada
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Chicken Farmers of Canada', :target => '_blank'} Chicken Farmers of Canada
 
 			%h3 Agency
-			%h4 Northern Army
+			%h4
+				%a{:href => 'http://northernarmy.com/', :title => 'Northern Army', :target => '_blank'} Northern Army
 
 		.project_overlay
 			%h5 View Project
@@ -205,7 +222,7 @@
 
 	%article.project
 
-		%a.project_logo{:href => 'http://bryston.curtisdulmage.com', :target => '_blank', :title => 'BDP Beta'}
+		%a.project_logo{:href => 'http://dulmage.me/sites/bryston', :title => 'BDP Beta', :target => '_blank'}
 
 			%svg.svg_bryston
 				%use{'xlink:href' => '#bryston'}
@@ -213,10 +230,12 @@
 		.project_content
 
 			%h3 Client
-			%h4 Bryston Limited
+			%h4
+				%a{:href => 'http://dulmage.me/sites/bryston', :title => 'BDP Beta', :target => '_blank'} Bryston Limited
 
 			%h3 Designer
-			%h4 Mandira Midha
+			%h4
+				%a{:href => 'https://dribbble.com/mandira', :title => 'Mandira Midha', :target => '_blank'} Mandira Midha
 
 		.project_overlay
 			%h5 View Project
