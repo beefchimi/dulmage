@@ -42,13 +42,13 @@ li[data-anchor="bmc"] {
 	transition: transform 0.3s ease-in-out 0.04s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="na2014"] {
-	transition: transform 0.3s ease-in-out 0.08s, z-index 0.2s ease-in-out;
-}
-li[data-anchor="fringe"] {
 	transition: transform 0.3s ease-in-out 0.06s, z-index 0.2s ease-in-out;
 }
+li[data-anchor="fringe"] {
+	transition: transform 0.3s ease-in-out 0.08s, z-index 0.2s ease-in-out;
+}
 li[data-anchor="cfc"] {
-	transition: transform 0.3s ease-in-out 0.18s, z-index 0.2s ease-in-out;
+	transition: transform 0.3s ease-in-out 0.1s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="na2012"] {
 	transition: transform 0.3s ease-in-out 0.12s, z-index 0.2s ease-in-out;
@@ -57,10 +57,10 @@ li[data-anchor="pukeko"] {
 	transition: transform 0.3s ease-in-out 0.14s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="artscourt"] {
-	transition: transform 0.3s ease-in-out 0.1s, z-index 0.2s ease-in-out;
+	transition: transform 0.3s ease-in-out 0.16s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="efc"] {
-	transition: transform 0.3s ease-in-out 0.16s, z-index 0.2s ease-in-out;
+	transition: transform 0.3s ease-in-out 0.18s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="bryston"] {
 	transition: transform 0.3s ease-in-out 0.2s, z-index 0.2s ease-in-out;
@@ -536,7 +536,7 @@ section.project_efc {
 	background-image: url('../img/efc.png');
 }
 section.project_efc a.project_logo {
-	width: 9.4rem;
+	width: 9.5rem;
 	height: 14rem;
 }
 // --- Bryston --- \\
