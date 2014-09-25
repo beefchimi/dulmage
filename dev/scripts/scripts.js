@@ -89,16 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	imgLoader.addImage(imgHome);
 
 	// only first half of images are preloaded
-	imgLoader.addImage(imgPath + 'artscourt.png');
-	imgLoader.addImage(imgPath + 'bmc.png');
-	imgLoader.addImage(imgPath + 'bryston.png');
-	imgLoader.addImage(imgPath + 'cfc.png');
-	imgLoader.addImage(imgPath + 'efc.png');
-	imgLoader.addImage(imgPath + 'fringe.png');
-	imgLoader.addImage(imgPath + 'na2012.png');
-	imgLoader.addImage(imgPath + 'na2014.png');
 	imgLoader.addImage(imgPath + 'preserve.png');
-	imgLoader.addImage(imgPath + 'pukeko.png');
+	imgLoader.addImage(imgPath + 'bmc.png');
+	imgLoader.addImage(imgPath + 'na2014.png');
+	imgLoader.addImage(imgPath + 'fringe.png');
+	imgLoader.addImage(imgPath + 'cfc.png');
+	imgLoader.addImage(imgPath + 'na2012.png');
+	// imgLoader.addImage(imgPath + 'pukeko.png');
+	// imgLoader.addImage(imgPath + 'artscourt.png');
+	// imgLoader.addImage(imgPath + 'efc.png');
+	// imgLoader.addImage(imgPath + 'bryston.png');
 
 	// callback that will be run once images are ready
 	imgLoader.addCompletionListener(function() {
