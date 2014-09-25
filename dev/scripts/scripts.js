@@ -39,13 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		homeOptions[randomOption],
 		{ title:'preserve',  r:255, g:195, b:12  },
 		{ title:'bmc',       r:255, g:65,  b:0   },
-		{ title:'fringe',    r:255, g:90,  b:82  },
 		{ title:'na2014',    r:226, g:172, b:58  },
-		{ title:'artscourt', r:248, g:109, b:41  },
+		{ title:'fringe',    r:255, g:90,  b:82  },
+		{ title:'cfc',       r:192, g:106, b:30  },
 		{ title:'na2012',    r:235, g:71,  b:71  },
 		{ title:'pukeko',    r:55,  g:58,  b:134 },
-		{ title:'chicken',   r:73,  g:200, b:142 },
-		{ title:'cfc',       r:192, g:106, b:30  },
+		{ title:'artscourt', r:248, g:109, b:41  },
+		{ title:'efc',       r:255, g:186, b:0   },
 		{ title:'bryston',   r:57,  g:148, b:219 }
 	];
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	imgLoader.addImage(imgPath + 'bmc.png');
 	imgLoader.addImage(imgPath + 'bryston.png');
 	imgLoader.addImage(imgPath + 'cfc.png');
-	imgLoader.addImage(imgPath + 'chicken.png');
+	imgLoader.addImage(imgPath + 'efc.png');
 	imgLoader.addImage(imgPath + 'fringe.png');
 	imgLoader.addImage(imgPath + 'na2012.png');
 	imgLoader.addImage(imgPath + 'na2014.png');

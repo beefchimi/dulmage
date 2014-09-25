@@ -41,14 +41,14 @@ li[data-anchor="preserve"] {
 li[data-anchor="bmc"] {
 	transition: transform 0.3s ease-in-out 0.04s, z-index 0.2s ease-in-out;
 }
-li[data-anchor="fringe"] {
-	transition: transform 0.3s ease-in-out 0.06s, z-index 0.2s ease-in-out;
-}
 li[data-anchor="na2014"] {
 	transition: transform 0.3s ease-in-out 0.08s, z-index 0.2s ease-in-out;
 }
-li[data-anchor="artscourt"] {
-	transition: transform 0.3s ease-in-out 0.1s, z-index 0.2s ease-in-out;
+li[data-anchor="fringe"] {
+	transition: transform 0.3s ease-in-out 0.06s, z-index 0.2s ease-in-out;
+}
+li[data-anchor="cfc"] {
+	transition: transform 0.3s ease-in-out 0.18s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="na2012"] {
 	transition: transform 0.3s ease-in-out 0.12s, z-index 0.2s ease-in-out;
@@ -56,11 +56,11 @@ li[data-anchor="na2012"] {
 li[data-anchor="pukeko"] {
 	transition: transform 0.3s ease-in-out 0.14s, z-index 0.2s ease-in-out;
 }
-li[data-anchor="chicken"] {
-	transition: transform 0.3s ease-in-out 0.16s, z-index 0.2s ease-in-out;
+li[data-anchor="artscourt"] {
+	transition: transform 0.3s ease-in-out 0.1s, z-index 0.2s ease-in-out;
 }
-li[data-anchor="cfc"] {
-	transition: transform 0.3s ease-in-out 0.18s, z-index 0.2s ease-in-out;
+li[data-anchor="efc"] {
+	transition: transform 0.3s ease-in-out 0.16s, z-index 0.2s ease-in-out;
 }
 li[data-anchor="bryston"] {
 	transition: transform 0.3s ease-in-out 0.2s, z-index 0.2s ease-in-out;
@@ -487,14 +487,6 @@ section.project_bmc a.project_logo {
 	width: 18rem;
 	height: 8.8rem;
 }
-// --- Fringe --- \\
-section.project_fringe {
-	background-image: url('../img/fringe.png');
-}
-section.project_fringe a.project_logo {
-	width: 20rem;
-	height: 11.1rem;
-}
 // --- NA 2014 & 2012 --- \\
 section.project_na2014 {
 	background-image: url('../img/na2014.png');
@@ -507,12 +499,20 @@ section.project_na2012 a.project_logo {
 	width: 16.1rem;
 	height: 8.4rem;
 }
-// --- Arts Court --- \\
-section.project_artscourt {
-	background-image: url('../img/artscourt.png');
+// --- Fringe --- \\
+section.project_fringe {
+	background-image: url('../img/fringe.png');
 }
-section.project_artscourt a.project_logo {
-	width: 11rem;
+section.project_fringe a.project_logo {
+	width: 20rem;
+	height: 11.1rem;
+}
+// --- CFC --- \\
+section.project_cfc {
+	background-image: url('../img/cfc.png');
+}
+section.project_cfc a.project_logo {
+	width: 13rem;
 	height: 10rem;
 }
 // --- Pukeko --- \\
@@ -523,17 +523,21 @@ section.project_pukeko a.project_logo {
 	width: 12.1rem;
 	height: 13.7rem;
 }
-// --- Chicken & CFC --- \\
-section.project_chicken {
-	background-image: url('../img/chicken.png');
+// --- Arts Court --- \\
+section.project_artscourt {
+	background-image: url('../img/artscourt.png');
 }
-section.project_cfc {
-	background-image: url('../img/cfc.png');
-}
-section.project_chicken a.project_logo,
-section.project_cfc a.project_logo {
-	width: 13rem;
+section.project_artscourt a.project_logo {
+	width: 11rem;
 	height: 10rem;
+}
+// --- EFC --- \\
+section.project_efc {
+	background-image: url('../img/efc.png');
+}
+section.project_efc a.project_logo {
+	width: 9.4rem;
+	height: 14rem;
 }
 // --- Bryston --- \\
 section.project_bryston {
