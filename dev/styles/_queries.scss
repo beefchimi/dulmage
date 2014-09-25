@@ -46,8 +46,8 @@
 	div.project_content h3,
 	div.project_content h4,
 	div.project_overlay h5 {
-		transition: all 0.3s ease-in-out;
-		backface-visibility: hidden;
+		transition: all 0.3s ease-in-out; // using just 'filter' for the svg seems iffy
+		backface-visibility: hidden; // there was a bit of webkit weirdness... this seems to smooth things out
 	}
 	a.contact p.mailme {
 		transition: max-width 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -103,8 +103,10 @@
 	}
 	// + hover state + \\
 	a.project_logo:hover svg {
-		opacity: 0.7;
 		filter: blur(2px);
+	}
+	html.no-cssanimations a.project_logo:hover svg {
+		fill: rgba(255,255,255,0.7);
 	}
 	a.project_logo:hover + div.project_content h3,
 	a.project_logo:hover + div.project_content h4 {
@@ -118,19 +120,21 @@
 		transform: scale(1);
 	}
 	// + active state + \\
+	a.project_logo:active svg {
+		filter: blur(1px);
+	}
+	html.no-cssanimations a.project_logo:active svg {
+		fill: rgba(255,255,255,0.8);
+	}
+	a.project_logo:active + div.project_content h3,
+	a.project_logo:active + div.project_content h4 {
+		filter: blur(0.5px);
+	}
 	a.project_logo:active ~ div.project_overlay {
 		opacity: 0.8;
 	}
 	a.project_logo:active ~ div.project_overlay h5 {
 		transform: scale(0.9);
-	}
-	a.project_logo:active svg {
-		opacity: 0.8;
-		filter: blur(1px);
-	}
-	a.project_logo:active + div.project_content h3,
-	a.project_logo:active + div.project_content h4 {
-		filter: blur(0.5px);
 	}
 	// --- Project Overlay --- \\
 	div.project_overlay {
@@ -232,6 +236,15 @@
 	a.contact svg.svg_mail .path_outside {
 		stroke-dasharray: 0;
 		stroke-dashoffset: 0;
+	}
+	a.project_logo {
+		z-index: 1001;
+	}
+	a.project_logo:hover svg {
+		fill: rgba(255,255,255,0.7);
+	}
+	a.project_logo:active svg {
+		fill: rgba(255,255,255,0.8);
 	}
 
 }

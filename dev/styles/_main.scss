@@ -288,11 +288,11 @@ div.project_content h4 a::before {
 }
 div.project_content h4 a:hover::before {
 	width: 100%;
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(255,255,255,0.8);
 }
 div.project_content h4 a:active::before {
 	width: 90%;
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.7);
 }
 
 // Project Logo
@@ -300,11 +300,13 @@ div.project_content h4 a:active::before {
 a.project_logo {
 	display: block;
 	position: relative;
-	z-index: 1001;
 	margin: 0 auto 5.2rem auto;
 }
 a.project_logo svg {
 	fill: rgba(255,255,255,0.94);
+}
+html.no-cssanimations a.project_logo {
+	z-index: 1001;
 }
 // --- Project Overlay --- \\
 div.project_overlay {
@@ -318,6 +320,7 @@ div.project_overlay {
 	background: rgba(0,0,0,0.6);
 	opacity: 0;
 	visibility: hidden;
+	pointer-events: none;
 }
 div.project_overlay h5 {
 	position: absolute;
