@@ -159,6 +159,9 @@
 		max-width: 12rem;
 		opacity: 1;
 	}
+	a.contact:active p.mailme {
+		opacity: 0.8;
+	}
 
 	// Projects Section
 	// ----------------------------------------------------------------------------

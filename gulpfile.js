@@ -14,7 +14,6 @@ var gulp       = require('gulp'),
 		replaceString: /\bgulp[\-.]/
 	});
 
-
 // source / destination paths
 var paths = {
 
@@ -27,7 +26,8 @@ var paths = {
 		dest: 'build/assets/css/'
 	},
 	scripts: {
-		src : 'dev/scripts/', // *.js
+		src : 'dev/scripts/*.js',
+		vndr: 'dev/scripts/vendor/*.js',
 		dest: 'build/assets/js/'
 	},
 	images: {
@@ -36,6 +36,14 @@ var paths = {
 	},
 	svg: {
 		src : 'dev/media/svg/*.svg'
+	},
+	extra: {
+		dply : {
+			prod : 'dev/extra/deploy/prod/*.*',
+			stage: 'dev/extra/deploy/stage/*.*'
+		},
+		root : 'dev/extra/root/',
+		dest : 'build/'
 	}
 
 };
@@ -62,17 +70,18 @@ if (gutil.env.dev === true) {
 // Delete all build files
 gulp.task('clean', function(cb) {
 
-	del(['build/assets/css/**', 'build/assets/js/scripts.js', 'build/assets/img/**', 'build/index.html'], cb);
+	// deletes all files and files within folders, but keeps empty folder structure
+	// should consider using an "Are You Sure?" prompt
+	del(['build/assets/css/*.css', 'build/assets/img/*.*', 'build/assets/js/*.js', 'build/*.*', 'build/.htaccess'], cb);
 
 });
 
 
-// Compile Haml with double quotes
+// Compile only main HAML files (partials are included via the main files)
 gulp.task('haml', function() {
 
-	return gulp.src(paths.haml.src + 'main.html.haml') // , {read: false}
-		.pipe(plugins.rubyHaml()) // {doubleQuote: true}
-		.pipe(plugins.rename('index.html'))
+	return gulp.src(paths.haml.src + '*.haml') // does not work: , {read: false}
+		.pipe(plugins.rubyHaml()) // does not work: {doubleQuote: true}
 		.pipe(gulp.dest(paths.haml.dest));
 
 });
@@ -87,9 +96,9 @@ gulp.task('styles', function() {
 			sourcemap: sourceMap,
 			precision: 2
 		}))
-		.pipe(plugins.concat('styles.css'))
+		.pipe(isProduction ? gutil.noop() : plugins.concat('styles.css')) // concat with sourcemap if --dev
 		.pipe(plugins.autoprefixer('last 2 version'))
-		.pipe(isProduction ? plugins.minifyCss() : gutil.noop())
+		.pipe(isProduction ? plugins.minifyCss() : gutil.noop()) // don't minify if --dev
 		.pipe(gulp.dest(paths.styles.dest));
 
 });
@@ -98,11 +107,9 @@ gulp.task('styles', function() {
 // Concat and Output Scripts
 gulp.task('scripts', function() {
 
-	return gulp.src(paths.scripts.src + '*.js') // [paths.scripts.src + 'plugins.js', paths.scripts.src + 'scripts.js']
-		// .pipe(plugins.jshint('.jshintrc')) // what is '.jshintrc' ?
-		// .pipe(plugins.jshint.reporter('default'))
+	return gulp.src(paths.scripts.src)
 		.pipe(plugins.concat('scripts.js'))
-		.pipe(isProduction ? plugins.uglify() : gutil.noop())
+		.pipe(isProduction ? plugins.uglify() : gutil.noop()) // don't uglify if --dev
 		.pipe(gulp.dest(paths.scripts.dest));
 
 });
@@ -115,7 +122,7 @@ gulp.task('images', function() {
 		.pipe(plugins.imagemin({
 			optimizationLevel: 7,
 			progressive: true,
-			use: [pngcrush()] // is this making things super slow?
+			use: [pngcrush()] // very slow, but better compression
 		}))
 		.pipe(gulp.dest(paths.images.dest));
 });
@@ -155,6 +162,38 @@ gulp.task('svg', function() {
 });
 
 
+// Copy (if changed) all of our miscellaneous files to the build folder
+gulp.task('extras', function() {
+
+	return gulp.src([paths.extra.root + '*.*', paths.extra.root + '.htaccess'])
+		.pipe(plugins.changed(paths.extra.dest)) // not sure how to check if this is working or not
+		.pipe(gulp.dest(paths.extra.dest));
+
+});
+
+
+// Copy (if changed) all of our vendor scripts to the build/assets/js folder (does not work if part of extras...)
+gulp.task('vendor', function() {
+
+	return gulp.src(paths.scripts.vndr)
+		.pipe(plugins.changed(paths.scripts.dest))
+		.pipe(gulp.dest(paths.scripts.dest));
+
+});
+
+
+// To be run before 'deploy'... handles server specific files / injections (staging vs production: robots.txt, google analytics, etc.)
+// ...curently assumes destination of build folder for files such as robots.txt
+gulp.task('prepare', function() {
+
+	// prepare our server specific files
+	return gulp.src(isProduction ? paths.extra.dply.prod : paths.extra.dply.stage)
+		// .pipe(plugins.changed(paths.extra.dest)) // not sure how to check if this is working or not
+		.pipe(gulp.dest(paths.extra.dest));
+
+});
+
+
 // Use rsync to deploy to server (no need to exclude files since everything comes from 'build' folder)
 // build/** and build/**/*.* do not seem to work anymore... in fact nothing seems to fucking work!
 /*
@@ -177,7 +216,8 @@ gulp.task('deploy', function() {
 
 
 // Use rsyncwrapper to deploy to server... since piece of ship gulp-rsync doesn't do a fucking thing!
-gulp.task('deploy', function() {
+// Consider using gulp-prompt to ask which server to deploy to
+gulp.task('deploy', ['prepare'], function() {
 
 	rsync({
 		ssh: true,
@@ -196,13 +236,13 @@ gulp.task('deploy', function() {
 
 // Watch over specified files and run corresponding tasks...
 // does not inject SVG... need better process for this
-gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
+gulp.task('watch', ['haml', 'styles', 'scripts', 'extras', 'vendor'], function() {
 
 	gulp.start('svg'); // apparently not a good approach
 
 	// watch dev files, rebuild when changed
-	gulp.watch(paths.haml.src + '*.haml', ['haml']);
-	gulp.watch(paths.styles.src + '*.scss', ['styles']);
+	gulp.watch(paths.haml.src + '**/*.haml', ['haml']);  // watch all HAML files, including partials (recursively)
+	gulp.watch(paths.styles.src + '*.scss', ['styles']); // watch all SCSS files,  including partials
 	gulp.watch(paths.scripts.src + '*.js', ['scripts']);
 
 	// start livereload server and refresh page whenever build files are updated
@@ -216,6 +256,6 @@ gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 // Should run gulp clean prior to running the default task
 gulp.task('default', ['haml'], function() {
 
-	gulp.start('styles', 'scripts', 'images', 'svg'); // apparently not a good approach
+	gulp.start('styles', 'scripts', 'images', 'extras', 'vendor', 'svg'); // apparently not a good approach
 
 });
