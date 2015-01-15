@@ -151,7 +151,7 @@ AddDefaultCharset utf-8
 
 # Redirect 301 /courtyard http://ottawafringe.com/whats-on/fringe-courtyard
 
-ErrorDocument 404 404.html
+ErrorDocument 404 /404.html
 
 
 # ------------------------------------------------------------------------------

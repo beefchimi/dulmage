@@ -1,0 +1,13 @@
+:plain
+	// svg injection
+	(function(d) {
+		var ajax = new XMLHttpRequest();
+		ajax.open('GET', 'assets/img/icons.svg', true);
+		ajax.send();
+		ajax.onload = function(e) {
+			var div = document.createElement('div');
+			div.id = 'svgInject';
+			div.innerHTML = ajax.responseText;
+			document.body.insertBefore(div, document.body.childNodes[0]);
+		}
+	})(document);

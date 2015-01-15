@@ -547,8 +547,7 @@ if (typeof define === 'function' && define.amd) {
 }
 
 
-// smooth-scroll v5.1.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
-// removed bind polyfill... add back if needed
+// smooth-scroll v5.2.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
 		define('smoothScroll', factory(root));
@@ -557,7 +556,7 @@ if (typeof define === 'function' && define.amd) {
 	} else {
 		root.smoothScroll = factory(root);
 	}
-})(this, function (root) {
+})(window || this, function (root) {
 
 	'use strict';
 
@@ -584,7 +583,13 @@ if (typeof define === 'function' && define.amd) {
 	// Methods
 	//
 
-	// A simple forEach() implementation for Arrays, Objects and NodeLists
+	/**
+	 * A simple forEach() implementation for Arrays, Objects and NodeLists
+	 * @private
+	 * @param {Array|Object|NodeList} collection Collection of items to iterate
+	 * @param {Function} callback Callback function for each iteration
+	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
+	 */
 	var forEach = function (collection, callback, scope) {
 		if (Object.prototype.toString.call(collection) === '[object Object]') {
 			for (var prop in collection) {
@@ -599,7 +604,13 @@ if (typeof define === 'function' && define.amd) {
 		}
 	};
 
-	// Merge defaults with user options
+	/**
+	 * Merge defaults with user options
+	 * @private
+	 * @param {Object} defaults Default settings
+	 * @param {Object} options User options
+	 * @returns {Object} Merged values of defaults and options
+	 */
 	var extend = function ( defaults, options ) {
 		var extended = {};
 		forEach(defaults, function (value, prop) {
@@ -611,7 +622,12 @@ if (typeof define === 'function' && define.amd) {
 		return extended;
 	};
 
-	// Get the closest matching element up the DOM tree
+	/**
+	 * Get the closest matching element up the DOM tree
+	 * @param {Element} elem Starting element
+	 * @param {String} selector Selector to match against (class, ID, or data attribute)
+	 * @return {Boolean|Element} Returns false if not match found
+	 */
 	var getClosest = function (elem, selector) {
 		var firstChar = selector.charAt(0);
 		for ( ; elem && elem !== document; elem = elem.parentNode ) {
@@ -632,7 +648,13 @@ if (typeof define === 'function' && define.amd) {
 		return false;
 	};
 
-	// Escape special characters for use with querySelector
+	/**
+	 * Escape special characters for use with querySelector
+	 * @private
+	 * @param {String} id The anchor ID to escape
+	 * @author Mathias Bynens
+	 * @link https://github.com/mathiasbynens/CSS.escape
+	 */
 	var escapeCharacters = function ( id ) {
 		var string = String(id);
 		var length = string.length;
@@ -698,7 +720,14 @@ if (typeof define === 'function' && define.amd) {
 		return result;
 	};
 
-	// Calculate the easing pattern
+	/**
+	 * Calculate the easing pattern
+	 * @private
+	 * @link https://gist.github.com/gre/1650294
+	 * @param {String} type Easing pattern
+	 * @param {Number} time Time animation should take to complete
+	 * @returns {Number}
+	 */
 	var easingPattern = function ( type, time ) {
 		var pattern;
 		if ( type === 'easeInQuad' ) pattern = time * time; // accelerating from zero velocity
@@ -716,7 +745,14 @@ if (typeof define === 'function' && define.amd) {
 		return pattern || time; // no easing, no acceleration
 	};
 
-	// Calculate how far to scroll
+	/**
+	 * Calculate how far to scroll
+	 * @private
+	 * @param {Element} anchor The anchor element to scroll to
+	 * @param {Number} headerHeight Height of a fixed header, if any
+	 * @param {Number} offset Number of pixels by which to offset scroll
+	 * @returns {Number}
+	 */
 	var getEndLocation = function ( anchor, headerHeight, offset ) {
 		var location = 0;
 		if (anchor.offsetParent) {
@@ -729,7 +765,11 @@ if (typeof define === 'function' && define.amd) {
 		return location >= 0 ? location : 0;
 	};
 
-	// Determine the document's height
+	/**
+	 * Determine the document's height
+	 * @private
+	 * @returns {Number}
+	 */
 	var getDocumentHeight = function () {
 		return Math.max(
 			document.body.scrollHeight, document.documentElement.scrollHeight,
@@ -738,21 +778,35 @@ if (typeof define === 'function' && define.amd) {
 		);
 	};
 
-	// Convert data-options attribute into an object of key/value pairs
+	/**
+	 * Convert data-options attribute into an object of key/value pairs
+	 * @private
+	 * @param {String} options Link-specific options as a data attribute string
+	 * @returns {Object}
+	 */
 	var getDataOptions = function ( options ) {
 		return !options || !(typeof JSON === 'object' && typeof JSON.parse === 'function') ? {} : JSON.parse( options );
 	};
 
-	// Update the URL
+	/**
+	 * Update the URL
+	 * @private
+	 * @param {Element} anchor The element to scroll to
+	 * @param {Boolean} url Whether or not to update the URL history
+	 */
 	var updateUrl = function ( anchor, url ) {
 		if ( history.pushState && (url || url === 'true') ) {
-			history.pushState( {
-				pos: anchor.id
-			}, '', window.location.pathname + anchor );
+			history.pushState( null, null, [root.location.protocol, '//', root.location.host, root.location.pathname, root.location.search, anchor].join('') );
 		}
 	};
 
-	// Start/stop the scrolling animation
+	/**
+	 * Start/stop the scrolling animation
+	 * @public
+	 * @param {Element} toggle The element that toggled the scroll event
+	 * @param {Element} anchor The element to scroll to
+	 * @param {Object} options
+	 */
 	smoothScroll.animateScroll = function ( toggle, anchor, options ) {
 
 		// Options and overrides
@@ -762,10 +816,11 @@ if (typeof define === 'function' && define.amd) {
 		anchor = '#' + escapeCharacters(anchor.substr(1)); // Escape special characters and leading numbers
 
 		// Selectors and variables
+		var anchorElem = document.querySelector(anchor);
 		var fixedHeader = document.querySelector('[data-scroll-header]'); // Get the fixed header
 		var headerHeight = fixedHeader === null ? 0 : (fixedHeader.offsetHeight + fixedHeader.offsetTop); // Get the height of a fixed header if one exists
 		var startLocation = root.pageYOffset; // Current location on the page
-		var endLocation = getEndLocation( document.querySelector(anchor), headerHeight, parseInt(settings.offset, 10) ); // Scroll to location
+		var endLocation = getEndLocation( anchorElem, headerHeight, parseInt(settings.offset, 10) ); // Scroll to location
 		var animationInterval; // interval timer
 		var distance = endLocation - startLocation; // distance to travel
 		var documentHeight = getDocumentHeight();
@@ -775,16 +830,26 @@ if (typeof define === 'function' && define.amd) {
 		// Update URL
 		updateUrl(anchor, settings.updateURL);
 
-		// Stop the scroll animation when it reaches its target (or the bottom/top of page)
+		/**
+		 * Stop the scroll animation when it reaches its target (or the bottom/top of page)
+		 * @private
+		 * @param {Number} position Current position on the page
+		 * @param {Number} endLocation Scroll to location
+		 * @param {Number} animationInterval How much to scroll on this loop
+		 */
 		var stopAnimateScroll = function (position, endLocation, animationInterval) {
 			var currentLocation = root.pageYOffset;
 			if ( position == endLocation || currentLocation == endLocation || ( (root.innerHeight + currentLocation) >= documentHeight ) ) {
 				clearInterval(animationInterval);
+				anchorElem.focus();
 				settings.callbackAfter( toggle, anchor ); // Run callbacks after animation complete
 			}
 		};
 
-		// Loop scrolling animation
+		/**
+		 * Loop scrolling animation
+		 * @private
+		 */
 		var loopAnimateScroll = function () {
 			timeLapsed += 16;
 			percentage = ( timeLapsed / parseInt(settings.speed, 10) );
@@ -794,13 +859,19 @@ if (typeof define === 'function' && define.amd) {
 			stopAnimateScroll(position, endLocation, animationInterval);
 		};
 
-		// Set interval timer
+		/**
+		 * Set interval timer
+		 * @private
+		 */
 		var startAnimateScroll = function () {
 			settings.callbackBefore( toggle, anchor ); // Run callbacks before animating scroll
 			animationInterval = setInterval(loopAnimateScroll, 16);
 		};
 
-		// Reset position to fix weird iOS bug
+		/**
+		 * Reset position to fix weird iOS bug
+		 * @link https://github.com/cferdinandi/smooth-scroll/issues/45
+		 */
 		if ( root.pageYOffset === 0 ) {
 			root.scrollTo( 0, 0 );
 		}
@@ -810,23 +881,33 @@ if (typeof define === 'function' && define.amd) {
 
 	};
 
-	// If smooth scroll element clicked, animate scroll
+	/**
+	 * If smooth scroll element clicked, animate scroll
+	 * @private
+	 */
 	var eventHandler = function (event) {
 		var toggle = getClosest(event.target, '[data-scroll]');
 		if ( toggle && toggle.tagName.toLowerCase() === 'a' ) {
 			event.preventDefault(); // Prevent default click event
-			smoothScroll.animateScroll( toggle, toggle.hash, settings, event ); // Animate scroll
+			smoothScroll.animateScroll( toggle, toggle.hash, settings); // Animate scroll
 		}
 	};
 
-	// Destroy the current initialization.
+	/**
+	 * Destroy the current initialization.
+	 * @public
+	 */
 	smoothScroll.destroy = function () {
 		if ( !settings ) return;
 		document.removeEventListener( 'click', eventHandler, false );
 		settings = null;
 	};
 
-	// Initialize Smooth Scroll
+	/**
+	 * Initialize Smooth Scroll
+	 * @public
+	 * @param {Object} options User settings
+	 */
 	smoothScroll.init = function ( options ) {
 
 		// feature test
@@ -842,6 +923,11 @@ if (typeof define === 'function' && define.amd) {
 		document.addEventListener('click', eventHandler, false);
 
 	};
+
+
+	//
+	// Public APIs
+	//
 
 	return smoothScroll;
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg id="mail" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 45 39" enable-background="new 0 0 45 39" xml:space="preserve">
+	<path class="path_inside" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M22.128 26.966L43.34 1.736 15.67 22.695"/>
+	<path class="path_outside" fill="none" stroke="#000" stroke-width="1.8" stroke-miterlimit="10" d="M15.57 22.704v12.053l6.558-7.79L33.106 37.15 43.34 1.738 3.02 18.207z"/>
+</svg>

@@ -1,5 +1,5 @@
 // ==|== primary styles =======================================================
-// Author: Northern Army
+// Author: Curtis Dulmage
 // ============================================================================
 
 
@@ -20,18 +20,40 @@ body {
 
 // Transitions
 // ----------------------------------------------------------------------------
-nav > a {
+span.nav_toggle {
 	transition: transform 0.2s ease-in-out, opacity 1s ease-in-out;
 }
-nav > a div.one {
-	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out;
+span.nav_toggle div.one {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.8s ease-in-out 0.2s;
 }
-nav > a div.two {
-	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out 0.4s;
+span.nav_toggle div.two {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.8s ease-in-out 0.8s;
 }
-nav > a div.three {
-	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.6s ease-in-out 0.8s;
+span.nav_toggle div.three {
+	transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.8s ease-in-out 1.2s;
 }
+nav ul li a {
+	transition: transform 0.2s ease-in-out;
+}
+nav ul li a span {
+	transition: background-color 0.2s ease-in-out;
+}
+section {
+	transition: height 0.2s ease-in-out;
+}
+article.intro {
+	transition: background-color 1s ease-in-out;
+}
+div.loading-icon svg.svg_loader {
+	transition: fill 0.6s ease-in-out;
+}
+div.project_content h4 a::before {
+	transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+section.error div.project_content h2 a {
+	transition: color 0.2s ease-in-out;
+}
+// + incremented nav list transforms + \\
 li[data-anchor="dulmage"] {
 	transition: transform 0.3s ease-in-out 0s, z-index 0.2s ease-in-out;
 }
@@ -65,27 +87,6 @@ li[data-anchor="efc"] {
 li[data-anchor="bryston"] {
 	transition: transform 0.3s ease-in-out 0.2s, z-index 0.2s ease-in-out;
 }
-nav ul li a {
-	transition: transform 0.2s ease-in-out;
-}
-nav ul li a span {
-	transition: background-color 0.2s ease-in-out;
-}
-section {
-	transition: height 0.2s ease-in-out;
-}
-article.intro {
-	transition: background-color 1s ease-in-out;
-}
-div.loading-icon svg.svg_loader circle {
-	transition: stroke 0.6s ease-in-out;
-}
-div.project_content h4 a::before {
-	transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-section.error div.project_content h2 a {
-	transition: color 0.2s ease-in-out;
-}
 
 // General Styles
 // ----------------------------------------------------------------------------
@@ -107,16 +108,20 @@ article {
 	vertical-align: middle;
 }
 svg {
-	display: block;
 	width: 100%;
 	height: 100%;
+}
+// + hide SVG container + \\
+#svgInject {
+	display: none;
+	visibility: hidden;
 }
 
 // Navigation
 // ----------------------------------------------------------------------------
-
 // --- Nav Toggle --- \\
-nav > a {
+span.nav_toggle {
+	cursor: pointer;
 	display: block;
 	position: fixed;
 	z-index: 2000;
@@ -125,45 +130,31 @@ nav > a {
 	width: 3.2rem;
 	height: 2rem;
 }
-nav > a div {
+span.nav_toggle div {
 	position: absolute;
-	width: 0rem;
+	width: 0;
 	height: 0.2rem;
 	background: rgb(255,255,255);
 }
-nav > a div.one {
+span.nav_toggle div.one {
 	top: 0;
 	left: 0;
 }
-nav > a div.two {
+span.nav_toggle div.two {
 	top: 0.9rem;
 	right: 0;
 }
-nav > a div.three {
+span.nav_toggle div.three {
 	top: 1.8rem;
 	left: 0;
 }
-// + nav toggle interaction + \\
-nav > a:hover {
+// + interaction: nav toggle + \\
+span.nav_toggle:hover {
 	transform: scale(1.1);
 }
-nav > a.active div.one {
-	top: 0.9rem;
-	transform: rotate(-45deg);
-}
-nav > a.active div.two {
-	opacity: 0;
-	transform: scale(0.2);
-}
-nav > a.active div.three {
-	top: 0.9rem;
-	transform: rotate(45deg);
-}
-nav > a.active + ul {
-	width: auto;
-}
-nav > a.active + ul li {
-	transform: translateX(1%);
+span.nav_toggle:active div {
+	// background: rgba(255,255,255,0.9);
+	opacity: 0.9;
 }
 // --- Nav List --- \\
 nav ul {
@@ -219,6 +210,25 @@ nav ul li.current a {
 }
 nav ul li.current a span {
 	background-color: rgba(255,255,255,0.9);
+}
+// --- Toggled Navigation --- \\
+nav.toggled_nav span.nav_toggle div.one {
+	top: 0.9rem;
+	transform: rotate(-45deg);
+}
+nav.toggled_nav span.nav_toggle div.two {
+	opacity: 0;
+	transform: scale(0.2);
+}
+nav.toggled_nav span.nav_toggle div.three {
+	top: 0.9rem;
+	transform: rotate(45deg);
+}
+nav.toggled_nav ul {
+	width: auto;
+}
+nav.toggled_nav ul li {
+	transform: translateX(1%);
 }
 
 // Project Content
@@ -363,10 +373,10 @@ body.ready article.intro {
 	background-color: rgba(10,10,10,0);
 }
 html.cssanimations div.project_content h1 {
-	animation: txtFade 2.4s ease-in-out 0.4s forwards;
+	animation: txtFade 2.2s ease-in-out 0.4s forwards;
 }
 html.cssanimations div.project_content h2 {
-	animation: txtFade 2.8s ease-in-out 1s forwards;
+	animation: txtFade 2.6s ease-in-out 1s forwards;
 }
 // --- Mail Me --- \\
 a.contact {
@@ -419,13 +429,13 @@ html.no-cssanimations a.contact svg.svg_mail .path_outside {
 	stroke-dashoffset: 0;
 }
 html.cssanimations body.ready a.contact svg.svg_mail .path_inside {
-	animation: svgpath 1.6s ease-in-out 0.4s forwards;
+	animation: svgpath 1.8s ease-in-out 0.4s forwards;
 }
 html.cssanimations body.ready a.contact svg.svg_mail .path_outside {
-	animation: svgpath 1.6s ease-in-out forwards;
+	animation: svgpath 1.8s ease-in-out forwards;
 }
 // + nav animation + \\
-body.ready nav > a div {
+body.ready span.nav_toggle div {
 	width: 3.2rem;
 }
 // + loading circle + \\
@@ -439,11 +449,6 @@ body.ready nav > a div {
 		transform: rotate(360deg);
 	}
 }
-@keyframes loadpath {
-	to {
-		stroke-dashoffset: -138;
-	}
-}
 div.loading-icon {
 	position: absolute;
 	top: 16%;
@@ -453,16 +458,13 @@ div.loading-icon {
 	width: 4.4rem;
 	height: 4.4rem;
 	opacity: 0;
-	animation: logoFade 2s ease-in-out 1 forwards 2s, rotator 1.6s linear infinite forwards;
+	animation: logoFade 2s ease-in-out 1 forwards 2s, rotator 1s linear infinite forwards;
 }
-div.loading-icon svg.svg_loader circle {
-	stroke: rgba(255,255,255,0.9);
-	stroke-dasharray: 138;
-	stroke-dashoffset: 138;
-	animation: loadpath 1.6s linear infinite;
+div.loading-icon svg.svg_loader {
+	fill: rgba(255,255,255,0.9);
 }
-body.ready div.loading-icon svg.svg_loader circle {
-	stroke: rgba(255,255,255,0);
+body.ready div.loading-icon svg.svg_loader {
+	fill: rgba(255,255,255,0);
 }
 html.no-cssanimations div.loading-icon {
 	visibility: hidden;
@@ -470,7 +472,6 @@ html.no-cssanimations div.loading-icon {
 
 // Projects Section
 // ----------------------------------------------------------------------------
-
 // --- Preserve --- \\
 section.project_preserve {
 	background-image: url('../img/preserve.png');

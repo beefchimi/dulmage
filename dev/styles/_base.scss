@@ -9,7 +9,7 @@ article, aside, footer, header, main, nav, section { display: block; }
 // Base
 // ----------------------------------------------------------------------------
 html { box-sizing: border-box; font-size: 62.5%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-size-adjust: 100%; }
-*, *:before, *:after { box-sizing: inherit; }
+*, *::before, *::after { box-sizing: inherit; }
 html, body { overflow-x: hidden; }
 body { margin: 0; }
 

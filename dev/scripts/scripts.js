@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		elIntroSection = document.getElementById('intro_dulmage'),
 		elIntroArticle = document.getElementsByClassName('intro')[0],
 		elPreloader    = document.getElementById('preloader'),
-		elNavToggle    = document.getElementById('nav_toggle'),
 		elNavList      = document.getElementsByTagName('li'),
 		elNavLinks     = document.getElementsByClassName('link_anchor'),
 		navListCount   = elNavList.length;
@@ -28,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		{ title:'tropical', r:186, g:64,  b:79  },
 		{ title:'worship',  r:203, g:78,  b:74  }
 	];
+
+	// iOS version number
+	// var iOSv = iOSversion();
 
 	// randomly select a home option
 	var randomMin    = 0,
@@ -275,15 +277,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	// ----------------------------------------------------------------------------
 	function navToggle() {
 
-		elNavToggle.addEventListener('click', function(e) {
+		var elNav       = document.getElementsByTagName('nav')[0],
+			elNavToggle = document.getElementById('nav_toggle');
 
-			if (this.className == 'active') {
-				this.className = '';
+		elNavToggle.addEventListener('click', function() {
+
+			// is a <span> element, does not require e.preventDefault();
+
+			if (elNav.className == 'toggled_nav') {
+				elNav.className = '';
 			} else {
-				this.className = 'active';
+				elNav.className = 'toggled_nav';
 			}
-
-			e.preventDefault();
 
 		}, false);
 
@@ -294,11 +299,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// ----------------------------------------------------------------------------
 	function secretMail() {
 
-		var mailLink    = document.getElementById('contact'),
-			prefix      = 'mailto',
-			local       = 'curtis',
-			domain      = 'dulmage',
-			suffix      = 'me';
+		var mailLink = document.getElementById('contact'),
+			prefix   = 'mailto',
+			local    = 'curtis',
+			domain   = 'dulmage',
+			suffix   = 'me';
 
 		mailLink.setAttribute('href', prefix + ':' + local + '@' + domain + '.' + suffix);
 
@@ -328,71 +333,90 @@ document.addEventListener('DOMContentLoaded', function() {
 	})();
 
 
-	// Window Events: On Touch - Start, Move, and End
+	// Helper: Detect iOS Version
 	// ----------------------------------------------------------------------------
-	document.body.addEventListener('touchstart', function(e) {
+/*
+	function iOSversion() {
 
-		// code adapted from:
-		// http://dropshado.ws/post/45694832906/touch-identifier-0
-
-		// dismiss after-touches
-		if (isTouching) {
-			return;
+		if (/iP(hone|od|ad)/.test(navigator.platform)) {
+			// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
+			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+			return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
 		}
 
-		// only care about the first touch
-		touchS  = e.changedTouches[0];
-		touchID = touchS.identifier;
+	}
+*/
 
-		window.addEventListener('touchmove', onTouchMove, false);
-		window.addEventListener('touchend', onTouchEnd, false);
 
-		isTouching = true;
+	// Window Events: On Touch - Start, Move, and End
+	// ----------------------------------------------------------------------------
+	function touchScrolling() {
 
-	}, false);
+		document.body.addEventListener('touchstart', function(e) {
 
-	// iterate through touch points and stick with the initial touch contact
-	function getTouch(e) {
+			// code adapted from:
+			// http://dropshado.ws/post/45694832906/touch-identifier-0
 
-		// cycle through every changed touch and get one that matches
-		for (var i = 0, len = e.changedTouches.length; i < len; i++) {
+			// dismiss after-touches
+			if (isTouching) {
+				return;
+			}
 
-			touchAll = e.changedTouches[i];
+			// only care about the first touch
+			touchS  = e.changedTouches[0];
+			touchID = touchS.identifier;
 
-			if (touchAll.identifier === touchID) {
-				return touchAll;
+			window.addEventListener('touchmove', onTouchMove, false);
+			window.addEventListener('touchend', onTouchEnd, false);
+
+			isTouching = true;
+
+		}, false);
+
+		// iterate through touch points and stick with the initial touch contact
+		function getTouch(e) {
+
+			// cycle through every changed touch and get one that matches
+			for (var i = 0, len = e.changedTouches.length; i < len; i++) {
+
+				touchAll = e.changedTouches[i];
+
+				if (touchAll.identifier === touchID) {
+					return touchAll;
+				}
+
 			}
 
 		}
 
-	}
+		// assign touchstart to touchmove, updateColor as we move
+		function onTouchMove(e) {
 
-	// assign touchstart to touchmove, updateColor as we move
-	function onTouchMove(e) {
+			touchM = getTouch(e);
 
-		touchM = getTouch(e);
+			if (!touchM) {
+				return;
+			}
 
-		if (!touchM) {
-			return;
+			updateColor();
+
 		}
 
-		updateColor();
+		// assign touchstart to touchend, remove touch listeners, set isTouching back to false
+		function onTouchEnd(e) {
 
-	}
+			touchE = getTouch(e);
 
-	// assign touchstart to touchend, remove touch listeners, set isTouching back to false
-	function onTouchEnd(e) {
+			if (!touchE) {
+				return;
+			}
 
-		touchE = getTouch(e);
+			window.removeEventListener('touchmove', onTouchMove, false);
+			window.removeEventListener('touchend', onTouchEnd, false);
 
-		if (!touchE) {
-			return;
+			isTouching = false;
+
 		}
-
-		window.removeEventListener('touchmove', onTouchMove, false);
-		window.removeEventListener('touchend', onTouchEnd, false);
-
-		isTouching = false;
 
 	}
 
@@ -429,6 +453,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	onPageLoad();
 	navToggle();
 	secretMail();
+	touchScrolling();
+
+/*
+	// only enable the touch events for iOS <= 7
+	if (iOSv && iOSv[0] <= 7) {
+		touchScrolling();
+		alert(iOSv);
+	} else {
+		console.log('noooope');
+		alert(iOSv);
+	}
+*/
 
 	// smoothScroll();
 	smoothScroll.init({

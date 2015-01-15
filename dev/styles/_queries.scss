@@ -55,9 +55,8 @@
 
 	// Navigation
 	// ----------------------------------------------------------------------------
-
 	// --- Nav Toggle --- \\
-	nav > a {
+	span.nav_toggle {
 		bottom: 3.2rem;
 		right: 3.2rem;
 	}
@@ -90,10 +89,6 @@
 	}
 	div.project_content h4 + h3 {
 		margin-top: 4rem;
-	}
-	div.project_content h3,
-	div.project_content h4 {
-		filter: blur(0px);
 	}
 
 	// Project Logo

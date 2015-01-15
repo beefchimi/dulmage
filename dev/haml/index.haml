@@ -1,19 +1,14 @@
 !!!
-%html{:lang => 'en'}
+%html{:lang => "en"}
 
-	= Haml::Engine.new(File.read('dev/haml/partials/_m-head.haml')).render
+	= Haml::Engine.new(File.read("dev/haml/partials/_doc_head.haml")).render
 
 	%body.loading
 
-		:plain
-			<!-- inject:svg --><!-- endinject -->
+		= Haml::Engine.new(File.read("dev/haml/partials/_html_nav.haml")).render
 
-		= Haml::Engine.new(File.read('dev/haml/partials/_m-nav.haml')).render
+		%main{:role => "main"}
 
-		%main{:role => 'main'}
+			= Haml::Engine.new(File.read("dev/haml/partials/_html_sections.haml")).render
 
-			= Haml::Engine.new(File.read('dev/haml/partials/_m-sections.haml')).render
-
-		%script{:src => 'assets/js/scripts.js'}
-		:javascript
-			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date; e=o.createElement(i);r=o.getElementsByTagName(i)[0]; e.src='//www.google-analytics.com/analytics.js'; r.parentNode.insertBefore(e,r)}(window,document,'script','ga')); ga('create','UA-XXXXX-X'); ga('send','pageview');
+		= Haml::Engine.new(File.read("dev/haml/partials/_doc_scripts.haml")).render
