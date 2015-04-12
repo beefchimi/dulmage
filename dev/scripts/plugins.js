@@ -1,36 +1,11 @@
-/*
-// Avoid 'console' errors in browsers that lack a console.
-(function() {
-	var method;
-	var noop = function () {};
-	var methods = [
-		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-		'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-		'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
-	];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
-
-	while (length--) {
-		method = methods[length];
-
-		// Only stub undefined methods.
-		if (!console[method]) {
-			console[method] = noop;
-		}
-	}
-}());
-*/
-
-
-// PxLoader v1.0 | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+// PxLoader v1.0
+// copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+// removed Date.now and Array.isArray polyfill... add back if needed
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
 (function(global) {
 
-	/*
-	 * PixelLab Resource Loader
-	 * Loads resources while providing progress updates.
-	*/
+	// PixelLab Resource Loader
+	// Loads resources while providing progress updates.
 	function PxLoader(settings) {
 
 		// merge settings with defaults
@@ -57,10 +32,8 @@
 			progressListeners = [],
 			timeStarted, progressChanged = Date.now();
 
-		/**
-		 * The status of a resource
-		 * @enum {number}
-		 */
+		// The status of a resource
+		// @enum {number}
 		var ResourceState = {
 			QUEUED: 0,
 			WAITING: 1,
@@ -439,13 +412,20 @@
 }(this));
 
 
-// PxLoader v1.0 Image Extension | Copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
-// removed Date.now and Array.isArray polyfill... add back if needed
-function PxLoaderImage(url, tags, priority) {
+// PxLoader v1.0 Image Extension
+// copyright (c) 2012 Pixel Lab | https://github.com/thinkpixellab/PxLoader | MIT License
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
+function PxLoaderImage(url, tags, priority, origin) {
+
 	var self = this,
 		loader = null;
 
 	this.img = new Image();
+
+	if(origin !== undefined) {
+		this.img.crossOrigin = origin;
+	}
+
 	this.tags = tags;
 	this.priority = priority;
 
@@ -531,6 +511,22 @@ function PxLoaderImage(url, tags, priority) {
 }
 
 // add a convenience method to PxLoader for adding an image
+PxLoader.prototype.addImage = function(url, tags, priority, origin) {
+	var imageLoader = new PxLoaderImage(url, tags, priority, origin);
+	this.add(imageLoader);
+
+	// return the img element to the caller
+	return imageLoader.img;
+};
+
+// AMD module support
+if (typeof define === 'function' && define.amd) {
+	define('PxLoaderImage', [], function() {
+		return PxLoaderImage;
+	});
+}
+
+// add a convenience method to PxLoader for adding an image
 PxLoader.prototype.addImage = function(url, tags, priority) {
 	var imageLoader = new PxLoaderImage(url, tags, priority);
 	this.add(imageLoader);
@@ -547,7 +543,9 @@ if (typeof define === 'function' && define.amd) {
 }
 
 
-// smooth-scroll v5.2.2 | copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
+// smooth-scroll v5.3.3
+// copyright Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
 		define('smoothScroll', factory(root));
@@ -566,7 +564,7 @@ if (typeof define === 'function' && define.amd) {
 
 	var smoothScroll = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-	var settings;
+	var settings, eventTimeout, fixedHeader;
 
 	// Default settings
 	var defaults = {
@@ -646,6 +644,16 @@ if (typeof define === 'function' && define.amd) {
 			}
 		}
 		return false;
+	};
+
+	/**
+	 * Get the height of an element
+	 * @private
+	 * @param  {Node]} elem The element
+	 * @return {Number}     The element's height
+	 */
+	var getHeight = function (elem) {
+		return Math.max( elem.scrollHeight, elem.offsetHeight, elem.clientHeight );
 	};
 
 	/**
@@ -816,10 +824,10 @@ if (typeof define === 'function' && define.amd) {
 		anchor = '#' + escapeCharacters(anchor.substr(1)); // Escape special characters and leading numbers
 
 		// Selectors and variables
-		var anchorElem = document.querySelector(anchor);
-		var fixedHeader = document.querySelector('[data-scroll-header]'); // Get the fixed header
-		var headerHeight = fixedHeader === null ? 0 : (fixedHeader.offsetHeight + fixedHeader.offsetTop); // Get the height of a fixed header if one exists
+		var anchorElem = anchor === '#' ? document.documentElement : document.querySelector(anchor);
 		var startLocation = root.pageYOffset; // Current location on the page
+		if ( !fixedHeader ) { fixedHeader = document.querySelector('[data-scroll-header]'); }  // Get the fixed header if not already set
+		var headerHeight = fixedHeader === null ? 0 : ( getHeight( fixedHeader ) + fixedHeader.offsetTop ); // Get the height of a fixed header if one exists
 		var endLocation = getEndLocation( anchorElem, headerHeight, parseInt(settings.offset, 10) ); // Scroll to location
 		var animationInterval; // interval timer
 		var distance = endLocation - startLocation; // distance to travel
@@ -894,13 +902,37 @@ if (typeof define === 'function' && define.amd) {
 	};
 
 	/**
+	 * On window scroll and resize, only run events at a rate of 15fps for better performance
+	 * @private
+	 * @param  {Function} eventTimeout Timeout function
+	 * @param  {Object} settings
+	 */
+	var eventThrottler = function (event) {
+		if ( !eventTimeout ) {
+			eventTimeout = setTimeout(function() {
+				eventTimeout = null; // Reset timeout
+				headerHeight = fixedHeader === null ? 0 : ( getHeight( fixedHeader ) + fixedHeader.offsetTop ); // Get the height of a fixed header if one exists
+			}, 66);
+		}
+	};
+
+	/**
 	 * Destroy the current initialization.
 	 * @public
 	 */
 	smoothScroll.destroy = function () {
+
+		// If plugin isn't already initialized, stop
 		if ( !settings ) return;
+
+		// Remove event listeners
 		document.removeEventListener( 'click', eventHandler, false );
+		root.removeEventListener( 'resize', eventThrottler, false );
+
+		// Reset varaibles
 		settings = null;
+		eventTimeout = null;
+		fixedHeader = null;
 	};
 
 	/**
@@ -918,9 +950,11 @@ if (typeof define === 'function' && define.amd) {
 
 		// Selectors and variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
+		fixedHeader = document.querySelector('[data-scroll-header]'); // Get the fixed header
 
 		// When a toggle is clicked, run the click handler
-		document.addEventListener('click', eventHandler, false);
+		document.addEventListener('click', eventHandler, false );
+		if ( fixedHeader ) { root.addEventListener( 'resize', eventThrottler, false ); }
 
 	};
 

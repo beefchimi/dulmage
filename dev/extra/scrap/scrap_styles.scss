@@ -1,0 +1,86 @@
+// Navigation
+// ----------------------------------------------------------------------------
+nav ul li a {
+	transition: transform 0.2s ease-in-out;
+}
+nav ul li:nth-child(variable) {
+	transition: transform 0.3s ease-in-out variable, z-index 0.2s ease-in-out;
+}
+nav ul {
+	position: fixed;
+	z-index: 2001;
+	bottom: 8rem;
+	right: 0;
+	width: 0;
+	text-align: right;
+}
+nav ul li {
+	position: relative;
+	z-index: 2003;
+	float: right;
+	clear: both;
+	transform: translateX(125%); // more than 100% to accomodate for scaled nav items
+}
+nav ul li a {
+	display: block;
+	position: relative;
+	transform-origin: center right;
+}
+nav ul li:hover {
+	z-index: 3003;
+}
+nav ul li a:hover {
+	transform: scale(1.2);
+}
+nav ul li a:active {
+	transform: scale(1.1);
+}
+nav ul li.current {
+	z-index: 3003;
+}
+nav ul li.current a {
+	transform: scale(1.2);
+}
+
+
+// --- CFC --- \\
+section.project_cfc {
+	background-image: url('../img/proj_cfc.png');
+}
+section.project_cfc a.project_logo {
+	width: 13rem;
+	// height: 10rem;
+}
+// --- EFC --- \\
+section.project_efc {
+	background-image: url('../img/proj_efc.png');
+}
+section.project_efc a.project_logo {
+	width: 9.5rem;
+	// height: 14rem;
+}
+// --- Bryston --- \\
+section.project_bryston {
+	background-image: url('../img/proj_bryston.png');
+}
+section.project_bryston a.project_logo {
+	width: 14rem;
+}
+
+
+// 768
+
+	// --- CFC --- \\
+	section.project_cfc a.project_logo {
+		width: 17.6rem;
+		// height: 13.6rem;
+	}
+	// --- EFC --- \\
+	section.project_efc a.project_logo {
+		width: 12.8rem;
+		// height: 19rem;
+	}
+	// --- Bryston --- \\
+	section.project_bryston a.project_logo {
+		width: 19.2rem;
+	}

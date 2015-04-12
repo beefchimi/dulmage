@@ -2,7 +2,7 @@
 // WIDTHS: 568px / 768px / 980px
 // ============================================================================
 
-@media only screen and (max-width: 35.5em) and (orientation: landscape) { // 568px / 16px = 35.5em
+@media only screen and (max-width: 568px) and (orientation: landscape) {
 
 // ==|== primary styles =======================================================
 // ============================================================================
@@ -16,7 +16,7 @@
 
 	// Project Content
 	// ----------------------------------------------------------------------------
-	article:not(.intro) div.project_content {
+	article.section_project div.project_content {
 		display: none;
 		visibility: hidden;
 	}
@@ -32,7 +32,7 @@
 
 }
 
-@media only screen and (min-width: 48em) { // 768px / 16px = 48em
+@media only screen and (min-width: 768px) {
 
 // ==|== primary styles =======================================================
 // ============================================================================
@@ -100,9 +100,6 @@
 	a.project_logo:hover svg {
 		filter: blur(2px);
 	}
-	html.no-cssanimations a.project_logo:hover svg {
-		fill: rgba(255,255,255,0.7);
-	}
 	a.project_logo:hover + div.project_content h3,
 	a.project_logo:hover + div.project_content h4 {
 		filter: blur(1px);
@@ -117,9 +114,6 @@
 	// + active state + \\
 	a.project_logo:active svg {
 		filter: blur(1px);
-	}
-	html.no-cssanimations a.project_logo:active svg {
-		fill: rgba(255,255,255,0.8);
 	}
 	a.project_logo:active + div.project_content h3,
 	a.project_logo:active + div.project_content h4 {
@@ -163,53 +157,64 @@
 	// --- Preserve --- \\
 	section.project_preserve a.project_logo {
 		width: 17rem;
-		height: 18.2rem;
 	}
 	// --- BMC --- \\
 	section.project_bmc a.project_logo {
 		width: 24rem;
-		height: 11.7rem;
 	}
 	// --- NA 2014 & 2012 --- \\
 	section.project_na2014 a.project_logo,
 	section.project_na2012 a.project_logo {
 		width: 22rem;
-		height: 11.6rem;
 	}
 	// --- Fringe --- \\
 	section.project_fringe a.project_logo {
 		width: 26rem;
-		height: 14.5rem;
 	}
-	// --- CFC --- \\
-	section.project_cfc a.project_logo {
-		width: 17.6rem;
-		height: 13.6rem;
+	// --- North & Navy --- \\
+	section.project_northnavy a.project_logo {
+		width: 22rem;
 	}
 	// --- Pukeko --- \\
 	section.project_pukeko a.project_logo {
 		width: 15.6rem;
-		height: 17.8rem;
 	}
-	// --- EFC --- \\
-	section.project_efc a.project_logo {
-		width: 12.8rem;
-		height: 19rem;
+	// --- CFC --- \\
+	section.project_cfc a.project_logo {
+		width: 17.6rem;
+	}
+	// --- Northman --- \\
+	section.project_northman a.project_logo {
+		width: 14.8rem;
 	}
 	// --- Arts Court --- \\
 	section.project_artscourt a.project_logo {
 		width: 15.2rem;
-		height: 13.8rem;
 	}
-	// --- Bryston --- \\
-	section.project_bryston a.project_logo {
-		width: 19.2rem;
-		height: 8.8rem;
+
+	// Internet Explorer / No Animations
+	// ----------------------------------------------------------------------------
+	html.ie9 a.project_logo:hover svg {
+		fill: $hsla_L100-70;
 	}
+/*
+	html.no-cssanimations a.project_logo:hover svg {
+		fill: $hsla_L100-70;
+	}
+*/
+
+	html.ie9 a.project_logo:active svg {
+		fill: $hsla_L100-80;
+	}
+/*
+	html.no-cssanimations a.project_logo:active svg {
+		fill: $hsla_L100-80;
+	}
+*/
 
 }
 
-@media only screen and (min-width: 48em) and (min-height: 43.75em) { // 768px / 16px = 48em | 700px / 16px = 43.75em
+@media only screen and (min-width: 768px) and (min-height: 700px) {
 
 // ==|== primary styles =======================================================
 // ============================================================================
@@ -234,8 +239,8 @@
 	div.loading-icon {
 		visibility: hidden;
 	}
-	a.contact svg.svg_mail .path_inside,
-	a.contact svg.svg_mail .path_outside {
+	a.contact svg .path_inside,
+	a.contact svg .path_outside {
 		stroke-dasharray: 0;
 		stroke-dashoffset: 0;
 	}
@@ -243,10 +248,10 @@
 		z-index: 1001;
 	}
 	a.project_logo:hover svg {
-		fill: rgba(255,255,255,0.7);
+		fill: $hsla_L100-70;
 	}
 	a.project_logo:active svg {
-		fill: rgba(255,255,255,0.8);
+		fill: $hsla_L100-80;
 	}
 
 }

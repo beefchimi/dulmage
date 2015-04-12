@@ -27,7 +27,7 @@ var paths = {
 	},
 	scripts: {
 		src : 'dev/scripts/*.js',
-		vndr: 'dev/scripts/vendor/*.js',
+		// vndr: 'dev/scripts/vendor/*.js',
 		dest: 'build/assets/js/'
 	},
 	images: {
@@ -38,12 +38,6 @@ var paths = {
 		src : 'dev/media/svg/*.svg'
 	},
 	extra: {
-/*
-		dply : {
-			prod : 'dev/extra/deploy/prod/*.*',
-			stage: 'dev/extra/deploy/stage/*.*'
-		},
-*/
 		root : 'dev/extra/root/',
 		dest : 'build/'
 	}
@@ -53,46 +47,15 @@ var paths = {
 
 /* Gulp Tasks
 ---------------------------------------------------------------------------- */
-
-/*
-// Delete all build files
-gulp.task('clean', function(cb) {
-
-	// deletes all files and files within folders, but keeps empty folder structure
-	// should consider using an "Are You Sure?" prompt
-	del(['build/assets/css/*.css', 'build/assets/img/*.*', 'build/assets/js/*.js', 'build/*.*', 'build/.htaccess'], cb);
-
-});
-*/
-
-
 // Compile only main HAML files (partials are included via the main files)
 gulp.task('haml', function() {
 
-	return gulp.src(paths.haml.src + '*.haml') // does not work: , {read: false}
-		.pipe(plugins.rubyHaml()) // does not work: {doubleQuote: true}
+	return gulp.src(paths.haml.src + '*.haml')
+		.pipe(plugins.rubyHaml())
 		.pipe(gulp.dest(paths.haml.dest))
 		.pipe(plugins.livereload());
 
 });
-
-
-/*
-// Minify HTML
-gulp.task('minify-html', function() {
-
-	var opts = {
-		empty: true,
-		comments: true
-	};
-
-	// paths.haml.dest
-	return gulp.src('build/index.html')
-	.pipe(plugins.minifyHtml(opts))
-	.pipe(gulp.dest('build/'));
-
-});
-*/
 
 
 // Compile and Output Styles
@@ -104,7 +67,7 @@ gulp.task('styles', function() {
 		// .pipe(plugins.sourcemaps.write())
 		// .pipe(plugins.concat('styles.css')) // concat with sourcemap if --dev
 		.pipe(plugins.autoprefixer({
-			browsers: ['last 2 version', 'ios 6', 'android 4']
+			browsers: ['last 3 version', 'ios 6', 'android 4']
 		}))
 		.pipe(gulp.dest(paths.styles.dest))
 		.pipe(plugins.minifyCss()) // don't minify if --dev
@@ -129,6 +92,7 @@ gulp.task('scripts', function() {
 });
 
 
+/*
 // Copy (if changed) all of our vendor scripts to the build js folder
 gulp.task('vendor', function() {
 
@@ -137,6 +101,7 @@ gulp.task('vendor', function() {
 		.pipe(gulp.dest(paths.scripts.dest));
 
 });
+*/
 
 
 // Check for changed image files and compress them
@@ -164,9 +129,7 @@ gulp.task('svg', function() {
 				removeUselessStrokeAndFill: false
 			}]
 		}))
-		.pipe(plugins.svgstore({
-			fileName: 'icons.svg'
-		}))
+		.pipe(plugins.svgstore())
 		.pipe(gulp.dest(paths.images.dest));
 
 });
@@ -217,4 +180,4 @@ gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 
 
 // Default gulp task, should run gulp clean prior to running the default task...
-gulp.task('default', ['haml', 'styles', 'scripts', 'vendor', 'images', 'extras', 'svg']);
+gulp.task('default', ['haml', 'styles', 'scripts', 'images', 'extras', 'svg']); // remove 'vendor' task

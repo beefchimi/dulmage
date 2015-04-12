@@ -1,75 +1,76 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
-	// Global Variables
+	// Global Variables: Variables requiring a global scope
 	// ----------------------------------------------------------------------------
 
 	// --- Objects and Initial Setup --- \\
 
 	// common objects
-	var elBody         = document.body,
-		elMain         = document.getElementsByTagName('main')[0],
-		elSections     = document.getElementsByTagName('section'),
-		elIntroSection = document.getElementById('intro_dulmage'),
-		elIntroArticle = document.getElementsByClassName('intro')[0],
-		elPreloader    = document.getElementById('preloader'),
-		elNavList      = document.getElementsByTagName('li'),
-		elNavLinks     = document.getElementsByClassName('link_anchor'),
-		navListCount   = elNavList.length;
+	var animationEvent  = whichAnimationEvent(),
+		transitionEvent = whichTransitionEvent(),
+		elHTML          = document.documentElement,
+		elBody          = document.body,
+		elMain          = document.getElementsByTagName('main')[0],
+		elIntroSection  = document.getElementById('intro_dulmage'),
+		elIntroArticle  = document.getElementsByClassName('intro')[0],
+		elPreloader     = document.getElementById('preloader'),
+		elPreloaderSVG  = document.getElementsByClassName('ui_loader')[0],
+		arrSections     = document.getElementsByTagName('section'),
+		arrNavList      = document.getElementsByTagName('li'),
+		arrNavLinks     = document.getElementsByClassName('link_anchor'),
+		numNavList      = arrNavList.length;
 
 	// possible homepage options
-	var homeOptions = [
+	var arrHomeOptions = [
 		{ title:'beach',    r:134, g:160, b:197 },
 		{ title:'bridge',   r:110, g:145, b:110 },
-		{ title:'flowers',  r:140, g:84,  b:193 },
+		{ title:'flowers',   r:140, g:84,  b:193 },
 		{ title:'forest',   r:189, g:187, b:56  },
 		{ title:'thegut',   r:106, g:96,  b:25  },
 		{ title:'tropical', r:186, g:64,  b:79  },
 		{ title:'worship',  r:203, g:78,  b:74  }
 	];
 
-	// iOS version number
-	// var iOSv = iOSversion();
-
 	// randomly select a home option
-	var randomMin    = 0,
-		randomMax    = homeOptions.length - 1,
-		randomOption = Math.floor(Math.random() * (randomMax - randomMin + 1)) + randomMin;
+	var numRandomMin    = 0,
+		numRandomMax    = arrHomeOptions.length - 1,
+		numRandomOption = Math.floor(Math.random() * (numRandomMax - numRandomMin + 1)) + numRandomMin;
 
-	// color data for each section (first object is added as a random selection from homeOptions)
-	var sectionData = [
-		homeOptions[randomOption],
+	// color data for each section (first object is added as a random selection from arrHomeOptions)
+	var arrSectionData = [
+		arrHomeOptions[numRandomOption],
 		{ title:'preserve',  r:255, g:195, b:12  },
 		{ title:'bmc',       r:255, g:65,  b:0   },
 		{ title:'na2014',    r:226, g:172, b:58  },
 		{ title:'fringe',    r:255, g:90,  b:82  },
-		{ title:'cfc',       r:192, g:106, b:30  },
+		{ title:'northnavy', r:21,  g:53,  b:91  },
 		{ title:'na2012',    r:235, g:71,  b:71  },
 		{ title:'pukeko',    r:55,  g:58,  b:134 },
-		{ title:'artscourt', r:248, g:109, b:41  },
-		{ title:'efc',       r:255, g:186, b:0   },
-		{ title:'bryston',   r:57,  g:148, b:219 }
+		{ title:'cfc',       r:192, g:106, b:30  },
+		{ title:'northman',  r:66,  g:92,  b:105 },
+		{ title:'artscourt', r:248, g:109, b:41  }
 	];
 
 	// --- Section and Data Variables --- \\
 
 	// section data
-	var sectionCount = elSections.length,
-		sectionPrev,
-		sectionCurrent,
-		sectionNext,
-		sectionWhileScrolling;
+	var numSectionCount = arrSections.length,
+		numSectionPrev,
+		numSectionNext,
+		numSectionCurrent,
+		numSectionWhileScrolling;
 
-	// scroll, touch, and height variables
-	var scrollPos,
-		currentPercent,
-		windowHeight,
-		touchS,
-		touchM,
-		touchE,
-		touchAll,
-		touchID,
-		isTouching = false;
+	// scroll, touch, and window variables
+	var numWindowHeight = window.innerHeight,
+		boolTouching    = false,
+		numScrollPos,
+		numCurrentPercent,
+		dataTouchS,
+		dataTouchM,
+		dataTouchE,
+		dataTouchAll,
+		dataTouchID;
 
 	// --- Colour Variables --- \\
 
@@ -85,33 +86,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	var imgLoader = new PxLoader(),
 		imgPath   = 'assets/img/',
-		imgHome   = imgPath + 'home-' + homeOptions[randomOption].title + '.png';
+		imgProj   = imgPath + 'proj_',
+		imgHome   = imgPath + 'home_' + arrHomeOptions[numRandomOption].title + '.png';
 
-	// load home image based on homeOptions random selection
+	// load home image based on arrHomeOptions random selection
 	imgLoader.addImage(imgHome);
 
 	// only first half of images are preloaded
-	imgLoader.addImage(imgPath + 'preserve.png');
-	imgLoader.addImage(imgPath + 'bmc.png');
-	imgLoader.addImage(imgPath + 'na2014.png');
-	imgLoader.addImage(imgPath + 'fringe.png');
-	imgLoader.addImage(imgPath + 'cfc.png');
-	imgLoader.addImage(imgPath + 'na2012.png');
-	// imgLoader.addImage(imgPath + 'pukeko.png');
-	// imgLoader.addImage(imgPath + 'artscourt.png');
-	// imgLoader.addImage(imgPath + 'efc.png');
-	// imgLoader.addImage(imgPath + 'bryston.png');
+	imgLoader.addImage(imgProj + 'preserve.png');
+	imgLoader.addImage(imgProj + 'bmc.png');
+	imgLoader.addImage(imgProj + 'na2014.png');
+	imgLoader.addImage(imgProj + 'fringe.png');
+	imgLoader.addImage(imgProj + 'northnavy.png');
+	imgLoader.addImage(imgProj + 'na2012.png');
+	// imgLoader.addImage(imgProj + 'pukeko.png');
+	// imgLoader.addImage(imgProj + 'cfc.png');
+	// imgLoader.addImage(imgProj + 'northman.png');
+	// imgLoader.addImage(imgProj + 'artscourt.png');
 
 	// callback that will be run once images are ready
 	imgLoader.addCompletionListener(function() {
 
-		// replace <body> 'loading' class with 'ready' in order to trigger css transitions / animations
-		elBody.className = 'ready';
+		// listen for CSS transitionEnd before removing the element
+		elPreloaderSVG.addEventListener(transitionEvent, removePreloader);
 
-		// remove div.loader-icon from DOM after 4 seconds
-		setTimeout(function() {
-			elIntroArticle.removeChild(elPreloader);
-		}, 4000);
+		// declare page as 'loaded' in order to trigger css transitions / animations
+		elHTML.setAttribute('data-ready', 'loaded');
+
+		// restore scrolling to document by removing locked <body> height
+		elBody.removeAttribute('style');
 
 	});
 
@@ -119,193 +122,43 @@ document.addEventListener('DOMContentLoaded', function() {
 	imgLoader.start();
 
 
-	// onPageLoad: Main Function To Fire on Window Load
+	// Helper: Check when a CSS animation or transition has ended
 	// ----------------------------------------------------------------------------
-	function onPageLoad() {
+	function whichAnimationEvent() {
 
-		// get scroll position on load in case of anchor or refresh (do not assume 0)
-		// we will likely scroll to document top on page load for preloader styles... but that could still fail in some cases
-		scrollPos = window.pageYOffset;
-
-		// get height of browser window on page load and resize events
-		windowHeight = window.innerHeight;
-
-		// set randomly selected homeOption as <section> background-image
-		elIntroSection.style.backgroundImage = 'url(' + imgHome + ')';
-
-		// apply windowHeight to each <section>...
-		// only required because iOS shits the bed with 100vh height elements and orientation change
-		for (var i = 0; i < sectionCount; i++) {
-			elSections[i].style.height = windowHeight + 'px';
-		}
-
-		// get sectionCurrent on page load
-		sectionCurrent = Math.floor(scrollPos / windowHeight);
-
-		// set prev and next sections to be equal to sectionCurrent...
-		// trackSection will immediately update these incorrect values
-		sectionPrev = sectionCurrent;
-		sectionNext = sectionCurrent;
-
-		// initialize trackSection for the first time
-		trackSection();
-
-		// perform color math on page load
-		colorMath();
-
-	}
-
-
-	// trackSection: Track Progression of Sections
-	// ----------------------------------------------------------------------------
-	function trackSection() {
-
-		// determine new prev / next sections
-		if (sectionCurrent <= 0) {
-
-			sectionPrev = 0;
-			sectionNext = sectionCurrent + 1;
-
-		} else if ( sectionCurrent >= (sectionCount - 1) ) {
-
-			sectionPrev = sectionCurrent - 1;
-			sectionNext = sectionCurrent;
-
-		} else {
-
-			sectionPrev = sectionCurrent - 1;
-			sectionNext = sectionCurrent + 1;
-
-		}
-
-		// remove "current" class from ALL nav items...
-		// sectionPrev & sectionNext is unreliable and sometimes does not get removed in time (not fast enough)
-		for (var i = 0; i < navListCount; i++) {
-			elNavList[i].className = '';
-		}
-
-		// apply "current" class to the current nav item
-		elNavList[sectionCurrent].className = 'current';
-
-		// redefine begin RGB values based on new sectionCurrent
-		beginR = sectionData[sectionCurrent].r;
-		beginG = sectionData[sectionCurrent].g;
-		beginB = sectionData[sectionCurrent].b;
-
-		// redefine end RGB values based on new sectionNext
-		endR = sectionData[sectionNext].r;
-		endG = sectionData[sectionNext].g;
-		endB = sectionData[sectionNext].b;
-
-		// define difference of begin / end RGB values
-		diffR = beginR - endR;
-		diffG = beginG - endG;
-		diffB = beginB - endB;
-
-	}
-
-
-	// updateColor: Update Background Color During Scroll
-	// ----------------------------------------------------------------------------
-	function updateColor() {
-
-		// update scroll position as we scroll the window
-		scrollPos = window.pageYOffset;
-
-		// apply new values only if scrollPos is greater than 0...
-		// this will prevent iOS rubber band scrolling from producing incorrect values
-		if (scrollPos >= 0) {
-
-			// check what section we are in while scrolling
-			sectionWhileScrolling = Math.floor(scrollPos / windowHeight);
-
-			// once sectionWhileScrolling no longer equals sectionCurrent,
-			// we know we have crossed into new territory
-			if (sectionCurrent != sectionWhileScrolling) {
-
-				// assign sectionWhileScrolling as the new sectionCurrent
-				sectionCurrent = sectionWhileScrolling;
-
-				// run trackSection again to update section progression and RGB values
-				trackSection();
-
+		var anim,
+			element    = document.createElement('fakeelement'),
+			animations = {
+				'animation'       : 'animationend',
+				'OAnimation'      : 'oAnimationEnd',
+				'MozAnimation'    : 'animationend',
+				'WebkitAnimation' : 'webkitAnimationEnd'
 			}
 
-			colorMath();
-
+		for (anim in animations) {
+			if (element.style[anim] !== undefined) {
+				return animations[anim];
+			}
 		}
 
 	}
 
+	function whichTransitionEvent() {
 
-	// colorMath: Calculate Background Colour Values
-	// ----------------------------------------------------------------------------
-	function colorMath() {
-
-		// get current scroll percentage within section
-		currentPercent = ( scrollPos - (sectionCurrent * windowHeight) ) / windowHeight * 100;
-
-		// reverse the sign of this integer (positive or negative), required to do the math properly...
-		// you can add a negative to a positive as if subtracting (10 + -4 = 6)
-		intSignR = diffR > 0 ? '-' : '';
-		intSignG = diffG > 0 ? '-' : '';
-		intSignB = diffB > 0 ? '-' : '';
-
-		// calculate the threshold we will (in/de)crease our RGB values by
-		calcR = Math.abs( (diffR * currentPercent) / 100 );
-		calcG = Math.abs( (diffG * currentPercent) / 100 );
-		calcB = Math.abs( (diffB * currentPercent) / 100 );
-
-		// update our RGB values by adding our calculated (in/de)crease values to the current (begin) value
-		updateR = beginR + parseInt(intSignR + calcR);
-		updateG = beginG + parseInt(intSignG + calcG);
-		updateB = beginB + parseInt(intSignB + calcB);
-
-		// apply new RGB colors to <main> element
-		elMain.style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
-
-		// apply new RGB colors to <nav> links
-		for (var i = 0; i < navListCount; i++) {
-			elNavLinks[i].style.color           = 'rgb('+updateR+','+updateG+','+updateB+')';
-			elNavLinks[i].style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
-		}
-
-	}
-
-
-	// Navigation: Click to toggle navigation
-	// ----------------------------------------------------------------------------
-	function navToggle() {
-
-		var elNav       = document.getElementsByTagName('nav')[0],
-			elNavToggle = document.getElementById('nav_toggle');
-
-		elNavToggle.addEventListener('click', function() {
-
-			// is a <span> element, does not require e.preventDefault();
-
-			if (elNav.className == 'toggled_nav') {
-				elNav.className = '';
-			} else {
-				elNav.className = 'toggled_nav';
+		var trans,
+			element     = document.createElement('fakeelement'),
+			transitions = {
+				'transition'       : 'transitionend',
+				'OTransition'      : 'oTransitionEnd',
+				'MozTransition'    : 'transitionend',
+				'WebkitTransition' : 'webkitTransitionEnd'
 			}
 
-		}, false);
-
-	}
-
-
-	// secretMail: Add mailto link to home section
-	// ----------------------------------------------------------------------------
-	function secretMail() {
-
-		var mailLink = document.getElementById('contact'),
-			prefix   = 'mailto',
-			local    = 'curtis',
-			domain   = 'dulmage',
-			suffix   = 'me';
-
-		mailLink.setAttribute('href', prefix + ':' + local + '@' + domain + '.' + suffix);
+		for (trans in transitions) {
+			if (element.style[trans] !== undefined) {
+				return transitions[trans];
+			}
+		}
 
 	}
 
@@ -333,9 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	})();
 
 
+/*
+
 	// Helper: Detect iOS Version
 	// ----------------------------------------------------------------------------
-/*
 	function iOSversion() {
 
 		if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -345,7 +199,251 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 
 	}
+
+	// iOS version number
+	var iOSv = iOSversion();
+
 */
+
+
+	// removePreloader: Remove the preloader from DOM
+	// ----------------------------------------------------------------------------
+	function removePreloader() {
+
+		// must remove event listener!
+		elPreloaderSVG.removeEventListener(transitionEvent, removePreloader);
+
+		// remove preloader <div> from document once the SVG listener has been removed
+		elIntroArticle.removeChild(elPreloader);
+
+	}
+
+
+	// Navigation: Click to toggle navigation
+	// ----------------------------------------------------------------------------
+	function navToggle() {
+
+		var elNav       = document.getElementsByTagName('nav')[0],
+			elNavToggle = document.getElementById('nav_toggle');
+
+		// is a <span> element, does not require e.preventDefault();
+		elNavToggle.addEventListener('click', function() {
+
+			if (elNav.className == 'toggled_nav') {
+				elNav.className = '';
+			} else {
+				elNav.className = 'toggled_nav';
+			}
+
+		}, false);
+
+	}
+
+
+	// secretMail: Add mailto link to home section
+	// ----------------------------------------------------------------------------
+	function secretMail() {
+
+		var mailLink = document.getElementById('contact'),
+			prefix    = 'mailto',
+			local    = 'curtis',
+			domain   = 'dulmage',
+			suffix    = 'me';
+
+		mailLink.setAttribute('href', prefix + ':' + local + '@' + domain + '.' + suffix);
+
+	}
+
+
+	// onPageLoad: Main Function To Fire on Window Load
+	// ----------------------------------------------------------------------------
+	function onPageLoad() {
+
+		// load page at top of document...
+		// chrome remembers your scroll position on reload, so this is the only reliable solution
+		if (history.pushState) {
+			history.pushState(null, null, '');
+			window.scroll(0, 0);
+		}
+
+		// assume still loading images - lock scrolling by setting explicit height on <body>
+		elBody.style.height = numWindowHeight + 'px';
+
+		// set randomly selected homeOption as <section> background-image
+		elIntroSection.style.backgroundImage = 'url(' + imgHome + ')';
+
+		// run initial functions
+		setupSections();
+		navToggle();
+		secretMail();
+		touchScrolling();
+
+		// initialize smoothscroll for nav links
+		smoothScroll.init({
+			speed: 400,
+			easing: 'easeInOutQuint',
+			updateURL: false
+		});
+
+	/*
+		// only enable the touch events for iOS <= 7
+		if (iOSv && iOSv[0] <= 7) {
+			touchScrolling();
+			alert(iOSv);
+		} else {
+			console.log('noooope');
+			alert(iOSv);
+		}
+	*/
+
+	}
+
+
+	// setupSections: Apply and initialize section styles
+	// ----------------------------------------------------------------------------
+	function setupSections() {
+
+		// apply numWindowHeight to each <section>...
+		// only required because iOS shits the bed with 100vh height elements and orientation change
+		for (var i = 0; i < numSectionCount; i++) {
+			arrSections[i].style.height = numWindowHeight + 'px';
+		}
+
+		// update scroll position (section height adjustment happens at end of window resize - transitions)
+		numScrollPos = window.pageYOffset;
+
+		// get numSectionCurrent on page load (user may have landed here via anchor, sections may have shifted on resize, etc...)
+		numSectionCurrent = Math.floor(numScrollPos / numWindowHeight);
+
+		// set prev and next sections to be equal to numSectionCurrent...
+		// trackSection will immediately update these incorrect values
+		numSectionPrev = numSectionCurrent;
+		numSectionNext = numSectionCurrent;
+
+		// initialize trackSection for the first time
+		trackSection();
+
+		// perform color math on page load
+		colorMath();
+
+	}
+
+
+	// trackSection: Track Progression of Sections
+	// ----------------------------------------------------------------------------
+	function trackSection() {
+
+		// determine new prev / next sections
+		if (numSectionCurrent <= 0) {
+
+			numSectionPrev = 0;
+			numSectionNext = numSectionCurrent + 1;
+
+		} else if ( numSectionCurrent >= (numSectionCount - 1) ) {
+
+			numSectionPrev = numSectionCurrent - 1;
+			numSectionNext = numSectionCurrent;
+
+		} else {
+
+			numSectionPrev = numSectionCurrent - 1;
+			numSectionNext = numSectionCurrent + 1;
+
+		}
+
+		// remove "current" class from ALL nav items...
+		// numSectionPrev & numSectionNext is unreliable and sometimes does not get removed in time (not fast enough)
+		for (var i = 0; i < numNavList; i++) {
+			arrNavList[i].className = '';
+		}
+
+		// apply "current" class to the current nav item
+		arrNavList[numSectionCurrent].className = 'current';
+
+		// redefine begin RGB values based on new numSectionCurrent
+		beginR = arrSectionData[numSectionCurrent].r;
+		beginG = arrSectionData[numSectionCurrent].g;
+		beginB = arrSectionData[numSectionCurrent].b;
+
+		// redefine end RGB values based on new numSectionNext
+		endR = arrSectionData[numSectionNext].r;
+		endG = arrSectionData[numSectionNext].g;
+		endB = arrSectionData[numSectionNext].b;
+
+		// define difference of begin / end RGB values
+		diffR = beginR - endR;
+		diffG = beginG - endG;
+		diffB = beginB - endB;
+
+	}
+
+
+	// updateColor: Update Background Color During Scroll
+	// ----------------------------------------------------------------------------
+	function updateColor() {
+
+		// update scroll position as we scroll the window
+		numScrollPos = window.pageYOffset;
+
+		// apply new values only if numScrollPos is greater than 0...
+		// this will prevent iOS rubber band scrolling from producing incorrect values
+		if (numScrollPos >= 0) {
+
+			// check what section we are in while scrolling
+			numSectionWhileScrolling = Math.floor(numScrollPos / numWindowHeight);
+
+			// once numSectionWhileScrolling no longer equals numSectionCurrent,
+			// we know we have crossed into new territory
+			if (numSectionCurrent != numSectionWhileScrolling) {
+
+				// assign numSectionWhileScrolling as the new numSectionCurrent
+				numSectionCurrent = numSectionWhileScrolling;
+
+				// run trackSection again to update section progression and RGB values
+				trackSection();
+
+			}
+
+			colorMath();
+
+		}
+
+	}
+
+
+	// colorMath: Calculate Background Colour Values
+	// ----------------------------------------------------------------------------
+	function colorMath() {
+
+		// get current scroll percentage within section
+		numCurrentPercent = ( numScrollPos - (numSectionCurrent * numWindowHeight) ) / numWindowHeight * 100;
+
+		// reverse the sign of this integer (positive or negative), required to do the math properly...
+		// you can add a negative to a positive as if subtracting (10 + -4 = 6)
+		intSignR = diffR > 0 ? '-' : '';
+		intSignG = diffG > 0 ? '-' : '';
+		intSignB = diffB > 0 ? '-' : '';
+
+		// calculate the threshold we will (in/de)crease our RGB values by
+		calcR = Math.abs( (diffR * numCurrentPercent) / 100 );
+		calcG = Math.abs( (diffG * numCurrentPercent) / 100 );
+		calcB = Math.abs( (diffB * numCurrentPercent) / 100 );
+
+		// update our RGB values by adding our calculated (in/de)crease values to the current (begin) value
+		updateR = beginR + parseInt(intSignR + calcR);
+		updateG = beginG + parseInt(intSignG + calcG);
+		updateB = beginB + parseInt(intSignB + calcB);
+
+		// apply new RGB colors to <main> element
+		elMain.style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
+
+		// apply new RGB colors to <nav> links
+		for (var i = 0; i < numNavList; i++) {
+			arrNavLinks[i].style.color           = 'rgb('+updateR+','+updateG+','+updateB+')';
+			arrNavLinks[i].style.backgroundColor = 'rgb('+updateR+','+updateG+','+updateB+')';
+		}
+
+	}
 
 
 	// Window Events: On Touch - Start, Move, and End
@@ -358,18 +456,18 @@ document.addEventListener('DOMContentLoaded', function() {
 			// http://dropshado.ws/post/45694832906/touch-identifier-0
 
 			// dismiss after-touches
-			if (isTouching) {
+			if (boolTouching) {
 				return;
 			}
 
 			// only care about the first touch
-			touchS  = e.changedTouches[0];
-			touchID = touchS.identifier;
+			dataTouchS  = e.changedTouches[0];
+			dataTouchID = dataTouchS.identifier;
 
 			window.addEventListener('touchmove', onTouchMove, false);
 			window.addEventListener('touchend', onTouchEnd, false);
 
-			isTouching = true;
+			boolTouching = true;
 
 		}, false);
 
@@ -379,10 +477,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			// cycle through every changed touch and get one that matches
 			for (var i = 0, len = e.changedTouches.length; i < len; i++) {
 
-				touchAll = e.changedTouches[i];
+				dataTouchAll = e.changedTouches[i];
 
-				if (touchAll.identifier === touchID) {
-					return touchAll;
+				if (dataTouchAll.identifier === dataTouchID) {
+					return dataTouchAll;
 				}
 
 			}
@@ -392,9 +490,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		// assign touchstart to touchmove, updateColor as we move
 		function onTouchMove(e) {
 
-			touchM = getTouch(e);
+			dataTouchM = getTouch(e);
 
-			if (!touchM) {
+			if (!dataTouchM) {
 				return;
 			}
 
@@ -402,19 +500,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		}
 
-		// assign touchstart to touchend, remove touch listeners, set isTouching back to false
+		// assign touchstart to touchend, remove touch listeners, set boolTouching back to false
 		function onTouchEnd(e) {
 
-			touchE = getTouch(e);
+			dataTouchE = getTouch(e);
 
-			if (!touchE) {
+			if (!dataTouchE) {
 				return;
 			}
 
 			window.removeEventListener('touchmove', onTouchMove, false);
 			window.removeEventListener('touchend', onTouchEnd, false);
 
-			isTouching = false;
+			boolTouching = false;
 
 		}
 
@@ -434,7 +532,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		// do not fire resize event for every pixel... wait until finished
 		waitForFinalEvent(function() {
 
-			onPageLoad();
+			numWindowHeight = window.innerHeight; // recalculate window height for sections
+			setupSections();
 
 		}, 500, 'unique string');
 
@@ -443,35 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Initialize Primary Functions
 	// ----------------------------------------------------------------------------
-	// load page at top of document...
-	// chrome remembers your scroll position on reload, so this is the only reliable solution
-	if (history.pushState) {
-		history.pushState(null, null, '');
-		window.scroll(0, 0);
-	}
-
 	onPageLoad();
-	navToggle();
-	secretMail();
-	touchScrolling();
-
-/*
-	// only enable the touch events for iOS <= 7
-	if (iOSv && iOSv[0] <= 7) {
-		touchScrolling();
-		alert(iOSv);
-	} else {
-		console.log('noooope');
-		alert(iOSv);
-	}
-*/
-
-	// smoothScroll();
-	smoothScroll.init({
-		speed: 400,
-		easing: 'easeInOutQuint',
-		updateURL: false
-	});
 
 
 }, false);
