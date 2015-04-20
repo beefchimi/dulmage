@@ -37,14 +37,11 @@ span.nav_toggle {
 nav ul li a span {
 	transition: background-color 0.2s ease-in-out;
 }
-section {
-	transition: height 0.2s ease-in-out;
-}
 article.intro {
 	transition: background-color 1s ease-in-out;
 }
 div.loading-icon svg {
-	transition: fill 0.6s ease-in-out;
+	transition: opacity 0.6s ease-in-out;
 }
 div.project_content h4 a::before {
 	transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -75,27 +72,19 @@ $numDelay: 0;
 
 }
 // --- Animations --- \\
-@keyframes animTextFadeIn {
-	0% {
-		color: $hsla_L100-0;
-	}
-	100% {
-		color: $hsl_L100;
-	}
-}
 @keyframes animSVG {
 	to {
 		stroke-dashoffset: 0;
 	}
 }
-@keyframes animFadeIn {
-	to {
-		opacity: 1;
-	}
-}
 @keyframes anim360 {
 	to {
 		transform: rotate(360deg);
+	}
+}
+@keyframes animFadeIn {
+	to {
+		opacity: 1;
 	}
 }
 
@@ -349,13 +338,17 @@ article.intro div.project_content h1,
 article.intro div.project_content h2 {
 	position: relative;
 	z-index: 100;
-	color: $hsla_L100-0;
+	color: $hsl_L100;
+}
+html:not(.ie9) article.intro div.project_content h1,
+html:not(.ie9) article.intro div.project_content h2 {
+	opacity: 0;
 }
 article.intro div.project_content h1 {
-	animation: animTextFadeIn 2.2s ease-in-out 0.4s forwards;
+	animation: animFadeIn 2.2s ease-in-out 0.4s forwards;
 }
 article.intro div.project_content h2 {
-	animation: animTextFadeIn 2.6s ease-in-out 1s forwards;
+	animation: animFadeIn 2.6s ease-in-out 1s forwards;
 }
 // --- Mail Me --- \\
 a.contact {
@@ -389,11 +382,11 @@ a.contact p.mailme {
 	overflow: hidden;
 }
 // + path animation + \\
-a.contact svg .path_inside {
+html:not(.ie9) a.contact svg .path_inside {
 	stroke-dasharray: 100;
 	stroke-dashoffset: 100;
 }
-a.contact svg .path_outside {
+html:not(.ie9) a.contact svg .path_outside {
 	stroke-dasharray: 134;
 	stroke-dashoffset: 134;
 }
@@ -427,7 +420,7 @@ html[data-ready="loaded"] span.nav_toggle div {
 	width: 3.2rem;
 }
 html[data-ready="loaded"] div.loading-icon svg {
-	fill: $hsla_L100-0;
+	opacity: 0;
 }
 
 // Projects Section
@@ -521,74 +514,3 @@ section.error div.project_content a:hover {
 section.error div.project_content a:active {
 	color: $hsl_red;
 }
-
-// Internet Explorer / No Animations
-// ----------------------------------------------------------------------------
-html.ie9 a.project_logo {
-	z-index: 1001;
-}
-/*
-html.no-cssanimations a.project_logo {
-	z-index: 1001;
-}
-*/
-
-
-/*
-body.ready article.intro {
-	background-color: $hsla_L4-0;
-}
-html.cssanimations div.project_content h1 {
-	animation: animTextFadeIn 2.2s ease-in-out 0.4s forwards;
-}
-html.cssanimations div.project_content h2 {
-	animation: animTextFadeIn 2.6s ease-in-out 1s forwards;
-}
-*/
-
-
-/*
-html.no-cssanimations a.contact svg .path_inside,
-html.no-cssanimations a.contact svg .path_outside {
-	stroke-dasharray: 0;
-	stroke-dashoffset: 0;
-}
-html.cssanimations body.ready a.contact svg .path_inside {
-	animation: animSVG 1.8s ease-in-out 0.4s forwards;
-}
-html.cssanimations body.ready a.contact svg .path_outside {
-	animation: animSVG 1.8s ease-in-out forwards;
-}
-*/
-
-
-html.ie9 a.contact svg .path_inside,
-html.ie9 a.contact svg .path_outside {
-	stroke-dasharray: 0;
-	stroke-dashoffset: 0;
-}
-
-
-html.ie9 div.loading-icon {
-	visibility: hidden;
-}
-/*
-body.ready div.loading-icon svg {
-	fill: $hsla_L100-0;
-}
-html.no-cssanimations div.loading-icon {
-	visibility: hidden;
-}
-*/
-
-
-html.ie9 div.project_content h1,
-html.ie9 div.project_content h2 {
-	color: $hsl_L100;
-}
-/*
-html.no-cssanimations div.project_content h1,
-html.no-cssanimations div.project_content h2 {
-	color: $hsl_L100;
-}
-*/

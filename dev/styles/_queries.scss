@@ -126,7 +126,7 @@
 		transform: scale(0.9);
 	}
 	// --- Project Overlay --- \\
-	div.project_overlay {
+	html:not(.ie9) div.project_overlay {
 		display: block;
 	}
 
@@ -192,26 +192,6 @@
 		width: 15.2rem;
 	}
 
-	// Internet Explorer / No Animations
-	// ----------------------------------------------------------------------------
-	html.ie9 a.project_logo:hover svg {
-		fill: $hsla_L100-70;
-	}
-/*
-	html.no-cssanimations a.project_logo:hover svg {
-		fill: $hsla_L100-70;
-	}
-*/
-
-	html.ie9 a.project_logo:active svg {
-		fill: $hsla_L100-80;
-	}
-/*
-	html.no-cssanimations a.project_logo:active svg {
-		fill: $hsla_L100-80;
-	}
-*/
-
 }
 
 @media only screen and (min-width: 768px) and (min-height: 700px) {
@@ -236,22 +216,10 @@
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { // IE10 & IE11
 
-	div.loading-icon {
-		visibility: hidden;
-	}
 	a.contact svg .path_inside,
 	a.contact svg .path_outside {
-		stroke-dasharray: 0;
-		stroke-dashoffset: 0;
-	}
-	a.project_logo {
-		z-index: 1001;
-	}
-	a.project_logo:hover svg {
-		fill: $hsla_L100-70;
-	}
-	a.project_logo:active svg {
-		fill: $hsla_L100-80;
+		stroke-dasharray: 0 !important;
+		stroke-dashoffset: 0 !important;
 	}
 
 }

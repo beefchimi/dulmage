@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		{ title:'artscourt', r:248, g:109, b:41  }
 	];
 
+	// smoothScroll config
+	var scrollOptions   = {
+			speed: 400,
+			easing: 'easeInOutQuint',
+			updateURL: false
+		};
+
 	// --- Section and Data Variables --- \\
 
 	// section data
@@ -61,16 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		numSectionCurrent,
 		numSectionWhileScrolling;
 
-	// scroll, touch, and window variables
+	// scroll and window variables
 	var numWindowHeight = window.innerHeight,
-		boolTouching    = false,
 		numScrollPos,
-		numCurrentPercent,
-		dataTouchS,
-		dataTouchM,
-		dataTouchE,
-		dataTouchAll,
-		dataTouchID;
+		numCurrentPercent;
 
 	// --- Colour Variables --- \\
 
@@ -186,26 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	})();
 
 
-/*
-
-	// Helper: Detect iOS Version
-	// ----------------------------------------------------------------------------
-	function iOSversion() {
-
-		if (/iP(hone|od|ad)/.test(navigator.platform)) {
-			// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
-			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
-			return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
-		}
-
-	}
-
-	// iOS version number
-	var iOSv = iOSversion();
-
-*/
-
-
 	// removePreloader: Remove the preloader from DOM
 	// ----------------------------------------------------------------------------
 	function removePreloader() {
@@ -279,22 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		touchScrolling();
 
 		// initialize smoothscroll for nav links
-		smoothScroll.init({
-			speed: 400,
-			easing: 'easeInOutQuint',
-			updateURL: false
-		});
-
-	/*
-		// only enable the touch events for iOS <= 7
-		if (iOSv && iOSv[0] <= 7) {
-			touchScrolling();
-			alert(iOSv);
-		} else {
-			console.log('noooope');
-			alert(iOSv);
-		}
-	*/
+		smoothScroll.init(scrollOptions);
 
 	}
 
@@ -446,9 +412,35 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
+	// resizeScrollToSection: Scroll to top of section on window resize
+	// ----------------------------------------------------------------------------
+	function resizeScrollToSection() {
+
+		if (numSectionCurrent === 0) {
+			smoothScroll.animateScroll(null, '#intro_dulmage', scrollOptions);
+		} else {
+			smoothScroll.animateScroll(null, '#project_' + arrSectionData[numSectionCurrent].title, scrollOptions);
+		}
+
+	}
+
+
 	// Window Events: On Touch - Start, Move, and End
 	// ----------------------------------------------------------------------------
 	function touchScrolling() {
+
+		// exit function if this is not Chrome iOS
+		if (!navigator.userAgent.match('CriOS')) {
+			return;
+		}
+
+		// touch variables
+		var boolTouching = false,
+			dataTouchS,
+			dataTouchM,
+			dataTouchE,
+			dataTouchAll,
+			dataTouchID;
 
 		document.body.addEventListener('touchstart', function(e) {
 
@@ -534,6 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			numWindowHeight = window.innerHeight; // recalculate window height for sections
 			setupSections();
+			resizeScrollToSection();
 
 		}, 500, 'unique string');
 
