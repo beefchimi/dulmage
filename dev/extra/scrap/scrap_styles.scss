@@ -43,14 +43,7 @@ nav ul li.current a {
 }
 
 
-// --- CFC --- \\
-section.project_cfc {
-	background-image: url('../img/proj_cfc.png');
-}
-section.project_cfc a.project_logo {
-	width: 13rem;
-	// height: 10rem;
-}
+
 // --- EFC --- \\
 section.project_efc {
 	background-image: url('../img/proj_efc.png');
@@ -66,15 +59,20 @@ section.project_bryston {
 section.project_bryston a.project_logo {
 	width: 14rem;
 }
+// --- Arts Court --- \\
+section.project_artscourt {
+	background-image: url('../img/proj_artscourt.png');
+}
+section.project_artscourt a.project_logo {
+	width: 11rem;
+}
+
+
 
 
 // 768
 
-	// --- CFC --- \\
-	section.project_cfc a.project_logo {
-		width: 17.6rem;
-		// height: 13.6rem;
-	}
+
 	// --- EFC --- \\
 	section.project_efc a.project_logo {
 		width: 12.8rem;
@@ -83,4 +81,8 @@ section.project_bryston a.project_logo {
 	// --- Bryston --- \\
 	section.project_bryston a.project_logo {
 		width: 19.2rem;
+	}
+	// --- Arts Court --- \\
+	section.project_artscourt a.project_logo {
+		width: 15.2rem;
 	}

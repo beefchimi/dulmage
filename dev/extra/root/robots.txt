@@ -4,4 +4,5 @@ Disallow: /
 
 # hello
 # User-agent: *
-# Allow: /
+# Disallow: /sites
+# Disallow: /files

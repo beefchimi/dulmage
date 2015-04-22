@@ -48,8 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		{ title:'na2012',    r:235, g:71,  b:71  },
 		{ title:'pukeko',    r:55,  g:58,  b:134 },
 		{ title:'cfc',       r:192, g:106, b:30  },
-		{ title:'northman',  r:66,  g:92,  b:105 },
-		{ title:'artscourt', r:248, g:109, b:41  }
+		{ title:'northman',  r:66,  g:92,  b:105 }
 	];
 
 	// smoothScroll config
@@ -103,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// imgLoader.addImage(imgProj + 'pukeko.png');
 	// imgLoader.addImage(imgProj + 'cfc.png');
 	// imgLoader.addImage(imgProj + 'northman.png');
-	// imgLoader.addImage(imgProj + 'artscourt.png');
 
 	// callback that will be run once images are ready
 	imgLoader.addCompletionListener(function() {
