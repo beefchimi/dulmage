@@ -1,10 +1,8 @@
-/* Variables / Environment Setup
----------------------------------------------------------------------------- */
+// Variables / Environment Setup
+// ----------------------------------------------------------------------------
 
 // gulp requires
 var gulp       = require('gulp'),
-	// del        = require('del'),
-	// cheerio    = require('cheerio'), // used by gulp-svgstore for transforms
 	pngcrush   = require('imagemin-pngcrush'),
 	// gutil = require('gulp-util'), // does it make sense to define this outside of load-plugins?
 	// livereload = require('gulp-livereload'), // does it make sense to define this outside of load-plugins?
@@ -45,8 +43,8 @@ var paths = {
 };
 
 
-/* Gulp Tasks
----------------------------------------------------------------------------- */
+// Gulp Tasks
+// ----------------------------------------------------------------------------
 // Compile only main HAML files (partials are included via the main files)
 gulp.task('haml', function() {
 
@@ -60,6 +58,8 @@ gulp.task('haml', function() {
 
 // Compile and Output Styles
 gulp.task('styles', function() {
+
+	// gulp-ruby-sass does not have sourcemap support?
 
 	return plugins.rubySass(paths.styles.src + 'styles.scss', {
 			sourcemap: false // true

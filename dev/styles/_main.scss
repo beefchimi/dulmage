@@ -11,9 +11,6 @@ html {
 body {
 	position: relative;
 }
-::-moz-selection {
-	background-color: $hsl_L0;
-}
 ::selection {
 	background-color: $hsl_L0;
 }

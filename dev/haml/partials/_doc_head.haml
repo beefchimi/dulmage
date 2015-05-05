@@ -13,8 +13,5 @@
 
 	%link{:rel => "stylesheet", :href => "assets/css/styles.min.css?v=2"}
 
-	-# %script{:src => "assets/js/modernizr.js"}
-
 	%script
 		= Haml::Engine.new(File.read("dev/haml/partials/_js_fonts.haml")).render
-		= Haml::Engine.new(File.read("dev/haml/partials/_js_svg.haml")).render
