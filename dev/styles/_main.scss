@@ -25,6 +25,29 @@ html[data-ready="waiting"] body {
 html[data-ready="loaded"] body {
 	overflow-y: visible;
 }
+/*
+.takeover {
+	position: fixed;
+	z-index: 9999;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #000;
+}
+.takeover p {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 34rem;
+	font-size: 6rem;
+	font-weight: 900;
+	text-align: center;
+	text-transform: uppercase;
+	color: #fff;
+}
+*/
 
 // Transitions & Animations
 // ----------------------------------------------------------------------------

@@ -4,8 +4,6 @@
 // gulp requires
 var gulp       = require('gulp'),
 	pngcrush   = require('imagemin-pngcrush'),
-	// gutil = require('gulp-util'), // does it make sense to define this outside of load-plugins?
-	// livereload = require('gulp-livereload'), // does it make sense to define this outside of load-plugins?
 	secrets    = require('./secrets.json'),
 	plugins    = require('gulp-load-plugins')({
 		pattern: ['gulp-*', 'gulp.*'],
@@ -28,6 +26,9 @@ var paths = {
 		// vndr: 'dev/scripts/vendor/*.js',
 		dest: 'build/assets/js/'
 	},
+	maps: {
+		src : 'build/assets/maps/src/'
+	},
 	images: {
 		src : 'dev/media/images/*.{png,jpg,gif}',
 		dest: 'build/assets/img/'
@@ -45,33 +46,30 @@ var paths = {
 
 // Gulp Tasks
 // ----------------------------------------------------------------------------
-// Compile only main HAML files (partials are included via the main files)
-gulp.task('haml', function() {
-
-	return gulp.src(paths.haml.src + '*.haml')
-		.pipe(plugins.rubyHaml())
-		.pipe(gulp.dest(paths.haml.dest))
-		.pipe(plugins.livereload());
-
-});
-
-
 // Compile and Output Styles
 gulp.task('styles', function() {
 
-	// gulp-ruby-sass does not have sourcemap support?
+	// external sourcemaps not working, for whatever fucking reason
 
 	return plugins.rubySass(paths.styles.src + 'styles.scss', {
-			sourcemap: false // true
+			sourcemap: true,
+			style: 'compact'
 		})
-		// .pipe(plugins.sourcemaps.write())
-		// .pipe(plugins.concat('styles.css')) // concat with sourcemap if --dev
-		.pipe(plugins.autoprefixer({
-			browsers: ['last 3 version', 'ios 6', 'android 4']
+		.pipe(plugins.sourcemaps.init())
+			.pipe(plugins.autoprefixer({
+				browsers: ['last 3 version', 'ios 6', 'android 4']
+			}))
+			.pipe(plugins.minifyCss())
+			.pipe(plugins.rename({
+				suffix: '.min'
+			}))
+		.pipe(plugins.sourcemaps.write('../maps'))
+/*
+		.pipe(plugins.sourcemaps.write('../maps', {
+			includeContent: false,
+			sourceRoot: 'src'
 		}))
-		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(plugins.minifyCss()) // don't minify if --dev
-		.pipe(plugins.rename('styles.min.css'))
+*/
 		.pipe(gulp.dest(paths.styles.dest))
 		.pipe(plugins.livereload());
 
@@ -79,15 +77,27 @@ gulp.task('styles', function() {
 
 
 // Concat and Output Scripts
-gulp.task('scripts', function() {
+gulp.task('scripts', ['copy-scripts'], function() {
 
 	return gulp.src(paths.scripts.src)
-		.pipe(plugins.concat('scripts.js'))
-		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(plugins.uglify())
-		.pipe(plugins.rename('scripts.min.js'))
+		.pipe(plugins.sourcemaps.init())
+			.pipe(plugins.concat('scripts.min.js'))
+			.pipe(plugins.uglify())
+		.pipe(plugins.sourcemaps.write('../maps', {
+			includeContent: false,
+			sourceRoot: 'src'
+		}))
 		.pipe(gulp.dest(paths.scripts.dest))
 		.pipe(plugins.livereload());
+
+});
+
+
+// Copy dev scripts to source maps folder
+gulp.task('copy-scripts', function() {
+
+	return gulp.src(paths.scripts.src)
+		.pipe(gulp.dest(paths.maps.src));
 
 });
 
@@ -119,7 +129,7 @@ gulp.task('images', function() {
 });
 
 
-// Compress all svg files and combine into a single file
+// Compress and built SVG sprite, then inject into build .html files (only after running HAML task)
 gulp.task('svg', function() {
 
 	return gulp.src(paths.svg.src)
@@ -129,8 +139,31 @@ gulp.task('svg', function() {
 				removeUselessStrokeAndFill: false
 			}]
 		}))
-		.pipe(plugins.svgstore())
+		.pipe(plugins.svgstore({
+			inlineSvg: true
+		}))
 		.pipe(gulp.dest(paths.images.dest));
+
+});
+
+
+// Compile only main HAML files (ignore partials - included via the main files)
+gulp.task('haml', function() {
+
+	// should use an if statement to skip the injection if no SVGs are found
+	var svgSource = gulp.src(paths.images.dest + 'svg.svg');
+
+	function fileContents(filePath, file) {
+		return file.contents.toString();
+	}
+
+	return gulp.src(paths.haml.src + '*.haml')
+		.pipe(plugins.rubyHaml())
+		.pipe(plugins.inject(svgSource, {
+			transform: fileContents
+		}))
+		.pipe(gulp.dest(paths.haml.dest))
+		.pipe(plugins.livereload());
 
 });
 
@@ -139,7 +172,6 @@ gulp.task('svg', function() {
 gulp.task('extras', function() {
 
 	// currently manually copying fonts folder into assets
-
 	return gulp.src([paths.extra.root + '*.*', paths.extra.root + '.htaccess'])
 		.pipe(plugins.changed(paths.extra.dest)) // not sure how to check if this is working or not
 		.pipe(gulp.dest(paths.extra.dest));
@@ -166,8 +198,7 @@ gulp.task('deploy', function() {
 
 
 // Watch over specified files and run corresponding tasks...
-// does not inject SVG... need better process for this
-gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
+gulp.task('watch', function() {
 
 	plugins.livereload.listen(); // start livereload server
 
@@ -179,5 +210,5 @@ gulp.task('watch', ['haml', 'styles', 'scripts'], function() {
 });
 
 
-// Default gulp task, should run gulp clean prior to running the default task...
-gulp.task('default', ['haml', 'styles', 'scripts', 'images', 'extras', 'svg']); // remove 'vendor' task
+// Default gulp task
+gulp.task('default', ['styles', 'scripts', 'svg', 'haml', 'extras']); // remove 'images' task as it takes LONG

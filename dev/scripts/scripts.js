@@ -185,29 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	})();
 
 
-	// injectSVG: Inject SVG data once document is ready
-	// ----------------------------------------------------------------------------
-	function injectSVG() {
-
-		var ajax   = new XMLHttpRequest(),
-			origin = window.location.origin,
-			wpPath = '/', // '/wp-content/themes/northman/',
-			ajaxPath = origin === 'http://localhost' ? '' : origin + wpPath;
-
-		ajax.open('GET', ajaxPath + 'assets/img/svg.svg?v=1', true);
-		ajax.send();
-		ajax.onload = function(e) {
-
-			var div = document.createElement('div');
-			div.id = 'svgInject';
-			div.innerHTML = ajax.responseText;
-			document.body.insertBefore(div, document.body.childNodes[0]);
-
-		}
-
-	}
-
-
 	// removePreloader: Remove the preloader from DOM
 	// ----------------------------------------------------------------------------
 	function removePreloader() {
@@ -260,9 +237,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// onPageLoad: Main Function To Fire on Window Load
 	// ----------------------------------------------------------------------------
 	function onPageLoad() {
-
-		// inject SVG markup right away before too much time passes
-		injectSVG();
 
 		// load page at top of document...
 		// chrome remembers your scroll position on reload, so this is the only reliable solution
