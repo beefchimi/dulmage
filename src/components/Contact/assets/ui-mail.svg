@@ -1,0 +1,4 @@
+<svg id="UiMail" class="SvgUiMail" viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path class="UiMailPath UiMailPath--inside" d="M21.593,31.079l21.212,-25.23l-27.67,20.959" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.8" />
+  <path class="UiMailPath UiMailPath--outside" d="M15.035,26.817l0,12.053l6.558,-7.79l10.978,10.183l10.234,-35.412l-40.32,16.469l12.55,4.497Z" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2.8" />
+</svg>

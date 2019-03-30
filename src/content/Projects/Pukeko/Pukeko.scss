@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.Pukeko {
+  background-image: asset-url('bg-pukeko.png');
+
+  .ProjectLogo {
+    width: 12.1rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 15.6rem;
+    }
+  }
+}

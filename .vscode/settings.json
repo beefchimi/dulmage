@@ -1,0 +1,20 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "lib": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "lib": true,
+    "dist/": true
+  },
+  "css.validate": false,
+  "javascript.validate.enable": false,
+  "editor.formatOnSave": true,
+  "stylelint.enable": true,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  "eslint.validate": ["javascript"]
+}

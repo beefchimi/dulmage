@@ -1,0 +1,30 @@
+{% extends 'templates/document.html' %}
+
+{% block PageId %}Home{% endblock %}
+
+{% block head %}
+  {% set ViewAttr = {
+    title: 'Curtis Dulmage | UX Developer / Ottawa Canada'
+  } %}
+
+  {% import 'components/Document/Head.html' as Head %}
+  {{ Head.render(ViewAttr) }}
+{% endblock %}
+
+{% block navigation %}
+  {% include 'components/ProjectsMenu/ProjectsMenu.html' %}
+{% endblock %}
+
+{% block main %}
+  {% include 'content/Intro/Intro.html' %}
+
+  {% include 'content/Projects/PreservationSociety/PreservationSociety.html' %}
+  {% include 'content/Projects/BodyMindChange/BodyMindChange.html' %}
+  {% include 'content/Projects/NorthernArmy/NorthernArmy.html' %}
+  {% include 'content/Projects/Fringe/Fringe.html' %}
+  {% include 'content/Projects/NorthNavy/NorthNavy.html' %}
+  {% include 'content/Projects/NorthernArmy2012/NorthernArmy2012.html' %}
+  {% include 'content/Projects/Pukeko/Pukeko.html' %}
+  {% include 'content/Projects/Chicken/Chicken.html' %}
+  {% include 'content/Projects/Northman/Northman.html' %}
+{% endblock %}

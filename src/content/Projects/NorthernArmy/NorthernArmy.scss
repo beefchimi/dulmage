@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.NorthernArmy {
+  background-image: asset-url('bg-northern-army.png');
+
+  .ProjectLogo {
+    width: 16.1rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 22rem;
+    }
+  }
+}

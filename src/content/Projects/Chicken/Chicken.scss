@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.Chicken {
+  background-image: asset-url('bg-chicken.png');
+
+  .ProjectLogo {
+    width: 13rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 17.6rem;
+    }
+  }
+}

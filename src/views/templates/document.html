@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" data-current-index="0">
+  {% block head %}{% endblock %}
+
+  <body id="Page{% block PageId %}{% endblock %}">
+    <div class="SvgSprites">
+      <!-- inject:svg --><!-- endinject -->
+    </div>
+
+    {% block navigation %}{% endblock %}
+
+    <main id="Portfolio" class="Portfolio" role="main">
+      {% block main %}{% endblock %}
+    </main>
+
+    {% include 'components/Notification/Notification.html' %}
+  </body>
+</html>

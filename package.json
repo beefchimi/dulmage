@@ -1,42 +1,83 @@
 {
-  "name": "dulmage",
-  "version": "0.0.1",
-  "description": "Hello, and welcome, to my new portfolio.",
-  "main": "gulpfile.js",
-  "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-autoprefixer": "^2.2.0",
-    "gulp-changed": "^1.2.1",
-    "gulp-concat": "^2.5.2",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-inject": "^1.2.0",
-    "gulp-livereload": "^3.8.0",
-    "gulp-load-plugins": "^0.10.0",
-    "gulp-minify-css": "^1.1.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-rsync": "^0.0.5",
-    "gulp-ruby-haml": "0.0.4",
-    "gulp-ruby-sass": "^1.0.5",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-svgstore": "^5.0.1",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.4",
-    "imagemin-pngcrush": "^4.1.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "dulmage.me",
+  "version": "1.1.0",
+  "description": "Hello and welcome to my portfolio.",
+  "author": "Curtis Dulmage",
+  "homepage": "https://dulmage.me/",
+  "license": "UNLICENSED",
+  "main": "tools/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/beefchimi/dulmage.git"
   },
   "keywords": [
     "dulmage",
-    "portfolio"
+    "portfolio",
+    "development"
   ],
-  "author": "Curtis Dulmage",
   "bugs": {
     "url": "https://github.com/beefchimi/dulmage/issues"
   },
-  "homepage": "https://github.com/beefchimi/dulmage"
+  "config": {
+    "tools": "--require @babel/register --gulpfile tools"
+  },
+  "scripts": {
+    "build": "yarn run clean && NODE_ENV=production gulp build $npm_package_config_tools",
+    "clean": "rm -rf dist assets-manifest.json bundle-report.html",
+    "clean:scripts": "rm -rf dist/assets/js dist/sw.*",
+    "media": "gulp parallelMedia $npm_package_config_tools",
+    "views": "gulp parallelViews $npm_package_config_tools",
+    "svg": "gulp svg $npm_package_config_tools",
+    "scripts": "yarn run clean:scripts && gulp scripts $npm_package_config_tools",
+    "styles": "gulp styles $npm_package_config_tools",
+    "sw": "NODE_ENV=production gulp serviceWorker $npm_package_config_tools",
+    "start": "gulp start $npm_package_config_tools",
+    "start:prod": "NODE_ENV=production gulp server $npm_package_config_tools",
+    "lint": "yarn run lint:scss && yarn run lint:js",
+    "lint:scss": "stylelint './src/**/*.scss'",
+    "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
+    "pretter": "yarn run prettier:scss && yarn run prettier:js",
+    "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
+    "prettier:js": "yarn run lint:js --fix",
+    "prepublish": "yarn run build"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "threads": "git+ssh://git@github.com/beefchimi/threads.git#v1.0.0-beta8"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.4.0",
+    "autoprefixer": "^9.5.1",
+    "babel-core": "^7.0.0-beta.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-shopify": "^18.0.0",
+    "browser-sync": "^2.26.3",
+    "cssnano": "^4.1.10",
+    "cssnano-preset-advanced": "^4.0.7",
+    "eslint": "^5.16.0",
+    "eslint-plugin-shopify": "^26.3.0",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.1.0",
+    "gulp-data": "^1.3.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-inject": "^5.0.2",
+    "gulp-noop": "^1.0.0",
+    "gulp-nunjucks": "^4.0.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-svgstore": "^7.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^7.0.0",
+    "install": "^0.12.2",
+    "nunjucks": "^3.2.0",
+    "prettier-stylelint": "^0.4.2",
+    "rev-hash": "^2.0.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-shopify": "^7.2.1",
+    "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.2.0"
+  }
 }

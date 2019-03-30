@@ -1,0 +1,37 @@
+////
+/// Shared Utilities
+/// Animation
+////
+
+@mixin svg-trace-stroke {
+  animation: svg-trace-stroke get-duration() get-easing(excite) both;
+}
+
+@mixin fade-in {
+  animation: fade-in get-duration() get-easing() both;
+}
+
+@mixin pulse {
+  animation: pulse get-duration(slower) linear both;
+}
+
+@mixin rainbow-background-color {
+  animation: rainbow-background-color get-duration(slowest) get-easing() infinite;
+}
+
+@mixin rainbow-background-gradient {
+  background: linear-gradient(
+    124deg,
+    #ff2400,
+    #e81d1d,
+    #e8b71d,
+    #e3e81d,
+    #1de840,
+    #1ddde8,
+    #2b1de8,
+    #dd00f3,
+    #dd00f3
+  );
+  background-size: 1800% 1800%;
+  animation: rainbow-background-gradient get-duration(slowest) get-easing() infinite;
+}

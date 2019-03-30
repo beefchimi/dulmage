@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.BodyMindChange {
+  background-image: asset-url('bg-body-mind-change.png');
+
+  .ProjectLogo {
+    width: 18rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 24rem;
+    }
+  }
+}

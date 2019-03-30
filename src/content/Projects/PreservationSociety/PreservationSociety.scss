@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.PreservationSociety {
+  background-image: asset-url('bg-preservation-society.png');
+
+  .ProjectLogo {
+    width: 12rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 17rem;
+    }
+  }
+}
