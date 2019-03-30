@@ -1,0 +1,19 @@
+@import 'props';
+
+.Intro {
+  .Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) and (min-height: get-breakpoint(iphone6, wide)) {
+      margin-top: -(get-spacing());
+    }
+  }
+
+  .Heading {
+    flex: 0 0 auto;
+    // padding: text-background-padding(get-spacing(tightest));
+    // background-color: var(--dulmage-color);
+  }
+}

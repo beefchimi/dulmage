@@ -1,0 +1,109 @@
+.Paragraph {
+  font-size: get-type-scale(paragraph);
+  text-align: center;
+  color: white;
+}
+
+.Heading {
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+}
+
+.Heading--1 {
+  margin-bottom: 2rem;
+  font-size: get-type-scale(h1);
+  font-weight: 900;
+  letter-spacing: 0.8rem;
+
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    margin-bottom: 6rem;
+    font-size: get-type-scale(h1, tablet);
+    letter-spacing: 3rem;
+  }
+}
+
+.Heading--2 {
+  font-size: get-type-scale(h2);
+  letter-spacing: 0.2rem;
+
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    font-size: get-type-scale(h2, tablet);
+    letter-spacing: 0.4rem;
+  }
+
+  // @media only screen and (max-height: get-breakpoint(mobile, wide)) {
+  //   margin-bottom: 3.2rem;
+  // }
+}
+
+.Heading--3 {
+  margin-bottom: 1rem;
+  font-size: get-type-scale(h3);
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    font-size: get-type-scale(h3, tablet);
+    letter-spacing: 0.2rem;
+  }
+}
+
+.Heading--4 {
+  font-size: get-type-scale(h4);
+  letter-spacing: 0.2rem;
+  line-height: 1.1;
+
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    font-size: get-type-scale(h4, tablet);
+    letter-spacing: 0.3rem;
+  }
+}
+
+.Heading--5 {
+  font-size: get-type-scale(h5);
+  font-weight: 700;
+  letter-spacing: 0.8rem;
+  line-height: 1.2;
+}
+
+.HeadingLink {
+  position: relative;
+  display: inline-block;
+  color: white;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -(get-spacing(tightest));
+    left: 0;
+    display: block;
+    width: 0%;
+    height: 0.1rem;
+    margin: 0 auto;
+    background-color: white;
+    transition-property: width, opacity;
+    transition-duration: get-duration();
+    transition-timing-function: get-easing();
+  }
+
+  &:focus,
+  &:hover {
+    &::before {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    &::before {
+      width: 60%;
+      opacity: 1;
+    }
+  }
+}
+
+.BreakWord {
+  display: block;
+}

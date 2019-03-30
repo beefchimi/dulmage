@@ -1,0 +1,68 @@
+@import 'utilities/shared/animation';
+
+:root {
+  --dulmage-color: rgb(0, 0, 0);
+}
+
+html {
+  // @include rainbow-background-color;
+  font-family: get-font-stack();
+  background-color: black;
+
+  ::selection {
+    color: white;
+    background-color: var(--dulmage-color);
+  }
+}
+
+body {
+  position: relative;
+  cursor: get-cursor();
+}
+
+///
+/// Cursor styles
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+dd,
+dt,
+pre,
+code,
+cite,
+blockquote,
+figcaption {
+  cursor: get-cursor(text);
+}
+
+a,
+button {
+  cursor: get-cursor(pointer);
+
+  &:active {
+    cursor: get-cursor(pointer, active);
+  }
+}
+
+// Set `state` cursors to never used tags only so they can be fetched on page load,
+// rather than the instance they are first requested...
+.preload-cursors {
+  @include visually-hidden;
+
+  b {
+    // cursor: get-cursor(drag, active);
+  }
+
+  u {
+    cursor: get-cursor(pointer, active);
+  }
+
+  i {
+    // cursor: get-cursor(rock, active);
+  }
+}

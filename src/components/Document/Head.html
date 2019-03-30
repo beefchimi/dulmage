@@ -1,0 +1,45 @@
+{% macro render(ViewAttr) %}
+  {% set url = 'https://dulmage.me' %}
+
+  {# 404 page urls could contain sub paths, so we need to use absolute urls #}
+  {% if ViewAttr.is404 and ViewAttr.isProd %}
+    {% set srcPrefix = url + '/' %}
+  {% else %}
+    {% set srcPrefix = '' %}
+  {% endif %}
+
+  {% set HeadAttr = {
+    siteName: 'dulmage.me',
+    description: 'Curtis Dulmage — Ottawa UX Wizard, CSS Sensation, Developer extraordinaire. Currently counting pixels at Shopify',
+    siteUrl: url,
+    socialImg: url + '/assets/img/social/dulmage-social.png',
+    twitterHandle: '@Shopify',
+    twitterId: '17136315'
+  } %}
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ViewAttr.title}}</title>
+
+    <meta name="description" content="{{HeadAttr.description}}">
+
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#8c54c1">
+
+    {% import 'components/Document/SocialShare.html' as SocialShare %}
+    {{ SocialShare.render(ViewAttr, HeadAttr) }}
+
+    {% import 'components/Document/Favicon.html' as Favicon %}
+    {{ Favicon.render(srcPrefix) }}
+
+    <link rel="manifest" href="{{srcPrefix}}manifest.json">
+    <link rel="stylesheet" href="{{srcPrefix}}assets/css/app.css">
+
+    <script src="{{srcPrefix}}assets/js/runtime.js" defer></script>
+    <script src="{{srcPrefix}}assets/js/vendor.js" defer></script>
+    <script src="{{srcPrefix}}assets/js/app.js" defer></script>
+  </head>
+{% endmacro %}

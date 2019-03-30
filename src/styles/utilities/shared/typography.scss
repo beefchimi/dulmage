@@ -1,0 +1,44 @@
+////
+/// Utilities shared
+/// Typography
+////
+
+// For truncating single line text.
+// @param {String} $display (optional) - The value to be used for `display`.
+// @param {Boolean} $descender-fix (optional) - Sometimes descenders are cutoff by overflow.
+@mixin text-truncate($display: block, $descender-fix: false) {
+  $padding-bottom: if($descender-fix, 0.25em, null);
+  display: $display;
+  overflow: hidden;
+  max-width: 100%;
+  padding-bottom: $padding-bottom;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// For preventing any text selection.
+@mixin text-no-select {
+  pointer-events: none;
+  user-select: none;
+}
+
+@mixin unstyled-button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin unstyled-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

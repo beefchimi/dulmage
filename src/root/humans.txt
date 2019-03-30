@@ -1,0 +1,8 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+
+  Author: Curtis Dulmage
+  Site: https://dulmage.me
+  Location: Ottawa, Ontario, Canada
