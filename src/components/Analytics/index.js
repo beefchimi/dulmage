@@ -55,7 +55,7 @@ export default class Analytics {
     // To get around the problem,
     // we don't send GA Events / block clicks until GA is on the Window.
     if (window.ga && window.ga.create) {
-      /* eslint-disable camelcase, prettier/prettier */
+      /* eslint-disable babel/camelcase */
       gtag('event', 'click', {
         event_category: this.dataset.gtagCategory,
         event_label: this.title,
@@ -66,7 +66,7 @@ export default class Analytics {
           }
         },
       });
-      /* eslint-enable camelcase, prettier/prettier */
+      /* eslint-enable babel/camelcase */
     } else if (evt.type !== 'auxclick') {
       document.location = this.href;
     }

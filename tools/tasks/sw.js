@@ -4,7 +4,7 @@ import inject from 'gulp-inject';
 import {fileContentsManifest} from '../utilities';
 import {assetsManifestPath} from './revision';
 
-// eslint-disable-next-line no-process-env, no-undef
+// eslint-disable-next-line no-undef
 const isProd = process.env.NODE_ENV === 'production';
 
 const srcServiceWorker = 'src/scripts/service-worker.js';

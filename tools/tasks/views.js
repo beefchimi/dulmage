@@ -10,7 +10,7 @@ import gulpjucks from 'gulp-nunjucks';
 import {fileContentsToString} from '../utilities';
 import {distSvg, fileSymbols} from './svg';
 
-// eslint-disable-next-line no-process-env, no-undef
+// eslint-disable-next-line no-undef
 const isProd = process.env.NODE_ENV === 'production';
 
 export const srcViews = 'src/views/';

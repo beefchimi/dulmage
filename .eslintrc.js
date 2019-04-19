@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     'no-console': 0,
     'no-warning-comments': 0,
+    'eslint-comments/no-unlimited-disable': 0,
   },
   env: {
     browser: true,
