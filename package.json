@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "threads": "git+ssh://git@github.com/beefchimi/threads.git#v1.0.0-beta8"
+    "threads-scss": "^1.0.0"
   },
   "devDependencies": {
     "@babel/register": "^7.4.0",
