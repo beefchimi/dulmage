@@ -1,5 +1,6 @@
 const PreservationSociety = {
   title: 'Preservation Society',
+  attribution: 'Rene Antunes',
   channels: {
     red: 255,
     green: 195,

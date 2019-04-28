@@ -3,6 +3,7 @@ import {getUrlForAssetPng, randomIntBetweenRange} from '../../scripts/utilities'
 const INTRO_SLIDES = [
   {
     title: 'Beach',
+    attribution: 'Curtis Dulmage',
     channels: {
       red: 134,
       green: 160,
@@ -10,15 +11,8 @@ const INTRO_SLIDES = [
     },
   },
   {
-    title: 'Bridge',
-    channels: {
-      red: 110,
-      green: 145,
-      blue: 110,
-    },
-  },
-  {
     title: 'Flowers',
+    attribution: 'Curtis Dulmage',
     channels: {
       red: 140,
       green: 84,
@@ -27,14 +21,16 @@ const INTRO_SLIDES = [
   },
   {
     title: 'Forest',
+    attribution: 'Curtis Dulmage',
     channels: {
-      red: 189,
-      green: 187,
-      blue: 56,
+      red: 139,
+      green: 157,
+      blue: 47,
     },
   },
   {
     title: 'The Gut',
+    attribution: 'Curtis Dulmage',
     channels: {
       red: 106,
       green: 96,
@@ -43,6 +39,7 @@ const INTRO_SLIDES = [
   },
   {
     title: 'Tropical',
+    attribution: 'Curtis Dulmage',
     channels: {
       red: 186,
       green: 64,
@@ -50,32 +47,46 @@ const INTRO_SLIDES = [
     },
   },
   {
-    title: 'Worship',
+    title: 'Xander',
+    attribution: 'Alexander Thomas Stobbs',
     channels: {
-      red: 203,
-      green: 78,
-      blue: 74,
+      red: 98,
+      green: 79,
+      blue: 135,
     },
   },
 ];
+
+const INTRO_SECTION_ID = 'Intro';
+const INTRO_ATTRIBUTION_SELECTOR = '[data-attribution-intro]';
 
 function randomIntroSlide() {
   return INTRO_SLIDES[randomIntBetweenRange(0, INTRO_SLIDES.length - 1)];
 }
 
-const Intro = randomIntroSlide();
+export function applyIntroAttribution(attribution) {
+  const element = document.querySelector(INTRO_ATTRIBUTION_SELECTOR);
 
-export function applyIntroSlideBackground() {
-  const introSection = document.getElementById('Intro');
+  if (!element) {
+    return;
+  }
+
+  element.textContent = `${element.textContent} ${attribution}`;
+}
+
+export function applyIntroSlideBackground(title) {
+  const introSection = document.getElementById(INTRO_SECTION_ID);
 
   if (!introSection) {
     return;
   }
 
-  const assetTitle = Intro.title.toLowerCase().replace(/ /g, '-');
+  const assetTitle = title.toLowerCase().replace(/ /g, '-');
   const assetPath = getUrlForAssetPng(`intro-${assetTitle}`);
 
   introSection.style.backgroundImage = `url(${assetPath})`;
 }
+
+const Intro = randomIntroSlide();
 
 export default Intro;

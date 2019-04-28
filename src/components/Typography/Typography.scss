@@ -8,16 +8,18 @@
   text-align: center;
   text-transform: uppercase;
   color: white;
+
+  & + & {
+    margin-top: 1em;
+  }
 }
 
 .Heading--1 {
-  margin-bottom: 2rem;
   font-size: get-type-scale(h1);
   font-weight: 900;
   letter-spacing: 0.8rem;
 
   @media only screen and (min-width: get-breakpoint(tablet)) {
-    margin-bottom: 6rem;
     font-size: get-type-scale(h1, tablet);
     letter-spacing: 3rem;
   }
@@ -31,14 +33,9 @@
     font-size: get-type-scale(h2, tablet);
     letter-spacing: 0.4rem;
   }
-
-  // @media only screen and (max-height: get-breakpoint(mobile, wide)) {
-  //   margin-bottom: 3.2rem;
-  // }
 }
 
 .Heading--3 {
-  margin-bottom: 1rem;
   font-size: get-type-scale(h3);
   font-weight: 900;
   letter-spacing: 0.1rem;
@@ -53,6 +50,10 @@
   font-size: get-type-scale(h4);
   letter-spacing: 0.2rem;
   line-height: 1.1;
+
+  .Heading--3 + & {
+    margin-top: get-spacing(tightest);
+  }
 
   @media only screen and (min-width: get-breakpoint(tablet)) {
     font-size: get-type-scale(h4, tablet);
