@@ -25,23 +25,26 @@
 /// Project Logo
 .ProjectLogo {
   position: relative;
-  display: block;
   margin: 0 auto get-spacing(looser);
-  backface-visibility: hidden;
-  will-change: filter;
-  transition: filter get-duration() get-easing();
 
   .Svg {
     fill: white;
   }
 
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    margin-bottom: get-spacing(fattest);
+  }
+}
+
+a.ProjectLogo {
+  backface-visibility: hidden;
+  will-change: filter;
+  transition: filter get-duration() get-easing();
   // TODO: Better a11y styles
   // :-moz-focusring
   // :focus-visible
 
   @media only screen and (min-width: get-breakpoint(tablet)) {
-    margin-bottom: get-spacing(fattest);
-
     &:focus,
     &:hover {
       filter: blur(2px);
@@ -61,12 +64,12 @@
   transition: filter get-duration() get-easing();
 
   @media only screen and (min-width: get-breakpoint(tablet)) {
-    .ProjectLogo:focus + &,
-    .ProjectLogo:hover + & {
+    a.ProjectLogo:focus + &,
+    a.ProjectLogo:hover + & {
       filter: blur(1px);
     }
 
-    .ProjectLogo:active + & {
+    a.ProjectLogo:active + & {
       filter: blur(0.5px);
     }
   }
@@ -85,6 +88,18 @@
     @media only screen and (max-height: get-breakpoint(mobile, wide)) {
       display: none;
     }
+  }
+}
+
+///
+/// Badge
+.Badge {
+  padding: get-spacing(tighter);
+  border-radius: get-radius();
+  border: 1px solid white;
+
+  .Heading {
+    color: white;
   }
 }
 

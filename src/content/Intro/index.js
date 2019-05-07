@@ -1,1 +1,1 @@
-export {default, applyIntroSlideBackground} from './Intro';
+export {default, applyIntroAttribution, applyIntroSlideBackground} from './Intro';

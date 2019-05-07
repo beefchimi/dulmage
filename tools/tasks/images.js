@@ -12,7 +12,9 @@ const distImages = 'dist/assets/img/';
 const extImages = '*.+(jpeg|jpg|png|gif)';
 
 export const pngOptions = {
-  quality: [0.7, 0.8],
+  speed: 1,
+  strip: true,
+  quality: [0.4, 0.8],
 };
 const mozJpegOptions = {
   quality: 65,

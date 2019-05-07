@@ -8,6 +8,7 @@ html {
   // @include rainbow-background-color;
   font-family: get-font-stack();
   background-color: black;
+  scroll-behavior: smooth;
 
   ::selection {
     color: white;
@@ -16,6 +17,7 @@ html {
 }
 
 body {
+  @include fade-in;
   position: relative;
   cursor: get-cursor();
 }

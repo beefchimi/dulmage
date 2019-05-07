@@ -13,12 +13,11 @@ const uiMedia = [
 ];
 const introMedia = [
   'dist/assets/img/intro-beach.png',
-  'dist/assets/img/intro-bridge.png',
   'dist/assets/img/intro-flowers.png',
   'dist/assets/img/intro-forest.png',
   'dist/assets/img/intro-the-gut.png',
   'dist/assets/img/intro-tropical.png',
-  'dist/assets/img/intro-worship.png',
+  'dist/assets/img/intro-xander.png',
 ];
 const projectsMedia = [
   'dist/assets/img/bg-body-mind-change.png',
@@ -26,7 +25,6 @@ const projectsMedia = [
   'dist/assets/img/bg-fringe.png',
   'dist/assets/img/bg-northern-army.png',
   'dist/assets/img/bg-northern-army-2012.png',
-  // 'dist/assets/img/bg-northman.png',
   'dist/assets/img/bg-north-navy.png',
   'dist/assets/img/bg-preservation-society.png',
   'dist/assets/img/bg-pukeko.png',

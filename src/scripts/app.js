@@ -1,4 +1,5 @@
-import {applyIntroSlideBackground} from '../content/Intro';
+import Intro, {applyIntroAttribution, applyIntroSlideBackground} from '../content/Intro';
+import {applyProjectsAttribution} from '../content/Projects';
 import {secretEmail} from './utilities';
 import init from './init';
 
@@ -21,6 +22,8 @@ if (is404) {
   init.Navigation();
   init.Dulmage();
 
-  applyIntroSlideBackground();
+  applyIntroAttribution(Intro.attribution);
+  applyIntroSlideBackground(Intro.title);
+  applyProjectsAttribution();
   secretEmail(dulmageEmail);
 }

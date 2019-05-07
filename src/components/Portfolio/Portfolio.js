@@ -75,8 +75,8 @@ export default class Portfolio {
   }
 
   registerEventListeners() {
-    window.addEventListener('scroll', this.handleOnScroll);
-    window.addEventListener('resize', debounce(this.handleOnResize));
+    window.addEventListener('scroll', this.handleOnScroll, {passive: true});
+    window.addEventListener('resize', debounce(this.handleOnResize), {passive: true});
   }
 
   updateUrlHash(index = 0) {
