@@ -76,6 +76,10 @@ a.ProjectLogo {
 }
 
 .ContentBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
   & + & {
     margin-top: 3.2rem;
 
@@ -89,14 +93,24 @@ a.ProjectLogo {
       display: none;
     }
   }
+
+  .Heading {
+    flex: 1 1 100%;
+  }
 }
 
 ///
 /// Badge
 .Badge {
-  padding: get-spacing(tighter);
+  flex: 0 0 auto;
+  padding: get-spacing(tightest);
   border-radius: get-radius();
-  border: 1px solid white;
+  // Using `border` would sometimes cause bad aliasing
+  box-shadow: 0 0 0 0.2rem white;
+
+  @media only screen and (min-width: get-breakpoint(tablet)) {
+    padding: get-spacing(tighter);
+  }
 
   .Heading {
     color: white;
