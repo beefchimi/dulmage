@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.CommerceAwards {
+  background-image: asset-url('bg-commerce-awards.png');
+
+  .ProjectLogo {
+    width: 10rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 16rem;
+    }
+  }
+}
