@@ -3,7 +3,9 @@ import BodyMindChange from './BodyMindChange';
 import NorthernArmy from './NorthernArmy';
 import Fringe from './Fringe';
 import NorthNavy from './NorthNavy';
+import CommerceAwards from './CommerceAwards';
 import NorthernArmy2012 from './NorthernArmy2012';
+import PartnersAcademy from './PartnersAcademy';
 import Pukeko from './Pukeko';
 import Chicken from './Chicken';
 
@@ -13,7 +15,9 @@ const Projects = [
   NorthernArmy,
   Fringe,
   NorthNavy,
+  CommerceAwards,
   NorthernArmy2012,
+  PartnersAcademy,
   Pukeko,
   Chicken,
 ];
