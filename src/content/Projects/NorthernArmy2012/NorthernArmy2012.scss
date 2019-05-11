@@ -3,8 +3,9 @@
 .NorthernArmy2012 {
   background-image: asset-url('bg-northern-army-2012.png');
 
+  // Consistent with other instances of the NA logo
   .ProjectLogo {
-    width: 16.1rem;
+    width: 16rem;
 
     @media only screen and (min-width: get-breakpoint(tablet)) {
       width: 22rem;
