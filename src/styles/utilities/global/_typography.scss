@@ -5,6 +5,12 @@
 
 @import 'utilities/shared/typography';
 
+.text-break {
+  // TODO: Might be able to replace with more modern techniques,
+  // such as `overflow-wrap: break-word`
+  display: block;
+}
+
 .text-truncate {
   @include text-truncate;
 }
