@@ -22,12 +22,14 @@ const introMedia = [
 const projectsMedia = [
   'dist/assets/img/bg-body-mind-change.png',
   // 'dist/assets/img/bg-chicken.png',
+  'dist/assets/img/bg-commerce-awards.png',
   'dist/assets/img/bg-fringe.png',
   'dist/assets/img/bg-northern-army.png',
   'dist/assets/img/bg-northern-army-2012.png',
   'dist/assets/img/bg-north-navy.png',
+  'dist/assets/img/bg-partners-academy.png',
+  'dist/assets/img/bg-polaris-styleguide.png',
   'dist/assets/img/bg-preservation-society.png',
-  'dist/assets/img/bg-pukeko.png',
 ];
 
 const cacheManifest = [
