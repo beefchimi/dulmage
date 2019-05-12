@@ -4,7 +4,8 @@
       "babel-preset-shopify/web",
       {
         "babel-preset-shopify/web": {
-          "modules": false
+          "modules": false,
+          "useBuiltIns": "entry"
         }
       }
     ]

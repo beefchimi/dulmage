@@ -6,7 +6,7 @@ import NorthNavy from './NorthNavy';
 import CommerceAwards from './CommerceAwards';
 import NorthernArmy2012 from './NorthernArmy2012';
 import PartnersAcademy from './PartnersAcademy';
-import Pukeko from './Pukeko';
+import PolarisStyleguide from './PolarisStyleguide';
 import Chicken from './Chicken';
 
 const Projects = [
@@ -18,7 +18,7 @@ const Projects = [
   CommerceAwards,
   NorthernArmy2012,
   PartnersAcademy,
-  Pukeko,
+  PolarisStyleguide,
   Chicken,
 ];
 
