@@ -2,9 +2,9 @@ const Chicken = {
   title: 'Chicken',
   attribution: 'Rene Antunes',
   channels: {
-    red: 192,
-    green: 106,
-    blue: 30,
+    red: 248,
+    green: 61,
+    blue: 74,
   },
 };
 
