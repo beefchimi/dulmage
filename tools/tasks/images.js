@@ -14,7 +14,7 @@ const extImages = '*.+(jpeg|jpg|png|gif)';
 export const pngOptions = {
   speed: 1,
   strip: true,
-  quality: [0.4, 0.8],
+  quality: [0.4, 0.9],
 };
 const mozJpegOptions = {
   quality: 65,

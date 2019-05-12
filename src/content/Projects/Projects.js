@@ -1,3 +1,4 @@
+import Draggable from './Draggable';
 import PreservationSociety from './PreservationSociety';
 import BodyMindChange from './BodyMindChange';
 import NorthernArmy from './NorthernArmy';
@@ -10,6 +11,7 @@ import PolarisStyleguide from './PolarisStyleguide';
 import Chicken from './Chicken';
 
 const Projects = [
+  Draggable,
   PreservationSociety,
   BodyMindChange,
   NorthernArmy,
