@@ -31,6 +31,7 @@ const projectsMedia = [
   'dist/assets/img/bg-partners-academy.png',
   'dist/assets/img/bg-polaris-styleguide.png',
   'dist/assets/img/bg-preservation-society.png',
+  'dist/assets/img/bg-sandwich-video.png',
 ];
 
 const cacheManifest = [

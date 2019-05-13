@@ -1,27 +1,29 @@
-import Draggable from './Draggable';
 import PreservationSociety from './PreservationSociety';
 import BodyMindChange from './BodyMindChange';
+import Draggable from './Draggable';
 import NorthernArmy from './NorthernArmy';
 import Fringe from './Fringe';
 import NorthNavy from './NorthNavy';
+import SandwichVideo from './SandwichVideo';
 import CommerceAwards from './CommerceAwards';
 import NorthernArmy2012 from './NorthernArmy2012';
 import PartnersAcademy from './PartnersAcademy';
-import PolarisStyleguide from './PolarisStyleguide';
 import Chicken from './Chicken';
+import PolarisStyleguide from './PolarisStyleguide';
 
 const Projects = [
-  Draggable,
   PreservationSociety,
   BodyMindChange,
+  Draggable,
   NorthernArmy,
   Fringe,
   NorthNavy,
+  SandwichVideo,
   CommerceAwards,
   NorthernArmy2012,
   PartnersAcademy,
-  PolarisStyleguide,
   Chicken,
+  PolarisStyleguide,
 ];
 
 const PROJECTS_ATTRIBUTION_ATTR = 'data-attribution-project';

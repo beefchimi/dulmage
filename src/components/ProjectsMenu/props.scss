@@ -8,7 +8,7 @@ $projects-menu-item-shift-x: 0.3rem;
   @return $y $padding-right $y $x;
 }
 
-$projects-count: 12;
+$projects-count: 14;
 
 $projects-menu-bottom: (get-spacing(tight) * 2) + ($hamburger-padding * 2) + $hamburger-height;
 $projects-menu-bottom-desktop: (get-spacing() * 2) + ($hamburger-padding * 2) + $hamburger-height;
