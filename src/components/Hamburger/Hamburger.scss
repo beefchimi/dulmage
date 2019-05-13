@@ -42,6 +42,7 @@
   width: 100%;
   height: $hamburger-line-height;
   overflow: hidden;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.4);
   animation-duration: get-duration();
   animation-timing-function: get-easing();
   animation-fill-mode: both;

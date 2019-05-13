@@ -1,0 +1,13 @@
+@import 'utilities/shared/functions';
+
+.SandwichVideo {
+  background-image: asset-url('bg-sandwich-video.png');
+
+  .ProjectLogo {
+    width: 16rem;
+
+    @media only screen and (min-width: get-breakpoint(tablet)) {
+      width: 22rem;
+    }
+  }
+}
