@@ -12,7 +12,7 @@ export default class Portfolio {
   constructor() {
     this.portfolio = document.documentElement;
     this.sections = document.querySelectorAll('.Section');
-    this.windowHeight = 0;
+    this.sectionHeight = 0;
     this.documentHeight = 0;
     this._index = 0;
     this._channels = {
@@ -29,7 +29,7 @@ export default class Portfolio {
   }
 
   get currentIndex() {
-    const calculatedIndex = Math.floor(window.scrollY / this.windowHeight);
+    const calculatedIndex = Math.floor(window.scrollY / this.sectionHeight);
     return isNaN(calculatedIndex) ? 0 : calculatedIndex;
   }
 
@@ -56,7 +56,7 @@ export default class Portfolio {
   }
 
   get sectionScrollProgress() {
-    return ((this._index * this.windowHeight - window.scrollY) / this.windowHeight) * 100;
+    return ((this._index * this.sectionHeight - window.scrollY) / this.sectionHeight) * 100;
   }
 
   init() {
@@ -70,7 +70,7 @@ export default class Portfolio {
   }
 
   cacheHeightValues() {
-    this.windowHeight = window.innerHeight;
+    this.sectionHeight = this.sections[0].clientHeight;
     this.documentHeight = document.documentElement.scrollHeight;
   }
 
