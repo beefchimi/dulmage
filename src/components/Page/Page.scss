@@ -18,6 +18,7 @@ html {
 
 body {
   @include fade-in;
+  animation-delay: get-duration();
   position: relative;
   cursor: get-cursor();
 }
