@@ -1,3 +1,5 @@
 .Portfolio {
   background-color: var(--dulmage-color);
+  // Required to prevent horizontal scrolling
+  overflow: hidden;
 }
