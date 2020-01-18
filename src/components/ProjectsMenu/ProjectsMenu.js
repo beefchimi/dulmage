@@ -26,7 +26,7 @@ export default class ProjectsMenu {
 
     const anchorId = getAnchorIdFromLink(event.currentTarget);
 
-    if (!this.anchors.hasOwnProperty(anchorId)) {
+    if (!Object.prototype.hasOwnProperty.call(this.anchors, anchorId)) {
       this.anchors[anchorId] = document.getElementById(anchorId);
     }
 
