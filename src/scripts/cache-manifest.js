@@ -1,6 +1,7 @@
 const views = ['dist/404.html', 'dist/index.html'];
 const styles = ['dist/assets/css/app.css'];
-const scripts = ['dist/assets/js/app.js', 'dist/assets/js/runtime.js', 'dist/assets/js/vendor.js'];
+// Removed: 'dist/assets/js/vendor.js'
+const scripts = ['dist/assets/js/app.js', 'dist/assets/js/runtime.js'];
 const uiMedia = [
   'dist/assets/img/cursor-auto.png',
   'dist/assets/img/cursor-text.png',
