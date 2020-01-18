@@ -22,7 +22,7 @@ export default function secretEmail(
   const {local, domain, suffix} = email;
   const address = `${local}@${domain}.${suffix}`;
 
-  [...links].forEach(link => {
+  [...links].forEach((link) => {
     if (link.classList.contains(classNames.replace)) {
       link.textContent = address;
     }

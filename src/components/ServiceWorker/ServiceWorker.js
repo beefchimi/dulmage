@@ -5,10 +5,10 @@ const swFilename = 'service-worker.js';
 function register() {
   navigator.serviceWorker
     .register(swFilename)
-    .then(registration => {
+    .then((registration) => {
       return install(registration);
     })
-    .catch(error => {
+    .catch((error) => {
       console.warn(`Error during service worker registration: ${error.message}`);
     });
 }
@@ -16,14 +16,14 @@ function register() {
 function unregister() {
   navigator.serviceWorker
     .getRegistrations()
-    .then(registrations => {
+    .then((registrations) => {
       for (const registration of registrations) {
         registration.unregister();
       }
 
       return registrations;
     })
-    .catch(error => {
+    .catch((error) => {
       console.warn(`Error unregistering service worker: ${error.message}`);
     });
 }

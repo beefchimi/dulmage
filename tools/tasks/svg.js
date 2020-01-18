@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import rename from 'gulp-rename';
 import imagemin from 'gulp-imagemin';
 import svgstore from 'gulp-svgstore';
+
 import {renameSvg} from '../utilities';
 
 export const srcMediaSvg = 'src/media/svg/**/*.svg';

@@ -25,8 +25,8 @@ export function images() {
     .src([`${srcMediaImages}**/${extImages}`, `${srcAssetsImages}/${extImages}`])
     .pipe(imagemin([pngQuant(pngOptions), mozJpeg(mozJpegOptions)]))
     .pipe(
-      rename(path => {
-        const removeDirname = assetsBlacklist.some(assetPath => path.dirname.includes(assetPath));
+      rename((path) => {
+        const removeDirname = assetsBlacklist.some((assetPath) => path.dirname.includes(assetPath));
         path.dirname = removeDirname ? '' : path.dirname;
       }),
     )

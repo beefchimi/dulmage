@@ -3,11 +3,11 @@ import gulp from 'gulp';
 import data from 'gulp-data';
 import inject from 'gulp-inject';
 import htmlmin from 'gulp-htmlmin';
-
 import nunjucks from 'nunjucks';
 import gulpjucks from 'gulp-nunjucks';
 
 import {fileContentsToString} from '../utilities';
+
 import {distSvg, fileSymbols} from './svg';
 
 // eslint-disable-next-line no-undef

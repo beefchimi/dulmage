@@ -1,4 +1,5 @@
 import path from 'path';
+
 import initPlugins from './webpack.plugins';
 
 // eslint-disable-next-line no-undef

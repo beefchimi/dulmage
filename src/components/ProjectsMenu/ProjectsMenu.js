@@ -18,7 +18,7 @@ export default class ProjectsMenu {
       return;
     }
 
-    this.links.forEach(link => link.addEventListener('click', this.scrollToAnchor));
+    this.links.forEach((link) => link.addEventListener('click', this.scrollToAnchor));
   }
 
   _scrollToAnchor(event) {

@@ -1,4 +1,5 @@
 import {startServer} from '../server';
+
 import {favicons} from './favicons';
 import {fonts} from './fonts';
 import {images} from './images';
