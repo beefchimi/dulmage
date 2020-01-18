@@ -52,7 +52,7 @@
 // Toggle visibility + opacity + pointer-events
 // @param {Boolean} $state - Switch visibility "on" `(true)` or "off" `(false)`. Defaults to `true`.
 @mixin visible($isVisible: true) {
-  @if ($isVisible) {
+  @if $isVisible {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -106,7 +106,7 @@
   position: relative;
   overflow: hidden;
 
-  @if ($pseudo) {
+  @if $pseudo {
     &::before {
       @include _aspect-ratio-padding-top($ratio-percentage);
       content: '';
