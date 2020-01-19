@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import rename from 'gulp-rename';
 import imagemin from 'gulp-imagemin';
-import mozJpeg from 'imagemin-mozjpeg';
 import pngQuant from 'imagemin-pngquant';
 
 const assetsBlacklist = ['content/', 'components/'];
@@ -23,7 +22,7 @@ const mozJpegOptions = {
 export function images() {
   return gulp
     .src([`${srcMediaImages}**/${extImages}`, `${srcAssetsImages}/${extImages}`])
-    .pipe(imagemin([pngQuant(pngOptions), mozJpeg(mozJpegOptions)]))
+    .pipe(imagemin([pngQuant(pngOptions), imagemin.mozjpeg(mozJpegOptions)]))
     .pipe(
       rename((path) => {
         const removeDirname = assetsBlacklist.some((assetPath) => path.dirname.includes(assetPath));

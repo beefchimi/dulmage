@@ -69,7 +69,6 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svgstore": "^7.0.1",
-    "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^8.0.0",
     "install": "^0.13.0",
     "nunjucks": "^3.2.0",
