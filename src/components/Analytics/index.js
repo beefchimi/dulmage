@@ -22,7 +22,7 @@ export default class Analytics {
         gtag('js', new Date());
         gtag('config', this.ua);
 
-        this.elements.forEach(element => {
+        this.elements.forEach((element) => {
           this._clickHandler(element);
           this._auxHandler(element);
         });
@@ -31,7 +31,7 @@ export default class Analytics {
 
         return window.dataLayer;
       })
-      .catch(error => console.warn(error));
+      .catch((error) => console.warn(error));
   }
 
   _appendScript() {

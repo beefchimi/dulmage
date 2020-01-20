@@ -1,12 +1,17 @@
 {
   "recommendations": [
+    "bungcip.better-toml",
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
     "codezombiech.gitignore",
+    "DavidAnson.vscode-markdownlint",
     "dbaeumer.vscode-eslint",
     "EditorConfig.editorconfig",
     "esbenp.prettier-vscode",
+    "Gruntfuggly.todo-tree",
+    "hex-ci.stylelint-plus",
+    "mariusschulz.yarn-lock-syntax",
     "mrmlnc.vscode-scss",
-    "shinnn.stylelint"
+    "ronnidc.nunjucks"
   ]
 }

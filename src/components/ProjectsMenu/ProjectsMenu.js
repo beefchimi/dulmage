@@ -18,7 +18,7 @@ export default class ProjectsMenu {
       return;
     }
 
-    this.links.forEach(link => link.addEventListener('click', this.scrollToAnchor));
+    this.links.forEach((link) => link.addEventListener('click', this.scrollToAnchor));
   }
 
   _scrollToAnchor(event) {
@@ -26,7 +26,7 @@ export default class ProjectsMenu {
 
     const anchorId = getAnchorIdFromLink(event.currentTarget);
 
-    if (!this.anchors.hasOwnProperty(anchorId)) {
+    if (!Object.prototype.hasOwnProperty.call(this.anchors, anchorId)) {
       this.anchors[anchorId] = document.getElementById(anchorId);
     }
 

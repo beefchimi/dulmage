@@ -1,4 +1,5 @@
 import browsersync from 'browser-sync';
+
 import {serviceWorker} from './index';
 
 export const server = browsersync.create();

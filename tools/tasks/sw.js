@@ -1,7 +1,9 @@
 import gulp from 'gulp';
 import noop from 'gulp-noop';
 import inject from 'gulp-inject';
+
 import {fileContentsManifest} from '../utilities';
+
 import {assetsManifestPath} from './revision';
 
 // eslint-disable-next-line no-undef

@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import imagemin from 'gulp-imagemin';
 import pngQuant from 'imagemin-pngquant';
+
 import {pngOptions} from './images';
 
 const srcFavicon = 'src/media/favicons/*.png';
