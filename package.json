@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.8.2",
-    "astro": "^4.12.1",
+    "astro": "^4.12.2",
     "beeftools": "^0.1.5",
     "typescript": "^5.5.3"
   },

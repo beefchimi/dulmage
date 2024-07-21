@@ -71,8 +71,10 @@ const {id, title = DEFAULT_TITLE} = Astro.props;
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4G2VKG5NK2"
-    ></script>
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4G2VKG5NK2"></script>
     <script is:inline>
       if (window.location.hostname === 'localhost') return;
 
