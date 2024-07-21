@@ -1,0 +1,19 @@
+name: 🗃️ PR Labels
+on: [pull_request_target]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: 🗳️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🍭 Apply PR labels
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

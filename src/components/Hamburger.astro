@@ -1,0 +1,286 @@
+---
+interface Props {
+  id: string;
+  controlsId: string;
+}
+
+const {id, controlsId} = Astro.props;
+---
+
+<button
+  type="button"
+  id={id}
+  class="focus-ring Hamburger"
+  aria-controls={controlsId}
+  aria-expanded="false"
+  data-toggler-state="idle"
+>
+  <div class="Bun">
+    <div class="Patty patty1"></div>
+    <div class="Patty patty2"></div>
+    <div class="Patty patty3"></div>
+  </div>
+</button>
+
+<style>
+  @import '@styles/shared.css';
+
+  :root {
+    --hamburger-width-min: 2.4rem;
+    --hamburger-width-max: 3rem;
+    --hamburger-height: 2rem;
+    --hamburger-line-height: 0.3rem;
+    --hamburger-padding: var(--space-tightest);
+
+    /* Computed value: `height - line-height` */
+    --hamburger-patty3-y: 1.7rem;
+
+    /* Computed value: `height / 2 - line-height / 2` */
+    --hamburger-vertical-center: 0.85rem;
+  }
+
+  /* --- Keyframes --- */
+
+  @keyframes enterLeft {
+    0% {
+      translate: -100% 0;
+    }
+
+    100% {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes enterRight {
+    0% {
+      translate: 100% 0;
+    }
+
+    100% {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes expanded1 {
+    0% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    50% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 0deg;
+    }
+
+    100% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 45deg;
+    }
+  }
+
+  @keyframes collapsed1 {
+    0% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 45deg;
+    }
+
+    50% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 0deg;
+    }
+
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes expanded2 {
+    0%,
+    25% {
+      opacity: 1;
+    }
+
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes collapsed2 {
+    0%,
+    25% {
+      opacity: 0;
+    }
+
+    50%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes expanded3 {
+    0% {
+      translate: 0 var(--hamburger-patty3-y);
+      rotate: 0deg;
+    }
+
+    50% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 0deg;
+    }
+
+    100% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: -45deg;
+    }
+  }
+
+  @keyframes collapsed3 {
+    0% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: -45deg;
+    }
+
+    50% {
+      translate: 0 var(--hamburger-vertical-center);
+      rotate: 0deg;
+    }
+
+    100% {
+      translate: 0 var(--hamburger-patty3-y);
+      rotate: 0deg;
+    }
+  }
+
+  /* --- Component --- */
+
+  .Hamburger {
+    z-index: var(--index-troposphere);
+    position: fixed;
+    bottom: var(--space-tight);
+    right: var(--space-tight);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: var(--hamburger-padding);
+    width: calc(var(--hamburger-width-max) + var(--hamburger-padding) * 2);
+    color: var(--color-primary);
+
+    &:hover:not(:active) {
+      --hamburger-width-min: var(--hamburger-width-max);
+    }
+
+    @media (--min-tablet) {
+      bottom: var(--space);
+      right: var(--space);
+    }
+
+    /* Tighten the global focus ring */
+    &::before {
+      inset: -0.4rem 0;
+    }
+
+    /*
+      `data-toggler-state` has 3 values in order to
+      prevent the page-load animation from breaking.
+    */
+
+    &[data-toggler-state='inactive'] {
+      & .patty1 {
+        animation-name: collapsed1;
+      }
+
+      & .patty2 {
+        animation-name: collapsed2;
+      }
+
+      & .patty3 {
+        animation-name: collapsed3;
+      }
+    }
+
+    &[data-toggler-state='active'] {
+      & .patty1 {
+        animation-name: expanded1;
+      }
+
+      & .patty2 {
+        animation-name: expanded2;
+      }
+
+      & .patty3 {
+        animation-name: expanded3;
+      }
+    }
+  }
+
+  .Bun {
+    position: relative;
+    width: var(--hamburger-width-min);
+    height: var(--hamburger-height);
+    transition: width var(--speed) var(--ease);
+  }
+
+  .Patty {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--hamburger-line-height);
+    overflow: hidden;
+    box-shadow: 0 0 0.4rem rgb(0, 0, 0, 0.2);
+    animation-duration: var(--speed);
+    animation-timing-function: var(--ease);
+    animation-fill-mode: both;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--hamburger-line-height);
+      background-color: currentColor;
+      animation-duration: var(--speed-slow);
+      animation-timing-function: var(--ease);
+      animation-fill-mode: both;
+      animation-iteration-count: once;
+    }
+  }
+
+  .patty1,
+  .patty3 {
+    top: 0;
+  }
+
+  .patty1::before,
+  .patty3::before {
+    animation-name: enterLeft;
+  }
+
+  .patty1 {
+    translate: 0 0;
+    rotate: 0deg;
+
+    &::before {
+      animation-delay: var(--speed-fastest);
+    }
+  }
+
+  .patty2 {
+    top: var(--hamburger-vertical-center);
+
+    &::before {
+      animation-name: enterRight;
+      animation-delay: var(--speed);
+    }
+  }
+
+  .patty3 {
+    translate: 0 var(--hamburger-patty3-y);
+    rotate: 0deg;
+
+    &::before {
+      animation-delay: var(--speed-slow);
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import {type SectionEntry} from '@data/types';
+import Contact from '@components/Contact.astro';
+
+interface Props {
+  id: SectionEntry['id'];
+  thumbnail: SectionEntry['thumbnail'];
+}
+
+const {id, thumbnail} = Astro.props;
+---
+
+<header id={id} class="section" style={{backgroundImage: `url(${thumbnail})`}}>
+  <article class="section-interior">
+    <div class="Content">
+      <h1 class="heading heading--1">Dulmage</h1>
+      <h2 class="heading heading--2">UX Developer</h2>
+
+      <p class="heading heading--3 visually-hidden">
+        Background image photographed by: Curtis Dulmage
+      </p>
+
+      <p class="paragraph visually-hidden preload-cursors">
+        <b>Curtis Dulmage.</b>
+        <u>Front end web developer.</u>
+        <i>Ottawa, Canada.</i> Here are a few of my most recent projects. Please
+        get in touch if you have any questions. Thank you.
+      </p>
+    </div>
+
+    <Contact />
+  </article>
+</header>
+
+<style>
+  @import '@styles/shared.css';
+
+  .Content {
+    display: grid;
+    place-items: center;
+    place-content: center;
+    gap: var(--space-tighter);
+
+    @media (--min-tablet) {
+      gap: var(--space);
+    }
+  }
+</style>

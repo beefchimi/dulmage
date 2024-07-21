@@ -1,0 +1,104 @@
+.focus-ring {
+  position: relative;
+
+  &::before {
+    content: '';
+    z-index: 1;
+    display: block;
+    position: absolute;
+    inset: var(--focus-offset);
+    border-radius: var(--radius-looser);
+    background-color: var(--color-highlight);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--speed) var(--ease);
+  }
+
+  &:focus-visible::before {
+    opacity: 1;
+  }
+}
+
+/* --- Media --- */
+
+.icon-wrapper {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+a.icon-wrapper {
+  display: block;
+}
+
+.svg-base {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: currentColor;
+}
+
+/* --- Typography --- */
+
+.line-clamp {
+  @supports (-webkit-line-clamp: 2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.truncate-height-fix {
+  margin-bottom: 0;
+  padding-bottom: 0.14em;
+}
+
+.truncate-height-fix-nudge {
+  margin-bottom: -0.14em;
+  padding-bottom: 0.14em;
+}
+
+.text-box-trim {
+  /* A rough approximation of the future `text-box-trim` property. */
+  &::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: -0.14em;
+  }
+}
+
+/* --- Layout --- */
+
+.visible-show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.visible-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}

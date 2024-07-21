@@ -1,17 +1,15 @@
 {
   "recommendations": [
-    "bungcip.better-toml",
+    "astro-build.astro-vscode",
+    "codezombiech.gitignore",
+    "github.vscode-github-actions",
+    "EditorConfig.editorconfig",
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
-    "codezombiech.gitignore",
+    "aaron-bond.better-comments",
     "DavidAnson.vscode-markdownlint",
     "dbaeumer.vscode-eslint",
-    "EditorConfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "Gruntfuggly.todo-tree",
-    "hex-ci.stylelint-plus",
-    "mariusschulz.yarn-lock-syntax",
-    "mrmlnc.vscode-scss",
-    "ronnidc.nunjucks"
-  ]
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": []
 }

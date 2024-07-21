@@ -1,0 +1,68 @@
+---
+interface Props {
+  id: string;
+}
+
+const {id} = Astro.props;
+---
+
+<aside id={id} class="ProjectOverlay" aria-hidden="true">
+  <h5 class="heading heading--5 Text">
+    <span class="Word">View</span>
+    <span class="Word">Project</span>
+  </h5>
+</aside>
+
+<style>
+  @import '@styles/shared.css';
+
+  .ProjectOverlay {
+    display: none;
+    z-index: var(--index-mesosphere);
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0, 0, 0, 0.6);
+    backdrop-filter: blur(1rem) brightness(100%);
+    pointer-events: none;
+    transition-property: backdrop-filter, opacity, visibility;
+    transition-duration: var(--speed);
+    transition-timing-function: var(--ease);
+
+    @media (--min-tablet) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &[aria-hidden='true'] {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &[aria-hidden='false'] {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &[aria-pressed] {
+      backdrop-filter: blur(1rem) brightness(80%);
+    }
+  }
+
+  .Text {
+    scale: 0.8;
+    transition: scale var(--speed) var(--ease);
+  }
+
+  .ProjectOverlay[aria-hidden='false'] .Text {
+    scale: 1;
+  }
+
+  .ProjectOverlay[aria-pressed] .Text {
+    scale: 0.96;
+  }
+
+  .Word {
+    display: block;
+  }
+</style>

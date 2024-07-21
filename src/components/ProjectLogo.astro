@@ -1,0 +1,151 @@
+---
+import {type ProjectEntry} from '@data/types';
+
+interface Props {
+  id: ProjectEntry['logo'];
+  name?: ProjectEntry['name'];
+  url?: ProjectEntry['url'];
+}
+
+const {id, name = '', url = ''} = Astro.props;
+const logos = await Astro.glob('../assets/svg/Logo*.astro');
+
+function getLogo(logoId: string) {
+  const foundLogo = logos.find(({file}) => file.includes(logoId));
+  // TODO: Pass back a unique fallback logo?
+  return foundLogo ? foundLogo.default : logos[0].default;
+}
+
+const LogoSvg = getLogo(id);
+const isLink = Boolean(url && name);
+---
+
+{
+  isLink ? (
+    <a
+      href={url}
+      class="focus-ring ProjectLogo"
+      title={`Visit Project: ${name}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-overlay-action
+    >
+      <LogoSvg />
+      <slot />
+    </a>
+  ) : (
+    <div class="ProjectLogo">
+      <LogoSvg />
+      <slot />
+    </div>
+  )
+}
+
+<style>
+  @import '@styles/shared.css';
+
+  :root {
+    --project-logo-size: 18rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 24rem;
+    }
+  }
+
+  .ProjectLogo {
+    width: var(--project-logo-size);
+    color: var(--color-primary);
+  }
+
+  a.ProjectLogo {
+    display: block;
+  }
+
+  div.ProjectLogo {
+    cursor: url('../assets/img/cursor-dead.png'), not-allowed;
+  }
+
+  .ProjectLogo > :global(svg) {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: currentColor;
+  }
+
+  /* Unique logo sizes per section id */
+
+  :global(#BodyMindChange) {
+    --project-logo-size: 18rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 24rem;
+    }
+  }
+
+  :global(#Chicken) {
+    --project-logo-size: 13rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 17.6rem;
+    }
+  }
+
+  :global(#CommerceAwards),
+  :global(#PartnersAcademy),
+  :global(#Polaris) {
+    --project-logo-size: 10rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 16rem;
+    }
+  }
+
+  :global(#Draggable) {
+    --project-logo-size: 10rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 14rem;
+    }
+  }
+
+  :global(#Fringe) {
+    --project-logo-size: 20rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 26rem;
+    }
+  }
+
+  :global(#NorthernArmy),
+  :global(#NorthernArmy2012) {
+    --project-logo-size: 16rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 22rem;
+    }
+  }
+
+  :global(#NorthNavy) {
+    --project-logo-size: 16rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 22rem;
+    }
+  }
+
+  :global(#PreservationSociety) {
+    --project-logo-size: 12rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 17rem;
+    }
+  }
+
+  :global(#SandwichVideo) {
+    --project-logo-size: 16rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 22rem;
+    }
+  }
+</style>

@@ -1,0 +1,11 @@
+/*
+  TODO: Figure out how to make these custom rules
+  available to all files, without needing to
+  manually import them for each use.
+*/
+
+@custom-media --before-tablet (width < 768px);
+@custom-media --before-desktop (width < 1440px);
+@custom-media --min-tablet (width >= 768px);
+@custom-media --min-desktop (width >= 1440px);
+@custom-media --max-phone-height (height <= 480px);

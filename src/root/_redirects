@@ -1,8 +1,0 @@
-# These rules will change if you change your site’s custom domains or HTTPS settings
-
-# Redirect domain aliases to primary domain
-https://pixelstarship.ca/* https://www.dulmage.me/:splat 301!
-https://curtisdulmage.com/* https://www.dulmage.me/:splat 301!
-
-# Optional: Redirect default Netlify subdomain to primary domain
-# https://dulmage.netlify.com/* https://www.dulmage.me/:splat 301!

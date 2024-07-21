@@ -1,0 +1,297 @@
+@import './shared.css';
+
+:root {
+  --color-portfolio: rgb(0, 0, 0);
+  --color-primary: rgb(255, 255, 255, 1);
+  --color-highlight: rgb(0, 0, 0, 0.1);
+
+  --index-surface: 100;
+  --index-troposphere: 200;
+  --index-stratosphere: 300;
+  --index-mesosphere: 400;
+  --index-thermosphere: 500;
+  --index-exosphere: 600;
+  --index-outerspace: 700;
+
+  --space-tightest: 0.8rem;
+  --space-tighter: 1.6rem;
+  --space-tight: 2.4rem;
+  --space: 3.2rem;
+  --space-loose: 4rem;
+  --space-looser: 4.8rem;
+  --space-loosest: 5.6rem;
+  --space-fat: 6.4rem;
+  --space-fatter: 7.2rem;
+  --space-fattest: 8rem;
+
+  --radius-tight: 0.1rem;
+  --radius: 0.3rem;
+  --radius-loose: 0.6rem;
+  --radius-looser: 0.8rem;
+
+  --speed-fastest: 30ms;
+  --speed-faster: 60ms;
+  --speed-fast: 120ms;
+  --speed: 240ms;
+  --speed-slow: 480ms;
+  --speed-slower: 960ms;
+  --speed-slowest: 1920ms;
+
+  /* Consider: `--ease: cubic-bezier(0.6, 0, 0.2, 1)` */
+  --ease: cubic-bezier(0.64, 0, 0.32, 1);
+  --ease-excite: cubic-bezier(0.18, 0.66, 0.6, 1.22);
+  --ease-bungie: cubic-bezier(0.32, 1.46, 0.54, 1.28);
+  --ease-anticipate: cubic-bezier(0.38, -0.4, 0.84, 0.44);
+
+  --focus-offset: -0.6rem;
+  --icon-size: 2rem;
+
+  --p-size: 1.4rem;
+  --subhead-size: 2.2rem;
+
+  --h1-size: 3.2rem;
+  --h2-size: 2rem;
+  --h3-size: 1.2rem;
+  --h4-size: 1.8rem;
+  --h5-size: 7.2rem;
+
+  @media (--min-tablet) {
+    --h1-size: 8rem;
+    --h2-size: 2.4rem;
+    --h3-size: 1.4rem;
+    --h4-size: 2rem;
+  }
+
+  @media (--min-desktop) {
+    --p-size: 1.6rem;
+  }
+}
+
+::selection {
+  color: var(--color-primary);
+  background-color: var(--color-portfolio);
+}
+
+html {
+  background-color: var(--color-portfolio);
+}
+
+body {
+  cursor: url('../assets/img/cursor-auto.png'), auto;
+}
+
+/* --- Smooth scroll + snapping --- */
+
+html,
+body {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+main {
+  height: 100dvh;
+  overflow: scroll;
+  scroll-snap-points-y: repeat(100dvh);
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+.section {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  scroll-snap-align: start;
+  /*
+    Required to prevent content from spilling over
+    when on a very short height display.
+  */
+  overflow: hidden;
+
+  /* Background styles */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.section-interior {
+  display: grid;
+  gap: var(--space-looser);
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+
+  @media (--min-tablet) {
+    gap: var(--space-fattest);
+  }
+}
+
+/* --- Page load --- */
+/* TODO: Consider something better with `document.readystate`. */
+
+@keyframes pageLoad {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+body {
+  position: relative;
+
+  &::after {
+    content: '';
+    z-index: var(--index-outerspace);
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-color: black;
+    animation: pageLoad var(--speed-slow) var(--speed) var(--ease) forwards;
+  }
+}
+
+/* --- Typography --- */
+
+.paragraph {
+  font-size: var(--p-size);
+  text-align: center;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+.heading {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+.heading--1 {
+  font-size: var(--h1-size);
+  font-weight: 900;
+  letter-spacing: 0.8rem;
+
+  @media (--min-tablet) {
+    letter-spacing: 3rem;
+  }
+}
+
+.heading--2 {
+  font-size: var(--h2-size);
+  letter-spacing: 0.2rem;
+
+  @media (--min-tablet) {
+    letter-spacing: 0.4rem;
+  }
+}
+
+.heading--3 {
+  font-size: var(--h3-size);
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+
+  @media (--min-tablet) {
+    letter-spacing: 0.2rem;
+  }
+}
+
+.heading--4 {
+  font-size: var(--h4-size);
+  letter-spacing: 0.2rem;
+  line-height: 1.1;
+
+  @media (--min-tablet) {
+    letter-spacing: 0.3rem;
+  }
+}
+
+.heading--5 {
+  font-size: var(--h5-size);
+  font-weight: 700;
+  letter-spacing: 0.8rem;
+  line-height: 1.2;
+}
+
+.heading-link {
+  position: relative;
+  display: inline-block;
+  color: var(--color-primary);
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: calc(var(--space-tightest) * -1);
+    left: 0;
+    display: block;
+    width: 0%;
+    height: 0.1rem;
+    margin: 0 auto;
+    background-color: currentColor;
+    transition-property: width, opacity;
+    transition-duration: var(--speed);
+    transition-timing-function: var(--ease);
+  }
+
+  &:focus::before,
+  &:hover::before {
+    width: 100%;
+    opacity: 1;
+  }
+
+  &:active::before {
+    width: 60%;
+    opacity: 1;
+  }
+}
+
+/* --- Cursors --- */
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+dd,
+dt,
+pre,
+code,
+cite,
+blockquote,
+figcaption {
+  cursor: url('../assets/img/cursor-text.png'), text;
+}
+
+a,
+button {
+  &,
+  & * {
+    cursor: url('../assets/img/cursor-pointer.png'), pointer;
+  }
+
+  &:active,
+  &:active * {
+    cursor: url('../assets/img/cursor-pointer-clicked.png'), pointer;
+  }
+}
+
+/*
+.preload-cursors b {
+  cursor: url('../assets/img/cursor-drag-clicked.png'), auto;
+}
+*/
+
+.preload-cursors u {
+  cursor: url('../assets/img/cursor-pointer-clicked.png'), pointer;
+}
+
+.preload-cursors i {
+  cursor: url('../assets/img/cursor-rock-clicked.png'), pointer;
+}

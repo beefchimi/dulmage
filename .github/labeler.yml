@@ -1,0 +1,35 @@
+🧰 Dependency:
+  - changed-files:
+      - any-glob-to-any-file: 'package-lock.json'
+
+📚 Documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['README.md', 'docs/**']
+
+⚖️ Legal:
+  - changed-files:
+      - any-glob-to-any-file: 'LICENSE'
+
+🧪 Testing:
+  - changed-files:
+      - any-glob-to-any-file: '**/*.test.ts'
+
+🛠️ Tooling:
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            '.astro/**',
+            '.github/**',
+            '.vscode/**',
+            '.editorconfig',
+            '.gitignore',
+            '.npmignore',
+            '.nvmrc',
+            '.prettierignore',
+            '.prettierrc',
+            'config/**',
+            'astro.config.mjs',
+            'eslint.config.mjs',
+            'package.json',
+            'tsconfig.json',
+          ]

@@ -1,0 +1,59 @@
+---
+import Page from '@layouts/Page.astro';
+import Stars from '@components/Stars.astro';
+---
+
+<Page
+  id="Page404"
+  title="Anomaly detected | Curtis Dulmage | UX Developer / Ottawa Canada"
+>
+  <main id="Main404">
+    <Stars />
+
+    <section id="Section404" class="section">
+      <article class="section-interior">
+        <div class="ErrorContent">
+          <h1 class="heading heading--1">Error 404</h1>
+          <h2 class="heading heading--2">
+            You have encountered a catastrophic error. Please evacuate the
+            internet.
+          </h2>
+
+          <h4 class="heading heading--4">
+            <a href="/" class="heading-link" title="Return to home page"
+              >Emergency Eject</a
+            >
+          </h4>
+        </div>
+      </article>
+    </section>
+  </main>
+</Page>
+
+<style>
+  @property --color-rainbow {
+    initial-value: 0deg;
+    inherits: false;
+    syntax: '<angle>';
+  }
+
+  @keyframes rainbowSpin {
+    0%,
+    10% {
+      --color-rainbow: 0deg;
+    }
+    100% {
+      --color-rainbow: 360deg;
+    }
+  }
+
+  .ErrorContent {
+    --color-portfolio: hsl(var(--color-rainbow) 100% 50%);
+    display: grid;
+    gap: var(--space-tight);
+    justify-content: center;
+    text-align: center;
+    max-width: 80rem;
+    animation: rainbowSpin 4s linear infinite both;
+  }
+</style>

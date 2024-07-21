@@ -1,0 +1,26 @@
+name: 🤖 Lint
+on: [push]
+
+jobs:
+  lint:
+    name: Lint the codebase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🗳️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Lint
+        run: npm run lint
+
+      - name: 💄 Prettier
+        run: npm run format

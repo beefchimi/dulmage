@@ -1,9 +1,0 @@
-.Error404 {
-  .Heading--4 {
-    margin-top: get-spacing(loose);
-
-    @media only screen and (min-width: get-breakpoint(tablet)) {
-      margin-top: get-spacing(fattest);
-    }
-  }
-}

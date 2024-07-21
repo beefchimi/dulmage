@@ -1,81 +1,56 @@
 {
   "name": "dulmage.me",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Hello and welcome to my portfolio.",
   "author": "Curtis Dulmage",
-  "homepage": "https://dulmage.me/",
   "license": "UNLICENSED",
-  "main": "tools/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/beefchimi/dulmage.git"
-  },
   "keywords": [
     "dulmage",
     "portfolio",
     "development"
   ],
+  "homepage": "https://dulmage.me/",
   "bugs": {
     "url": "https://github.com/beefchimi/dulmage/issues"
   },
-  "config": {
-    "tools": "--require @babel/register --gulpfile tools"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beefchimi/dulmage.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.4.0",
+    "npm": ">=10.8.0"
   },
   "scripts": {
-    "build": "yarn run clean && NODE_ENV=production gulp build $npm_package_config_tools",
-    "clean": "rm -rf dist assets-manifest.json bundle-report.html",
-    "clean:scripts": "rm -rf dist/assets/js dist/sw.*",
-    "media": "gulp parallelMedia $npm_package_config_tools",
-    "views": "gulp parallelViews $npm_package_config_tools",
-    "svg": "gulp svg $npm_package_config_tools",
-    "scripts": "yarn run clean:scripts && gulp scripts $npm_package_config_tools",
-    "styles": "gulp styles $npm_package_config_tools",
-    "sw": "NODE_ENV=production gulp serviceWorker $npm_package_config_tools",
-    "start": "gulp start $npm_package_config_tools",
-    "start:prod": "NODE_ENV=production gulp server $npm_package_config_tools",
-    "lint": "yarn run lint:scss && yarn run lint:js",
-    "lint:scss": "stylelint './src/**/*.scss'",
-    "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
-    "prettier": "yarn run prettier:scss && yarn run prettier:js",
-    "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
-    "prettier:js": "yarn run lint:js --fix",
-    "prepublish": "yarn run build"
+    "clean": "rm -rf dev-dist && rm -rf dist && rm -rf node_modules/.cache && rm -rf node_modules/.vite",
+    "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force",
+    "astro": "astro",
+    "start": "astro dev",
+    "build": "npm run clean && astro check && astro build",
+    "preview": "astro preview",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "check": "astro check",
+    "test": "echo 'There is no testing suite set up for this app.'"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "threads-scss": "^1.0.0"
+    "@astrojs/check": "^0.8.2",
+    "astro": "^4.12.1",
+    "beeftools": "^0.1.5",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/register": "^7.8.3",
-    "autoprefixer": "^9.7.4",
-    "babel-loader": "^8.0.6",
-    "babel-preset-shopify": "^21.0.0",
-    "browser-sync": "^2.26.7",
-    "cssnano": "^4.1.10",
-    "cssnano-preset-advanced": "^4.0.7",
-    "eslint": "^6.8.0",
-    "eslint-plugin-shopify": "^34.0.0",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.2.0",
-    "gulp-data": "^1.3.1",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^7.0.0",
-    "gulp-inject": "^5.0.5",
-    "gulp-noop": "^1.0.0",
-    "gulp-nunjucks": "^5.0.1",
-    "gulp-postcss": "^8.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-svgstore": "^7.0.1",
-    "imagemin-pngquant": "^8.0.0",
-    "nunjucks": "^3.2.0",
-    "prettier-stylelint": "^0.4.2",
-    "rev-hash": "^3.0.0",
-    "stylelint": "^13.0.0",
-    "stylelint-config-shopify": "^7.4.0",
-    "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.6.0"
+    "@typescript-eslint/parser": "^7.16.1",
+    "@vite-pwa/astro": "^0.4.0",
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "eslint": "^8.56.0",
+    "eslint-plugin-astro": "^1.2.3",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "lightningcss": "^1.25.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
