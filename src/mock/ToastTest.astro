@@ -14,7 +14,7 @@
 
 <style>
   .ToastTest {
-    z-index: var(--index-troposphere);
+    z-index: var(--index-thermosphere);
     position: absolute;
     top: var(--space);
     left: var(--space);
@@ -169,7 +169,7 @@
       (event) => {
         console.log('This Toast has just been removed!', newId, event);
         removeItem(newIndex);
-      },
+      }
     );
 
     console.log('A new Toast has just been created!', newId);

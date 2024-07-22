@@ -145,7 +145,7 @@ body {
 
   &::after {
     content: '';
-    z-index: var(--index-outerspace);
+    z-index: var(--index-mesosphere);
     position: fixed;
     inset: 0;
     pointer-events: none;
