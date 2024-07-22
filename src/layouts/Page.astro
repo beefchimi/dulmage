@@ -8,6 +8,8 @@ import '@styles/utility.css';
 import {TOAST_TMPL_ID} from '@data/app';
 import Toast from '@components/Toast.astro';
 
+// import ToastTest from '@mock/ToastTest.astro';
+
 interface Props {
   id: string;
   title?: string;
@@ -112,10 +114,13 @@ const OG_IMAGE = '/assets/dulmage-social.png';
 </html>
 
 <style>
-  /* Horizontal centering is required for Toast components */
+  /*
+    Horizontal centering is required for Toast components.
+    `display grid / justify-items` does not work correctly in Safari.
+  */
   body {
-    display: grid;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
   }
 </style>
 
