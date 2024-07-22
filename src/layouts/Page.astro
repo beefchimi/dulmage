@@ -64,7 +64,11 @@ const OG_IMAGE = new URL('/assets/dulmage-social.png', Astro.site).href;
     <!-- <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml"> -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.png" sizes="any" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <!-- Workaround for `@vite-pwa/assets-generator` adding a thick white border -->
+    <link
+      rel="apple-touch-icon"
+      href="/custom-pwa/apple-touch-icon-180x180.png"
+    />
 
     <!-- Open Graph meta -->
     <meta property="og:type" content="website" />
