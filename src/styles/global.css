@@ -147,6 +147,17 @@ main {
   overflow: hidden;
 }
 
+/*
+  TODO: Experiment with this when Safari has better support.
+  At the moment, the site in "web app view" does not stretch
+  the full height of the viewport (likely because of `svh`).
+*/
+/*
+.section:fullscreen {
+  height: 100dvh;
+}
+*/
+
 .section-interior {
   display: grid;
   gap: var(--space-looser);
