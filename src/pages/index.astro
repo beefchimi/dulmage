@@ -49,7 +49,8 @@ const [intro, ...portfolioSections] = sections;
   const overlayInstance = new Overlay(OVERLAY_ID);
   overlayInstance.init();
 
-  const portfolioInstance = new Portfolio({scroller: 'main'});
+  // Only pass `{scroller: 'main'}` is we want scroll-snapping.
+  const portfolioInstance = new Portfolio();
   portfolioInstance.init();
 
   const emailInstance = new SecretEmail(PERSONAL_EMAIL);
