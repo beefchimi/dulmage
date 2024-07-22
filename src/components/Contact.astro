@@ -1,0 +1,137 @@
+---
+import {SecretEmail} from '@scripts/SecretEmail';
+---
+
+<a
+  href="#SecretEmail"
+  id="Contact"
+  class:list={['focus-ring', 'Contact', SecretEmail.defaultSecretClass]}
+  title="Send me an email"
+>
+  <div class="PaperPlaneWrapper">
+    <svg
+      class="PaperPlane"
+      viewBox="0 0 46 46"
+      xmlns="https://www.w3.org/2000/svg"
+    >
+      <path
+        class="PaperPlanePath inside"
+        d="M21.593,31.079l21.212,-25.23l-27.67,20.959"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-miterlimit="10"
+        stroke-width="2.8"></path>
+
+      <path
+        class="PaperPlanePath outside"
+        d="M15.035,26.817l0,12.053l6.558,-7.79l10.978,10.183l10.234,-35.412l-40.32,16.469l12.55,4.497Z"
+        stroke-miterlimit="10"
+        stroke-width="2.8"></path>
+    </svg>
+  </div>
+
+  <div class="LabelWrapper">
+    <p class="Label">Mail Me</p>
+  </div>
+</a>
+
+<style>
+  @import '@styles/shared.css';
+
+  @keyframes svgStrokeTrace {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  :root {
+    --svg-mail-size: 4.6rem;
+    --label-max-width: 0rem;
+    --label-opacity: 0;
+    --label-offset-x: 0;
+  }
+
+  .Contact {
+    z-index: var(--index-surface);
+    position: absolute;
+    bottom: var(--space-tight);
+    left: var(--space-tight);
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    color: var(--color-primary);
+    border-radius: var(--radius);
+    transition: opacity var(--speed) var(--ease);
+
+    &:hover {
+      --label-max-width: 14rem;
+      --label-opacity: 1;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+
+    @media (--min-tablet) {
+      bottom: var(--space);
+      left: var(--space);
+    }
+  }
+
+  /* --- SVG --- */
+
+  .PaperPlaneWrapper {
+    position: relative;
+    z-index: 2;
+    width: var(--svg-mail-size);
+    height: var(--svg-mail-size);
+  }
+
+  .PaperPlane {
+    fill: none;
+  }
+
+  .PaperPlanePath {
+    stroke: currentColor;
+    animation-name: svgStrokeTrace;
+    animation-duration: calc(var(--speed-slower) + var(--speed-slow));
+    animation-timing-function: var(--ease);
+    animation-fill-mode: forwards;
+  }
+
+  .inside {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation-delay: var(--speed);
+  }
+
+  .outside {
+    stroke-dasharray: 134;
+    stroke-dashoffset: 134;
+    animation-delay: var(--speed-faster);
+  }
+
+  /* --- Label --- */
+
+  .LabelWrapper {
+    position: relative;
+    z-index: 3;
+    max-width: var(--label-max-width);
+    overflow: hidden;
+    opacity: var(--label-opacity);
+    transition-property: max-width, opacity;
+    transition-duration: var(--speed);
+    transition-timing-function: var(--ease);
+  }
+
+  .Label {
+    display: block;
+    padding-left: 1rem;
+    font-size: var(--h4-size);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+    color: currentColor;
+  }
+</style>

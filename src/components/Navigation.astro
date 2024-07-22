@@ -1,0 +1,228 @@
+---
+interface ItemDescriptor {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface Props {
+  id: string;
+  items?: ItemDescriptor[];
+}
+
+const {id, items = []} = Astro.props;
+---
+
+<nav class="Navigation">
+  <slot />
+
+  <ul id={id} class="List" aria-hidden="true">
+    {
+      items.map((item, index) => (
+        <li class="Item" style={{'--nav-item-index': index}}>
+          <a
+            href={`#${item.id}`}
+            class="Link"
+            title={item.description}
+            data-scroll-action
+          >
+            <span class="Label">{item.name}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  @import '@styles/shared.css';
+
+  :root {
+    /* TODO: Figure out how to share `Hamburger` variables. */
+    --hamburger-height: 2rem;
+    --hamburger-padding: var(--space-tightest);
+
+    /* Component */
+
+    --nav-offset-safety: 0.2rem;
+    --nav-item-shift-x: 0.3rem;
+
+    --nav-list-bottom: calc(
+      var(--space-tight) * 2 + var(--hamburger-padding) * 2 +
+        var(--hamburger-height)
+    );
+
+    --nav-label-padding-y: 1rem;
+    --nav-label-padding-left: 1.6rem;
+    --nav-label-padding-right: calc(
+      var(--nav-label-padding-left) + var(--nav-offset-safety) +
+        var(--nav-item-shift-x)
+    );
+
+    @media (--min-tablet) {
+      --nav-list-bottom: calc(
+        var(--space) * 2 + var(--hamburger-padding) * 2 +
+          var(--hamburger-height)
+      );
+      --nav-label-padding-y: 1.2rem;
+      --nav-label-padding-left: 2rem;
+    }
+
+    @media (--min-desktop) {
+      --nav-label-padding-y: 1.4rem;
+      --nav-label-padding-left: 2.2rem;
+    }
+  }
+
+  /*
+    Navigation will get cut off if the document height is too short,
+    so its best to just hide it.
+  */
+  .Navigation {
+    @media (--max-phone-height) {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .List {
+    position: fixed;
+    z-index: var(--index-stratosphere);
+    bottom: var(--nav-list-bottom);
+    right: 0;
+
+    &[aria-hidden='false'] {
+      width: auto;
+    }
+
+    &[aria-hidden='true'] {
+      width: 0;
+    }
+  }
+
+  .Item {
+    float: right;
+    clear: both;
+    transition: translate var(--speed) var(--ease);
+    /* Stagger animation offset */
+    transition-delay: calc(var(--speed-fastest) * var(--nav-item-index));
+  }
+
+  .List[aria-hidden='false'] .Item {
+    translate: calc(var(--nav-item-shift-x) + var(--nav-offset-safety)) 0;
+  }
+
+  .List[aria-hidden='true'] .Item {
+    translate: calc(100% + var(--nav-item-shift-x) + var(--nav-offset-safety)) 0;
+  }
+
+  .Link {
+    position: relative;
+    display: block;
+    color: var(--color-portfolio);
+    background-color: var(--color-portfolio);
+    transition: translate var(--speed) var(--ease);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      display: block;
+      background-color: var(--color-primary);
+      opacity: 0.9;
+      transition: opacity var(--speed) var(--ease);
+      pointer-events: none;
+    }
+
+    &:focus,
+    &:hover {
+      translate: calc(var(--nav-item-shift-x) * -1) 0;
+    }
+
+    &:focus::before,
+    &:hover::before {
+      opacity: 1;
+    }
+
+    &:active {
+      translate: 0 0;
+    }
+
+    &:active::before {
+      opacity: 0.9;
+    }
+  }
+
+  .Label {
+    position: relative;
+    display: block;
+    padding-top: var(--nav-label-padding-y);
+    padding-right: var(--nav-label-padding-right);
+    padding-bottom: var(--nav-label-padding-y);
+    padding-left: var(--nav-label-padding-left);
+    font-size: var(--p-size);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    white-space: nowrap;
+    /* Required for the `rock` cursor to work. */
+    pointer-events: none;
+  }
+
+  /* --- Active Item iteration --- */
+  /* TODO: Replace these with an `active` class instead. */
+
+  html[data-current-index='0'] .Item:nth-child(1) .Link,
+  html[data-current-index='1'] .Item:nth-child(2) .Link,
+  html[data-current-index='2'] .Item:nth-child(3) .Link,
+  html[data-current-index='3'] .Item:nth-child(4) .Link,
+  html[data-current-index='4'] .Item:nth-child(5) .Link,
+  html[data-current-index='5'] .Item:nth-child(6) .Link,
+  html[data-current-index='6'] .Item:nth-child(7) .Link,
+  html[data-current-index='7'] .Item:nth-child(8) .Link,
+  html[data-current-index='8'] .Item:nth-child(9) .Link,
+  html[data-current-index='9'] .Item:nth-child(10) .Link,
+  html[data-current-index='10'] .Item:nth-child(11) .Link,
+  html[data-current-index='11'] .Item:nth-child(12) .Link,
+  html[data-current-index='12'] .Item:nth-child(13) .Link,
+  html[data-current-index='13'] .Item:nth-child(14) .Link {
+    cursor: url('../assets/img/cursor-rock.png'), not-allowed;
+    color: var(--color-primary);
+    translate: calc(var(--nav-item-shift-x) * -1) 0;
+  }
+
+  html[data-current-index='0'] .Item:nth-child(1) .Link:active,
+  html[data-current-index='1'] .Item:nth-child(2) .Link:active,
+  html[data-current-index='2'] .Item:nth-child(3) .Link:active,
+  html[data-current-index='3'] .Item:nth-child(4) .Link:active,
+  html[data-current-index='4'] .Item:nth-child(5) .Link:active,
+  html[data-current-index='5'] .Item:nth-child(6) .Link:active,
+  html[data-current-index='6'] .Item:nth-child(7) .Link:active,
+  html[data-current-index='7'] .Item:nth-child(8) .Link:active,
+  html[data-current-index='8'] .Item:nth-child(9) .Link:active,
+  html[data-current-index='9'] .Item:nth-child(10) .Link:active,
+  html[data-current-index='10'] .Item:nth-child(11) .Link:active,
+  html[data-current-index='11'] .Item:nth-child(12) .Link:active,
+  html[data-current-index='12'] .Item:nth-child(13) .Link:active,
+  html[data-current-index='13'] .Item:nth-child(14) .Link:active {
+    cursor: url('../assets/img/cursor-rock-clicked.png'), not-allowed;
+  }
+
+  html[data-current-index='0'] .Item:nth-child(1) .Link::before,
+  html[data-current-index='1'] .Item:nth-child(2) .Link::before,
+  html[data-current-index='2'] .Item:nth-child(3) .Link::before,
+  html[data-current-index='3'] .Item:nth-child(4) .Link::before,
+  html[data-current-index='4'] .Item:nth-child(5) .Link::before,
+  html[data-current-index='5'] .Item:nth-child(6) .Link::before,
+  html[data-current-index='6'] .Item:nth-child(7) .Link::before,
+  html[data-current-index='7'] .Item:nth-child(8) .Link::before,
+  html[data-current-index='8'] .Item:nth-child(9) .Link::before,
+  html[data-current-index='9'] .Item:nth-child(10) .Link::before,
+  html[data-current-index='10'] .Item:nth-child(11) .Link::before,
+  html[data-current-index='11'] .Item:nth-child(12) .Link::before,
+  html[data-current-index='12'] .Item:nth-child(13) .Link::before,
+  html[data-current-index='13'] .Item:nth-child(14) .Link::before {
+    opacity: 0;
+  }
+</style>

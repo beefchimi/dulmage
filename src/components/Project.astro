@@ -1,0 +1,97 @@
+---
+import {type ProjectEntry} from '@data/types';
+
+import ContentBlock from './ContentBlock.astro';
+import ProjectLogo from './ProjectLogo.astro';
+
+type Props = Omit<ProjectEntry, 'description' | 'channels'>;
+
+const {
+  id,
+  name,
+  thumbnail,
+  logo,
+  url,
+  attribution,
+  client,
+  agency,
+  contributor,
+  inhouse,
+  personal,
+  inactive = false,
+} = Astro.props;
+---
+
+<section id={id} class="section" style={{backgroundImage: `url(${thumbnail})`}}>
+  <article class="section-interior">
+    <ProjectLogo id={logo} name={name} url={url}>
+      {
+        attribution ? (
+          <p class="heading heading--3 visually-hidden">
+            Original design by: {attribution}
+          </p>
+        ) : null
+      }
+    </ProjectLogo>
+
+    <div class="Content">
+      {
+        client ? (
+          <ContentBlock title="Client" subtitle={client[0]} url={client[1]} />
+        ) : null
+      }
+
+      {
+        agency ? (
+          <ContentBlock title="Agency" subtitle={agency[0]} url={agency[1]} />
+        ) : null
+      }
+
+      {
+        contributor ? (
+          <ContentBlock
+            title="Project contributor"
+            subtitle={contributor[0]}
+            url={contributor[1]}
+          />
+        ) : null
+      }
+
+      {
+        inhouse ? (
+          <ContentBlock
+            title="Inhouse project"
+            subtitle={inhouse[0]}
+            url={inhouse[1]}
+          />
+        ) : null
+      }
+
+      {
+        personal ? (
+          <ContentBlock
+            title="Personal project"
+            subtitle={personal[0]}
+            url={personal[1]}
+          />
+        ) : null
+      }
+
+      {inactive ? <ContentBlock /> : null}
+    </div>
+  </article>
+</section>
+
+<style>
+  @import '@styles/shared.css';
+
+  .Content {
+    display: grid;
+    gap: var(--space);
+    padding: 0 var(--space-tight);
+
+    @media (--min-tablet) {
+      gap: var(--space-loose);
+    }
+  }
+</style>

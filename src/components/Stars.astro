@@ -1,0 +1,83 @@
+---
+import PatternStars from '@assets/svg/PatternStars.astro';
+
+// NOTE: This is mostly adapted from the `Stars` component on `Draggable`.
+// I have not included the `Shooting Stars`, but may want to consider
+// that in the future.
+---
+
+<div class="visually-hidden">
+  <PatternStars />
+</div>
+
+<div class="Stars">
+  <div class="StarField small">
+    <svg width="100%" height="100%">
+      <rect width="100%" height="100%" fill="url(#PatternStarsSmall)"></rect>
+    </svg>
+  </div>
+
+  <div class="StarField medium">
+    <svg width="100%" height="100%">
+      <rect width="100%" height="100%" fill="url(#PatternStarsMedium)"></rect>
+    </svg>
+  </div>
+
+  <div class="StarField large">
+    <svg width="100%" height="100%">
+      <rect width="100%" height="100%" fill="url(#PatternStarsLarge)"></rect>
+    </svg>
+  </div>
+</div>
+
+<style>
+  :root {
+    --star-field-size: 60rem;
+  }
+
+  @keyframes star-drift {
+    to {
+      translate: 0 calc(var(--star-field-size) * -1);
+    }
+  }
+
+  .Stars {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(
+      48deg,
+      #0f0118,
+      #13021d,
+      #160322,
+      #0d0622,
+      #030821,
+      #0e071f,
+      #15071c
+    );
+  }
+
+  .StarField {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 175%;
+    animation-name: star-drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .small {
+    animation-duration: 20s;
+  }
+
+  .medium {
+    animation-duration: 40s;
+  }
+
+  .large {
+    animation-duration: 60s;
+  }
+</style>

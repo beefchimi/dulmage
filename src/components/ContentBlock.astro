@@ -1,0 +1,70 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  url?: string;
+}
+
+const {title = '', subtitle = '', url = ''} = Astro.props;
+const inactive = !title || !subtitle;
+---
+
+<div class="ContentBlock">
+  {title ? <h3 class="heading heading--3">{title}</h3> : null}
+
+  {
+    subtitle && url ? (
+      <h4 class="heading heading--4">
+        <a
+          href={url}
+          class="heading-link"
+          title={`Visit external site: ${subtitle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {subtitle}
+        </a>
+      </h4>
+    ) : null
+  }
+
+  {subtitle && !url ? <h4 class="heading heading--4">{subtitle}</h4> : null}
+
+  {
+    inactive ? (
+      <div class="Badge">
+        <h3 class="heading heading--3">Project no longer active</h3>
+      </div>
+    ) : null
+  }
+</div>
+
+<style>
+  @import '@styles/shared.css';
+
+  .ContentBlock {
+    display: grid;
+    gap: var(--space-tightest);
+    justify-content: center;
+    text-align: center;
+
+    /* Limit content when viewport height is too short. */
+    &:nth-child(n + 2) {
+      @media (--max-phone-height) {
+        display: none;
+      }
+    }
+  }
+
+  .Badge {
+    padding: var(--space-tightest);
+    border-radius: var(--radius-loose);
+    border: 0.2rem solid var(--color-primary);
+    /* Just a small nudge for better vertical centering */
+    padding-top: calc(var(--space-tightest) + 0.1rem);
+
+    @media (--min-tablet) {
+      padding: var(--space-tighter);
+    }
+  }
+</style>

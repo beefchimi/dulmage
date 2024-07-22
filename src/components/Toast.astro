@@ -1,0 +1,172 @@
+---
+interface Props {
+  id: string;
+  ariaLabel?: string;
+  message?: string;
+  thumbnail?: string;
+  thumbnailAlt?: string;
+  // TODO: Eventually replace this with modern start/end animations:
+  // https://developer.chrome.com/blog/entry-exit-animations
+  exiting?: boolean;
+}
+
+// TODO: Use the Astro Image component.
+const {
+  id,
+  ariaLabel = 'Click to dismiss',
+  message = '…',
+  thumbnail = '/favicon.png',
+  thumbnailAlt,
+  exiting = false,
+} = Astro.props;
+
+// Ideally, the `Toast` is a `div` and uses `role="alert"`.
+// Doing so would mean we have to update our `Toast` logic
+// to add/remove listeners on the nested <button />.
+---
+
+<button
+  type="button"
+  id={id}
+  class="Toast"
+  aria-label={ariaLabel}
+  data-toast-exiting={exiting}
+>
+  <div class="Interior">
+    <div class="Thumbnail">
+      <img class="Image" src={thumbnail} alt={thumbnailAlt} />
+    </div>
+
+    <p class="paragraph Label">{message}</p>
+  </div>
+</button>
+
+<style>
+  @import '@styles/shared.css';
+
+  :root {
+    --toast-offset-y: 10rem;
+    --toast-nudge-y: 0.4rem;
+    --toast-icon-size: 3.2rem;
+  }
+
+  @keyframes toastEnter {
+    from {
+      translate: 0 var(--toast-offset-y);
+    }
+
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes toastExit {
+    from {
+      translate: 0 0;
+    }
+
+    to {
+      translate: 0 var(--toast-offset-y);
+    }
+  }
+
+  .Toast {
+    position: fixed;
+    z-index: var(--index-thermosphere);
+    bottom: var(--space-tighter);
+    left: auto;
+    right: auto;
+    display: block;
+    max-width: 28rem;
+    background-color: var(--color-portfolio);
+    box-shadow: 0 1rem 4rem rgb(0, 0, 0, 0.6);
+    border: 0 solid var(--color-portfolio);
+    border-radius: var(--radius-loose);
+    overflow: hidden;
+    transition-property: scale, bottom;
+    transition-duration: var(--speed);
+    transition-timing-function: var(--ease);
+    animation: toastEnter var(--speed-slow) var(--ease-bungie) both;
+    transform-origin: bottom center;
+    /* Needed to restore interactivity when nested within a Portal. */
+    pointer-events: auto;
+
+    @media (--min-tablet) {
+      max-width: 40rem;
+    }
+
+    /*
+      Cannot use `color-mix()` because we do not want
+      to `transition` the `background-color`.
+    */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-loose);
+      background-color: rgb(0, 0, 0, 0.1);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--speed) var(--ease);
+    }
+
+    &:focus-visible,
+    &:hover:not(:active) {
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &[data-toast-exiting] {
+      animation-name: toastExit;
+      animation-duration: var(--speed);
+      animation-timing-function: var(--ease-anticipate);
+    }
+
+    /* Like :nth(n+2) in reverse. */
+    &:has(+ &) {
+      scale: 0.9;
+      bottom: calc(var(--space-tighter) - var(--toast-nudge-y));
+      pointer-events: none;
+    }
+
+    /* Like :nth(n+3) in reverse. */
+    &:has(+ & + &) {
+      scale: 0.8;
+      bottom: calc(var(--space-tighter) - var(--toast-nudge-y) * 2);
+    }
+
+    /* Like :nth(n+4) in reverse. */
+    &:has(+ & + & + &) {
+      scale: 0.7;
+      bottom: calc(var(--space-tighter) - var(--toast-nudge-y) * 3);
+    }
+
+    /* Like :nth(n+5) in reverse. */
+    &:has(+ & + & + & + &) {
+      scale: 0;
+    }
+  }
+
+  .Interior {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: var(--space-tighter);
+    padding: var(--space-tightest) var(--space-tighter) var(--space-tightest)
+      var(--space-tightest);
+  }
+
+  .Thumbnail {
+    width: var(--toast-icon-size);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .Image {
+  }
+
+  .Label {
+    font-weight: 600;
+  }
+</style>

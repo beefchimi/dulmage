@@ -1,0 +1,188 @@
+---
+// No frontmatter...
+---
+
+<div class="ToastTest">
+  <template id="ToastItemTemplate">
+    <li class="paragraph ToastItem">…</li>
+  </template>
+
+  <button type="button" id="ToastTrigger">New Toast</button>
+  <p id="ToastCount" class="paragraph" data-toast-count="0">Count:</p>
+  <ul id="ToastList"></ul>
+</div>
+
+<style>
+  .ToastTest {
+    z-index: var(--index-troposphere);
+    position: absolute;
+    top: var(--space);
+    left: var(--space);
+    display: grid;
+    gap: var(--space);
+    padding: var(--space);
+    width: 28rem;
+    text-align: center;
+    border: 0.1rem solid var(--color-primary);
+    background-color: rgb(0, 0, 0, 0.6);
+  }
+
+  :global(#ToastTrigger) {
+    padding: var(--space-tighter);
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-portfolio);
+    background-color: var(--color-primary);
+    transition: opacity var(--speed) var(--ease);
+
+    &:disabled {
+      opacity: 0.6;
+    }
+
+    &:focus-visible,
+    &:hover:not(:active) {
+      opacity: 0.8;
+    }
+  }
+
+  :global(#ToastCount) {
+    text-decoration: underline;
+
+    &::after {
+      content: ' ' attr(data-toast-count);
+      display: inline-block;
+    }
+  }
+
+  :global(#ToastList) {
+    display: grid;
+    gap: var(--space-tighter);
+  }
+
+  .ToastItem {
+    padding: var(--space-tighter);
+    border: 0.1rem solid currentColor;
+  }
+
+  /*
+  // Example of using a custom Portal:
+
+  import {TOAST_PORTAL_ID} from '@data/app';
+  const portal = document.getElementById(TOAST_PORTAL_ID);
+  const tracker = new ToastTracker(portal);
+
+  <div id={TOAST_PORTAL_ID} class="ToastPortal"></div>
+
+  .ToastPortal {
+    position: fixed;
+    z-index: var(--index-thermosphere);
+    left: var(--space-tighter);
+    right: var(--space-tighter);
+    bottom: var(--space-tighter);
+    display: grid;
+    justify-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    pointer-events: none;
+
+    &:empty {
+      display: none;
+    }
+  }
+  */
+</style>
+
+<script>
+  import {randomInteger} from 'beeftools';
+  import {ToastTracker} from '@scripts/ToastTracker';
+
+  const template =
+    document.querySelector<HTMLTemplateElement>('#ToastItemTemplate');
+
+  const triggerEl = document.querySelector<HTMLButtonElement>('#ToastTrigger');
+  const countEl = document.querySelector<HTMLParagraphElement>('#ToastCount');
+  const listEl = document.querySelector<HTMLUListElement>('#ToastList');
+
+  const tracker = new ToastTracker();
+
+  const MESSAGES = [
+    'Short message.',
+    'Medium length message.',
+    'Much longer example of a message.',
+    'Maximum length message is very long and could wrap lines.',
+  ];
+
+  function getRandomMessage() {
+    const randomIndex = randomInteger(0, MESSAGES.length - 1);
+    return MESSAGES[randomIndex];
+  }
+
+  function getItemId(counterIndex = 0) {
+    return `ToastItem-${counterIndex}`;
+  }
+
+  function getItemFromFragment(frag?: DocumentFragment | Node) {
+    if (frag instanceof DocumentFragment) {
+      return frag.querySelector('li');
+    }
+
+    return frag instanceof HTMLLIElement ? frag : undefined;
+  }
+
+  function createItem(counterIndex = 0) {
+    if (!template || !listEl) return;
+
+    const cloned = template.content.cloneNode(true);
+    const extracted = getItemFromFragment(cloned);
+
+    if (!extracted) return;
+
+    extracted.id = getItemId(counterIndex);
+    extracted.textContent = `Toast item: #${counterIndex}`;
+
+    listEl.appendChild(extracted);
+  }
+
+  function removeItem(counterIndex = 0) {
+    const itemId = getItemId(counterIndex);
+    const node = document.getElementById(itemId);
+
+    if (countEl) {
+      countEl.dataset.toastCount = tracker.count.toString();
+    }
+
+    node?.remove();
+  }
+
+  function createToast() {
+    const newIndex = tracker.totalCreated;
+    const newId = `Toast-${newIndex}`;
+
+    // TODO: Simplify some of this using a `tracker.on('count', handleCountChange)`.
+    tracker.add(
+      newId,
+      {message: `${getRandomMessage()} | #${newIndex}`},
+      (event) => {
+        console.log('This Toast has just been dismissed!', newId, event);
+      },
+      (event) => {
+        console.log('This Toast has just been removed!', newId, event);
+        removeItem(newIndex);
+      },
+    );
+
+    console.log('A new Toast has just been created!', newId);
+    createItem(newIndex);
+
+    if (countEl) {
+      countEl.dataset.toastCount = tracker.count.toString();
+    }
+  }
+
+  if (triggerEl) {
+    triggerEl.addEventListener('click', createToast);
+    // TODO: This won't work until we wire up `emitten` events.
+    triggerEl.disabled = tracker.maxReached;
+  }
+</script>

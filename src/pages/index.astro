@@ -1,0 +1,60 @@
+---
+import Page from '@layouts/Page.astro';
+
+import {NAV_ID, NAV_TOGGLE_ID, OVERLAY_ID} from '@data/app';
+import {sections} from '@data/sections';
+
+import Hamburger from '@components/Hamburger.astro';
+import Navigation from '@components/Navigation.astro';
+import Project from '@components/Project.astro';
+
+import Intro from '@sections/Intro.astro';
+import ProjectOverlay from '@sections/ProjectOverlay.astro';
+
+const [intro, ...portfolioSections] = sections;
+---
+
+<Page id="Home" title="Curtis Dulmage | UX Developer / Ottawa Canada">
+  <Navigation id={NAV_ID} items={sections}>
+    <Hamburger id={NAV_TOGGLE_ID} controlsId={NAV_ID} />
+  </Navigation>
+
+  <main id="Portfolio" class="Portfolio">
+    <Intro id={intro.id} thumbnail={intro.thumbnail} />
+
+    {
+      portfolioSections.map(({channels: _channels, ...props}) => (
+        <Project {...props} />
+      ))
+    }
+  </main>
+
+  <ProjectOverlay id={OVERLAY_ID} />
+</Page>
+
+<style>
+  .Portfolio {
+    background-color: var(--color-portfolio);
+  }
+</style>
+
+<script>
+  import {NAV_ID, NAV_TOGGLE_ID, OVERLAY_ID, PERSONAL_EMAIL} from '@data/app';
+
+  import {Overlay} from '@scripts/Overlay';
+  import {Portfolio} from '@scripts/Portfolio';
+  import {SecretEmail} from '@scripts/SecretEmail';
+  import {Toggler} from '@scripts/Toggler';
+
+  const overlayInstance = new Overlay(OVERLAY_ID);
+  overlayInstance.init();
+
+  const portfolioInstance = new Portfolio({scroller: 'main'});
+  portfolioInstance.init();
+
+  const emailInstance = new SecretEmail(PERSONAL_EMAIL);
+  emailInstance.replaceEmails();
+
+  const togglerInstance = new Toggler(NAV_TOGGLE_ID, NAV_ID);
+  togglerInstance.init();
+</script>
