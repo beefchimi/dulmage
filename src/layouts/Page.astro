@@ -13,58 +13,73 @@ interface Props {
   title?: string;
 }
 
-const THEME_COLOR = '#8c54c1';
-const SITE_NAME = 'dulmage.me';
-const SITE_URL = 'https://dulmage.me';
-const DEFAULT_TITLE = 'Curtis Dulmage | UX Developer';
-const DESCRIPTION = 'UX development portfolio for Curtis Dulmage';
-const SOCIAL_IMG = '/assets/dulmage-social-png';
+const {id, title = 'Curtis Dulmage | UX Developer'} = Astro.props;
 
-const {id, title = DEFAULT_TITLE} = Astro.props;
+const DESCRIPTION = 'UX development portfolio for Curtis Dulmage';
+const PERMALINK = new URL(Astro.url.pathname, Astro.site).href;
+// new URL('/assets/dulmage-social.png', Astro.site).href;
+const OG_IMAGE = '/assets/dulmage-social.png';
 ---
 
 <!doctype html>
 <html lang="en" data-current-index="0">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
 
     <title>{title}</title>
 
-    <!-- Special app meta -->
-
+    <!-- SEO meta -->
     <meta name="description" content={DESCRIPTION} />
-    <meta name="theme-color" content={THEME_COLOR} />
+    <meta
+      name="keywords"
+      content="Web, UX, Developer, Software, Design, Ottawa"
+    />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Web app meta -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="Curtis Dulmage" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- iOS browser chrome looks better without this -->
+    <!-- <meta name="theme-color" content="#8c54c1" /> -->
+
+    <!-- Windows meta -->
+    <!--
+      <meta name="msapplication-TileImage" content="/icon-144x144.png">
+      <meta name="msapplication-TileColor" content="#8c54c1">
+    -->
 
     <!-- Favicons (see: https://vite-pwa-org.netlify.app/assets-generator) -->
-
     <!-- <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml"> -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.png" sizes="any" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
 
-    <!-- Social share images -->
+    <!-- Open Graph meta -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:site_name" content="dulmage.me" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={DESCRIPTION} />
-    <meta property="og:image" content={SOCIAL_IMG} />
-    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:url" content={PERMALINK} />
 
+    <!-- Twitter meta -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:site" content="@beefchimi" />
     <meta property="twitter:account_id" content="358226505" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={DESCRIPTION} />
-    <meta property="twitter:image" content={SOCIAL_IMG} />
+    <meta property="twitter:image" content={OG_IMAGE} />
 
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 
