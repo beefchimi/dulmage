@@ -29,11 +29,13 @@ export default defineConfig({
   integrations: [
     AstroPWA({
       workbox: {
+        // Not sure how this differs from `includeAssets`...
         // globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        // Not sure if we actually want to specify this fallback.
         navigateFallback: '/404',
       },
 
-      // Specify which assets (in addition to the default html/css/js)
+      // Specify which public assets (in addition to the default html/css/js)
       // we want to include in our pre-cache.
       // includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
 
