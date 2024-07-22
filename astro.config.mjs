@@ -31,8 +31,8 @@ export default defineConfig({
       workbox: {
         // Not sure how this differs from `includeAssets`...
         // globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        // Not sure if we actually want to specify this fallback.
-        navigateFallback: '/404',
+        // Using this seems to always `404` for saved "web apps".
+        // navigateFallback: '/404',
       },
 
       // Specify which public assets (in addition to the default html/css/js)
