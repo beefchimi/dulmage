@@ -9,6 +9,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    // host: '192.168.2.27',
   },
   vite: {
     // TODO: Figure out how to get this to work.

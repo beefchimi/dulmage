@@ -80,52 +80,6 @@ body {
   cursor: url('../assets/img/cursor-auto.png'), auto;
 }
 
-/* --- Smooth scroll + snapping --- */
-
-html,
-body {
-  height: 100dvh;
-  overflow: hidden;
-}
-
-main {
-  height: 100dvh;
-  overflow: scroll;
-  scroll-snap-points-y: repeat(100dvh);
-  scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
-}
-
-.section {
-  position: relative;
-  width: 100dvw;
-  height: 100dvh;
-  scroll-snap-align: start;
-  /*
-    Required to prevent content from spilling over
-    when on a very short height display.
-  */
-  overflow: hidden;
-
-  /* Background styles */
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
-.section-interior {
-  display: grid;
-  gap: var(--space-looser);
-  place-content: center;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-
-  @media (--min-tablet) {
-    gap: var(--space-fattest);
-  }
-}
-
 /* --- Page load --- */
 /* TODO: Consider something better with `document.readystate`. */
 
@@ -145,12 +99,64 @@ body {
 
   &::after {
     content: '';
-    z-index: var(--index-outerspace);
+    z-index: var(--index-mesosphere);
     position: fixed;
     inset: 0;
     pointer-events: none;
     background-color: black;
     animation: pageLoad var(--speed-slow) var(--speed) var(--ease) forwards;
+  }
+}
+
+/* --- Smooth scroll + snapping --- */
+/* Disabled because it breaks "dynamic chrome" behaviour on iOS */
+
+/*
+html,
+body {
+  height: 100svh;
+  overflow: hidden;
+}
+
+main {
+  height: 100svh;
+  overflow: scroll;
+  scroll-snap-points-y: repeat(100svh);
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+.section {
+  position: relative;
+  scroll-snap-align: start;
+}
+*/
+
+/* --- Components --- */
+
+.section {
+  width: 100dvw;
+  height: 100svh;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /*
+    Required to prevent content from spilling over
+    when on a very short height display.
+  */
+  overflow: hidden;
+}
+
+.section-interior {
+  display: grid;
+  gap: var(--space-looser);
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+
+  @media (--min-tablet) {
+    gap: var(--space-fattest);
   }
 }
 

@@ -95,7 +95,8 @@ html {
   text-rendering: geometricPrecision;
 }
 
-html:focus-within {
+html {
+  /* Scoping to `&:focus-within` does not work in Safari. */
   scroll-behavior: smooth;
 }
 
