@@ -76,16 +76,16 @@ const {id, title = DEFAULT_TITLE} = Astro.props;
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-4G2VKG5NK2"></script>
     <script is:inline>
-      if (window.location.hostname === 'localhost') return;
-
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
         dataLayer.push(arguments);
       }
 
-      gtag('js', new Date());
-      gtag('config', 'G-4G2VKG5NK2');
+      if (window.location.hostname !== 'localhost') {
+        gtag('js', new Date());
+        gtag('config', 'G-4G2VKG5NK2');
+      }
     </script>
   </head>
 
