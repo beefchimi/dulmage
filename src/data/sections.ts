@@ -10,7 +10,7 @@ const intro: SectionEntry = {
 
 const preserve: ProjectEntry = {
   id: 'PreservationSociety',
-  name: 'Preserve',
+  name: 'Preservation Society ',
   description: 'Northern Army Preservation Society of Canada',
   thumbnail: '/assets/bg-preservation-society.png',
   channels: [255, 195, 12],
@@ -143,7 +143,7 @@ const chicken: ProjectEntry = {
 
 const polaris: ProjectEntry = {
   id: 'Polaris',
-  name: 'Polaris Styleguide',
+  name: 'Polaris',
   description: 'Shopify Polaris Styleguide',
   thumbnail: '/assets/bg-polaris-styleguide.png',
   channels: [56, 80, 177],
@@ -156,10 +156,10 @@ const polaris: ProjectEntry = {
 
 const earwurm: ProjectEntry = {
   id: 'Earwurm',
-  name: 'Earwurm Audio',
+  name: 'Earwurm',
   description: 'Easier web audio for UI sound effects',
   thumbnail: '/assets/bg-earwurm.png',
-  channels: [237, 105, 0],
+  channels: [207, 1, 93],
   logo: 'LogoEarwurm',
   url: 'https://beefchimi.github.io/earwurm/',
   attribution: 'Curtis Dulmage',
@@ -168,21 +168,24 @@ const earwurm: ProjectEntry = {
 
 const tetchi: ProjectEntry = {
   id: 'Tetchi',
-  name: 'Tetsuro Takara',
-  description: 'Tribute to the greatest man',
+  name: 'Tetchi',
+  description: 'Tribute to Tetsuro Takara',
   thumbnail: '/assets/bg-tetchi.png',
-  channels: [136, 63, 64],
+  channels: [2, 0, 255],
   logo: 'LogoTetchi',
-  url: 'https://live.staticflickr.com/5294/5503094244_2994460d49_b.jpg',
+  url: 'https://codepen.io/tetchi',
   attribution: 'Curtis Dulmage',
-  personal: ['Tetchi', 'https://codepen.io/tetchi'],
+  personal: [
+    'Tetchi',
+    'https://live.staticflickr.com/5294/5503094244_2994460d49_b.jpg',
+  ],
   inactive: true,
 };
 
 const yat: ProjectEntry = {
   id: 'Yat',
   name: 'Yat Labs',
-  description: 'Floor Game / What goes up / Must come down',
+  description: 'Intergalactic Web 3',
   thumbnail: '/assets/bg-yat.png',
   channels: [87, 18, 222],
   logo: 'LogoYat',
@@ -194,18 +197,18 @@ const yat: ProjectEntry = {
 
 export const sections: [intro: SectionEntry, ...projects: ProjectEntry[]] = [
   intro,
-  preserve,
   bodyMindChange,
-  draggable,
-  northernArmy,
+  polaris,
+  preserve,
   fringe,
+  yat,
+  northernArmy,
   northNavy,
   sandwich,
   commerceAwards,
   na2012,
+  draggable,
   chicken,
-  polaris,
-  earwurm,
   tetchi,
-  yat,
+  earwurm,
 ];
