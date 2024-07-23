@@ -41,7 +41,7 @@ const draggable: ProjectEntry = {
   name: 'Draggable',
   description: 'The drag-and-drop library your grandparents warned you about',
   thumbnail: '/assets/bg-draggable.png',
-  channels: [20, 5, 41],
+  channels: [0, 66, 255],
   logo: 'LogoDraggable',
   url: 'https://shopify.github.io/draggable',
   attribution: 'Curtis Dulmage',
@@ -128,19 +128,6 @@ const na2012: ProjectEntry = {
   inactive: true,
 };
 
-const partnersAcademy: ProjectEntry = {
-  id: 'PartnersAcademy',
-  name: 'Partners Academy',
-  description: 'Shopify Partners Academy learning platform',
-  thumbnail: '/assets/bg-partners-academy.png',
-  channels: [180, 180, 180],
-  logo: 'LogoShopify',
-  url: 'https://www.shopify.ca/partners/academy',
-  attribution: 'Jonathan Forsythe',
-  inhouse: ['Shopify Partners Academy', 'https://www.shopify.com'],
-  inactive: true,
-};
-
 const chicken: ProjectEntry = {
   id: 'Chicken',
   name: 'Chicken Farmers',
@@ -167,6 +154,44 @@ const polaris: ProjectEntry = {
   inactive: true,
 };
 
+const earwurm: ProjectEntry = {
+  id: 'Earwurm',
+  name: 'Earwurm Audio',
+  description: 'Easier web audio for UI sound effects',
+  thumbnail: '/assets/bg-earwurm.png',
+  channels: [237, 105, 0],
+  logo: 'LogoEarwurm',
+  url: 'https://beefchimi.github.io/earwurm/',
+  attribution: 'Curtis Dulmage',
+  personal: ['Earwurm', 'https://github.com/beefchimi/earwurm'],
+};
+
+const tetchi: ProjectEntry = {
+  id: 'Tetchi',
+  name: 'Tetsuro Takara',
+  description: 'Tribute to the greatest man',
+  thumbnail: '/assets/bg-tetchi.png',
+  channels: [136, 63, 64],
+  logo: 'LogoTetchi',
+  url: 'https://live.staticflickr.com/5294/5503094244_2994460d49_b.jpg',
+  attribution: 'Curtis Dulmage',
+  personal: ['Tetchi', 'https://codepen.io/tetchi'],
+  inactive: true,
+};
+
+const yat: ProjectEntry = {
+  id: 'Yat',
+  name: 'Yat Labs',
+  description: 'Floor Game / What goes up / Must come down',
+  thumbnail: '/assets/bg-yat.png',
+  channels: [87, 18, 222],
+  logo: 'LogoYat',
+  url: 'https://y.at/',
+  attribution: 'Karim Balaa',
+  inhouse: ['Yat Floor Game', 'https://www.freshcontrast.com/'],
+  inactive: true,
+};
+
 export const sections: [intro: SectionEntry, ...projects: ProjectEntry[]] = [
   intro,
   preserve,
@@ -178,7 +203,9 @@ export const sections: [intro: SectionEntry, ...projects: ProjectEntry[]] = [
   sandwich,
   commerceAwards,
   na2012,
-  partnersAcademy,
   chicken,
   polaris,
+  earwurm,
+  tetchi,
+  yat,
 ];
