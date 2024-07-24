@@ -8,17 +8,8 @@ const intro: SectionEntry = {
   channels: [140, 84, 193],
 };
 
-const preserve: ProjectEntry = {
-  id: 'PreservationSociety',
-  name: 'Preservation Society ',
-  description: 'Northern Army Preservation Society of Canada',
-  thumbnail: '/assets/bg-preservation-society.png',
-  channels: [255, 195, 12],
-  logo: 'LogoPreservationSociety',
-  url: 'https://preserve.northernarmy.com',
-  attribution: 'Rene Antunes',
-  inhouse: ['Northern Army', 'https://northernarmy.com'],
-};
+///
+/// Projects
 
 const bodyMindChange: ProjectEntry = {
   id: 'BodyMindChange',
@@ -36,66 +27,15 @@ const bodyMindChange: ProjectEntry = {
   inactive: true,
 };
 
-const draggable: ProjectEntry = {
-  id: 'Draggable',
-  name: 'Draggable',
-  description: 'The drag-and-drop library your grandparents warned you about',
-  thumbnail: '/assets/bg-draggable.png',
-  channels: [0, 66, 255],
-  logo: 'LogoDraggable',
-  url: 'https://shopify.github.io/draggable',
-  attribution: 'Curtis Dulmage',
-  personal: ['Draggable', 'https://shopify.github.io/draggable'],
-};
-
-const northernArmy: ProjectEntry = {
-  id: 'NorthernArmy',
-  name: 'Northern Army',
-  description: 'Independent branding & packaging studio',
-  thumbnail: '/assets/bg-northern-army.png',
-  channels: [226, 172, 58],
-  logo: 'LogoNorthernArmy',
-  url: 'https://northernarmy.com',
+const chicken: ProjectEntry = {
+  id: 'Chicken',
+  name: 'Chicken Farmers',
+  description: 'Chicken Farmers of Canada',
+  thumbnail: '/assets/bg-chicken.png',
+  channels: [248, 61, 74],
+  logo: 'LogoChicken',
   attribution: 'Rene Antunes',
-  inhouse: ['Northern Army', 'https://northernarmy.com'],
-  inactive: true,
-};
-
-const fringe: ProjectEntry = {
-  id: 'Fringe',
-  name: 'Ottawa Fringe',
-  description: 'Ottawa Fringe Festival',
-  thumbnail: '/assets/bg-fringe.png',
-  channels: [255, 90, 82],
-  logo: 'LogoFringe',
-  attribution: 'Mandira Midha',
-  client: ['Ottawa Fringe Festival', 'https://ottawafringe.com'],
-  agency: ['Northern Army', 'https://northernarmy.com'],
-  inactive: true,
-};
-
-const northNavy: ProjectEntry = {
-  id: 'NorthNavy',
-  name: 'North & Navy',
-  description: 'North and Navy restaurant',
-  thumbnail: '/assets/bg-north-navy.png',
-  channels: [21, 53, 91],
-  logo: 'LogoNorthNavy',
-  url: 'https://northandnavy.com',
-  attribution: 'Rene Antunes',
-  client: ['North & Navy', 'https://northandnavy.com'],
-  agency: ['Northern Army', 'https://northernarmy.com'],
-};
-
-const sandwich: ProjectEntry = {
-  id: 'SandwichVideo',
-  name: 'Sandwich Video',
-  description: 'Video production studio and sandwich enthusiasts',
-  thumbnail: '/assets/bg-sandwich-video.png',
-  channels: [207, 44, 71],
-  logo: 'LogoSandwichVideo',
-  attribution: 'Rene Antunes',
-  client: ['Sandwich Video', 'https://sandwichvideo.com'],
+  client: ['Chicken Farmers of Canada', 'https://chicken.ca'],
   agency: ['Northern Army', 'https://northernarmy.com'],
   inactive: true,
 };
@@ -116,42 +56,16 @@ const commerceAwards: ProjectEntry = {
   inactive: true,
 };
 
-const na2012: ProjectEntry = {
-  id: 'NorthernArmy2012',
-  name: 'NA 2012',
-  description: 'Legacy Northern Army 2012',
-  thumbnail: '/assets/bg-northern-army-2012.png',
-  channels: [234, 72, 72],
-  logo: 'LogoNorthernArmy',
-  attribution: 'Rene Antunes',
-  inhouse: ['Northern Army', 'https://northernarmy.com'],
-  inactive: true,
-};
-
-const chicken: ProjectEntry = {
-  id: 'Chicken',
-  name: 'Chicken Farmers',
-  description: 'Chicken Farmers of Canada',
-  thumbnail: '/assets/bg-chicken.png',
-  channels: [248, 61, 74],
-  logo: 'LogoChicken',
-  attribution: 'Rene Antunes',
-  client: ['Chicken Farmers of Canada', 'https://chicken.ca'],
-  agency: ['Northern Army', 'https://northernarmy.com'],
-  inactive: true,
-};
-
-const polaris: ProjectEntry = {
-  id: 'Polaris',
-  name: 'Polaris',
-  description: 'Shopify Polaris Styleguide',
-  thumbnail: '/assets/bg-polaris-styleguide.png',
-  channels: [56, 80, 177],
-  logo: 'LogoShopify',
-  url: 'https://polaris.shopify.com',
-  attribution: 'Alistair Lane',
-  inhouse: ['Shopify Polaris Styleguide', 'https://www.shopify.com'],
-  inactive: true,
+const draggable: ProjectEntry = {
+  id: 'Draggable',
+  name: 'Draggable',
+  description: 'The drag-and-drop library your grandparents warned you about',
+  thumbnail: '/assets/bg-draggable.png',
+  channels: [0, 66, 255],
+  logo: 'LogoDraggable',
+  url: 'https://shopify.github.io/draggable',
+  attribution: 'Curtis Dulmage',
+  personal: ['Draggable', 'https://shopify.github.io/draggable'],
 };
 
 const earwurm: ProjectEntry = {
@@ -166,6 +80,95 @@ const earwurm: ProjectEntry = {
   personal: ['Earwurm', 'https://github.com/beefchimi/earwurm'],
 };
 
+const fringe: ProjectEntry = {
+  id: 'Fringe',
+  name: 'Ottawa Fringe',
+  description: 'Ottawa Fringe Festival',
+  thumbnail: '/assets/bg-fringe.png',
+  channels: [255, 90, 82],
+  logo: 'LogoFringe',
+  attribution: 'Mandira Midha',
+  client: ['Ottawa Fringe Festival', 'https://ottawafringe.com'],
+  agency: ['Northern Army', 'https://northernarmy.com'],
+  inactive: true,
+};
+
+const na2012: ProjectEntry = {
+  id: 'NA2012',
+  name: 'NA 2012',
+  description: 'Legacy Northern Army 2012',
+  thumbnail: '/assets/bg-na2012.png',
+  channels: [234, 72, 72],
+  logo: 'LogoNorthernArmy',
+  attribution: 'Rene Antunes',
+  inhouse: ['Northern Army', 'https://northernarmy.com'],
+  inactive: true,
+};
+
+const northernArmy: ProjectEntry = {
+  id: 'NorthernArmy',
+  name: 'Northern Army',
+  description: 'Independent branding & packaging studio',
+  thumbnail: '/assets/bg-northern-army.png',
+  channels: [226, 172, 58],
+  logo: 'LogoNorthernArmy',
+  url: 'https://northernarmy.com',
+  attribution: 'Rene Antunes',
+  inhouse: ['Northern Army', 'https://northernarmy.com'],
+  inactive: true,
+};
+
+const northNavy: ProjectEntry = {
+  id: 'NorthNavy',
+  name: 'North & Navy',
+  description: 'North and Navy restaurant',
+  thumbnail: '/assets/bg-north-navy.png',
+  channels: [21, 53, 91],
+  logo: 'LogoNorthNavy',
+  url: 'https://northandnavy.com',
+  attribution: 'Rene Antunes',
+  client: ['North & Navy', 'https://northandnavy.com'],
+  agency: ['Northern Army', 'https://northernarmy.com'],
+};
+
+const polaris: ProjectEntry = {
+  id: 'Polaris',
+  name: 'Polaris',
+  description: 'Shopify Polaris Styleguide',
+  thumbnail: '/assets/bg-polaris.png',
+  channels: [56, 80, 177],
+  logo: 'LogoShopify',
+  url: 'https://polaris.shopify.com',
+  attribution: 'Alistair Lane',
+  inhouse: ['Shopify Polaris Styleguide', 'https://www.shopify.com'],
+  inactive: true,
+};
+
+const preserve: ProjectEntry = {
+  id: 'PreservationSociety',
+  name: 'Preservation Society ',
+  description: 'Northern Army Preservation Society of Canada',
+  thumbnail: '/assets/bg-preservation-society.png',
+  channels: [255, 195, 12],
+  logo: 'LogoPreservationSociety',
+  url: 'https://preserve.northernarmy.com',
+  attribution: 'Rene Antunes',
+  inhouse: ['Northern Army', 'https://northernarmy.com'],
+};
+
+const sandwich: ProjectEntry = {
+  id: 'SandwichVideo',
+  name: 'Sandwich Video',
+  description: 'Video production studio and sandwich enthusiasts',
+  thumbnail: '/assets/bg-sandwich-video.png',
+  channels: [207, 44, 71],
+  logo: 'LogoSandwichVideo',
+  attribution: 'Rene Antunes',
+  client: ['Sandwich Video', 'https://sandwichvideo.com'],
+  agency: ['Northern Army', 'https://northernarmy.com'],
+  inactive: true,
+};
+
 const tetchi: ProjectEntry = {
   id: 'Tetchi',
   name: 'Tetchi',
@@ -173,12 +176,8 @@ const tetchi: ProjectEntry = {
   thumbnail: '/assets/bg-tetchi.png',
   channels: [2, 0, 255],
   logo: 'LogoTetchi',
-  url: 'https://codepen.io/tetchi',
   attribution: 'Curtis Dulmage',
-  personal: [
-    'Tetchi',
-    'https://live.staticflickr.com/5294/5503094244_2994460d49_b.jpg',
-  ],
+  personal: ['Tetchi', 'https://codepen.io/tetchi'],
   inactive: true,
 };
 
