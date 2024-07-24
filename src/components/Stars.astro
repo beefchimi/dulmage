@@ -1,5 +1,7 @@
 ---
-import PatternStars from '@assets/svg/PatternStars.astro';
+const {default: patternStarsHtml} = await import(
+  '../assets/svg/patterns/PatternStars.svg?raw'
+);
 
 // NOTE: This is mostly adapted from the `Stars` component on `Draggable`.
 // I have not included the `Shooting Stars`, but may want to consider
@@ -7,7 +9,7 @@ import PatternStars from '@assets/svg/PatternStars.astro';
 ---
 
 <div class="visually-hidden">
-  <PatternStars />
+  <Fragment set:html={patternStarsHtml} />
 </div>
 
 <div class="Stars">
