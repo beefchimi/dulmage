@@ -13,7 +13,7 @@
       gradientUnits="userSpaceOnUse"
     >
       <stop offset=".6" stop-color="currentColor"></stop>
-      <stop offset="1" stop-color="currentColor" stop-opacity=".6"></stop>
+      <stop offset="1" stop-color="currentColor" stop-opacity=".4"></stop>
     </linearGradient>
   </defs>
   <path
