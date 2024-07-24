@@ -186,7 +186,8 @@ const {id, items = []} = Astro.props;
   html[data-current-index='10'] .Item:nth-child(11) .Link,
   html[data-current-index='11'] .Item:nth-child(12) .Link,
   html[data-current-index='12'] .Item:nth-child(13) .Link,
-  html[data-current-index='13'] .Item:nth-child(14) .Link {
+  html[data-current-index='13'] .Item:nth-child(14) .Link,
+  html[data-current-index='14'] .Item:nth-child(15) .Link {
     cursor: url('../assets/img/cursor-rock.png'), not-allowed;
     color: var(--color-primary);
     translate: calc(var(--nav-item-shift-x) * -1) 0;
@@ -205,7 +206,8 @@ const {id, items = []} = Astro.props;
   html[data-current-index='10'] .Item:nth-child(11) .Link:active,
   html[data-current-index='11'] .Item:nth-child(12) .Link:active,
   html[data-current-index='12'] .Item:nth-child(13) .Link:active,
-  html[data-current-index='13'] .Item:nth-child(14) .Link:active {
+  html[data-current-index='13'] .Item:nth-child(14) .Link:active,
+  html[data-current-index='14'] .Item:nth-child(15) .Link:active {
     cursor: url('../assets/img/cursor-rock-clicked.png'), not-allowed;
   }
 
@@ -222,7 +224,8 @@ const {id, items = []} = Astro.props;
   html[data-current-index='10'] .Item:nth-child(11) .Link::before,
   html[data-current-index='11'] .Item:nth-child(12) .Link::before,
   html[data-current-index='12'] .Item:nth-child(13) .Link::before,
-  html[data-current-index='13'] .Item:nth-child(14) .Link::before {
+  html[data-current-index='13'] .Item:nth-child(14) .Link::before,
+  html[data-current-index='14'] .Item:nth-child(15) .Link::before {
     opacity: 0;
   }
 </style>

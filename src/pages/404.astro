@@ -52,10 +52,15 @@ import Stars from '@components/Stars.astro';
 
     position: relative;
     display: grid;
-    gap: var(--space-tight);
     justify-content: center;
+    gap: var(--space-tight);
+    padding: var(--space);
     text-align: center;
     max-width: 80rem;
     animation: rainbowSpin 4s linear infinite both;
+  }
+
+  .ErrorContent h4 a {
+    font-weight: 700;
   }
 </style>

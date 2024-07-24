@@ -1,23 +1,25 @@
 ---
+import {Icon} from 'astro-icon/components';
 import {type ProjectEntry} from '@data/types';
 
 interface Props {
-  id: ProjectEntry['logo'];
+  logo: ProjectEntry['logo'];
   name?: ProjectEntry['name'];
   url?: ProjectEntry['url'];
 }
 
-const {id, name = '', url = ''} = Astro.props;
-const logos = await Astro.glob('../assets/svg/Logo*.astro');
-
-function getLogo(logoId: string) {
-  const foundLogo = logos.find(({file}) => file.includes(logoId));
-  // TODO: Pass back a unique fallback logo?
-  return foundLogo ? foundLogo.default : logos[0].default;
-}
-
-const LogoSvg = getLogo(id);
+// No need to strongly type `logo`, because `astro-icon` will fail the
+// build if it cannot find the SVG asset.
+const {logo, name = '', url = ''} = Astro.props;
 const isLink = Boolean(url && name);
+
+const iconProps = {
+  name: `logos/${logo}`,
+  // `astro-icon` appends a `width/height` prop, which we do not want.
+  // There should be a way to do this via SVGO.
+  width: undefined,
+  height: undefined,
+};
 ---
 
 {
@@ -30,12 +32,12 @@ const isLink = Boolean(url && name);
       rel="noopener noreferrer"
       data-overlay-action
     >
-      <LogoSvg />
+      <Icon {...iconProps} />
       <slot />
     </a>
   ) : (
     <div class="ProjectLogo">
-      <LogoSvg />
+      <Icon {...iconProps} />
       <slot />
     </div>
   )
@@ -65,7 +67,7 @@ const isLink = Boolean(url && name);
     cursor: url('../assets/img/cursor-dead.png'), not-allowed;
   }
 
-  .ProjectLogo > :global(svg) {
+  .ProjectLogo > [data-icon] {
     width: 100%;
     height: 100%;
     overflow: visible;
@@ -74,37 +76,36 @@ const isLink = Boolean(url && name);
 
   /* Unique logo sizes per section id */
 
-  :global(#BodyMindChange) {
-    --project-logo-size: 18rem;
-
-    @media (--min-tablet) {
-      --project-logo-size: 24rem;
-    }
-  }
-
   :global(#Chicken) {
-    --project-logo-size: 13rem;
+    --project-logo-size: 14rem;
 
     @media (--min-tablet) {
-      --project-logo-size: 17.6rem;
+      --project-logo-size: 20rem;
     }
   }
 
   :global(#CommerceAwards),
-  :global(#PartnersAcademy),
   :global(#Polaris) {
-    --project-logo-size: 10rem;
+    --project-logo-size: 12rem;
 
     @media (--min-tablet) {
-      --project-logo-size: 16rem;
+      --project-logo-size: 18rem;
     }
   }
 
   :global(#Draggable) {
-    --project-logo-size: 10rem;
+    --project-logo-size: 16rem;
 
     @media (--min-tablet) {
-      --project-logo-size: 14rem;
+      --project-logo-size: 22rem;
+    }
+  }
+
+  :global(#Earwurm) {
+    --project-logo-size: 12rem;
+
+    @media (--min-tablet) {
+      --project-logo-size: 18rem;
     }
   }
 
@@ -116,16 +117,8 @@ const isLink = Boolean(url && name);
     }
   }
 
-  :global(#NorthernArmy),
-  :global(#NorthernArmy2012) {
-    --project-logo-size: 16rem;
-
-    @media (--min-tablet) {
-      --project-logo-size: 22rem;
-    }
-  }
-
-  :global(#NorthNavy) {
+  :global(#NA2012),
+  :global(#NorthernArmy) {
     --project-logo-size: 16rem;
 
     @media (--min-tablet) {
@@ -134,18 +127,18 @@ const isLink = Boolean(url && name);
   }
 
   :global(#PreservationSociety) {
-    --project-logo-size: 12rem;
+    --project-logo-size: 14rem;
 
     @media (--min-tablet) {
-      --project-logo-size: 17rem;
+      --project-logo-size: 20rem;
     }
   }
 
-  :global(#SandwichVideo) {
-    --project-logo-size: 16rem;
+  :global(#Tetchi) {
+    --project-logo-size: 20rem;
 
     @media (--min-tablet) {
-      --project-logo-size: 22rem;
+      --project-logo-size: 26rem;
     }
   }
 </style>
