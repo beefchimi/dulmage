@@ -1,4 +1,5 @@
 import {defineConfig} from 'astro/config';
+import icon from 'astro-icon';
 import AstroPWA from '@vite-pwa/astro';
 
 // https://astro.build/config
@@ -27,6 +28,9 @@ export default defineConfig({
     },
   },
   integrations: [
+    icon({
+      iconDir: 'src/assets/svg',
+    }),
     AstroPWA({
       workbox: {
         // Not sure how this differs from `includeAssets`...
