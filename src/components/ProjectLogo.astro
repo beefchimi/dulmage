@@ -49,6 +49,10 @@ const iconProps = {
   :root {
     --project-logo-size: 18rem;
 
+    @media (--max-phone-height) {
+      --project-logo-size: 16rem;
+    }
+
     @media (--min-tablet) {
       --project-logo-size: 24rem;
     }
@@ -76,66 +80,54 @@ const iconProps = {
 
   /* Unique logo sizes per section id */
 
-  :global(#Chicken) {
+  :global(#Chicken),
+  :global(#PreservationSociety) {
     --project-logo-size: 14rem;
+
+    @media (--max-phone-height) {
+      --project-logo-size: 12rem;
+    }
 
     @media (--min-tablet) {
       --project-logo-size: 20rem;
     }
   }
 
+  :global(#Earwurm),
   :global(#CommerceAwards),
   :global(#Polaris) {
     --project-logo-size: 12rem;
 
-    @media (--min-tablet) {
-      --project-logo-size: 18rem;
+    @media (--max-phone-height) {
+      --project-logo-size: 10rem;
     }
-  }
-
-  :global(#Draggable) {
-    --project-logo-size: 16rem;
-
-    @media (--min-tablet) {
-      --project-logo-size: 22rem;
-    }
-  }
-
-  :global(#Earwurm) {
-    --project-logo-size: 12rem;
 
     @media (--min-tablet) {
       --project-logo-size: 18rem;
     }
   }
 
-  :global(#Fringe) {
-    --project-logo-size: 20rem;
-
-    @media (--min-tablet) {
-      --project-logo-size: 26rem;
-    }
-  }
-
+  :global(#Draggable),
   :global(#NA2012),
   :global(#NorthernArmy) {
     --project-logo-size: 16rem;
 
+    @media (--max-phone-height) {
+      --project-logo-size: 14rem;
+    }
+
     @media (--min-tablet) {
       --project-logo-size: 22rem;
     }
   }
 
-  :global(#PreservationSociety) {
-    --project-logo-size: 14rem;
-
-    @media (--min-tablet) {
-      --project-logo-size: 20rem;
-    }
-  }
-
+  :global(#Fringe),
   :global(#Tetchi) {
     --project-logo-size: 20rem;
+
+    @media (--max-phone-height) {
+      --project-logo-size: 18rem;
+    }
 
     @media (--min-tablet) {
       --project-logo-size: 26rem;
