@@ -38,12 +38,6 @@ const {id, items = []} = Astro.props;
   @import '@styles/shared.css';
 
   :root {
-    /* TODO: Figure out how to share `Hamburger` variables. */
-    --hamburger-height: 2rem;
-    --hamburger-padding: var(--space-tightest);
-
-    /* Component */
-
     --nav-offset-safety: 0.2rem;
     --nav-item-shift-x: 0.3rem;
 
@@ -162,7 +156,7 @@ const {id, items = []} = Astro.props;
     padding-bottom: var(--nav-label-padding-y);
     padding-left: var(--nav-label-padding-left);
     font-size: var(--p-size);
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     white-space: nowrap;

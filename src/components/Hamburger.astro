@@ -26,11 +26,10 @@ const {id, controlsId} = Astro.props;
   @import '@styles/shared.css';
 
   :root {
+    /* `height` and `padding` variables come from `globla.css` */
     --hamburger-width-min: 2.4rem;
     --hamburger-width-max: 3rem;
-    --hamburger-height: 2rem;
     --hamburger-line-height: 0.3rem;
-    --hamburger-padding: var(--space-tightest);
 
     /* Computed value: `height - line-height` */
     --hamburger-patty3-y: 1.7rem;
