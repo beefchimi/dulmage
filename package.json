@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.8.2",
+    "@fontsource-variable/outfit": "^5.0.13",
     "astro": "^4.12.2",
     "astro-icon": "^1.1.0",
     "beeftools": "^0.1.6",
