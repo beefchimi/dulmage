@@ -1,6 +1,10 @@
 ---
 import {pwaInfo} from 'virtual:pwa-info';
 
+// FontSource packages cannot be imported within CSS.
+// Supports weights `100-900`.
+import '@fontsource-variable/outfit';
+
 import '@styles/reset.css';
 import '@styles/global.css';
 import '@styles/utility.css';
