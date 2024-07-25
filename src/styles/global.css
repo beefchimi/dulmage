@@ -37,7 +37,6 @@
   --speed-slower: 960ms;
   --speed-slowest: 1920ms;
 
-  /* Consider: `--ease: cubic-bezier(0.6, 0, 0.2, 1)` */
   --ease: cubic-bezier(0.64, 0, 0.32, 1);
   --ease-excite: cubic-bezier(0.18, 0.66, 0.6, 1.22);
   --ease-bungie: cubic-bezier(0.32, 1.46, 0.54, 1.28);
@@ -46,10 +45,12 @@
   --focus-offset: -0.6rem;
   --icon-size: 2rem;
 
+  /* Typography */
+
   --p-size: 1.4rem;
   --subhead-size: 2.2rem;
 
-  --h1-size: 3.2rem;
+  --h1-size: 3.6rem;
   --h2-size: 2rem;
   --h3-size: 1.2rem;
   --h4-size: 1.8rem;
@@ -63,8 +64,13 @@
   }
 
   @media (--min-desktop) {
+    --h1-size: 10rem;
     --p-size: 1.6rem;
   }
+
+  /* Components */
+  --hamburger-height: 2rem;
+  --hamburger-padding: var(--space-tightest);
 }
 
 ::selection {
@@ -77,6 +83,7 @@ html {
 }
 
 body {
+  font-family: 'Outfit Variable', var(--font-stack-sans-serif);
   cursor: url('../assets/img/cursor-auto.png'), auto;
 }
 
@@ -189,8 +196,8 @@ main {
 
 .heading--1 {
   font-size: var(--h1-size);
-  font-weight: 900;
-  letter-spacing: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1rem;
 
   @media (--min-tablet) {
     letter-spacing: 3rem;
@@ -209,10 +216,10 @@ main {
 .heading--3 {
   font-size: var(--h3-size);
   font-weight: 900;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.2rem;
 
   @media (--min-tablet) {
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.4rem;
   }
 }
 
