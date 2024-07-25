@@ -84,9 +84,15 @@ meter {
 
 /* --- Custom resets --- */
 
+:root {
+  --font-stack-sans-serif: Avenir, 'Avenir Next LT Pro', Montserrat, Corbel,
+    'URW Gothic', source-sans-pro, sans-serif;
+  --font-stack-monospace: ui-monospace, 'Cascadia Code', 'Source Code Pro',
+    Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
 html {
-  font-family: Avenir, 'Avenir Next LT Pro', Montserrat, Corbel, 'URW Gothic',
-    source-sans-pro, sans-serif;
+  font-family: var(--font-stack-sans-serif);
   font-size: 10px;
   font-display: swap;
   line-height: 1;
@@ -106,8 +112,7 @@ body {
 }
 
 code {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
-    'DejaVu Sans Mono', monospace;
+  font-family: var(--font-stack-monospace);
 }
 
 svg:not(:root) {

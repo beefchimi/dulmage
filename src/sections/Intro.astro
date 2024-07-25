@@ -14,13 +14,17 @@ const {id, thumbnail} = Astro.props;
   <article class="section-interior">
     <div class="Content">
       <h1 class="heading heading--1">Dulmage</h1>
-      <h2 class="heading heading--2">UX Developer</h2>
+
+      <div class="Details">
+        <h2 class="heading heading--2">UX Developer</h2>
+        <h2 class="heading heading--2">Ottawa, ON</h2>
+      </div>
 
       <p class="heading heading--3 visually-hidden">
         Background image photographed by: Curtis Dulmage
       </p>
 
-      <p class="paragraph visually-hidden preload-cursors">
+      <p class="paragraph visually-hidden">
         <b>Curtis Dulmage.</b>
         <u>Front end web developer.</u>
         <i>Ottawa, Canada.</i> Here are a few of my most recent projects. Please
@@ -35,6 +39,10 @@ const {id, thumbnail} = Astro.props;
 <style>
   @import '@styles/shared.css';
 
+  :root {
+    --intro-detail-before: none;
+  }
+
   .Content {
     display: grid;
     place-items: center;
@@ -43,6 +51,20 @@ const {id, thumbnail} = Astro.props;
 
     @media (--min-tablet) {
       gap: var(--space);
+    }
+  }
+
+  .Details {
+    display: grid;
+    gap: var(--space-tightest);
+
+    & > h2 + h2::before {
+      content: var(--intro-detail-before);
+    }
+
+    @media (--min-tablet) {
+      --intro-detail-before: '\002F\0020';
+      grid-auto-flow: column;
     }
   }
 </style>
