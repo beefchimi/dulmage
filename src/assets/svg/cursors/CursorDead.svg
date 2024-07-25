@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <path fill="black"
+    d="M28 13v11a4 4 0 0 1-4.125 3.998A4.002 4.002 0 0 1 18 30.465 3.982 3.982 0 0 1 16 31a3.982 3.982 0 0 1-2-.535 4.002 4.002 0 0 1-5.874-2.467A4 4 0 0 1 4 24V13C4 6.373 9.373 1 16 1s12 5.373 12 12Z" />
+  <path fill="white"
+    d="M25 24V13c0-5-4-9-9-9s-9 4-9 9v11s0 1 1 1 1-1 1-1v-4s0-1 1-1 1 1 1 1v7s0 1 1 1 1-1 1-1v-5s0-1 1-1 1 1 1 1v5s0 1 1 1 1-1 1-1v-5s0-1 1-1 1 1 1 1v5s0 1 1 1 1-1 1-1v-7s0-1 1-1 1 1 1 1v4s0 1 1 1 1-1 1-1Z" />
+  <path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+    d="m18 12 3 3m0-3-3 3m-7-3 3 3m0-3-3 3" />
+</svg>

@@ -84,7 +84,7 @@ html {
 
 body {
   font-family: 'Outfit Variable', var(--font-stack-sans-serif);
-  cursor: url('../assets/img/cursor-auto.png'), auto;
+  cursor: url('../assets/svg/cursors/CursorAuto.svg'), auto;
 }
 
 /* --- Page load --- */
@@ -290,32 +290,18 @@ code,
 cite,
 blockquote,
 figcaption {
-  cursor: url('../assets/img/cursor-text.png'), text;
+  cursor: url('../assets/svg/cursors/CursorText.svg'), text;
 }
 
 a,
 button {
   &,
   & * {
-    cursor: url('../assets/img/cursor-pointer.png'), pointer;
+    cursor: url('../assets/svg/cursors/CursorPointer.svg'), pointer;
   }
 
   &:active,
   &:active * {
-    cursor: url('../assets/img/cursor-pointer-clicked.png'), pointer;
+    cursor: url('../assets/svg/cursors/CursorPointerClicked.svg'), pointer;
   }
-}
-
-/*
-.preload-cursors b {
-  cursor: url('../assets/img/cursor-drag-clicked.png'), auto;
-}
-*/
-
-.preload-cursors u {
-  cursor: url('../assets/img/cursor-pointer-clicked.png'), pointer;
-}
-
-.preload-cursors i {
-  cursor: url('../assets/img/cursor-rock-clicked.png'), pointer;
 }

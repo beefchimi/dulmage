@@ -68,7 +68,11 @@ const iconProps = {
   }
 
   div.ProjectLogo {
-    cursor: url('../assets/img/cursor-dead.png'), not-allowed;
+    cursor: url('../assets/svg/cursors/CursorDead.svg'), not-allowed;
+
+    &:active {
+      cursor: url('../assets/svg/cursors/CursorDeadClicked.svg'), not-allowed;
+    }
   }
 
   .ProjectLogo > [data-icon] {

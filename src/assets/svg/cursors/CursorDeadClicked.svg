@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <path fill="black"
+    d="M28 13v9a4 4 0 0 1-4 4v1a4 4 0 0 1-6 3.465A3.982 3.982 0 0 1 16 31a3.982 3.982 0 0 1-2-.535A4 4 0 0 1 8 27v-1a4 4 0 0 1-4-4v-9C4 6.373 9.373 1 16 1s12 5.373 12 12Z" />
+  <path fill="white"
+    d="M25 22v-9c0-5-4-9-9-9s-9 4-9 9v9s0 1 1 1 1-1 1-1v-2s0-1 1-1 1 1 1 1v7s0 1 1 1 1-1 1-1v-6s0-1 1-1 1 1 1 1v6s0 1 1 1 1-1 1-1v-6s0-1 1-1 1 1 1 1v6s0 1 1 1 1-1 1-1v-7s0-1 1-1 1 1 1 1v2s0 1 1 1 1-1 1-1Z" />
+  <path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+    d="m18 12 3 3m0-3-3 3m-7-3 3 3m0-3-3 3" />
+</svg>

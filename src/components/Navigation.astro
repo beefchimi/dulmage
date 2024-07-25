@@ -160,7 +160,7 @@ const {id, items = []} = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     white-space: nowrap;
-    /* Required for the `rock` cursor to work. */
+    /* Required for the `horns` cursor to work. */
     pointer-events: none;
   }
 
@@ -182,7 +182,7 @@ const {id, items = []} = Astro.props;
   html[data-current-index='12'] .Item:nth-child(13) .Link,
   html[data-current-index='13'] .Item:nth-child(14) .Link,
   html[data-current-index='14'] .Item:nth-child(15) .Link {
-    cursor: url('../assets/img/cursor-rock.png'), not-allowed;
+    cursor: url('../assets/svg/cursors/CursorHorns.svg'), not-allowed;
     color: var(--color-primary);
     translate: calc(var(--nav-item-shift-x) * -1) 0;
   }
@@ -202,7 +202,7 @@ const {id, items = []} = Astro.props;
   html[data-current-index='12'] .Item:nth-child(13) .Link:active,
   html[data-current-index='13'] .Item:nth-child(14) .Link:active,
   html[data-current-index='14'] .Item:nth-child(15) .Link:active {
-    cursor: url('../assets/img/cursor-rock-clicked.png'), not-allowed;
+    cursor: url('../assets/svg/cursors/CursorHornsClicked.svg'), not-allowed;
   }
 
   html[data-current-index='0'] .Item:nth-child(1) .Link::before,
