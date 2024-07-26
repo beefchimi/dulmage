@@ -305,3 +305,28 @@ button {
     cursor: url('../assets/svg/cursors/CursorPointerClicked.svg'), pointer;
   }
 }
+
+.preload-cursors {
+  /*
+    Required to preload the variant cursor. Otherwise, there will be
+    a delay upon click when switching to the different cursor asset.
+  */
+
+  > b {
+    cursor: url('../assets/svg/cursors/CursorDeadClicked.svg'), auto;
+  }
+
+  > u {
+    cursor: url('../assets/svg/cursors/CursorHornsClicked.svg'), pointer;
+  }
+
+  > i {
+    cursor: url('../assets/svg/cursors/CursorPointerClicked.svg'), pointer;
+  }
+
+  /*
+  > strong {
+    cursor: url('../assets/svg/cursors/CursorGrabClicked.svg'), pointer;
+  }
+  */
+}
