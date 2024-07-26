@@ -1,6 +1,5 @@
 ---
 import {type SectionEntry} from '@data/types';
-import Contact from '@components/Contact.astro';
 
 interface Props {
   id: SectionEntry['id'];
@@ -24,15 +23,14 @@ const {id, thumbnail} = Astro.props;
         Background image photographed by: Curtis Dulmage
       </p>
 
-      <p class="paragraph visually-hidden">
+      <p class="paragraph visually-hidden preload-cursors">
         <b>Curtis Dulmage.</b>
         <u>Front end web developer.</u>
-        <i>Ottawa, Canada.</i> Here are a few of my most recent projects. Please
-        get in touch if you have any questions. Thank you.
+        <i>Ottawa, Canada.</i>
+        <strong>Here are a few of my most recent projects.</strong>
+        <em>Please get in touch if you have any questions. Thank you.</em>
       </p>
     </div>
-
-    <Contact />
   </article>
 </header>
 
@@ -52,6 +50,11 @@ const {id, thumbnail} = Astro.props;
     @media (--min-tablet) {
       gap: var(--space);
     }
+
+    /* Page load (fade-in) */
+    position: relative;
+    z-index: var(--index-thermosphere);
+    animation: fadeIn var(--speed-slower) var(--speed-slow) var(--ease) both;
   }
 
   .Details {

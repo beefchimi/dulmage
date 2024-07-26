@@ -47,17 +47,23 @@ import Stars from '@components/Stars.astro';
     }
   }
 
-  .ErrorContent {
+  :global(#Main404) {
     --color-portfolio: hsl(var(--color-rainbow) 100% 50%);
+    animation: rainbowSpin 4s linear infinite both;
+  }
 
-    position: relative;
+  .ErrorContent {
     display: grid;
     justify-content: center;
     gap: var(--space-tight);
     padding: var(--space);
     text-align: center;
     max-width: 90rem;
-    animation: rainbowSpin 4s linear infinite both;
+
+    /* Page load (fade-in) */
+    position: relative;
+    z-index: var(--index-thermosphere);
+    animation: fadeIn var(--speed-slower) var(--speed-slow) var(--ease) both;
   }
 
   .ErrorContent h4 a {

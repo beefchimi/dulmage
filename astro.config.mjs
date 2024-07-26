@@ -34,9 +34,11 @@ export default defineConfig({
     AstroPWA({
       workbox: {
         // Not sure how this differs from `includeAssets`...
-        // globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: ['**/*.{css,js,html,woff2}', 'assets/*.{png,webp}'],
         // Not sure if we actually want to specify this fallback.
-        navigateFallback: '/404',
+        navigateFallback: '/',
+        // The `chicken` image is 2.2MB, so we increase the limit to 3MB.
+        maximumFileSizeToCacheInBytes: 3000000,
       },
 
       // Specify which public assets (in addition to the default html/css/js)
