@@ -88,34 +88,37 @@ body {
 }
 
 /* --- Smooth scroll + snapping --- */
-/* Disabled because it breaks "dynamic chrome" behaviour on iOS */
 
-/*
-html,
-body {
-  height: 100svh;
-  overflow: hidden;
-}
+html {
+  /*
+    It is possible that Safari may require this to be
+    added to the <body /> as well.
+  */
+  scroll-snap-type: y mandatory;
 
-main {
-  height: 100svh;
-  overflow: scroll;
-  scroll-snap-points-y: repeat(100svh);
-  scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
+  /*
+    Ideally, we use `proximity` everywhere...
+    but iOS scrolling just feels janky when `proximity` is used.
+  */
+  @media (--min-tablet) {
+    scroll-snap-type: y proximity;
+  }
 }
 
 .section {
-  position: relative;
   scroll-snap-align: start;
 }
-*/
 
 /* --- Components --- */
 
 .section {
   width: 100dvw;
-  height: 100svh;
+  /*
+    `lvh` appears to behave differently between various Mobile browsers...
+    but the intention is to always use the "largest viewport height".
+    Using a "dynamic" height leads to a lot of scroll jank.
+  */
+  height: 100lvh;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -125,17 +128,6 @@ main {
   */
   overflow: hidden;
 }
-
-/*
-  TODO: Experiment with this when Safari has better support.
-  At the moment, the site in "web app view" does not stretch
-  the full height of the viewport (likely because of `svh`).
-*/
-/*
-.section:fullscreen {
-  height: 100dvh;
-}
-*/
 
 .section-interior {
   display: grid;
