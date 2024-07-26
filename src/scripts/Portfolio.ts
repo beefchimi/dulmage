@@ -25,6 +25,12 @@ export class Portfolio {
 
   #isTicking = false;
 
+  // TODO: There is a bug in Firefox Mobile that causes the "URL bar" to
+  // re-appear everytime the url is updated (ex: via replaceState). I am
+  // simply disabling this behaviour for now... but I may need to do a
+  // user-agent sniff in order to work around it.
+  static SUPPORT_URL_UPDATES = false;
+
   constructor(selectors?: Selectors) {
     this.#selector = {
       cssColorProp: selectors?.cssColorProp || CSS_PORTFOLIO_COLOR_PROP,
@@ -111,6 +117,8 @@ export class Portfolio {
   }
 
   #updateUrlHash() {
+    if (!Portfolio.SUPPORT_URL_UPDATES) return;
+
     const urlHash = this.#index === 0 ? ' ' : `#${sections[this.#index].id}`;
 
     // Passing an empty `string` as `urlHash` will NOT remove any previous `hash`,

@@ -27,6 +27,7 @@
     "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force",
     "astro": "astro",
     "start": "astro dev",
+    "start:host": "astro dev --host",
     "build": "npm run clean && astro check && astro build",
     "preview": "astro preview",
     "lint": "eslint .",
@@ -37,7 +38,7 @@
     "test": "echo 'There is no testing suite set up for this app.'"
   },
   "dependencies": {
-    "@astrojs/check": "^0.8.2",
+    "@astrojs/check": "^0.8.3",
     "@fontsource-variable/outfit": "^5.0.13",
     "astro": "^4.12.2",
     "astro-icon": "^1.1.0",
