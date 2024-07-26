@@ -27,7 +27,7 @@ const OG_IMAGE = new URL('/dulmage-social.png', Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en" data-current-index="0">
+<html lang="en" data-current-index="0" data-ready="loading">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -131,23 +131,45 @@ const OG_IMAGE = new URL('/dulmage-social.png', Astro.site).href;
     display: flex;
     justify-content: center;
   }
+
+  /* --- Page load --- */
+
+  @keyframes pageLoadScreenCover {
+    from {
+      opacity: 1;
+      visibility: visible;
+    }
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  body {
+    position: relative;
+
+    &::after {
+      content: '';
+      z-index: var(--index-mesosphere);
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-color: black;
+    }
+  }
+
+  html[data-ready='done'] body::after {
+    animation: pageLoadScreenCover var(--speed-slower) var(--ease) forwards;
+  }
 </style>
 
 <script>
+  import {PageLoad} from '@scripts/PageLoad';
   import {PwaServiceWorker} from '@scripts/PwaServiceWorker';
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', PwaServiceWorker.install);
   }
 
-  // TODO: Decide if we want to leverage `readystate` for our
-  // page load animation.
-
-  /*
-    document.onreadystatechange = () => {
-      if (document.readyState === "complete") {
-        initApplication();
-      }
-    };
-  */
+  PageLoad.schedule();
 </script>

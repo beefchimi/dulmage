@@ -87,34 +87,6 @@ body {
   cursor: url('../assets/svg/cursors/CursorAuto.svg'), auto;
 }
 
-/* --- Page load --- */
-/* TODO: Consider something better with `document.readystate`. */
-
-@keyframes pageLoad {
-  from {
-    opacity: 1;
-    visibility: visible;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-body {
-  position: relative;
-
-  &::after {
-    content: '';
-    z-index: var(--index-mesosphere);
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-color: black;
-    animation: pageLoad var(--speed-slow) var(--speed) var(--ease) forwards;
-  }
-}
-
 /* --- Smooth scroll + snapping --- */
 /* Disabled because it breaks "dynamic chrome" behaviour on iOS */
 
@@ -329,4 +301,15 @@ button {
     cursor: url('../assets/svg/cursors/CursorGrabClicked.svg'), pointer;
   }
   */
+}
+
+/* --- Global animations --- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

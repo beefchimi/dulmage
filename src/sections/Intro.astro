@@ -1,6 +1,5 @@
 ---
 import {type SectionEntry} from '@data/types';
-import Contact from '@components/Contact.astro';
 
 interface Props {
   id: SectionEntry['id'];
@@ -32,8 +31,6 @@ const {id, thumbnail} = Astro.props;
         <em>Please get in touch if you have any questions. Thank you.</em>
       </p>
     </div>
-
-    <Contact />
   </article>
 </header>
 
@@ -53,6 +50,11 @@ const {id, thumbnail} = Astro.props;
     @media (--min-tablet) {
       gap: var(--space);
     }
+
+    /* Page load (fade-in) */
+    position: relative;
+    z-index: var(--index-thermosphere);
+    animation: fadeIn var(--speed-slower) var(--speed-slow) var(--ease) both;
   }
 
   .Details {
