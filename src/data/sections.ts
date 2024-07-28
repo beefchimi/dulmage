@@ -73,7 +73,7 @@ const earwurm: ProjectEntry = {
   name: 'Earwurm',
   description: 'Easier web audio for UI sound effects',
   thumbnail: '/assets/bg-earwurm.webp',
-  channels: [231, 131, 93],
+  channels: [237, 0, 55],
   logo: 'LogoEarwurm',
   url: 'https://beefchimi.github.io/earwurm/',
   attribution: 'Curtis Dulmage',
@@ -90,18 +90,6 @@ const fringe: ProjectEntry = {
   attribution: 'Mandira Midha',
   client: ['Ottawa Fringe Festival', 'https://ottawafringe.com'],
   agency: ['Northern Army', 'https://northernarmy.com'],
-  inactive: true,
-};
-
-const na2012: ProjectEntry = {
-  id: 'NA2012',
-  name: 'NA 2012',
-  description: 'Legacy Northern Army 2012',
-  thumbnail: '/assets/bg-na2012.webp',
-  channels: [234, 72, 72],
-  logo: 'LogoNorthernArmy',
-  attribution: 'Rene Antunes',
-  inhouse: ['Northern Army', 'https://northernarmy.com'],
   inactive: true,
 };
 
@@ -209,6 +197,5 @@ export const sections: [intro: SectionEntry, ...projects: ProjectEntry[]] = [
   tetchi,
   chicken,
   draggable,
-  na2012,
   commerceAwards,
 ];
