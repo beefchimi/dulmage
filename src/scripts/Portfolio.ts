@@ -11,8 +11,19 @@ interface Selectors {
   scroller?: string;
 }
 
+interface ScrollData {
+  currentIndex: number;
+  nextIndex: number;
+  mostVisibleIndex: number;
+  indexProgress: number;
+}
+
+type CustomScrollFn = (data: ScrollData) => void;
+
 export class Portfolio {
   #selector: Required<Selectors>;
+  #onScroll: CustomScrollFn | undefined;
+
   #sections: NodeListOf<Element>;
   #scroller: Element | null;
   #channels: RgbChannels;
@@ -31,12 +42,13 @@ export class Portfolio {
   // user-agent sniff in order to work around it.
   static SUPPORT_URL_UPDATES = false;
 
-  constructor(selectors?: Selectors) {
+  constructor(selectors?: Selectors, onScroll?: CustomScrollFn) {
     this.#selector = {
       cssColorProp: selectors?.cssColorProp || CSS_PORTFOLIO_COLOR_PROP,
       section: selectors?.section || SECTION_SELECTOR,
       scroller: selectors?.scroller || '',
     };
+    this.#onScroll = onScroll;
 
     this.#sections = document.querySelectorAll(this.#selector.section);
     this.#scroller = Boolean(this.#selector.scroller)
@@ -56,6 +68,10 @@ export class Portfolio {
     return this.#index >= this.#sections.length - 1
       ? this.#index
       : this.#index + 1;
+  }
+
+  get mostVisibleIndex() {
+    return this.sectionScrollProgress > 60 ? this.nextIndex : this.currentIndex;
   }
 
   get channels() {
@@ -136,8 +152,6 @@ export class Portfolio {
     if (this.#index === newIndex) return;
 
     this.#index = newIndex;
-    document.documentElement.dataset.currentIndex = newIndex.toString();
-
     this.#updateUrlHash();
   }
 
@@ -170,6 +184,13 @@ export class Portfolio {
 
     this.#rafId = requestAnimationFrame(this.#rafCallback);
     this.#isTicking = true;
+
+    this.#onScroll?.({
+      currentIndex: this.currentIndex,
+      nextIndex: this.nextIndex,
+      mostVisibleIndex: this.mostVisibleIndex,
+      indexProgress: this.sectionScrollProgress,
+    });
   };
 
   #handleResize = () => {
