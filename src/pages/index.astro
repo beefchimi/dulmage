@@ -65,12 +65,4 @@ const [intro, ...portfolioSections] = sections;
 
   const togglerInstance = new Toggler(NAV_TOGGLE_ID, NAV_ID);
   togglerInstance.init();
-
-  // Even with smooth scrolling, this is necessary to mitigate some of
-  // the issues that arise from `lvh` sections + scroll tracking.
-  function handleHashChange() {
-    navTrackerInstance.safeUpdate(portfolioInstance.mostVisibleIndex);
-  }
-
-  window.addEventListener('hashchange', handleHashChange, false);
 </script>
