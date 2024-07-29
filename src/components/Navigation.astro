@@ -3,6 +3,10 @@ interface ItemDescriptor {
   id: string;
   name: string;
   description: string;
+  // Not using a `current` prop as we need to calculate the
+  // current item via a `script` instead of `frontmatter`.
+  // current?: boolean;
+  // class:list={['Link', {current: item.current}]}
 }
 
 interface Props {
@@ -166,61 +170,18 @@ const {id, items = []} = Astro.props;
   }
 
   /* --- Active Item iteration --- */
-  /* TODO: Replace these with an `active` class instead. */
 
-  html[data-current-index='0'] .Item:nth-child(1) .Link,
-  html[data-current-index='1'] .Item:nth-child(2) .Link,
-  html[data-current-index='2'] .Item:nth-child(3) .Link,
-  html[data-current-index='3'] .Item:nth-child(4) .Link,
-  html[data-current-index='4'] .Item:nth-child(5) .Link,
-  html[data-current-index='5'] .Item:nth-child(6) .Link,
-  html[data-current-index='6'] .Item:nth-child(7) .Link,
-  html[data-current-index='7'] .Item:nth-child(8) .Link,
-  html[data-current-index='8'] .Item:nth-child(9) .Link,
-  html[data-current-index='9'] .Item:nth-child(10) .Link,
-  html[data-current-index='10'] .Item:nth-child(11) .Link,
-  html[data-current-index='11'] .Item:nth-child(12) .Link,
-  html[data-current-index='12'] .Item:nth-child(13) .Link,
-  html[data-current-index='13'] .Item:nth-child(14) .Link,
-  html[data-current-index='14'] .Item:nth-child(15) .Link {
+  .Item[data-current] .Link {
     cursor: url('../assets/svg/cursors/CursorHorns.svg'), not-allowed;
     color: var(--color-primary);
     translate: calc(var(--nav-item-shift-x) * -1) 0;
-  }
 
-  html[data-current-index='0'] .Item:nth-child(1) .Link:active,
-  html[data-current-index='1'] .Item:nth-child(2) .Link:active,
-  html[data-current-index='2'] .Item:nth-child(3) .Link:active,
-  html[data-current-index='3'] .Item:nth-child(4) .Link:active,
-  html[data-current-index='4'] .Item:nth-child(5) .Link:active,
-  html[data-current-index='5'] .Item:nth-child(6) .Link:active,
-  html[data-current-index='6'] .Item:nth-child(7) .Link:active,
-  html[data-current-index='7'] .Item:nth-child(8) .Link:active,
-  html[data-current-index='8'] .Item:nth-child(9) .Link:active,
-  html[data-current-index='9'] .Item:nth-child(10) .Link:active,
-  html[data-current-index='10'] .Item:nth-child(11) .Link:active,
-  html[data-current-index='11'] .Item:nth-child(12) .Link:active,
-  html[data-current-index='12'] .Item:nth-child(13) .Link:active,
-  html[data-current-index='13'] .Item:nth-child(14) .Link:active,
-  html[data-current-index='14'] .Item:nth-child(15) .Link:active {
-    cursor: url('../assets/svg/cursors/CursorHornsClicked.svg'), not-allowed;
-  }
+    &:active {
+      cursor: url('../assets/svg/cursors/CursorHornsClicked.svg'), not-allowed;
+    }
 
-  html[data-current-index='0'] .Item:nth-child(1) .Link::before,
-  html[data-current-index='1'] .Item:nth-child(2) .Link::before,
-  html[data-current-index='2'] .Item:nth-child(3) .Link::before,
-  html[data-current-index='3'] .Item:nth-child(4) .Link::before,
-  html[data-current-index='4'] .Item:nth-child(5) .Link::before,
-  html[data-current-index='5'] .Item:nth-child(6) .Link::before,
-  html[data-current-index='6'] .Item:nth-child(7) .Link::before,
-  html[data-current-index='7'] .Item:nth-child(8) .Link::before,
-  html[data-current-index='8'] .Item:nth-child(9) .Link::before,
-  html[data-current-index='9'] .Item:nth-child(10) .Link::before,
-  html[data-current-index='10'] .Item:nth-child(11) .Link::before,
-  html[data-current-index='11'] .Item:nth-child(12) .Link::before,
-  html[data-current-index='12'] .Item:nth-child(13) .Link::before,
-  html[data-current-index='13'] .Item:nth-child(14) .Link::before,
-  html[data-current-index='14'] .Item:nth-child(15) .Link::before {
-    opacity: 0;
+    &::before {
+      opacity: 0;
+    }
   }
 </style>
