@@ -26,7 +26,11 @@ export class PageLoad {
   }
 
   static #handleReadyState() {
+    // Before running the timer to "update document", we want to make sure any
+    // hash URL is removed and we reset our scroll position.
+    history.replaceState(null, '', ' ');
     window.scrollTo(0, 0);
+
     window.setTimeout(PageLoad.#updateDocument, PageLoad.MOTION_DELAY);
   }
 
