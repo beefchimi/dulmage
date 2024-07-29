@@ -34,7 +34,7 @@ export class Portfolio {
   #scrollHeight = 0;
   #sectionHeight = 0;
 
-  #isTicking = false;
+  #rafTicking = false;
 
   // TODO: There is a bug in Firefox Mobile that causes the "URL bar" to
   // re-appear everytime the url is updated (ex: via replaceState). I am
@@ -106,6 +106,7 @@ export class Portfolio {
   }
 
   teardown() {
+    window.removeEventListener('hashchange', this.#runAllUpdates);
     this.scroller.removeEventListener('scroll', this.#handleScroll);
     window.removeEventListener('resize', this.#handleResize);
 
@@ -113,6 +114,9 @@ export class Portfolio {
   }
 
   #registerEventListeners() {
+    // Required alongside `handleScroll` for anchor tags.
+    window.addEventListener('hashchange', this.#runAllUpdates, false);
+
     // `passive` may not actually make sense for `scroll` events.
     this.scroller.addEventListener('scroll', this.#handleScroll, {
       passive: true,
@@ -172,18 +176,18 @@ export class Portfolio {
     );
   }
 
-  #rafCallback = () => {
+  #runAllUpdates = () => {
     this.#updateIndex();
     this.#updatePortfolioColor();
 
-    this.#isTicking = false;
+    this.#rafTicking = false;
   };
 
   #handleScroll = () => {
-    if (this.#isTicking) return;
+    if (this.#rafTicking) return;
 
-    this.#rafId = requestAnimationFrame(this.#rafCallback);
-    this.#isTicking = true;
+    this.#rafId = requestAnimationFrame(this.#runAllUpdates);
+    this.#rafTicking = true;
 
     this.#onScroll?.({
       currentIndex: this.currentIndex,

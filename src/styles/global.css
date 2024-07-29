@@ -87,26 +87,23 @@ body {
   cursor: url('../assets/svg/cursors/CursorAuto.svg'), auto;
 }
 
-/* --- Smooth scroll + snapping --- */
+/* --- Scroll snapping --- */
 
 html {
   /*
-    It is possible that Safari may require this to be
-    added to the <body /> as well.
+    Scroll snapping creates many problems on iOS when used in combination
+     with `100vh`, so we are enabling this only for larger devices.
   */
-  scroll-snap-type: y mandatory;
-
-  /*
-    Ideally, we use `proximity` everywhere...
-    but iOS scrolling just feels janky when `proximity` is used.
-  */
-  @media (--min-tablet) {
+  @media (--min-desktop) {
     scroll-snap-type: y proximity;
   }
 }
 
 .section {
-  scroll-snap-align: start;
+  /* See note above about iOS issues */
+  @media (--min-desktop) {
+    scroll-snap-align: start;
+  }
 }
 
 /* --- Components --- */
