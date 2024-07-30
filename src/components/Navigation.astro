@@ -90,8 +90,12 @@ const {id, items = []} = Astro.props;
     z-index: calc(var(--index-thermosphere) + 1);
     bottom: var(--nav-list-bottom);
     right: 0;
+
+    /*
+    Using this layout breaks the close animation:
     display: grid;
     justify-items: end;
+    */
 
     &[aria-hidden='false'] {
       width: auto;
@@ -103,6 +107,10 @@ const {id, items = []} = Astro.props;
   }
 
   .Item {
+    /* Required for the close animation to work */
+    float: right;
+    clear: both;
+
     transition: translate var(--speed) var(--ease);
     /* Stagger animation offset */
     transition-delay: calc(var(--speed-fastest) * var(--nav-item-index));
