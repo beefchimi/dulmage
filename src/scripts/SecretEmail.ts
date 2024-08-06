@@ -6,8 +6,8 @@ const DEFAULT_CLASSNAMES = {
 };
 
 export class SecretEmail {
-  static defaultSecretClass = DEFAULT_CLASSNAMES.secret;
-  static defaultReplaceClass = DEFAULT_CLASSNAMES.replace;
+  static readonly defaultSecretClass = DEFAULT_CLASSNAMES.secret;
+  static readonly defaultReplaceClass = DEFAULT_CLASSNAMES.replace;
 
   readonly email: string;
   readonly secretClass: string;

@@ -4,8 +4,8 @@ type AddArgs = ConstructorParameters<typeof ToastNotification>;
 
 // TODO: Add event for `count` change using `emitten`.
 export class ToastTracker {
-  static MAX_SIZE = 10;
-  static DISMISS_AFTER_MS = 9999;
+  static readonly MAX_SIZE = 10;
+  static readonly DISMISS_AFTER_MS = 9999;
 
   #portal: HTMLElement;
   #queue: Map<string, ToastNotification>;
