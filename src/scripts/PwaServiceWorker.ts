@@ -9,7 +9,7 @@ type PwaReloadFn = ((reloadPage?: boolean) => Promise<void>) | undefined;
 export class PwaServiceWorker {
   // TODO: We probably want to initialize a global singleton
   // that gets imported and shared in various places.
-  static #tracker = new ToastTracker();
+  static readonly #tracker = new ToastTracker();
   static #refreshWorker: PwaReloadFn;
 
   static install() {
