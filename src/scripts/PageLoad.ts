@@ -1,7 +1,7 @@
 export type HtmlReady = 'loading' | 'done' | 'error';
 
 export class PageLoad {
-  static MOTION_DELAY = 1200;
+  static readonly MOTION_DELAY = 1200;
 
   static documentState() {
     return document.readyState;

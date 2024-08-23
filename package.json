@@ -19,7 +19,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=22.4.0",
+    "node": ">=22.6.0",
     "npm": ">=10.8.0"
   },
   "scripts": {
@@ -38,21 +38,21 @@
     "test": "echo 'There is no testing suite set up for this app.'"
   },
   "dependencies": {
-    "@astrojs/check": "^0.8.3",
-    "@fontsource-variable/outfit": "^5.0.13",
-    "astro": "^4.12.2",
-    "astro-icon": "^1.1.0",
-    "beeftools": "^0.1.6",
+    "@astrojs/check": "^0.9.3",
+    "@fontsource-variable/outfit": "^5.0.14",
+    "astro": "^4.14.5",
+    "astro-icon": "^1.1.1",
+    "beeftools": "^0.1.7",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.17.0",
+    "@typescript-eslint/parser": "^8.2.0",
     "@vite-pwa/astro": "^0.4.0",
     "@vite-pwa/assets-generator": "^0.2.4",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.2.3",
     "eslint-plugin-jsx-a11y": "^6.9.0",
-    "lightningcss": "^1.25.1",
+    "lightningcss": "^1.26.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1"
   }

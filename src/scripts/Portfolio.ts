@@ -40,7 +40,7 @@ export class Portfolio {
   // re-appear everytime the url is updated (ex: via replaceState). I am
   // simply disabling this behaviour for now... but I may need to do a
   // user-agent sniff in order to work around it.
-  static SUPPORT_URL_UPDATES = false;
+  static readonly SUPPORT_URL_UPDATES = false;
 
   constructor(selectors?: Selectors, onScroll?: CustomScrollFn) {
     this.#selector = {
