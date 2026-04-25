@@ -2,26 +2,22 @@
   "name": "dulmage.me",
   "version": "2.0.0",
   "description": "Hello and welcome to my portfolio.",
-  "author": "Curtis Dulmage",
-  "license": "UNLICENSED",
   "keywords": [
+    "development",
     "dulmage",
-    "portfolio",
-    "development"
+    "portfolio"
   ],
   "homepage": "https://dulmage.me/",
   "bugs": {
     "url": "https://github.com/beefchimi/dulmage/issues"
   },
+  "license": "UNLICENSED",
+  "author": "Curtis Dulmage",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/beefchimi/dulmage.git"
   },
   "type": "module",
-  "engines": {
-    "node": ">=22.15.0",
-    "npm": ">=10.8.0"
-  },
   "scripts": {
     "clean": "rm -rf dev-dist && rm -rf dist && rm -rf node_modules/.cache && rm -rf node_modules/.vite",
     "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force",
@@ -47,9 +43,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.13",
-    "@vite-pwa/astro": "^1.2.0",
     "@vite-pwa/assets-generator": "^1.0.2",
+    "@vite-pwa/astro": "^1.2.0",
     "lightningcss": "^1.32.0",
+    "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0"
+  },
+  "engines": {
+    "node": ">=22.15.0",
+    "npm": ">=10.8.0"
   }
 }

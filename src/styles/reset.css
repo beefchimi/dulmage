@@ -4,8 +4,8 @@
 */
 
 *:where(
-    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
-  ) {
+  :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+) {
   all: unset;
   display: revert;
 }
@@ -85,10 +85,12 @@ meter {
 /* --- Custom resets --- */
 
 :root {
-  --font-stack-sans-serif: Avenir, 'Avenir Next LT Pro', Montserrat, Corbel,
-    'URW Gothic', source-sans-pro, sans-serif;
-  --font-stack-monospace: ui-monospace, 'Cascadia Code', 'Source Code Pro',
-    Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --font-stack-sans-serif:
+    Avenir, 'Avenir Next LT Pro', Montserrat, Corbel, 'URW Gothic',
+    source-sans-pro, sans-serif;
+  --font-stack-monospace:
+    ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+    'DejaVu Sans Mono', monospace;
 }
 
 html {
