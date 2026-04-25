@@ -19,7 +19,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=22.6.0",
+    "node": ">=22.15.0",
     "npm": ">=10.8.0"
   },
   "scripts": {
@@ -30,30 +30,26 @@
     "start:host": "astro dev --host",
     "build": "npm run clean && astro check && astro build",
     "preview": "astro preview",
-    "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint --fix src",
+    "format": "biome check .",
+    "format:fix": "biome check --write .",
     "check": "astro check",
     "test": "echo 'There is no testing suite set up for this app.'"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@fontsource-variable/outfit": "^5.0.14",
-    "astro": "^4.14.5",
-    "astro-icon": "^1.1.1",
-    "beeftools": "^0.1.7",
-    "typescript": "^5.5.4"
+    "@astrojs/check": "^0.9.8",
+    "@fontsource-variable/outfit": "^5.2.8",
+    "astro": "^6.1.9",
+    "astro-icon": "^1.1.5",
+    "beeftools": "^0.1.9",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.2.0",
-    "@vite-pwa/astro": "^0.4.0",
-    "@vite-pwa/assets-generator": "^0.2.4",
-    "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^1.2.3",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "lightningcss": "^1.26.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "@biomejs/biome": "^2.4.13",
+    "@vite-pwa/astro": "^1.2.0",
+    "@vite-pwa/assets-generator": "^1.0.2",
+    "lightningcss": "^1.32.0",
+    "oxlint": "^1.61.0"
   }
 }

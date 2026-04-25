@@ -8,8 +8,8 @@
     "christian-kohler.path-intellisense",
     "aaron-bond.better-comments",
     "DavidAnson.vscode-markdownlint",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "biomejs.biome",
+    "oxc.oxc-vscode"
   ],
   "unwantedRecommendations": []
 }
