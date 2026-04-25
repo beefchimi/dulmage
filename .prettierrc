@@ -1,5 +1,0 @@
-{
-  "plugins": ["prettier-plugin-astro"],
-  "bracketSpacing": false,
-  "singleQuote": true
-}
